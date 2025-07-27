@@ -1,0 +1,21 @@
+Directive:
+Instance:
+(alu1, 'alu1')
+Term:
+(Term name:alu1._rn0_result type:['Rename'] msb:(IntConst 8) lsb:(IntConst 0))
+(Term name:alu1._rn1_result type:['Rename'] msb:(IntConst 8) lsb:(IntConst 0))
+(Term name:alu1._rn2_result type:['Rename'] msb:(IntConst 8) lsb:(IntConst 0))
+(Term name:alu1._rn3_result type:['Rename'] msb:(IntConst 8) lsb:(IntConst 0))
+(Term name:alu1._rn4_result type:['Rename'] msb:(IntConst 8) lsb:(IntConst 0))
+(Term name:alu1.a type:['Input'] msb:(IntConst 3) lsb:(IntConst 0))
+(Term name:alu1.b type:['Input'] msb:(IntConst 3) lsb:(IntConst 0))
+(Term name:alu1.c type:['Input'] msb:(IntConst 3) lsb:(IntConst 0))
+(Term name:alu1.op type:['Input'] msb:(IntConst 1) lsb:(IntConst 0))
+(Term name:alu1.result type:['Output', 'Reg'] msb:(IntConst 8) lsb:(IntConst 0))
+Bind:
+(Bind dest:alu1._rn0_result tree:(Operator Times Next:((Operator Plus Next:((Terminal alu1.a),(Terminal alu1.b))),(Terminal alu1.c))))
+(Bind dest:alu1._rn1_result tree:(Operator Xor Next:((Operator Minus Next:((Terminal alu1.a),(Terminal alu1.b))),(Terminal alu1.c))))
+(Bind dest:alu1._rn2_result tree:(Operator And Next:((Terminal alu1.a),(Operator Or Next:((Terminal alu1.b),(Terminal alu1.c))))))
+(Bind dest:alu1._rn3_result tree:(Operator Plus Next:((Operator Mod Next:((Terminal alu1.a),(Terminal alu1.b))),(Operator Times Next:((Terminal alu1.a),(Terminal alu1.c))))))
+(Bind dest:alu1._rn4_result tree:(IntCon st 9'b0))
+(Bind dest:alu1.result tree:(Branch Cond:(Operator Eq Next:((Terminal alu1.op),(IntConst 2'b00))) True:(Terminal alu1._rn0_result) False:(Branch Cond:(Operator Eq Next:((Terminal alu1.op),(IntConst 2'b01))) True:(Terminal alu1._rn1_result) False:(Branch Cond:(Operator Eq Next:((Terminal alu1.op),(IntConst 2'b10))) True:(Terminal alu1._rn2_result) False:(Branch Cond:(Operator Eq Next:((Terminal alu1.op),(IntConst 2'b11))) True:(Terminal alu1._rn3_result) False:(Branch Cond:(IntConst 1) True:(Terminal alu1._rn4_result)))))))
