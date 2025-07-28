@@ -588,10 +588,10 @@ def main():
         simulator_code = generate_python_simulator(dfg)
         
         # 保存模拟器代码
-        with open("/Users/xuxiaolan/PycharmProjects/ESIMULATOR/alu1_simulator.py", 'w') as f:
+        with open("/Users/xuxiaolan/PycharmProjects/ESIMULATOR/4004_simulator.py", 'w') as f:
             f.write(simulator_code)
         
-        print("模拟器代码已保存到 alu1_simulator.py")
+        print("模拟器代码已保存到 4004_simulator.py")
         
     except Exception as e:
         print(f"解析错误: {e}")
