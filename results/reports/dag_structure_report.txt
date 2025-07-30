@@ -1,0 +1,97 @@
+Intel 4004 ALU DAG结构详细报告
+==================================================
+
+完整拓扑排序结果:
+-------------------------
+  1. alu._rn0_dout                  [other          ] 扇入: 0 扇出: 1
+  2. alu.a12                        [general_input  ] 扇入: 0 扇出: 1
+  3. alu.add_group_4                [general_input  ] 扇入: 0 扇出: 1
+  4. alu.cma                        [general_input  ] 扇入: 0 扇出: 1
+  5. alu.com_n                      [general_input  ] 扇入: 0 扇出: 5
+  6. alu.daa                        [general_input  ] 扇入: 0 扇出: 2
+  7. alu.dcl                        [general_input  ] 扇入: 0 扇出: 1
+  8. alu.inc_group_5                [general_input  ] 扇入: 0 扇出: 1
+  9. alu.inc_isz                    [general_input  ] 扇入: 0 扇出: 1
+ 10. alu.ior                        [general_input  ] 扇入: 0 扇出: 1
+ 11. alu.iow                        [general_input  ] 扇入: 0 扇出: 2
+ 12. alu.kbp                        [general_input  ] 扇入: 0 扇出: 5
+ 13. alu.m12                        [general_input  ] 扇入: 0 扇出: 5
+ 14. alu.o_ib                       [general_input  ] 扇入: 0 扇出: 1
+ 15. alu.ope_n                      [general_input  ] 扇入: 0 扇出: 1
+ 16. alu.poc                        [general_input  ] 扇入: 0 扇出: 4
+ 17. alu.ral                        [general_input  ] 扇入: 0 扇出: 1
+ 18. alu.rar                        [general_input  ] 扇入: 0 扇出: 1
+ 19. alu.read_acc_3                 [general_input  ] 扇入: 0 扇出: 1
+ 20. alu.sub_group_6                [general_input  ] 扇入: 0 扇出: 5
+ 21. alu.sysclk                     [clock_input    ] 扇入: 0 扇出: 0
+ 22. alu.tcs                        [general_input  ] 扇入: 0 扇出: 2
+ 23. alu.tmp                        [temporary_register] 扇入: 0 扇出: 4
+ 24. alu.write_acc_1                [general_input  ] 扇入: 0 扇出: 1
+ 25. alu.write_carry_2              [general_input  ] 扇入: 0 扇出: 1
+ 26. alu.x12                        [general_input  ] 扇入: 0 扇出: 1
+ 27. alu.x21_clk2                   [clock_input    ] 扇入: 0 扇出: 3
+ 28. alu.x31_clk2                   [clock_input    ] 扇入: 0 扇出: 6
+ 29. alu.xch                        [general_input  ] 扇入: 0 扇出: 1
+ 30. alu.cmrom                      [general_output ] 扇入: 2 扇出: 0
+ 31. alu.add_ib                     [arithmetic_wire] 扇入: 2 扇出: 1
+ 32. alu.adsl                       [internal_wire  ] 扇入: 2 扇出: 0
+ 33. alu.adsr                       [internal_wire  ] 扇入: 2 扇出: 0
+ 34. alu.cy_ib                      [internal_wire  ] 扇入: 2 扇出: 1
+ 35. alu.acb_ib                     [internal_wire  ] 扇入: 4 扇出: 1
+ 36. alu.adc_cy                     [internal_wire  ] 扇入: 2 扇出: 1
+ 37. alu.add_acc                    [arithmetic_wire] 扇入: 2 扇出: 1
+
+连接关系详情:
+---------------
+alu.acc_out                    -> alu._rn1_dout                  [combinational]
+alu.acc_in                     -> alu._rn2_dout                  [combinational]
+alu.cy_1                       -> alu._rn3_dout                  [combinational]
+alu.iow                        -> alu.acb_ib                     [combinational]
+alu.xch                        -> alu.acb_ib                     [combinational]
+alu.x31_clk2                   -> alu.acb_ib                     [combinational]
+alu.x21_clk2                   -> alu.acb_ib                     [combinational]
+alu.add_acc                    -> alu.acc                        [sequential]
+alu.acc_in                     -> alu.acc                        [sequential]
+alu.acc_out                    -> alu.acc_0                      [combinational]
+alu.read_acc_3                 -> alu.acc_ada                    [combinational]
+alu.cma                        -> alu.acc_adac                   [combinational]
+alu.acc                        -> alu.acc_out                    [sequential]
+alu.write_carry_2              -> alu.adc_cy                     [combinational]
+alu.acc_in                     -> alu.add_0                      [combinational]
+alu.write_acc_1                -> alu.add_acc                    [combinational]
+alu.x31_clk2                   -> alu.add_ib                     [combinational]
+alu.inc_isz                    -> alu.add_ib                     [combinational]
+alu.ral                        -> alu.adsl                       [combinational]
+alu.x31_clk2                   -> alu.adsl                       [combinational]
+alu.rar                        -> alu.adsr                       [combinational]
+alu.x31_clk2                   -> alu.adsr                       [combinational]
+alu.com_n                      -> alu.cmram0                     [combinational]
+alu.com_n                      -> alu.cmram1                     [combinational]
+alu.com_n                      -> alu.cmram2                     [combinational]
+alu.com_n                      -> alu.cmram3                     [combinational]
+alu.poc                        -> alu.cmrom                      [combinational]
+alu.com_n                      -> alu.cmrom                      [combinational]
+alu.adc_cy                     -> alu.cy                         [sequential]
+alu.cy                         -> alu.cy_1                       [sequential]
+alu.add_group_4                -> alu.cy_ada                     [combinational]
+alu.sub_group_6                -> alu.cy_adac                    [combinational]
+alu.iow                        -> alu.cy_ib                      [combinational]
+alu.x31_clk2                   -> alu.cy_ib                      [combinational]
+alu.dout                       -> alu.data                       [combinational]
+alu._rn3_dout                  -> alu.dout                       [sequential]
+alu._rn1_dout                  -> alu.dout                       [sequential]
+alu._rn0_dout                  -> alu.dout                       [sequential]
+alu._rn4_dout                  -> alu.dout                       [sequential]
+alu._rn2_dout                  -> alu.dout                       [sequential]
+alu.add_ib                     -> alu.dout                       [sequential]
+alu.acb_ib                     -> alu.dout                       [sequential]
+alu.cy_ib                      -> alu.dout                       [sequential]
+
+DAG属性分析:
+---------------
+总节点数: 58
+主要节点数: 37
+总边数: 182
+主要边数: 43
+图类型: 有向图 (包含环路)
+成功排序节点数: 45

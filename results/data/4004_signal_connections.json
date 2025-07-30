@@ -1,0 +1,2106 @@
+{
+  "summary": {
+    "total_signals": 107,
+    "primary_signals": 58,
+    "total_connections": 182,
+    "category_distribution": {
+      "other": 5,
+      "general_input": 24,
+      "internal_wire": 11,
+      "accumulator": 2,
+      "general_output": 8,
+      "arithmetic_wire": 2,
+      "carry_flag": 1,
+      "internal_register": 1,
+      "clock_input": 3,
+      "temporary_register": 1
+    },
+    "connection_type_distribution": {
+      "combinational": 137,
+      "sequential": 45
+    },
+    "critical_signals": [
+      "alu.acc_out",
+      "alu.dout",
+      "alu.x31_clk2"
+    ],
+    "critical_paths": [
+      [
+        "alu.add_group_4",
+        "alu.cy_ada",
+        "alu.n0550",
+        "alu.n0878",
+        "alu.n0846",
+        "alu.acc_in",
+        "alu.acc",
+        "alu.acc_out",
+        "alu.n0803",
+        "alu.n0403",
+        "alu.cy",
+        "alu.cy_1"
+      ],
+      [
+        "alu.daa",
+        "alu.n0403",
+        "alu.cy",
+        "alu.n0550",
+        "alu.n0878",
+        "alu.n0846",
+        "alu.acc_in",
+        "alu.acc",
+        "alu.acc_out",
+        "alu.n0355",
+        "alu.n0749",
+        "alu.cmram0"
+      ],
+      [
+        "alu.daa",
+        "alu.n0403",
+        "alu.cy",
+        "alu.n0550",
+        "alu.n0878",
+        "alu.n0846",
+        "alu.acc_in",
+        "alu.acc",
+        "alu.acc_out",
+        "alu.n0371",
+        "alu.n0751",
+        "alu.cmram1"
+      ],
+      [
+        "alu.daa",
+        "alu.n0403",
+        "alu.cy",
+        "alu.n0550",
+        "alu.n0878",
+        "alu.n0846",
+        "alu.acc_in",
+        "alu.acc",
+        "alu.acc_out",
+        "alu.n0364",
+        "alu.n0750",
+        "alu.cmram2"
+      ],
+      [
+        "alu.daa",
+        "alu.n0403",
+        "alu.cy",
+        "alu.n0550",
+        "alu.n0878",
+        "alu.n0846",
+        "alu.acc_in",
+        "alu.acc",
+        "alu.acc_out",
+        "alu.n0355",
+        "alu.n0749",
+        "alu.cmram3"
+      ]
+    ],
+    "max_fan_in": 9,
+    "max_fan_out": 11
+  },
+  "signals": {
+    "alu._rn0_dout": {
+      "type": [
+        "Rename"
+      ],
+      "width": 4,
+      "category": "other",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.dout"
+      ]
+    },
+    "alu._rn1_dout": {
+      "type": [
+        "Rename"
+      ],
+      "width": 4,
+      "category": "other",
+      "fan_in": 1,
+      "fan_out": 1,
+      "direct_inputs": [
+        "alu.acc_out"
+      ],
+      "direct_outputs": [
+        "alu.dout"
+      ]
+    },
+    "alu._rn2_dout": {
+      "type": [
+        "Rename"
+      ],
+      "width": 4,
+      "category": "other",
+      "fan_in": 1,
+      "fan_out": 1,
+      "direct_inputs": [
+        "alu.acc_in"
+      ],
+      "direct_outputs": [
+        "alu.dout"
+      ]
+    },
+    "alu._rn3_dout": {
+      "type": [
+        "Rename"
+      ],
+      "width": 4,
+      "category": "other",
+      "fan_in": 1,
+      "fan_out": 1,
+      "direct_inputs": [
+        "alu.cy_1"
+      ],
+      "direct_outputs": [
+        "alu.dout"
+      ]
+    },
+    "alu._rn4_dout": {
+      "type": [
+        "Rename"
+      ],
+      "width": 4,
+      "category": "other",
+      "fan_in": 4,
+      "fan_out": 1,
+      "direct_inputs": [
+        "alu.n0359",
+        "alu.n0366",
+        "alu.n0357",
+        "alu.n0358"
+      ],
+      "direct_outputs": [
+        "alu.dout"
+      ]
+    },
+    "alu.a12": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.n0477"
+      ]
+    },
+    "alu.acb_ib": {
+      "type": [
+        "Wire"
+      ],
+      "width": 1,
+      "category": "internal_wire",
+      "fan_in": 4,
+      "fan_out": 1,
+      "direct_inputs": [
+        "alu.iow",
+        "alu.xch",
+        "alu.x31_clk2",
+        "alu.x21_clk2"
+      ],
+      "direct_outputs": [
+        "alu.dout"
+      ]
+    },
+    "alu.acc": {
+      "type": [
+        "Reg"
+      ],
+      "width": 4,
+      "category": "accumulator",
+      "fan_in": 2,
+      "fan_out": 1,
+      "direct_inputs": [
+        "alu.add_acc",
+        "alu.acc_in"
+      ],
+      "direct_outputs": [
+        "alu.acc_out"
+      ]
+    },
+    "alu.acc_0": {
+      "type": [
+        "Output",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_output",
+      "fan_in": 1,
+      "fan_out": 0,
+      "direct_inputs": [
+        "alu.acc_out"
+      ],
+      "direct_outputs": []
+    },
+    "alu.acc_ada": {
+      "type": [
+        "Wire"
+      ],
+      "width": 1,
+      "category": "internal_wire",
+      "fan_in": 2,
+      "fan_out": 0,
+      "direct_inputs": [
+        "alu.n0342",
+        "alu.read_acc_3"
+      ],
+      "direct_outputs": []
+    },
+    "alu.acc_adac": {
+      "type": [
+        "Wire"
+      ],
+      "width": 1,
+      "category": "internal_wire",
+      "fan_in": 2,
+      "fan_out": 0,
+      "direct_inputs": [
+        "alu.n0342",
+        "alu.cma"
+      ],
+      "direct_outputs": []
+    },
+    "alu.acc_in": {
+      "type": [
+        "Wire"
+      ],
+      "width": 4,
+      "category": "internal_wire",
+      "fan_in": 4,
+      "fan_out": 3,
+      "direct_inputs": [
+        "alu.n0846",
+        "alu.n0847",
+        "alu.n0514",
+        "alu.n0848"
+      ],
+      "direct_outputs": [
+        "alu._rn2_dout",
+        "alu.acc",
+        "alu.add_0"
+      ]
+    },
+    "alu.acc_out": {
+      "type": [
+        "Reg"
+      ],
+      "width": 4,
+      "category": "accumulator",
+      "fan_in": 2,
+      "fan_out": 11,
+      "direct_inputs": [
+        "alu.n0854",
+        "alu.acc"
+      ],
+      "direct_outputs": [
+        "alu._rn1_dout",
+        "alu.acc_0",
+        "alu.n0345",
+        "alu.n0354",
+        "alu.n0355",
+        "alu.n0363",
+        "alu.n0364",
+        "alu.n0370",
+        "alu.n0371",
+        "alu.n0377",
+        "alu.n0803"
+      ]
+    },
+    "alu.adc_cy": {
+      "type": [
+        "Wire"
+      ],
+      "width": 1,
+      "category": "internal_wire",
+      "fan_in": 2,
+      "fan_out": 1,
+      "direct_inputs": [
+        "alu.n0477",
+        "alu.write_carry_2"
+      ],
+      "direct_outputs": [
+        "alu.cy"
+      ]
+    },
+    "alu.add_0": {
+      "type": [
+        "Output",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_output",
+      "fan_in": 1,
+      "fan_out": 0,
+      "direct_inputs": [
+        "alu.acc_in"
+      ],
+      "direct_outputs": []
+    },
+    "alu.add_acc": {
+      "type": [
+        "Wire"
+      ],
+      "width": 1,
+      "category": "arithmetic_wire",
+      "fan_in": 2,
+      "fan_out": 1,
+      "direct_inputs": [
+        "alu.n0477",
+        "alu.write_acc_1"
+      ],
+      "direct_outputs": [
+        "alu.acc"
+      ]
+    },
+    "alu.add_group_4": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.cy_ada"
+      ]
+    },
+    "alu.add_ib": {
+      "type": [
+        "Wire"
+      ],
+      "width": 1,
+      "category": "arithmetic_wire",
+      "fan_in": 2,
+      "fan_out": 1,
+      "direct_inputs": [
+        "alu.x31_clk2",
+        "alu.inc_isz"
+      ],
+      "direct_outputs": [
+        "alu.dout"
+      ]
+    },
+    "alu.adsl": {
+      "type": [
+        "Wire"
+      ],
+      "width": 1,
+      "category": "internal_wire",
+      "fan_in": 2,
+      "fan_out": 0,
+      "direct_inputs": [
+        "alu.ral",
+        "alu.x31_clk2"
+      ],
+      "direct_outputs": []
+    },
+    "alu.adsr": {
+      "type": [
+        "Wire"
+      ],
+      "width": 1,
+      "category": "internal_wire",
+      "fan_in": 2,
+      "fan_out": 0,
+      "direct_inputs": [
+        "alu.rar",
+        "alu.x31_clk2"
+      ],
+      "direct_outputs": []
+    },
+    "alu.cma": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.acc_adac"
+      ]
+    },
+    "alu.cmram0": {
+      "type": [
+        "Output",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_output",
+      "fan_in": 4,
+      "fan_out": 0,
+      "direct_inputs": [
+        "alu.n0751",
+        "alu.n0750",
+        "alu.n0749",
+        "alu.com_n"
+      ],
+      "direct_outputs": []
+    },
+    "alu.cmram1": {
+      "type": [
+        "Output",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_output",
+      "fan_in": 2,
+      "fan_out": 0,
+      "direct_inputs": [
+        "alu.n0751",
+        "alu.com_n"
+      ],
+      "direct_outputs": []
+    },
+    "alu.cmram2": {
+      "type": [
+        "Output",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_output",
+      "fan_in": 2,
+      "fan_out": 0,
+      "direct_inputs": [
+        "alu.n0750",
+        "alu.com_n"
+      ],
+      "direct_outputs": []
+    },
+    "alu.cmram3": {
+      "type": [
+        "Output",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_output",
+      "fan_in": 2,
+      "fan_out": 0,
+      "direct_inputs": [
+        "alu.n0749",
+        "alu.com_n"
+      ],
+      "direct_outputs": []
+    },
+    "alu.cmrom": {
+      "type": [
+        "Output",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_output",
+      "fan_in": 2,
+      "fan_out": 0,
+      "direct_inputs": [
+        "alu.poc",
+        "alu.com_n"
+      ],
+      "direct_outputs": []
+    },
+    "alu.com_n": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 5,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.cmram0",
+        "alu.cmram1",
+        "alu.cmram2",
+        "alu.cmram3",
+        "alu.cmrom"
+      ]
+    },
+    "alu.cy": {
+      "type": [
+        "Reg"
+      ],
+      "width": 1,
+      "category": "carry_flag",
+      "fan_in": 4,
+      "fan_out": 2,
+      "direct_inputs": [
+        "alu.n0403",
+        "alu.n0415",
+        "alu.adc_cy",
+        "alu.n0861"
+      ],
+      "direct_outputs": [
+        "alu.cy_1",
+        "alu.n0550"
+      ]
+    },
+    "alu.cy_1": {
+      "type": [
+        "Output",
+        "Reg"
+      ],
+      "width": 1,
+      "category": "general_output",
+      "fan_in": 2,
+      "fan_out": 2,
+      "direct_inputs": [
+        "alu.n0854",
+        "alu.cy"
+      ],
+      "direct_outputs": [
+        "alu._rn3_dout",
+        "alu.n0803"
+      ]
+    },
+    "alu.cy_ada": {
+      "type": [
+        "Wire"
+      ],
+      "width": 1,
+      "category": "internal_wire",
+      "fan_in": 2,
+      "fan_out": 1,
+      "direct_inputs": [
+        "alu.n0342",
+        "alu.add_group_4"
+      ],
+      "direct_outputs": [
+        "alu.n0550"
+      ]
+    },
+    "alu.cy_adac": {
+      "type": [
+        "Wire"
+      ],
+      "width": 1,
+      "category": "internal_wire",
+      "fan_in": 2,
+      "fan_out": 1,
+      "direct_inputs": [
+        "alu.n0342",
+        "alu.sub_group_6"
+      ],
+      "direct_outputs": [
+        "alu.n0550"
+      ]
+    },
+    "alu.cy_ib": {
+      "type": [
+        "Wire"
+      ],
+      "width": 1,
+      "category": "internal_wire",
+      "fan_in": 2,
+      "fan_out": 1,
+      "direct_inputs": [
+        "alu.iow",
+        "alu.x31_clk2"
+      ],
+      "direct_outputs": [
+        "alu.dout"
+      ]
+    },
+    "alu.daa": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 2,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.n0378",
+        "alu.n0403"
+      ]
+    },
+    "alu.data": {
+      "type": [
+        "Inout",
+        "Wire"
+      ],
+      "width": 4,
+      "category": "internal_wire",
+      "fan_in": 1,
+      "fan_out": 0,
+      "direct_inputs": [
+        "alu.dout"
+      ],
+      "direct_outputs": []
+    },
+    "alu.dcl": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.n0351"
+      ]
+    },
+    "alu.dout": {
+      "type": [
+        "Reg"
+      ],
+      "width": 4,
+      "category": "internal_register",
+      "fan_in": 9,
+      "fan_out": 1,
+      "direct_inputs": [
+        "alu._rn3_dout",
+        "alu._rn1_dout",
+        "alu._rn0_dout",
+        "alu.n0415",
+        "alu._rn4_dout",
+        "alu._rn2_dout",
+        "alu.add_ib",
+        "alu.acb_ib",
+        "alu.cy_ib"
+      ],
+      "direct_outputs": [
+        "alu.data"
+      ]
+    },
+    "alu.inc_group_5": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.n0546"
+      ]
+    },
+    "alu.inc_isz": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.add_ib"
+      ]
+    },
+    "alu.ior": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.n0477"
+      ]
+    },
+    "alu.iow": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 2,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.acb_ib",
+        "alu.cy_ib"
+      ]
+    },
+    "alu.kbp": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 5,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.n0345",
+        "alu.n0354",
+        "alu.n0363",
+        "alu.n0370",
+        "alu.n0377"
+      ]
+    },
+    "alu.m12": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 5,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.n0550",
+        "alu.n0887",
+        "alu.n0889",
+        "alu.n0891",
+        "alu.n0893"
+      ]
+    },
+    "alu.o_ib": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.n0378"
+      ]
+    },
+    "alu.ope_n": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.n0415"
+      ]
+    },
+    "alu.poc": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 4,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.cmrom",
+        "alu.n0749",
+        "alu.n0750",
+        "alu.n0751"
+      ]
+    },
+    "alu.ral": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.adsl"
+      ]
+    },
+    "alu.rar": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.adsr"
+      ]
+    },
+    "alu.read_acc_3": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.acc_ada"
+      ]
+    },
+    "alu.sub_group_6": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 5,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.cy_adac",
+        "alu.n0887",
+        "alu.n0889",
+        "alu.n0891",
+        "alu.n0893"
+      ]
+    },
+    "alu.sysclk": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "clock_input",
+      "fan_in": 0,
+      "fan_out": 0,
+      "direct_inputs": [],
+      "direct_outputs": []
+    },
+    "alu.tcs": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 2,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.n0359",
+        "alu.n0366"
+      ]
+    },
+    "alu.tmp": {
+      "type": [
+        "Reg"
+      ],
+      "width": 4,
+      "category": "temporary_register",
+      "fan_in": 0,
+      "fan_out": 4,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.n0887",
+        "alu.n0889",
+        "alu.n0891",
+        "alu.n0893"
+      ]
+    },
+    "alu.write_acc_1": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.add_acc"
+      ]
+    },
+    "alu.write_carry_2": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.adc_cy"
+      ]
+    },
+    "alu.x12": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.n0854"
+      ]
+    },
+    "alu.x21_clk2": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "clock_input",
+      "fan_in": 0,
+      "fan_out": 3,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.acb_ib",
+        "alu.n0351",
+        "alu.n0415"
+      ]
+    },
+    "alu.x31_clk2": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "clock_input",
+      "fan_in": 0,
+      "fan_out": 6,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.acb_ib",
+        "alu.add_ib",
+        "alu.adsl",
+        "alu.adsr",
+        "alu.cy_ib",
+        "alu.n0477"
+      ]
+    },
+    "alu.xch": {
+      "type": [
+        "Input",
+        "Wire"
+      ],
+      "width": 1,
+      "category": "general_input",
+      "fan_in": 0,
+      "fan_out": 1,
+      "direct_inputs": [],
+      "direct_outputs": [
+        "alu.acb_ib"
+      ]
+    }
+  },
+  "connections": [
+    {
+      "source": "alu.acc_out",
+      "destination": "alu._rn1_dout",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.acc_in",
+      "destination": "alu._rn2_dout",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.cy_1",
+      "destination": "alu._rn3_dout",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0359",
+      "destination": "alu._rn4_dout",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0366",
+      "destination": "alu._rn4_dout",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0357",
+      "destination": "alu._rn4_dout",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0358",
+      "destination": "alu._rn4_dout",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.iow",
+      "destination": "alu.acb_ib",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.xch",
+      "destination": "alu.acb_ib",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.x31_clk2",
+      "destination": "alu.acb_ib",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.x21_clk2",
+      "destination": "alu.acb_ib",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.add_acc",
+      "destination": "alu.acc",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.acc_in",
+      "destination": "alu.acc",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.acc_out",
+      "destination": "alu.acc_0",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0342",
+      "destination": "alu.acc_ada",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.read_acc_3",
+      "destination": "alu.acc_ada",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0342",
+      "destination": "alu.acc_adac",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.cma",
+      "destination": "alu.acc_adac",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0846",
+      "destination": "alu.acc_in",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0847",
+      "destination": "alu.acc_in",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0514",
+      "destination": "alu.acc_in",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0848",
+      "destination": "alu.acc_in",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0854",
+      "destination": "alu.acc_out",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.acc",
+      "destination": "alu.acc_out",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0477",
+      "destination": "alu.adc_cy",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.write_carry_2",
+      "destination": "alu.adc_cy",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.acc_in",
+      "destination": "alu.add_0",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0477",
+      "destination": "alu.add_acc",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.write_acc_1",
+      "destination": "alu.add_acc",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.x31_clk2",
+      "destination": "alu.add_ib",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.inc_isz",
+      "destination": "alu.add_ib",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.ral",
+      "destination": "alu.adsl",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.x31_clk2",
+      "destination": "alu.adsl",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.rar",
+      "destination": "alu.adsr",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.x31_clk2",
+      "destination": "alu.adsr",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0751",
+      "destination": "alu.cmram0",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0750",
+      "destination": "alu.cmram0",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0749",
+      "destination": "alu.cmram0",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.com_n",
+      "destination": "alu.cmram0",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0751",
+      "destination": "alu.cmram1",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.com_n",
+      "destination": "alu.cmram1",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0750",
+      "destination": "alu.cmram2",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.com_n",
+      "destination": "alu.cmram2",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0749",
+      "destination": "alu.cmram3",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.com_n",
+      "destination": "alu.cmram3",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.poc",
+      "destination": "alu.cmrom",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.com_n",
+      "destination": "alu.cmrom",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0403",
+      "destination": "alu.cy",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0415",
+      "destination": "alu.cy",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.adc_cy",
+      "destination": "alu.cy",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0861",
+      "destination": "alu.cy",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0854",
+      "destination": "alu.cy_1",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.cy",
+      "destination": "alu.cy_1",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0342",
+      "destination": "alu.cy_ada",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.add_group_4",
+      "destination": "alu.cy_ada",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0342",
+      "destination": "alu.cy_adac",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.sub_group_6",
+      "destination": "alu.cy_adac",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.iow",
+      "destination": "alu.cy_ib",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.x31_clk2",
+      "destination": "alu.cy_ib",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.dout",
+      "destination": "alu.data",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu._rn3_dout",
+      "destination": "alu.dout",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu._rn1_dout",
+      "destination": "alu.dout",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu._rn0_dout",
+      "destination": "alu.dout",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0415",
+      "destination": "alu.dout",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu._rn4_dout",
+      "destination": "alu.dout",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu._rn2_dout",
+      "destination": "alu.dout",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.add_ib",
+      "destination": "alu.dout",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.acb_ib",
+      "destination": "alu.dout",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.cy_ib",
+      "destination": "alu.dout",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.kbp",
+      "destination": "alu.n0345",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.acc_out",
+      "destination": "alu.n0345",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.dcl",
+      "destination": "alu.n0351",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.x21_clk2",
+      "destination": "alu.n0351",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.kbp",
+      "destination": "alu.n0354",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.acc_out",
+      "destination": "alu.n0354",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.acc_out",
+      "destination": "alu.n0355",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0403",
+      "destination": "alu.n0357",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0377",
+      "destination": "alu.n0357",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0363",
+      "destination": "alu.n0357",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0345",
+      "destination": "alu.n0357",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0345",
+      "destination": "alu.n0358",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0354",
+      "destination": "alu.n0358",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0377",
+      "destination": "alu.n0358",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0370",
+      "destination": "alu.n0358",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0363",
+      "destination": "alu.n0358",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0403",
+      "destination": "alu.n0358",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.tcs",
+      "destination": "alu.n0359",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0377",
+      "destination": "alu.n0359",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0370",
+      "destination": "alu.n0359",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0345",
+      "destination": "alu.n0359",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.kbp",
+      "destination": "alu.n0363",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.acc_out",
+      "destination": "alu.n0363",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.acc_out",
+      "destination": "alu.n0364",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0354",
+      "destination": "alu.n0366",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0377",
+      "destination": "alu.n0366",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.tcs",
+      "destination": "alu.n0366",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0370",
+      "destination": "alu.n0366",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0363",
+      "destination": "alu.n0366",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.kbp",
+      "destination": "alu.n0370",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.acc_out",
+      "destination": "alu.n0370",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.acc_out",
+      "destination": "alu.n0371",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0378",
+      "destination": "alu.n0377",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.kbp",
+      "destination": "alu.n0377",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.acc_out",
+      "destination": "alu.n0377",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.daa",
+      "destination": "alu.n0378",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.o_ib",
+      "destination": "alu.n0378",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0803",
+      "destination": "alu.n0378",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.daa",
+      "destination": "alu.n0403",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0803",
+      "destination": "alu.n0403",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.ope_n",
+      "destination": "alu.n0415",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.x21_clk2",
+      "destination": "alu.n0415",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.a12",
+      "destination": "alu.n0477",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.ior",
+      "destination": "alu.n0477",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.x31_clk2",
+      "destination": "alu.n0477",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0877",
+      "destination": "alu.n0514",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0342",
+      "destination": "alu.n0546",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.inc_group_5",
+      "destination": "alu.n0546",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.cy",
+      "destination": "alu.n0550",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.cy_ada",
+      "destination": "alu.n0550",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.m12",
+      "destination": "alu.n0550",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0546",
+      "destination": "alu.n0550",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.cy_adac",
+      "destination": "alu.n0550",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0911",
+      "destination": "alu.n0553",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0912",
+      "destination": "alu.n0556",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0913",
+      "destination": "alu.n0559",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.poc",
+      "destination": "alu.n0749",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0355",
+      "destination": "alu.n0749",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0351",
+      "destination": "alu.n0749",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0364",
+      "destination": "alu.n0750",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.poc",
+      "destination": "alu.n0750",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0351",
+      "destination": "alu.n0750",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.poc",
+      "destination": "alu.n0751",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0371",
+      "destination": "alu.n0751",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0351",
+      "destination": "alu.n0751",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.cy_1",
+      "destination": "alu.n0803",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.acc_out",
+      "destination": "alu.n0803",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0878",
+      "destination": "alu.n0846",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0875",
+      "destination": "alu.n0847",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0879",
+      "destination": "alu.n0848",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.x12",
+      "destination": "alu.n0854",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0914",
+      "destination": "alu.n0861",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0889",
+      "destination": "alu.n0875",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0553",
+      "destination": "alu.n0875",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0556",
+      "destination": "alu.n0875",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0871",
+      "destination": "alu.n0875",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0559",
+      "destination": "alu.n0877",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0873",
+      "destination": "alu.n0877",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0861",
+      "destination": "alu.n0877",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0893",
+      "destination": "alu.n0877",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0887",
+      "destination": "alu.n0878",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0877",
+      "destination": "alu.n0878",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0550",
+      "destination": "alu.n0878",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0553",
+      "destination": "alu.n0878",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0870",
+      "destination": "alu.n0878",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0556",
+      "destination": "alu.n0879",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0891",
+      "destination": "alu.n0879",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0872",
+      "destination": "alu.n0879",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0559",
+      "destination": "alu.n0879",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.m12",
+      "destination": "alu.n0887",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.tmp",
+      "destination": "alu.n0887",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.sub_group_6",
+      "destination": "alu.n0887",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.m12",
+      "destination": "alu.n0889",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.tmp",
+      "destination": "alu.n0889",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.sub_group_6",
+      "destination": "alu.n0889",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.m12",
+      "destination": "alu.n0891",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.tmp",
+      "destination": "alu.n0891",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.sub_group_6",
+      "destination": "alu.n0891",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.m12",
+      "destination": "alu.n0893",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.tmp",
+      "destination": "alu.n0893",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.sub_group_6",
+      "destination": "alu.n0893",
+      "type": "sequential",
+      "is_combinational": false
+    },
+    {
+      "source": "alu.n0887",
+      "destination": "alu.n0911",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0550",
+      "destination": "alu.n0911",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0870",
+      "destination": "alu.n0911",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0889",
+      "destination": "alu.n0912",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0553",
+      "destination": "alu.n0912",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0871",
+      "destination": "alu.n0912",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0556",
+      "destination": "alu.n0913",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0891",
+      "destination": "alu.n0913",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0872",
+      "destination": "alu.n0913",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0559",
+      "destination": "alu.n0914",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0873",
+      "destination": "alu.n0914",
+      "type": "combinational",
+      "is_combinational": true
+    },
+    {
+      "source": "alu.n0893",
+      "destination": "alu.n0914",
+      "type": "combinational",
+      "is_combinational": true
+    }
+  ]
+}
