@@ -3,8 +3,10 @@
 DFG线性/非线性运算分析器
 从数据流图中识别和分离线性与非线性运算部分
 """
-
-from improved_dfg_parser import *
+import sys
+sys.path.append("..")
+import improved_dfg_to_dag
+from improved_dfg_to_dag import *
 from typing import Set, Dict, List, Tuple
 from enum import Enum
 

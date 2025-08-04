@@ -44,12 +44,12 @@ Intel 4004 ALU DAG结构详细报告
 连接关系详情:
 ---------------
 alu.acc_out                    -> alu._rn1_dout                  [combinational]
-alu.acc_in                     -> alu._rn2_dout                  [combinational]
+alu.acc_in                     -> alu._rn2_dout                  [combinational]       
 alu.cy_1                       -> alu._rn3_dout                  [combinational]
 alu.iow                        -> alu.acb_ib                     [combinational]
 alu.xch                        -> alu.acb_ib                     [combinational]
 alu.x31_clk2                   -> alu.acb_ib                     [combinational]
-alu.x21_clk2                   -> alu.acb_ib                     [combinational]
+alu.x21_clk2                   -> alu.acb_ib                     [combinational]          
 alu.add_acc                    -> alu.acc                        [sequential]
 alu.acc_in                     -> alu.acc                        [sequential]
 alu.acc_out                    -> alu.acc_0                      [combinational]
