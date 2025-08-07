@@ -1,17 +1,59 @@
-# ESIMULATOR - DFG线性分析工具
+# ESIMULATOR 2.0 - DFG线性分析工具
 
-## 项目简介
+## 🎯 项目简介
 
-本项目专注于Data Flow Graph (DFG)的线性分析，特别是Intel 4004 ALU的线性特征分析。项目提供了修正的分析方法，能够准确评估数字电路的线性度。
+ESIMULATOR 2.0是一个专门用于Data Flow Graph (DFG)线性分析的工具套件，经过重新组织优化，提供了更强大的功能和更清晰的模块结构。
 
-## 重要发现
+## 🏆 重要发现
 
 **修正前后的关键差异：**
 - 原始方法：63.2% 线性度（运算符级别统计）
 - 修正方法：16.2% 线性度（表达式级别分析）
-- 差异：47个百分点！
+- **修正幅度：47个百分点！**
 
 修正后的结果更准确地反映了Intel 4004 ALU作为非线性数字电路的本质特征。
+
+## 🚀 快速开始
+
+### 命令行使用
+
+```bash
+# 基本分析
+python esimulator_cli.py analyze dfg_files/4004_dfg.txt
+
+# 对比演示
+python esimulator_cli.py compare dfg_files/4004_dfg.txt
+
+# 批量分析
+python esimulator_cli.py batch dfg_files/ --output results
+
+# 可视化生成
+python esimulator_cli.py visualize dfg_files/4004_dfg.txt
+```
+
+### 程序化使用
+
+```python
+from esimulator import LinearityAnalyzer, ReportGenerator
+
+# 创建分析器
+analyzer = LinearityAnalyzer()
+
+# 执行分析
+result = analyzer.analyze_dfg_file("dfg_files/4004_dfg.txt")
+
+# 生成报告
+report_gen = ReportGenerator("results")
+report_gen.generate_text_report(result)
+```
+
+### 兼容性入口
+
+```bash
+# 与原版功能完全相同
+python analyze_linearity_v2.py
+python demo_comparison_v2.py
+```
 
 ## 项目结构
 
