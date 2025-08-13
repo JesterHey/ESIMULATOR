@@ -4,12 +4,7 @@
 
 ESIMULATOR 2.0是一个专门用于Data Flow Graph (DFG)线性分析的工具包，经过重新组织和优化，提供了更清晰的模块结构和更强大的功能。
 
-### 核心成就
-- **修正了47个百分点的分析误差**：从63.2%修正到16.2%
-- **表达式级别分析**：替代简单的运算符统计
-- **模块化设计**：清晰的包结构和API接口
-
-## 📁 新的项目结构
+## 📁 项目结构
 
 ```
 ESIMULATOR/
@@ -68,10 +63,7 @@ python analyze_linearity_v2.py
 
 **对比分析**：
 ```bash
-# 查看修正前后的对比
-python esimulator_cli.py compare dfg_files/4004_dfg.txt
-
-# 或使用兼容性入口
+# 使用兼容性入口
 python demo_comparison_v2.py
 ```
 
@@ -263,17 +255,8 @@ alu.acb_ib          : 非线性    - 包含非线性运算符: Unot
 }
 ```
 
-## 🔄 迁移指南
 
-### 从旧版本迁移
-
-**旧版本使用方式**：
-```bash
-python analyze_linearity.py
-python demo_comparison.py
-```
-
-**新版本对应方式**：
+**使用方式**：
 ```bash
 # 兼容性入口（功能完全相同）
 python analyze_linearity_v2.py
@@ -282,17 +265,6 @@ python demo_comparison_v2.py
 # 新CLI工具（功能更强大）
 python esimulator_cli.py analyze dfg_files/4004_dfg.txt
 python esimulator_cli.py compare dfg_files/4004_dfg.txt
-```
-
-**代码迁移**：
-```python
-# 旧版本
-from src.analyzers.dfg_linearity_corrector import CorrectedLinearityAnalyzer
-analyzer = CorrectedLinearityAnalyzer()
-
-# 新版本
-from esimulator import LinearityAnalyzer
-analyzer = LinearityAnalyzer()
 ```
 
 ## 🧪 示例和测试
@@ -365,10 +337,10 @@ for dfg_file in dfg_files:
 
 ## ⚠️ 注意事项
 
-1. **向后兼容性**：所有旧版本功能都通过兼容性文件保持可用
-2. **文件路径**：使用相对路径或绝对路径访问DFG文件
-3. **依赖项**：可视化功能需要安装matplotlib
-4. **输出目录**：确保有写入权限到指定的输出目录
+   
+1. **文件路径**：使用相对路径或绝对路径访问DFG文件
+2. **依赖项**：可视化功能需要安装matplotlib
+3. **输出目录**：确保有写入权限到指定的输出目录
 
 ## 🆘 故障排除
 
@@ -403,7 +375,6 @@ for dfg_file in dfg_files:
 - **大文件 (>1000个信号)**：可能需要几分钟
 - **批量处理**：支持目录级别的批量分析
 
-## 🤝 贡献和开发
 
 **开发环境设置**：
 ```bash
@@ -418,5 +389,3 @@ black esimulator/
 ```
 
 ---
-
-**🎉 ESIMULATOR 2.0提供了更强大、更灵活的DFG线性分析能力，同时保持了与旧版本的完全兼容性！**
