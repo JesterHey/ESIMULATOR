@@ -105,7 +105,7 @@ class CorrectedLinearityAnalyzer:
                 'expression_type': 'terminal'
             }
         
-        elif tree_expr.startswith('(IntConst '):
+        elif tree_expr.startswith('(IntCon'):
             # 常量赋值 - 线性
             return {
                 'is_linear': True,
@@ -264,54 +264,10 @@ class CorrectedLinearityAnalyzer:
             'detailed_analyses': self.signal_analyses
         }
 
-def demonstrate_correction():
-    """演示修正方案"""
-    
-    print("=== DFG表达式线性分析修正方案演示 ===\n")
-    
-    # 测试几个具体的表达式
-    test_cases = [
-        {
-            'name': 'alu._rn1_dout',
-            'expr': '(Terminal alu.acc_out)',
-            'expected': '线性（直接终端赋值）'
-        },
-        {
-            'name': 'alu.acb_ib', 
-            'expr': '(Operator Unot Next:(Operator And Next:(Operator Or Next:(Terminal alu.x31_clk2),(Operator Unot Next:(Terminal alu.xch))),(Operator Or Next:(Terminal alu.x21_clk2),(Operator Unot Next:(Terminal alu.iow)))))',
-            'expected': '非线性（包含逻辑运算）'
-        },
-        {
-            'name': 'alu._rn4_dout',
-            'expr': '(Concat Next:(Terminal alu.n0358),(Terminal alu.n0366),(Terminal alu.n0359),(Terminal alu.n0357))',
-            'expected': '线性（纯拼接，无运算符）'
-        }
-    ]
-    
-    analyzer = CorrectedLinearityAnalyzer()
-    
-    print("个别表达式测试:")
-    print("-" * 50)
-    
-    for test in test_cases:
-        analysis = analyzer._analyze_signal_expression(test['name'], test['expr'])
-        result = "线性" if analysis['is_linear'] else "非线性"
-        
-        print(f"信号: {test['name']}")
-        print(f"表达式: {test['expr'][:60]}...")
-        print(f"分析结果: {result}")
-        print(f"原因: {analysis['reason']}")
-        print(f"预期结果: {test['expected']}")
-        print(f"是否正确: {'✓' if (result in test['expected']) else '✗'}")
-        print()
-
-def analyze_real_dfg():
+def analyze_real_dfg(file_name):
     """分析真实的DFG文件"""
-    
-    print("=== 真实4004 ALU DFG分析 ===\n")
-    
     analyzer = CorrectedLinearityAnalyzer()
-    dfg_file = "/Users/xuxiaolan/PycharmProjects/ESIMULATOR/dfg_files/4004_dfg.txt"
+    dfg_file = f"/Users/xuxiaolan/PycharmProjects/ESIMULATOR/dfg_files/{file_name}"
     
     # 分析DFG文件
     report = analyzer.analyze_dfg_file(dfg_file)
@@ -344,15 +300,9 @@ def analyze_real_dfg():
     
     # 生成修正报告
     print(f"\n3. 生成修正报告...")
-    with open("results/corrected_linearity_analysis.txt", "w", encoding="utf-8") as f:
-        f.write("Intel 4004 ALU 修正线性分析报告\n")
+    with open(f"results/{file_name[:-4]}_linearity_analysis.txt", "w", encoding="utf-8") as f:
+        f.write(f"{file_name}线性分析报告\n")
         f.write("=" * 50 + "\n\n")
-        
-        f.write("修正要点:\n")
-        f.write("1. 按信号表达式分析，而非单个运算符统计\n")
-        f.write("2. 位移运算重新分类为非线性\n")
-        f.write("3. 考虑表达式树的整体结构\n")
-        f.write("4. 区分不同类型的表达式\n\n")
         
         f.write("分析结果:\n")
         f.write("-" * 15 + "\n")
@@ -377,9 +327,7 @@ def analyze_real_dfg():
             linearity = "线性" if analysis['is_linear'] else "非线性"
             f.write(f"{signal:<20}: {linearity:<6} - {analysis['reason']}\n")
     
-    print("   修正报告已保存到: results/corrected_linearity_analysis.txt")
+    print(f"   修正报告已保存到: results/{file_name[:-4]}_linearity_analysis.txt")
 
 if __name__ == "__main__":
-    demonstrate_correction()
-    print("\n" + "="*60 + "\n")
-    analyze_real_dfg()
+    analyze_real_dfg('4004_dfg.txt')
