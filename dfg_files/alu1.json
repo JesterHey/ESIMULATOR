@@ -1,0 +1,163 @@
+{
+  "nodes": {
+    "alu1._rn0_result": {
+      "types": [
+        "Rename"
+      ],
+      "tree": "(Operator Times Next:((Operator Plus Next:((Terminal alu1.a),(Terminal alu1.b))),(Terminal alu1.c)))",
+      "is_linear": false,
+      "reasons": [
+        "Times"
+      ]
+    },
+    "alu1._rn1_result": {
+      "types": [
+        "Rename"
+      ],
+      "tree": "(Operator Xor Next:((Operator Minus Next:((Terminal alu1.a),(Terminal alu1.b))),(Terminal alu1.c)))",
+      "is_linear": false,
+      "reasons": [
+        "Xor"
+      ]
+    },
+    "alu1._rn2_result": {
+      "types": [
+        "Rename"
+      ],
+      "tree": "(Operator And Next:((Terminal alu1.a),(Operator Or Next:((Terminal alu1.b),(Terminal alu1.c)))))",
+      "is_linear": false,
+      "reasons": [
+        "And",
+        "Or"
+      ]
+    },
+    "alu1._rn3_result": {
+      "types": [
+        "Rename"
+      ],
+      "tree": "(Operator Plus Next:((Operator Mod Next:((Terminal alu1.a),(Terminal alu1.b))),(Operator Times Next:((Terminal alu1.a),(Terminal alu1.c)))))",
+      "is_linear": false,
+      "reasons": [
+        "Mod",
+        "Times"
+      ]
+    },
+    "alu1._rn4_result": {
+      "types": [
+        "Rename"
+      ],
+      "tree": "(IntCon st 9'b0)",
+      "is_linear": true,
+      "reasons": []
+    },
+    "alu1.a": {
+      "types": [
+        "Input"
+      ],
+      "tree": null,
+      "is_linear": null,
+      "reasons": []
+    },
+    "alu1.b": {
+      "types": [
+        "Input"
+      ],
+      "tree": null,
+      "is_linear": null,
+      "reasons": []
+    },
+    "alu1.c": {
+      "types": [
+        "Input"
+      ],
+      "tree": null,
+      "is_linear": null,
+      "reasons": []
+    },
+    "alu1.op": {
+      "types": [
+        "Input"
+      ],
+      "tree": null,
+      "is_linear": null,
+      "reasons": []
+    },
+    "alu1.result": {
+      "types": [
+        "Output",
+        "Reg"
+      ],
+      "tree": null,
+      "is_linear": null,
+      "reasons": []
+    }
+  },
+  "edges": [
+    [
+      "alu1.c",
+      "alu1._rn0_result"
+    ],
+    [
+      "alu1.a",
+      "alu1._rn0_result"
+    ],
+    [
+      "alu1.b",
+      "alu1._rn0_result"
+    ],
+    [
+      "alu1.c",
+      "alu1._rn1_result"
+    ],
+    [
+      "alu1.a",
+      "alu1._rn1_result"
+    ],
+    [
+      "alu1.b",
+      "alu1._rn1_result"
+    ],
+    [
+      "alu1.c",
+      "alu1._rn2_result"
+    ],
+    [
+      "alu1.a",
+      "alu1._rn2_result"
+    ],
+    [
+      "alu1.b",
+      "alu1._rn2_result"
+    ],
+    [
+      "alu1.c",
+      "alu1._rn3_result"
+    ],
+    [
+      "alu1.a",
+      "alu1._rn3_result"
+    ],
+    [
+      "alu1.b",
+      "alu1._rn3_result"
+    ]
+  ],
+  "metrics": {
+    "total_expressions": 5,
+    "linear_expressions": 1,
+    "nonlinear_expressions": 4,
+    "linearity_ratio": 0.2,
+    "nonlinearity_ratio": 0.8,
+    "nonlinear_reason_frequency": {
+      "Times": 2,
+      "Xor": 1,
+      "And": 1,
+      "Or": 1,
+      "Mod": 1
+    },
+    "longest_linear_chain_length": 1,
+    "longest_linear_chain_path": [
+      "alu1._rn4_result"
+    ]
+  }
+}

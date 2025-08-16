@@ -1,0 +1,92 @@
+{
+  "nodes": {
+    "alu.acb_ib": {
+      "types": [
+        "Wire"
+      ],
+      "tree": "(Operator Unot Next:(Operator And Next:(Operator Or Next:(Terminal alu.x31_clk2),(Operator Unot Next:(Terminal alu.xch))),(Operator Or Next:(Terminal alu.x21_clk2),(Operator Unot Next:(Terminal alu.iow)))))",
+      "is_linear": false,
+      "reasons": [
+        "And",
+        "Or",
+        "Unot"
+      ]
+    },
+    "alu.add_ib": {
+      "types": [
+        "Wire"
+      ],
+      "tree": "(Operator Unot Next:(Operator Or Next:(Terminal alu.x31_clk2),(Operator Unot Next:(Terminal alu.inc_isz))))",
+      "is_linear": false,
+      "reasons": [
+        "Or",
+        "Unot"
+      ]
+    },
+    "alu.cy_ib": {
+      "types": [
+        "Wire"
+      ],
+      "tree": "(Operator Unot Next:(Operator Or Next:(Terminal alu.x31_clk2),(Operator Unot Next:(Terminal alu.iow))))",
+      "is_linear": false,
+      "reasons": [
+        "Or",
+        "Unot"
+      ]
+    },
+    "alu.dout": {
+      "types": [
+        "Reg"
+      ],
+      "tree": "(Branch Cond:(Terminal alu.n0415) True:(Terminal alu._rn4_dout) False:(Branch Cond:(Terminal alu.cy_ib) True:(Terminal alu._rn3_dout) False:(Branch Cond:(Terminal alu.add_ib) True:(Terminal alu._rn2_dout) False:(Branch Cond:(Terminal alu.acb_ib) True:(Terminal alu._rn1_dout) False:(Terminal alu._rn0_dout)))))",
+      "is_linear": false,
+      "reasons": [
+        "Branch"
+      ]
+    },
+    "alu.n0415": {
+      "types": [
+        "Wire"
+      ],
+      "tree": "(Operator Unot Next:(Operator Or Next:(Terminal alu.x21_clk2),(Terminal alu.ope_n)))",
+      "is_linear": false,
+      "reasons": [
+        "Or",
+        "Unot"
+      ]
+    }
+  },
+  "edges": [
+    [
+      "alu.n0415",
+      "alu.dout"
+    ],
+    [
+      "alu.acb_ib",
+      "alu.dout"
+    ],
+    [
+      "alu.add_ib",
+      "alu.dout"
+    ],
+    [
+      "alu.cy_ib",
+      "alu.dout"
+    ]
+  ],
+  "metrics": {
+    "total_expressions": 5,
+    "linear_expressions": 0,
+    "nonlinear_expressions": 5,
+    "linearity_ratio": 0.0,
+    "nonlinearity_ratio": 1.0,
+    "nonlinear_reason_frequency": {
+      "And": 1,
+      "Or": 4,
+      "Unot": 4,
+      "Branch": 1
+    },
+    "longest_linear_chain_length": 0,
+    "longest_linear_chain_path": []
+  }
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html><html lang='zh-cn'><head><meta charset='UTF-8'/><title>DFG 线性可视化</title>
+<style>
+body{font-family:Helvetica,Arial,sans-serif;margin:0;display:flex;height:100vh;}
+#panel{width:300px;background:#f5f5f5;border-right:1px solid #ccc;padding:12px;overflow:auto;}
+#graph{flex:1;position:relative;}
+svg{width:100%;height:100%;background:#ffffff;}
+.node circle{stroke:#333;stroke-width:1px;cursor:pointer;}
+.node text{font-size:10px;pointer-events:none;}
+.link{stroke:#999;stroke-opacity:0.6;}
+.legend-item{display:flex;align-items:center;margin-bottom:4px;font-size:12px;}
+.legend-color{width:14px;height:14px;margin-right:6px;border:1px solid #333;}
+#search{width:100%;padding:4px;margin-bottom:8px;}
+button{margin-right:6px;margin-bottom:6px;}
+</style></head><body>
+<div id='panel'>
+    <h3 style='margin-top:0'>DFG 线性/非线性</h3>
+    <input id='search' placeholder='搜索节点 (回车)' />
+    <div>
+        <button id='btnAll'>全部</button><button id='btnLin'>线性</button><button id='btnNon'>非线性</button>
+    </div>
+    <div class='legend-item'><div class='legend-color' style='background:#4CAF50'></div>线性</div>
+    <div class='legend-item'><div class='legend-color' style='background:#F44336'></div>非线性</div>
+    <div class='legend-item'><div class='legend-color' style='background:#9E9E9E'></div>未知/外部</div>
+    <h4>统计</h4>
+    <pre id='metrics' style='white-space:pre-wrap;font-size:11px;background:#fff;border:1px solid #ddd;padding:6px;'></pre>
+    <p style='font-size:11px;color:#666'>拖拽节点可重新布局。双击节点高亮邻居。</p>
+</div>
+<div id='graph'><svg id='svg'><g id='links'></g><g id='nodes'></g></svg></div>
+<script>
+const graphData = {"nodes": [{"id": "alu1._rn0_result", "linear": false, "reasons": ["Times"], "types": ["Rename"]}, {"id": "alu1._rn1_result", "linear": false, "reasons": ["Xor"], "types": ["Rename"]}, {"id": "alu1._rn2_result", "linear": false, "reasons": ["And", "Or"], "types": ["Rename"]}, {"id": "alu1._rn3_result", "linear": false, "reasons": ["Mod", "Times"], "types": ["Rename"]}, {"id": "alu1._rn4_result", "linear": true, "reasons": [], "types": ["Rename"]}, {"id": "alu1.a", "linear": null, "reasons": [], "types": ["Input"]}, {"id": "alu1.b", "linear": null, "reasons": [], "types": ["Input"]}, {"id": "alu1.c", "linear": null, "reasons": [], "types": ["Input"]}, {"id": "alu1.op", "linear": null, "reasons": [], "types": ["Input"]}, {"id": "alu1.result", "linear": null, "reasons": [], "types": ["Output", "Reg"]}], "links": [{"source": "alu1.c", "target": "alu1._rn0_result"}, {"source": "alu1.a", "target": "alu1._rn0_result"}, {"source": "alu1.b", "target": "alu1._rn0_result"}, {"source": "alu1.c", "target": "alu1._rn1_result"}, {"source": "alu1.a", "target": "alu1._rn1_result"}, {"source": "alu1.b", "target": "alu1._rn1_result"}, {"source": "alu1.c", "target": "alu1._rn2_result"}, {"source": "alu1.a", "target": "alu1._rn2_result"}, {"source": "alu1.b", "target": "alu1._rn2_result"}, {"source": "alu1.c", "target": "alu1._rn3_result"}, {"source": "alu1.a", "target": "alu1._rn3_result"}, {"source": "alu1.b", "target": "alu1._rn3_result"}], "metrics": {"total_expressions": 5, "linear_expressions": 1, "nonlinear_expressions": 4, "linearity_ratio": 0.2, "nonlinearity_ratio": 0.8, "nonlinear_reason_frequency": {"Times": 2, "Xor": 1, "And": 1, "Or": 1, "Mod": 1}, "longest_linear_chain_length": 1, "longest_linear_chain_path": ["alu1._rn4_result"]}};
+const COLOR_LINEAR='#4CAF50',COLOR_NON='#F44336',COLOR_UNKNOWN='#9E9E9E';
+const width = window.innerWidth - 300, height = window.innerHeight;
+const svg = document.getElementById('svg');
+const ns='http://www.w3.org/2000/svg';
+let nodes = graphData.nodes.map(n=>Object.assign({},n));
+let links = graphData.links.map(l=>Object.assign({},l));
+const nodeById = new Map(nodes.map(n=>[n.id,n]));
+links.forEach(l=>{l.source=nodeById.get(l.source);l.target=nodeById.get(l.target);});
+nodes.forEach(n=>{n.x=Math.random()*width; n.y=Math.random()*height; n.vx=0; n.vy=0;});
+const linkForce = ()=>{links.forEach(l=>{const dx=l.target.x-l.source.x;const dy=l.target.y-l.source.y;let dist=Math.sqrt(dx*dx+dy*dy)||0.01;const k=0.02*(dist-80);const nx=dx/dist, ny=dy/dist; l.target.vx-=k*nx; l.target.vy-=k*ny; l.source.vx+=k*nx; l.source.vy+=k*ny;});};
+const repelForce = ()=>{for(let i=0;i<nodes.length;i++){for(let j=i+1;j<nodes.length;j++){const a=nodes[i],b=nodes[j];let dx=b.x-a.x,dy=b.y-a.y;let d2=dx*dx+dy*dy+0.01; if(d2>40000) continue; const f=3000/d2; const dist=Math.sqrt(d2); const nx=dx/dist, ny=dy/dist; a.vx-=f*nx; a.vy-=f*ny; b.vx+=f*nx; b.vy+=f*ny;}}};
+const centerForce=()=>{const cx=width/2, cy=height/2; nodes.forEach(n=>{n.vx+=(cx-n.x)*0.001; n.vy+=(cy-n.y)*0.001;});};
+function step(){linkForce(); repelForce(); centerForce(); nodes.forEach(n=>{n.vx*=0.85; n.vy*=0.85; n.x+=n.vx; n.y+=n.vy;}); draw(); requestAnimationFrame(step);} 
+const gLinks=document.getElementById('links');
+const gNodes=document.getElementById('nodes');
+function colorOf(n){ if(n.linear===true) return COLOR_LINEAR; if(n.linear===false) return COLOR_NON; return COLOR_UNKNOWN; }
+function draw(){
+    gLinks.innerHTML='';
+    links.forEach(l=>{const line=document.createElementNS(ns,'line'); line.setAttribute('class','link'); line.setAttribute('x1',l.source.x); line.setAttribute('y1',l.source.y); line.setAttribute('x2',l.target.x); line.setAttribute('y2',l.target.y); line.setAttribute('stroke','#999'); line.setAttribute('stroke-width','1'); gLinks.appendChild(line);});
+    gNodes.innerHTML='';
+    nodes.forEach(n=>{const g=document.createElementNS(ns,'g'); g.setAttribute('class','node'); g.setAttribute('transform',`translate(${n.x},${n.y})`);
+        const c=document.createElementNS(ns,'circle'); c.setAttribute('r',Math.max(6, Math.min(14, (n.reasons&&n.reasons.length?10:8)))); c.setAttribute('fill',colorOf(n)); c.dataset.id=n.id; g.appendChild(c);
+        const t=document.createElementNS(ns,'text'); t.setAttribute('text-anchor','middle'); t.setAttribute('dy',20); t.textContent=n.id.split('.').pop(); g.appendChild(t);
+        g.addEventListener('mousedown',startDrag); g.addEventListener('dblclick',()=>highlightNeighbors(n.id));
+        g.addEventListener('mouseenter',()=>showTooltip(n)); g.addEventListener('mouseleave',hideTooltip);
+        gNodes.appendChild(g);});
+}
+let dragging=null; function startDrag(e){dragging=findNodeFromEvent(e); if(!dragging) return; e.preventDefault();}
+svg.addEventListener('mousemove',e=>{if(!dragging) return; const pt=svg.createSVGPoint(); pt.x=e.clientX; pt.y=e.clientY; const svgP=pt.matrixTransform(svg.getScreenCTM().inverse()); dragging.x=svgP.x; dragging.y=svgP.y; dragging.vx=dragging.vy=0; draw();});
+svg.addEventListener('mouseup',()=>{dragging=null;}); svg.addEventListener('mouseleave',()=>{dragging=null;});
+function findNodeFromEvent(e){const target=e.target; if(target.tagName==='circle'){const id=target.dataset.id; return nodes.find(n=>n.id===id);} return null;}
+function highlightNeighbors(id){ const neigh=new Set([id]); links.forEach(l=>{if(l.source.id===id) neigh.add(l.target.id); if(l.target.id===id) neigh.add(l.source.id);});
+    gNodes.querySelectorAll('g.node circle').forEach(c=>{ if(neigh.has(c.dataset.id)) c.setAttribute('stroke-width','3'); else c.setAttribute('stroke-width','0.5'); }); }
+let tip=document.createElement('div'); tip.style.position='fixed'; tip.style.pointerEvents='none'; tip.style.background='rgba(0,0,0,0.75)'; tip.style.color='#fff'; tip.style.padding='4px 6px'; tip.style.fontSize='11px'; tip.style.borderRadius='4px'; tip.style.display='none'; document.body.appendChild(tip);
+function showTooltip(n){ tip.innerHTML=`<b>${n.id}</b><br/>状态:${n.linear===true?'线性':(n.linear===false?'非线性':'?')}<br/>类型:${n.types.join(',')}<br/>原因:${(n.reasons||[]).join(',')||'-'}`; tip.style.display='block'; }
+function hideTooltip(){ tip.style.display='none'; }
+svg.addEventListener('mousemove',e=>{ if(tip.style.display!=='none'){ tip.style.left=(e.clientX+12)+'px'; tip.style.top=(e.clientY+12)+'px'; }});
+function applyFilter(mode){ nodes.forEach(n=>{ n._hidden = (mode==='linear' && n.linear!==true) || (mode==='nonlinear' && n.linear!==false);}); }
+function redrawFilter(){ nodes = nodes.filter(()=>true); draw(); gNodes.querySelectorAll('g.node').forEach(g=>{const id=g.querySelector('circle').dataset.id; const n=nodeById.get(id); if(n._hidden) g.style.display='none'; else g.style.display='';}); }
+document.getElementById('btnAll').onclick=()=>{nodes.forEach(n=>n._hidden=false); redrawFilter();};
+document.getElementById('btnLin').onclick=()=>{applyFilter('linear'); redrawFilter();};
+document.getElementById('btnNon').onclick=()=>{applyFilter('nonlinear'); redrawFilter();};
+document.getElementById('search').addEventListener('keydown',e=>{ if(e.key==='Enter'){ const q=e.target.value.trim(); gNodes.querySelectorAll('g.node circle').forEach(c=>{c.setAttribute('stroke','#333'); c.setAttribute('stroke-width','1');}); if(q){ const n=nodes.find(n=>n.id.endsWith(q)||n.id===q); if(n){ highlightNeighbors(n.id); } } }});
+document.getElementById('metrics').textContent = JSON.stringify(graphData.metrics, null, 2);
+draw(); step();
+</script></body></html>

@@ -1,0 +1,41 @@
+digraph DFG {
+  rankdir=LR;
+  splines=true;
+  node [style=filled,fontname=Helvetica];
+  "alu1._rn0_result" [label="alu1._rn0_result
+NL
+Times", shape=oval, fillcolor="#F44336"];
+  "alu1._rn1_result" [label="alu1._rn1_result
+NL
+Xor", shape=oval, fillcolor="#F44336"];
+  "alu1._rn2_result" [label="alu1._rn2_result
+NL
+And,Or", shape=oval, fillcolor="#F44336"];
+  "alu1._rn3_result" [label="alu1._rn3_result
+NL
+Mod,Times", shape=oval, fillcolor="#F44336"];
+  "alu1._rn4_result" [label="alu1._rn4_result
+L", shape=oval, fillcolor="#4CAF50"];
+  "alu1.a" [label="alu1.a
+?", shape=diamond, fillcolor="#9E9E9E"];
+  "alu1.b" [label="alu1.b
+?", shape=diamond, fillcolor="#9E9E9E"];
+  "alu1.c" [label="alu1.c
+?", shape=diamond, fillcolor="#9E9E9E"];
+  "alu1.op" [label="alu1.op
+?", shape=diamond, fillcolor="#9E9E9E"];
+  "alu1.result" [label="alu1.result
+?", shape=doublecircle, fillcolor="#9E9E9E"];
+  "alu1.c" -> "alu1._rn0_result";
+  "alu1.a" -> "alu1._rn0_result";
+  "alu1.b" -> "alu1._rn0_result";
+  "alu1.c" -> "alu1._rn1_result";
+  "alu1.a" -> "alu1._rn1_result";
+  "alu1.b" -> "alu1._rn1_result";
+  "alu1.c" -> "alu1._rn2_result";
+  "alu1.a" -> "alu1._rn2_result";
+  "alu1.b" -> "alu1._rn2_result";
+  "alu1.c" -> "alu1._rn3_result";
+  "alu1.a" -> "alu1._rn3_result";
+  "alu1.b" -> "alu1._rn3_result";
+}

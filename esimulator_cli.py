@@ -31,9 +31,12 @@ def main():
     batch_parser.add_argument('--output', '-o', help='输出目录', default='results')
     
     # 可视化命令
-    viz_parser = subparsers.add_parser('visualize', help='生成可视化图表')
+    viz_parser = subparsers.add_parser('visualize', help='生成可视化图表 (DOT + HTML)')
     viz_parser.add_argument('dfg_file', help='DFG文件路径')
     viz_parser.add_argument('--output', '-o', help='输出目录', default='results/visualizations')
+    viz_parser.add_argument('--filter', choices=['linear','nonlinear'], help='过滤仅显示线性或非线性节点')
+    viz_parser.add_argument('--focus', help='以某个信号为根聚焦子图')
+    viz_parser.add_argument('--depth', type=int, default=2, help='聚焦子图向前深度 (默认2)')
     
     args = parser.parse_args()
     

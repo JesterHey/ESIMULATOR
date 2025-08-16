@@ -1,0 +1,24 @@
+digraph DFG {
+  rankdir=LR;
+  splines=true;
+  node [style=filled,fontname=Helvetica];
+  "alu.acb_ib" [label="alu.acb_ib
+NL
+And,Or,Unot", shape=ellipse, fillcolor="#F44336"];
+  "alu.add_ib" [label="alu.add_ib
+NL
+Or,Unot", shape=ellipse, fillcolor="#F44336"];
+  "alu.cy_ib" [label="alu.cy_ib
+NL
+Or,Unot", shape=ellipse, fillcolor="#F44336"];
+  "alu.dout" [label="alu.dout
+NL
+Branch", shape=doublecircle, fillcolor="#F44336"];
+  "alu.n0415" [label="alu.n0415
+NL
+Or,Unot", shape=ellipse, fillcolor="#F44336"];
+  "alu.n0415" -> "alu.dout";
+  "alu.acb_ib" -> "alu.dout";
+  "alu.add_ib" -> "alu.dout";
+  "alu.cy_ib" -> "alu.dout";
+}
