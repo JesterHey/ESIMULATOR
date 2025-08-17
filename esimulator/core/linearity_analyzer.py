@@ -105,7 +105,7 @@ class LinearityAnalyzer:
                 'expression_type': 'terminal'
             }
         
-        elif tree_expr.startswith('(IntConst '):
+        elif tree_expr.startswith('(IntConst ') or tree_expr.startswith('(IntCon '):
             # 常量赋值 - 线性
             return {
                 'is_linear': True,

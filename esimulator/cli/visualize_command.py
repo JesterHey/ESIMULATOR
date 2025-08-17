@@ -32,6 +32,7 @@ def run_visualize(args: Any) -> None:
             keep=getattr(args, 'filter', None),
             html=True,
             dot=True,
+            split_subgraphs=getattr(args, 'split_subgraphs', False)
         )
         print(f"已输出: {out_dir}")
         print("指标: ", res['metrics'])

@@ -1,8 +1,0 @@
-digraph DFG {
-  rankdir=LR;
-  splines=true;
-  node [style=filled,fontname=Helvetica];
-  "alu1._rn0_result" [label="alu1._rn0_result
-NL
-Times", shape=oval, fillcolor="#F44336"];
-}
