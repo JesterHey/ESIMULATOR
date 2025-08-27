@@ -37,7 +37,6 @@ def main():
     viz_parser.add_argument('--filter', choices=['linear','nonlinear'], help='过滤仅显示线性或非线性节点')
     viz_parser.add_argument('--focus', help='以某个信号为根聚焦子图')
     viz_parser.add_argument('--depth', type=int, default=2, help='聚焦子图向前深度 (默认2)')
-    viz_parser.add_argument('--split-subgraphs', action='store_true', help='额外输出线性与非线性子图 (stem_linear / stem_nonlinear)')
     
     args = parser.parse_args()
     

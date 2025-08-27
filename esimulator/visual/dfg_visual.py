@@ -310,7 +310,7 @@ def write_interactive_html(nodes: Dict[str, Dict], edges: List[Tuple[str,str]], 
 
 # -------------------- 高层封装 --------------------
 
-def visualize_from_dfg(dfg_path: str, out_dir: str, stem: Optional[str]=None, *, focus: Optional[str]=None, depth: int=2, keep: Optional[str]=None, html: bool=True, dot: bool=True, detailed_label: bool=False, split_subgraphs: bool=False):
+def visualize_from_dfg(dfg_path: str, out_dir: str, stem: Optional[str]=None, *, focus: Optional[str]=None, depth: int=2, keep: Optional[str]=None, html: bool=True, dot: bool=True, detailed_label: bool=False):
     signals, binds = parse_dfg(dfg_path)
     analyzer = _ensure_analyzer(None)
     report = analyzer.analyze_dfg_file(dfg_path)
@@ -322,18 +322,6 @@ def visualize_from_dfg(dfg_path: str, out_dir: str, stem: Optional[str]=None, *,
     os.makedirs(out_dir, exist_ok=True)
     if dot:
         write_dot(nodes, edges, os.path.join(out_dir, f"{stem}.dot"), detailed=detailed_label)
-        if split_subgraphs:
-            # 线性子图
-            lin_nodes = {k:v for k,v in nodes.items() if v['is_linear'] is True}
-            lin_edges = [(s,d) for s,d in edges if s in lin_nodes and d in lin_nodes]
-            write_dot(lin_nodes, lin_edges, os.path.join(out_dir, f"{stem}_linear.dot"), detailed=detailed_label)
-            # 非线性子图
-            nlin_nodes = {k:v for k,v in nodes.items() if v['is_linear'] is False}
-            nlin_edges = [(s,d) for s,d in edges if s in nlin_nodes and d in nlin_nodes]
-            write_dot(nlin_nodes, nlin_edges, os.path.join(out_dir, f"{stem}_nonlinear.dot"), detailed=detailed_label)
-    if html and split_subgraphs:
-        # HTML 子图（可选；仅输出主图 HTML，避免文件数膨胀，可扩展为 True 再输出）
-        pass
     if html:
         write_interactive_html(nodes, edges, metrics, os.path.join(out_dir, f"{stem}.html"))
     return {'nodes':nodes,'edges':edges,'metrics':metrics,'analysis_report':report}
