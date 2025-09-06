@@ -130,6 +130,10 @@ def parse_expression(s: str, i: int = 0) -> Tuple[ExpressionNode, int]:
         true_expr = _extract_tagged_subexpr(whole, "True:")
         false_expr = _extract_tagged_subexpr(whole, "False:", required=False)
         children = []
+        if cond_expr is None:
+            raise ParseError("Branch missing Cond expression")
+        if true_expr is None:
+            raise ParseError("Branch missing True expression")
         cond_node, _ = parse_expression(cond_expr, 0)
         true_node, _ = parse_expression(true_expr, 0)
         children.extend([cond_node, true_node])
@@ -229,13 +233,10 @@ def evaluate_linearity(node: ExpressionNode, linear_ops: Set[str]) -> Dict:
     # 未识别类型视为非线性
     return {"is_linear": False, "reasons": ["未知节点类型"]}
 
-# ---------------------------
-# CorrectedLinearityAnalyzer 类，原有分析逻辑结合 AST 解析改造
-# ---------------------------
 class CorrectedLinearityAnalyzer:
     
     def __init__(self):
-        # 严格的线性运算符定义（仅支持基本算术及位拼接操作）
+        # 线性运算符定义（仅支持基本算术及位拼接操作）
         self.linear_operators = {
             'Plus', 'Minus', 'UnaryMinus',  # 基本算术运算
             'Concat', 'Partselect'          # 位操作（线性组合）
@@ -461,15 +462,6 @@ def analyze_real_dfg(file_name):
         percentage = count / summary['total_expressions'] * 100
         print(f"  {expr_type}: {count} ({percentage:.1f}%)")
     
-    print(f"\n复杂度分布:")
-    for complexity, count in report['complexity_distribution'].items():
-        percentage = count / summary['total_expressions'] * 100
-        print(f"  {complexity}: {count} ({percentage:.1f}%)")
-    
-    print(f"\n非线性原因分析:")
-    for reason, count in report['nonlinear_reasons'].items():
-        print(f"  {reason}: {count}")
-    
     print(f"\n运算符使用统计（前10位）:")
     sorted_ops = sorted(report['operator_usage'].items(), key=lambda x: x[1], reverse=True)
     for op, count in sorted_ops[:10]:
@@ -500,7 +492,7 @@ def analyze_real_dfg(file_name):
             linearity = "线性" if analysis['is_linear'] else "非线性"
             f.write(f"{signal:<20}: {linearity:<6} - {analysis['reason']}\n")
     
-    print(f"   修正报告已保存到: results/{file_name[:-4]}_linearity_analysis.txt")
+    print(f"报告已保存到: results/{file_name[:-4]}_linearity_analysis.txt")
 
 if __name__ == "__main__":
     analyze_real_dfg('4004_dfg.txt')
