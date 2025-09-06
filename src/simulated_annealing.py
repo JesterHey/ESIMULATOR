@@ -6,9 +6,11 @@
 import numpy as np
 import random
 import copy
-from typing import Dict, List, Tuple, Optional, Callable
+from typing import Dict, List, Tuple, Optional, Callable, Any
 from dataclasses import dataclass
 import networkx as nx
+from pathlib import Path
+from partitioning.cost_strategies import get_cost_function
 
 
 @dataclass
@@ -25,7 +27,7 @@ class AnnealingConfig:
     # 多起点次数（>=1 表示多次随机起点）
     multi_start_runs: int = 1
     # 聚类操作权重配置
-    cluster_operation_weights: Dict[str, float] = None
+    cluster_operation_weights: Optional[Dict[str, float]] = None
     # 非线性节点是否允许参与优化（True=允许，False=固定为0）
     allow_nonlinear_optimization: bool = True
 
@@ -44,7 +46,7 @@ class AnnealingResult:
 class SimulatedAnnealing:
     """模拟退火算法实现"""
     
-    def __init__(self, config: AnnealingConfig = None):
+    def __init__(self, config: Optional[AnnealingConfig] = None):
         self.config = config or AnnealingConfig()
         self.random_seed = None
         
@@ -173,14 +175,17 @@ class SimulatedAnnealing:
         runs = num_starts or max(1, self.config.multi_start_runs)
         best_overall: Optional[AnnealingResult] = None
         base_seed = self.random_seed if self.random_seed is not None else random.randint(0, 10**9)
-        
+
         for i in range(runs):
             # 变化种子以增加多样性
             self.set_random_seed(base_seed + i)
             result = self.optimize(graph, cost_function, initial_partition=None)
             if best_overall is None or result.best_cost < best_overall.best_cost:
                 best_overall = result
-        
+
+        if best_overall is None:
+            # 理论上不会发生；保险返回一次 optimize 的结果
+            best_overall = self.optimize(graph, cost_function, initial_partition=None)
         return best_overall
     
     def _generate_linear_random_partition(self, graph: nx.DiGraph) -> Dict[str, int]:
@@ -217,6 +222,13 @@ class SimulatedAnnealing:
             return new_partition
         
         # 根据权重随机选择邻域操作类型
+        if not self.config.cluster_operation_weights:
+            self.config.cluster_operation_weights = {
+                'flip': 0.4,
+                'linear_cluster': 0.3,
+                'nonlinear_cluster': 0.15,
+                'mixed_cluster': 0.15
+            }
         operations = list(self.config.cluster_operation_weights.keys())
         weights = list(self.config.cluster_operation_weights.values())
         operation = random.choices(operations, weights=weights, k=1)[0]
@@ -315,7 +327,7 @@ class SimulatedAnnealing:
         base_temperature = self.config.initial_temperature * (self.config.cooling_rate ** max(1, iteration // self.config.iterations_per_temp))
         return max(self.config.final_temperature, base_temperature * temperature_factor)
     
-    def analyze_result(self, result: AnnealingResult) -> Dict[str, any]:
+    def analyze_result(self, result: AnnealingResult) -> Dict[str, Any]:
         """分析优化结果"""
         analysis = {
             'convergence_reason': result.convergence_reason,
@@ -369,15 +381,8 @@ def main():
         'E': {'is_linear': True},
     })
     
-    # 定义成本函数（简化版本）
-    def simple_cost_function(g, partition):
-        # 简单的成本函数：跨分区边数
-        cross_edges = 0
-        for edge in g.edges():
-            src, dst = edge
-            if partition[src] != partition[dst]:
-                cross_edges += 1
-        return cross_edges
+    # 选择成本函数策略
+    simple_cost_function = get_cost_function('simple_cross')
     
     # 配置模拟退火
     config = AnnealingConfig(
@@ -417,3 +422,16 @@ def main():
 
 if __name__ == "__main__":
     main() 
+    
+    # 示例: 若已生成 results/4004_dfg_linearity_graph.json 可如下加载并优化
+    example_graph_json = Path('results/4004_dfg_linearity_graph.json')
+    if example_graph_json.exists():
+        from analyzers.graph_loader import load_graph_from_json
+        g = load_graph_from_json(str(example_graph_json))
+        # 采用组合型策略
+        cost_fn = get_cost_function('mixed', w_cross_linear=1.0, w_cross_nonlinear=1.5,
+                                    penalty_nonlinear_domain1=2.0, reward_linear_cluster=0.1)
+        cfg = AnnealingConfig(iterations_per_temp=30, max_iterations=2000, multi_start_runs=2)
+        sa = SimulatedAnnealing(cfg)
+        res = sa.optimize_multi_start(g, cost_fn)
+        print('4004 图优化结果: best_cost=', res.best_cost)

@@ -5,6 +5,12 @@ from collections import defaultdict
 from dataclasses import dataclass
 from typing import Dict, List, Set, Tuple, Optional, Union
 import json
+from pathlib import Path
+
+try:
+    import networkx as nx  # 可选：用于直接构建图供模拟退火使用
+except ImportError:  # 允许在未安装 networkx 时继续运行文本分析
+    nx = None  # type: ignore
 
 @dataclass
 class ExpressionNode:
@@ -251,29 +257,35 @@ class CorrectedLinearityAnalyzer:
             'Sll', 'Srl'                    # 位移运算
         }
         
-        self.signal_analyses = {}
+        self.signal_analyses: Dict[str, Dict] = {}
         self.total_expressions = 0
+        # 依赖映射: dest -> set(sources)
+        self.signal_dependencies: Dict[str, Set[str]] = defaultdict(set)
     
-    def analyze_dfg_file(self, file_path: str) -> Dict:
-        """分析DFG文件，按表达式级别进行线性分析"""
+    def analyze_dfg_file(self, file_path: str, *, export_graph_json: Optional[str] = None,
+                         export_graph_gexf: Optional[str] = None) -> Dict:
+        """分析DFG文件，按表达式级别进行线性分析并可导出图结构
+
+        参数:
+            file_path: DFG 源文件路径
+            export_graph_json: 若提供, 导出包含节点属性与边的 JSON 文件
+            export_graph_gexf: 若提供且安装 networkx, 以 gexf 形式导出图
+        返回:
+            综合报告 dict (新增 'graph' 键, 内含 nodes 与 edges )
+        """
         
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
-        
-        # 原来的正则方法切分 Bind 表达式
+
         bind_pattern = r'\(Bind dest:([^\s]+).*?tree:(.*?)\)(?=\n\(Bind|\nBranch:|\n\n|\Z)'
         matches = list(re.finditer(bind_pattern, content, re.DOTALL))
-        
         self.total_expressions = len(matches)
         print(f"找到 {self.total_expressions} 个信号表达式")
-        
-        # 分析每个 Bind 表达式
+
         for match in matches:
             signal_name = match.group(1)
             tree_expr = match.group(2).strip()
-            
             try:
-                # 对 Terminal 和常量直接处理
                 if tree_expr.startswith('(Terminal '):
                     analysis = {
                         'is_linear': True,
@@ -286,33 +298,40 @@ class CorrectedLinearityAnalyzer:
                     analysis = {
                         'is_linear': True,
                         'reason': '常量赋值',
-                        'complexity': 'simple', 
+                        'complexity': 'simple',
                         'operators': [],
                         'expression_type': 'constant'
                     }
                 else:
-                    # 对于 Operator、Concat、Branch 等情况，尝试以 AST 方式解析
                     try:
                         ast_root, _ = parse_expression(tree_expr, 0)
                         lin_info = evaluate_linearity(ast_root, self.linear_operators)
-                        # 递归收集 AST 中所有运算符
-                        ops = []
+                        ops: List[str] = []
+                        terminals: Set[str] = set()
+
                         def collect_ops(node: ExpressionNode):
                             if node.node_type == 'operator':
                                 ops.append(node.value)
+                            elif node.node_type == 'terminal':
+                                term_name = node.value.strip().split()[0]
+                                if not term_name.isdigit():
+                                    terminals.add(term_name)
                             for child in node.children:
                                 collect_ops(child)
+
                         collect_ops(ast_root)
-                        reason = "线性AST" if lin_info["is_linear"] else ",".join(sorted(set(lin_info["reasons"])))
+                        reason = '线性AST' if lin_info['is_linear'] else ','.join(sorted(set(lin_info['reasons'])))
                         analysis = {
-                            'is_linear': lin_info["is_linear"],
+                            'is_linear': lin_info['is_linear'],
                             'reason': reason,
-                            'complexity': 'complex',  # 可以进一步根据深度其他指标细化
+                            'complexity': 'complex',
                             'operators': ops,
                             'expression_type': ast_root.node_type
                         }
+                        for src in terminals:
+                            if src != signal_name:
+                                self.signal_dependencies[signal_name].add(src)
                     except Exception as e_ast:
-                        # 若 AST 解析失败，则回退到旧逻辑
                         print(f"AST解析失败,回退旧逻辑: {e_ast}")
                         if tree_expr.startswith('(Branch '):
                             analysis = self._analyze_branch_expression(tree_expr)
@@ -338,8 +357,54 @@ class CorrectedLinearityAnalyzer:
                     'operators': [],
                     'expression_type': 'unknown'
                 }
-        
-        return self._generate_comprehensive_report()
+
+        report = self._generate_comprehensive_report()
+        graph_payload = self._build_graph_payload()
+        report['graph'] = graph_payload
+        if export_graph_json:
+            self._export_graph_json(graph_payload, export_graph_json)
+        if export_graph_gexf and nx is not None:
+            self._export_graph_gexf(graph_payload, export_graph_gexf)
+        return report
+
+    # ---------------- 图构建与导出 ----------------
+    def _build_graph_payload(self) -> Dict:
+        """构建图数据结构 {nodes: {name: attrs}, edges: [[src,dst], ...]}"""
+        nodes = {}
+        for sig, analysis in self.signal_analyses.items():
+            nodes[sig] = {
+                'is_linear': bool(analysis['is_linear']),
+                'reason': analysis['reason'],
+                'operators': analysis['operators'],
+                'expression_type': analysis['expression_type'],
+                # 反向记录其依赖(源)数量
+                'in_degree_sources': len(self.signal_dependencies.get(sig, []))
+            }
+        edges = []
+        for dest, sources in self.signal_dependencies.items():
+            for src in sources:
+                # 仅在源信号存在分析信息时建立边 (忽略外部输入端口不在 Bind 列表情况)
+                edges.append([src, dest])
+        return {'nodes': nodes, 'edges': edges}
+
+    def _export_graph_json(self, graph_payload: Dict, path: str):
+        Path(path).parent.mkdir(parents=True, exist_ok=True)
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(graph_payload, f, ensure_ascii=False, indent=2)
+        print(f"图数据(JSON)已导出: {path}")
+
+    def _export_graph_gexf(self, graph_payload: Dict, path: str):
+        if nx is None:
+            print("未安装 networkx, 跳过 gexf 导出")
+            return
+        G = nx.DiGraph()
+        for name, attrs in graph_payload['nodes'].items():
+            G.add_node(name, **attrs)
+        for src, dst in graph_payload['edges']:
+            G.add_edge(src, dst)
+        Path(path).parent.mkdir(parents=True, exist_ok=True)
+        nx.write_gexf(G, path)
+        print(f"图数据(GEXF)已导出: {path}")
     
     def _analyze_operator_expression(self, expr: str) -> Dict:
         """旧方式：分析运算符表达式，基于正则扫描"""
@@ -450,7 +515,9 @@ def analyze_real_dfg(file_name):
     analyzer = CorrectedLinearityAnalyzer()
     dfg_file = f"/Users/xuxiaolan/PycharmProjects/ESIMULATOR/dfg_files/{file_name}"
     
-    report = analyzer.analyze_dfg_file(dfg_file)
+    # 同时导出图 JSON 到 results 目录
+    graph_json_path = f"results/{file_name[:-4]}_linearity_graph.json"
+    report = analyzer.analyze_dfg_file(dfg_file, export_graph_json=graph_json_path)
     print(f"\n=== 分析结果 ===")
     summary = report['summary']
     print(f"总表达式数: {summary['total_expressions']}")
@@ -493,6 +560,7 @@ def analyze_real_dfg(file_name):
             f.write(f"{signal:<20}: {linearity:<6} - {analysis['reason']}\n")
     
     print(f"报告已保存到: results/{file_name[:-4]}_linearity_analysis.txt")
+    print(f"图 JSON 已保存到: {graph_json_path}")
 
 if __name__ == "__main__":
     analyze_real_dfg('4004_dfg.txt')

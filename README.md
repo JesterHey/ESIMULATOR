@@ -1,158 +1,222 @@
-# ESIMULATOR 2.0 - DFG线性分析工具
+# ESIMULATOR
 
-## 🎯 项目简介
+面向数字电路 Data Flow Graph (DFG) 的线性/非线性分析与分区优化实验平台。
 
-ESIMULATOR 2.0是一个专门用于Data Flow Graph (DFG)线性分析的工具套件，经过重新组织优化，提供了更强大的功能和更清晰的模块结构。
+> 目标：Verilog → DFG → 线性分析 → 图构建 → 分区优化（模拟退火）。
 
+---
 
-## 🚀 快速开始
+## ✨ 核心特性
 
-### 命令行使用
+- 递归解析 DFG 表达式（Operator / Concat / Branch / Partselect / Terminal / 常量）
+- 基于 AST 的线性/非线性判定（避免简单字符串匹配局限）
+- 统计报告：类别计数 / 运算符频率 / 非线性原因 / 线性比例
+- 自动生成信号依赖图，导出 JSON / （可选）GEXF
+- 模拟退火分区优化：多起点 + 自适应温度 + 多邻域扰动
+- 成本策略插件化：simple / weighted / nonlinear_penalty / mixed
+- 代码模块化，易于扩展更多图算法或分析维度
 
-```bash
-# 基本分析
-python esimulator_cli.py analyze dfg_files/4004_dfg.txt
+---
 
-# 批量分析
-python esimulator_cli.py batch dfg_files/ --output results
+## 🧱 目录结构（节选）
 
-# 可视化生成 (生成 DOT + 交互式 HTML)
-python esimulator_cli.py visualize dfg_files/4004_dfg.txt
-
-# 可视化带筛选/聚焦 (只看非线性, 以某节点为根, 深度=2)
-python esimulator_cli.py visualize dfg_files/4004_dfg.txt \
-	--output results/visualizations \
-	--filter nonlinear \
-	--focus alu1._rn0_result \
-	--depth 2
+```text
+ESIMULATOR/
+├── verilog_files/                 # 输入 Verilog 源
+├── dfg_files/                     # 外部生成的 DFG 描述
+├── results/                       # 报告 & 图 & 优化输出
+├── src/
+│   ├── analyzers/
+│   │   ├── dfg_linearity_corrector.py   # 线性分析 + 图导出
+│   │   └── graph_loader.py              # 图 JSON -> networkx
+│   ├── partitioning/
+│   │   └── cost_strategies.py           # 成本函数策略
+│   └── simulated_annealing.py           # 优化主流程
+├── esimulator/examples/basic_usage.py   # 使用示例
+├── QUICK_START.md
+├── MODULE_DOC.md
+├── docs/USER_MANUAL.md
+├── docs/USAGE_GUIDE_V2.md
+└── README.md
 ```
 
-### 程序化使用
+---
+
+## 🚀 快速上手
+
+### 1. 准备 DFG
+
+将 Verilog 通过外部脚本/工具生成 `dfg_files/xxx_dfg.txt`。
+
+### 2. 运行线性分析
+
+
+```bash
+python src/analyzers/dfg_linearity_corrector.py
+```
+
+输出：
+
+- 文本报告：`results/<name>_linearity_analysis.txt`
+- 图：`results/<name>_linearity_graph.json`（可供后续优化）
+
+### 3. 运行分区优化
+
+
+```bash
+python src/simulated_annealing.py
+```
+
+检测到图 JSON 时会尝试加载并执行一次默认（mixed 策略）优化。
+
+---
+
+## 📊 报告内容概览
+
+报告包含：
+
+- 总表达式数、线性/非线性数量与比例
+- 每类节点分布（terminal / constant / operator / concat / branch 等）
+- 运算符使用频率排行
+- 每个信号的判定原因（例如：包含乘法 → 非线性）
+- 图节点/边统计与导出路径
+
+图 JSON 示例：
+
+```json
+{
+  "nodes": {
+    "a": {"is_linear": true},
+    "b": {"is_linear": false}
+  },
+  "edges": [["a", "c"], ["b", "c"]]
+}
+```
+
+---
+
+## 🧠 线性判定规则（默认）
+
+- Terminal / 常量：线性
+- Operator：所有子节点线性且运算符属于线性集合（如 +, -, 一元逻辑）
+- Concat：所有子项线性 → 线性
+- Partselect：底层对象线性 → 线性
+- Branch（三目/条件）：任一分支非线性则非线性（可扩展策略）
+- 包含 *, /, &, |, ^, <<, >> 等 → 非线性
+
+可在解析代码中扩展 `linear_operators` 或添加白名单/黑名单逻辑。
+
+---
+
+## 🧩 图与优化流程
+
+1. 解析表达式并收集依赖：对每个赋值/表达式识别其使用的信号形成有向边 (src → dst)
+2. 构建节点属性：`is_linear` / `type`
+3. 导出 JSON（必要）与 GEXF（可选）
+4. 读取 JSON 转为 `networkx.DiGraph`
+5. 模拟退火对节点分区（当前示例二域，可扩展多域）
+
+---
+
+## 🛠 成本策略 (`partitioning/cost_strategies.py`)
+
+| 策略 | 说明 |
+| ---- | ---- |
+| simple_cross | 仅统计跨分区边数量 |
+| weighted_cross | 线性/非线性源边不同权重 |
+| nonlinear_penalty | 非线性节点放入指定域惩罚或奖励聚集 |
+| mixed | 组合：跨域权重 + 非线性惩罚 + 线性聚集奖励 |
+
+使用示例：
 
 ```python
-from esimulator import LinearityAnalyzer, ReportGenerator
-
-# 创建分析器
-analyzer = LinearityAnalyzer()
-
-# 执行分析
-result = analyzer.analyze_dfg_file("dfg_files/4004_dfg.txt")
-
-# 生成报告
-report_gen = ReportGenerator("results")
-report_gen.generate_text_report(result)
-
-# 可视化 (编程接口)
-from esimulator.visual import visualize_from_dfg
-
-visualize_from_dfg(
-	'dfg_files/4004_dfg.txt',
-	'results/visualizations',
-	focus='alu1._rn0_result',
-	depth=2,
-	keep='nonlinear',  # 或 'linear'
-	html=True,
-	dot=True
+from partitioning.cost_strategies import get_cost_function
+cost_fn = get_cost_function(
+    strategy="mixed",
+    graph=g,
+    partitions=2,
+    w_cross_linear=1.0,
+    w_cross_nonlinear=1.5,
+    penalty_nonlinear_domain1=2.0,
+    reward_linear_cluster=0.1,
 )
-print('生成: DOT + HTML')
-```text
+score = cost_fn(partition_assignment_dict)
+```
 
-### 兼容性入口
+返回值为 `float`，可自由扩展为对象并兼容 `.total_cost` 属性。
+
+---
+
+## 🔥 模拟退火特点
+
+- 多邻域：flip / linear_cluster / nonlinear_cluster / mixed_cluster
+- 自适应温度：基于近期接受率或成本方差调节
+- Multi-start：多随机初始解，取全局最优
+- 支持将成本函数换成任意符合签名的函数
+- 可插入额外约束（如固定某些节点分区）
+
+---
+
+## 🧪 自定义调用示例
+
+```python
+from analyzers.graph_loader import load_graph_from_json
+from partitioning.cost_strategies import get_cost_function
+from simulated_annealing import optimize
+
+graph = load_graph_from_json("results/4004_dfg_linearity_graph.json")
+cost_fn = get_cost_function("mixed", graph, partitions=2)
+best = optimize(graph, cost_fn, partitions=2, max_iterations=2000)
+print(best)
+```
+
+---
+
+## ⚙️ 安装
+
+项目使用 `pyproject.toml`：
 
 ```bash
-python analyze_linearity_v2.py
-python demo_comparison_v2.py
+pip install -e .
 ```
 
-## 项目结构
-
-```
-ESIMULATOR/
-├── src/                      # 源代码
-│   ├── analyzers/           # 分析器模块
-│   ├── parsers/             # 解析器模块
-│   ├── visualizers/         # 可视化模块
-│   └── utils/               # 工具模块
-├── dfg_files/               # DFG输入文件
-├── results/                 # 分析结果
-│   ├── reports/             # 分析报告
-│   └── data/                # 数据文件
-├── tests/                   # 测试文件
-├── docs/                    # 文档
-└── examples/                # 示例代码
-```
-
-## 快速开始
-
-### 运行线性分析
+最小依赖（仅图 + 优化）：
 
 ```bash
-# 主要分析工具
-python analyze_linearity.py
-
-# 对比演示
-python demo_comparison.py
-
-# 运行测试
-python tests/test_parsing_logic.py
+pip install networkx
 ```
 
-### 核心功能
+可选：
 
-1. **DFG解析**: 解析Verilog DFG文件
-2. **线性分析**: 按表达式级别分析线性特征
-3. **结果对比**: 展示修正前后的差异
-4. **可视化**: 生成 Graphviz DOT 与交互式 HTML 力导图 (支持筛选 / 聚焦)
+```bash
+pip install lxml matplotlib
+```
 
-## 技术细节
+---
 
-### 修正的分析方法
+## 🗂 常见文件
 
-- **表达式级别分析**: 按信号表达式分析，而非单个运算符统计
-- **递归解析**: 理解表达式的嵌套结构和运算优先级
-- **类型分类**: 区分Terminal、Operator、Branch等不同表达式类型
-- **整体判断**: 一个表达式包含任何非线性运算，整体就是非线性
+| 作用 | 文件 |
+| ---- | ---- |
+| 线性分析 + 图导出 | `src/analyzers/dfg_linearity_corrector.py` |
+| 图加载 | `src/analyzers/graph_loader.py` |
+| 成本策略 | `src/partitioning/cost_strategies.py` |
+| 模拟退火示例 | `src/simulated_annealing.py` |
+| 使用示例 | `esimulator/examples/basic_usage.py` |
+| 快速开始 | `QUICK_START.md` |
+| 深度模块说明 | `MODULE_DOC.md` |
+| 用户手册 | `docs/USER_MANUAL.md` |
+| 结构指南 | `docs/USAGE_GUIDE_V2.md` |
 
-### 线性运算符定义
+---
 
-- **线性**: Plus, Minus, Concat, Partselect
-- **非线性**: And, Or, Xor, Unot, 比较运算, 分支运算
+## 🧾TODO
 
-## 重要文件 (V2)
+- [ ] 结果可视化
+- [ ] 整合pyverilog等上游工具链
+- [ ] 线性标记逻辑强化 
+---
 
-| 路径/模块 | 说明 |
-|-----------|------|
-| `esimulator/core/linearity_analyzer.py` | 新版表达式级线性分析引擎 |
-| `esimulator/core/dfg_parser.py` | DFG 解析器 |
-| `esimulator/core/report_generator.py` | 报告生成器 (文本/JSON) |
-| `esimulator/visual/dfg_visual.py` | 可视化封装 (DOT & HTML) |
-| `esimulator_cli.py` | 统一 CLI 入口 (analyze / compare / batch / visualize) |
-| `src/visualization/dfg_linearity_viz.py` | 旧版可视化脚本 (deprecated, 向后兼容) |
-| `results/` | 输出目录 (报告 / DOT / HTML / 图像) |
+## 📄 许可证
 
-> 提示: 新项目推荐使用 `esimulator.visual.visualize_from_dfg` 生成可视化；旧脚本仍可用但后续将不再扩展。
-
-### 可视化输出说明
-
-1. DOT: 适合用 Graphviz 生成 PNG / SVG  (例: `dot -Tpng file.dot -o file.png`)
-2. HTML: 自包含文件, 浏览器打开即可交互 (拖拽 / 搜索 / 邻居高亮 / 过滤按钮)
-3. 过滤 (CLI `--filter`): 仅保留 `linear` 或 `nonlinear`
-4. 聚焦 (CLI `--focus --depth`): 以根节点向前拓展指定层数并包含其直接前驱
-
-### 指标字段 (HTML / API metrics)
-
-| 字段 | 含义 |
-|------|------|
-| total_expressions | 有表达式的信号数 |
-| linear_expressions | 线性表达式数 |
-| nonlinear_expressions | 非线性表达式数 |
-| linearity_ratio | 线性比例 |
-| nonlinearity_ratio | 非线性比例 |
-| nonlinear_reason_frequency | 非线性原因出现频次 |
-| longest_linear_chain_length | 最长连续线性链长度 |
-| longest_linear_chain_path | 该线性链路径 |
-
-
-## 许可证
-
-MIT License - 详见LICENSE文件
+MIT License
