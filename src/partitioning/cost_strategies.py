@@ -23,6 +23,16 @@ import networkx as nx
 
 CostFunction = Callable[[nx.DiGraph, Dict[str, int]], float]
 
+# 导出符号列表初始化
+__all__ = [
+    'CostFunction',
+    'get_cost_function',
+    'cost_simple_cross',
+    'cost_weighted_cross',
+    'cost_linear_penalize_nonlinear',
+    'cost_mixed'
+]
+
 # ----------------------------------------------------------------------------
 # 基础工具
 # ----------------------------------------------------------------------------
@@ -65,24 +75,39 @@ def cost_mixed(graph: nx.DiGraph, partition: Dict[str, int], *,
                w_cross_linear: float = 1.0,
                w_cross_nonlinear: float = 1.5,
                penalty_nonlinear_domain1: float = 2.0,
-               reward_linear_cluster: float = 0.2) -> float:
-    """组合型成本:
-    - 线性/非线性跨域不同权重
-    - 非线性在域1惩罚
-    - 奖励线性连续链保持同域 (减少成本)
+               reward_linear_cluster: float = 0.2,
+               balance_lambda: float = 0.0,
+               non_negative: bool = True) -> float:
+    """组合型成本 (可扩展版本):
+    组成: cross + penalty + balance - reward
+    其中:
+      cross  : 跨域边代价 (线性/非线性源加权)
+      penalty: 非线性节点放入域1的惩罚
+      reward : 线性-线性同域边的奖励 (降低成本)
+      balance:  |#domain0 - #domain1| * balance_lambda (域规模不平衡惩罚, 可选)
+    若 non_negative=True, 返回 max(0, total)。
     """
     cross = cost_weighted_cross(graph, partition, w_linear=w_cross_linear, w_nonlinear=w_cross_nonlinear)
     penalty = 0.0
     for n, attrs in graph.nodes(data=True):
         if not attrs.get('is_linear', False) and partition.get(n, 0) == 1:
             penalty += penalty_nonlinear_domain1
-    # 线性链奖励: 对每条 u->v 边, 若两端线性且同域, 减少少量成本
     reward = 0.0
     for u, v in graph.edges():
         if (graph.nodes[u].get('is_linear') and graph.nodes[v].get('is_linear') and
             partition.get(u) == partition.get(v)):
             reward += reward_linear_cluster
-    return cross + penalty - reward
+    if balance_lambda != 0.0:
+        # 二域计数差值
+        domain0 = sum(1 for n in partition if partition[n] == 0)
+        domain1 = sum(1 for n in partition if partition[n] == 1)
+        balance = abs(domain0 - domain1) * balance_lambda
+    else:
+        balance = 0.0
+    total = cross + penalty + balance - reward
+    if non_negative and total < 0:
+        total = 0.0
+    return total
 
 # ----------------------------------------------------------------------------
 # 选择器
@@ -97,18 +122,110 @@ _STRATEGIES = {
 
 
 def get_cost_function(name: str, **kwargs) -> CostFunction:
-    """按名称获取成本函数(柯里化参数).
+    """按名称获取成本函数(柯里化参数), 并为函数附加元数据以便后续分解。
     可选名称: simple_cross, weighted_cross, linear_penalize_nonlinear, mixed
+    附加属性:
+        _strategy_name: 策略名称
+        _strategy_params: 传入参数字典
     """
     if name not in _STRATEGIES:
         raise ValueError(f"未知成本策略: {name}. 可选: {list(_STRATEGIES)}")
     func = _STRATEGIES[name]
     if not kwargs:
+        # 直接返回原函数但附加元数据
+        setattr(func, '_strategy_name', name)
+        setattr(func, '_strategy_params', {})
         return func  # type: ignore
     # 生成带参数闭包
     def _wrapped(graph: nx.DiGraph, partition: Dict[str, int]):
         return func(graph, partition, **kwargs)  # type: ignore
+    setattr(_wrapped, '_strategy_name', name)
+    setattr(_wrapped, '_strategy_params', kwargs)
     return _wrapped
+
+def decompose_cost(graph: nx.DiGraph, partition: Dict[str, int], strategy_name: str, params: Dict[str, Any]) -> Dict[str, float]:
+    """成本分解 (cross/penalty/reward/balance/total/unclamped_total)。
+    兼容旧策略, 未涉及项记 0。"""
+    cross = penalty = reward = balance = 0.0
+    unclamped_total = 0.0
+    if strategy_name == 'simple_cross':
+        cross = cost_simple_cross(graph, partition)
+    elif strategy_name == 'weighted_cross':
+        w_linear = params.get('w_linear', 1.0)
+        w_nonlinear = params.get('w_nonlinear', 1.0)
+        cross = cost_weighted_cross(graph, partition, w_linear=w_linear, w_nonlinear=w_nonlinear)
+    elif strategy_name == 'linear_penalize_nonlinear':
+        penalty_value = params.get('penalty_nonlinear', 2.0)
+        # base cross = simple_cross
+        cross = cost_simple_cross(graph, partition)
+        for n, attrs in graph.nodes(data=True):
+            if not attrs.get('is_linear', False) and partition.get(n, 0) == 1:
+                penalty += penalty_value
+    elif strategy_name == 'mixed':
+        w_cross_linear = params.get('w_cross_linear', 1.0)
+        w_cross_nonlinear = params.get('w_cross_nonlinear', 1.5)
+        penalty_nonlinear_domain1 = params.get('penalty_nonlinear_domain1', 2.0)
+        reward_linear_cluster = params.get('reward_linear_cluster', 0.2)
+        balance_lambda = params.get('balance_lambda', 0.0)
+        non_negative = params.get('non_negative', True)
+        # 详细诊断统计
+        cross_linear_edges = 0
+        cross_nonlinear_edges = 0
+        for u, v in graph.edges():
+            if partition.get(u) != partition.get(v):
+                if graph.nodes[u].get('is_linear', False):
+                    cross += w_cross_linear
+                    cross_linear_edges += 1
+                else:
+                    cross += w_cross_nonlinear
+                    cross_nonlinear_edges += 1
+        nonlinear_domain1_nodes = 0
+        for n, attrs in graph.nodes(data=True):
+            if not attrs.get('is_linear', False) and partition.get(n, 0) == 1:
+                penalty += penalty_nonlinear_domain1
+                nonlinear_domain1_nodes += 1
+        linear_same_domain_edges = 0
+        for u, v in graph.edges():
+            if (graph.nodes[u].get('is_linear') and graph.nodes[v].get('is_linear') and
+                partition.get(u) == partition.get(v)):
+                reward += reward_linear_cluster
+                linear_same_domain_edges += 1
+        if balance_lambda != 0.0:
+            domain0 = sum(1 for n in partition if partition[n] == 0)
+            domain1 = sum(1 for n in partition if partition[n] == 1)
+            balance = abs(domain0 - domain1) * balance_lambda
+        else:
+            domain0 = sum(1 for n in partition if partition[n] == 0)
+            domain1 = sum(1 for n in partition if partition[n] == 1)
+        unclamped_total = cross + penalty + balance - reward
+        total = max(0.0, unclamped_total) if non_negative else unclamped_total
+        return {
+            'cross': float(cross),
+            'penalty': float(penalty),
+            'reward': float(reward),
+            'balance': float(balance),
+            'unclamped_total': float(unclamped_total),
+            'total': float(total),
+            # 诊断字段
+            'cross_linear_edges': float(cross_linear_edges),
+            'cross_nonlinear_edges': float(cross_nonlinear_edges),
+            'nonlinear_domain1_nodes': float(nonlinear_domain1_nodes),
+            'linear_same_domain_edges': float(linear_same_domain_edges),
+            'domain0_size': float(domain0),
+            'domain1_size': float(domain1)
+        }
+    # 其它策略
+    total = cross + penalty + balance - reward
+    return {
+        'cross': float(cross),
+        'penalty': float(penalty),
+        'reward': float(reward),
+        'balance': float(balance),
+        'unclamped_total': float(total),
+        'total': float(total)
+    }
+
+__all__.append('decompose_cost')
 
 __all__ = [
     'CostFunction',

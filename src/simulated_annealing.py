@@ -10,7 +10,7 @@ from typing import Dict, List, Tuple, Optional, Callable, Any
 from dataclasses import dataclass
 import networkx as nx
 from pathlib import Path
-from partitioning.cost_strategies import get_cost_function
+from partitioning.cost_strategies import get_cost_function, decompose_cost
 
 
 @dataclass
@@ -187,6 +187,37 @@ class SimulatedAnnealing:
             # 理论上不会发生；保险返回一次 optimize 的结果
             best_overall = self.optimize(graph, cost_function, initial_partition=None)
         return best_overall
+
+    # ---------------- 结果导出 / 分解 ----------------
+    def export_best_partition(self, result: AnnealingResult, path: str, graph: nx.DiGraph, cost_function: Callable):
+        """导出最优分区 JSON，包含成本分解 (cross/penalty/reward/total)。
+        当成本策略不支持分解字段时，缺失部分为0。"""
+        strategy_name = getattr(cost_function, '_strategy_name', 'unknown')
+        strategy_params = getattr(cost_function, '_strategy_params', {})
+        breakdown = {}
+        try:
+            breakdown = decompose_cost(graph, result.best_partition, strategy_name, strategy_params)
+        except Exception:
+            breakdown = {
+                'cross': None,
+                'penalty': None,
+                'reward': None,
+                'total': result.best_cost
+            }
+        payload = {
+            'strategy': strategy_name,
+            'strategy_params': strategy_params,
+            'best_cost': result.best_cost,
+            'convergence_reason': result.convergence_reason,
+            'iteration_count': result.iteration_count,
+            'partition': result.best_partition,
+            'cost_breakdown': breakdown
+        }
+        path_obj = Path(path)
+        path_obj.parent.mkdir(parents=True, exist_ok=True)
+        import json
+        path_obj.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
+        return str(path_obj)
     
     def _generate_linear_random_partition(self, graph: nx.DiGraph) -> Dict[str, int]:
         """初始化分区：根据配置决定非线性节点的分配策略"""
@@ -338,12 +369,11 @@ class SimulatedAnnealing:
             'convergence_speed': None
         }
         
-        # 计算成本改进
-        if len(result.cost_history) > 1:
+        # 计算成本改进: 基于 best_cost 而非最后一步 (避免末尾反弹误差)
+        if len(result.cost_history) > 0:
             initial_cost = result.cost_history[0]
-            final_cost = result.cost_history[-1]
             if initial_cost != 0:
-                analysis['cost_improvement'] = (initial_cost - final_cost) / initial_cost * 100
+                analysis['cost_improvement'] = (initial_cost - result.best_cost) / initial_cost * 100
             else:
                 analysis['cost_improvement'] = 0.0
         
@@ -366,72 +396,22 @@ class SimulatedAnnealing:
         return analysis
     
     
-def main():
-    """测试函数"""
-    # 创建示例图
-    graph = nx.DiGraph()
-    graph.add_nodes_from(['A', 'B', 'C', 'D', 'E'])
-    graph.add_edges_from([('A', 'B'), ('B', 'C'), ('C', 'D'), ('D', 'E')])
-    # 标注线性/非线性属性（示例）
-    nx.set_node_attributes(graph, {
-        'A': {'is_linear': True},
-        'B': {'is_linear': True},
-        'C': {'is_linear': False},
-        'D': {'is_linear': True},
-        'E': {'is_linear': True},
-    })
-    
-    # 选择成本函数策略
-    simple_cost_function = get_cost_function('simple_cross')
-    
-    # 配置模拟退火
-    config = AnnealingConfig(
-        initial_temperature=100.0,
-        final_temperature=0.1,
-        cooling_rate=0.95,
-        iterations_per_temp=50,
-        max_iterations=1000,
-        use_adaptive_temperature=True,
-        multi_start_runs=3,
-        # 聚类操作权重配置
-        cluster_operation_weights={
-            'flip': 0.25,
-            'linear_cluster': 0.3,
-            'nonlinear_cluster': 0.25,
-            'mixed_cluster': 0.2
-        },
-        # 允许非线性节点参与优化
-        allow_nonlinear_optimization=True
-    )
-    
-    # 执行多起点优化
-    sa = SimulatedAnnealing(config)
-    sa.set_random_seed(42)
-    result = sa.optimize_multi_start(graph, simple_cost_function)
-    
-    # 分析结果
-    analysis = sa.analyze_result(result)
-    
-    print("模拟退火优化结果:")
-    print(f"  最优分区: {result.best_partition}")
-    print(f"  最优成本: {result.best_cost:.4f}")
-    print(f"  收敛原因: {result.convergence_reason}")
-    print(f"  总迭代次数: {result.iteration_count}")
-    print(f"  成本改进: {analysis['cost_improvement']:.2f}%" if analysis['cost_improvement'] is not None else "  成本改进: N/A")
-
-
 if __name__ == "__main__":
-    main() 
-    
-    # 示例: 若已生成 results/4004_dfg_linearity_graph.json 可如下加载并优化
-    example_graph_json = Path('results/4004_dfg_linearity_graph.json')
-    if example_graph_json.exists():
+    # 仅运行真实图的优化流程；需先通过线性分析生成 results/4004_dfg_linearity_graph.json
+    graph_json = Path('results/4004_dfg_linearity_graph.json')
+    if not graph_json.exists():
+        print('缺少真实图 JSON: results/4004_dfg_linearity_graph.json，请先运行线性分析生成该文件。')
+    else:
         from analyzers.graph_loader import load_graph_from_json
-        g = load_graph_from_json(str(example_graph_json))
-        # 采用组合型策略
+        g = load_graph_from_json(str(graph_json))
+        # 混合策略 + 域平衡 + 非负截断
         cost_fn = get_cost_function('mixed', w_cross_linear=1.0, w_cross_nonlinear=1.5,
-                                    penalty_nonlinear_domain1=2.0, reward_linear_cluster=0.1)
-        cfg = AnnealingConfig(iterations_per_temp=30, max_iterations=2000, multi_start_runs=2)
+                                    penalty_nonlinear_domain1=2.0, reward_linear_cluster=0.1,
+                                    balance_lambda=0.05, non_negative=True)
+        cfg = AnnealingConfig(iterations_per_temp=40, max_iterations=2500, multi_start_runs=3)
         sa = SimulatedAnnealing(cfg)
         res = sa.optimize_multi_start(g, cost_fn)
-        print('4004 图优化结果: best_cost=', res.best_cost)
+        export_path = sa.export_best_partition(res, 'results/4004_best_partition.json', g, cost_fn)
+        analysis = sa.analyze_result(res)
+        print('[REAL GRAPH] best_cost=', res.best_cost,
+              'improve=%.2f%%' % (analysis['cost_improvement'] or 0.0), 'export =>', export_path)
