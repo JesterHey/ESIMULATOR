@@ -1,0 +1,438 @@
+digraph G {
+  rankdir=LR;
+  labelloc="t";
+  label="DFG Partition
+Strategy: mixed
+cross=1.0 / penalty=0.0 / reward=0.25 / balance=5.2 / total=5.95";
+  node [style=filled, fontname="Helvetica"];
+  subgraph cluster_0 {
+    label="Domain 0";
+    color="#999999";
+    "alu._rn0_dout" [label="_rn0_dout
+(L)", shape=box, fillcolor="#cfe8ff"];
+    "alu._rn1_dout" [label="_rn1_dout
+(L)", shape=box, fillcolor="#cfe8ff"];
+    "alu._rn2_dout" [label="_rn2_dout
+(L)", shape=box, fillcolor="#cfe8ff"];
+    "alu._rn3_dout" [label="_rn3_dout
+(L)", shape=box, fillcolor="#cfe8ff"];
+    "alu._rn4_dout" [label="_rn4_dout
+(L)", shape=box, fillcolor="#cfe8ff"];
+    "alu.acb_ib" [label="acb_ib
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.acc" [label="acc
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.acc_0" [label="acc_0
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.acc_ada" [label="acc_ada
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.acc_adac" [label="acc_adac
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.acc_in" [label="acc_in
+(L)", shape=box, fillcolor="#cfe8ff"];
+    "alu.acc_out" [label="acc_out
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.adc_cy" [label="adc_cy
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.add_0" [label="add_0
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.add_acc" [label="add_acc
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.add_ib" [label="add_ib
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.adsl" [label="adsl
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.adsr" [label="adsr
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.cmram0" [label="cmram0
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.cmram1" [label="cmram1
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.cmram2" [label="cmram2
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.cmram3" [label="cmram3
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.cmrom" [label="cmrom
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.cy" [label="cy
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.cy_1" [label="cy_1
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.cy_ada" [label="cy_ada
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.cy_adac" [label="cy_adac
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.cy_ib" [label="cy_ib
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.dout" [label="dout
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0345" [label="n0345
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0351" [label="n0351
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0354" [label="n0354
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0355" [label="n0355
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0357" [label="n0357
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0358" [label="n0358
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0359" [label="n0359
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0363" [label="n0363
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0364" [label="n0364
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0366" [label="n0366
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0370" [label="n0370
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0371" [label="n0371
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0377" [label="n0377
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0378" [label="n0378
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0403" [label="n0403
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0415" [label="n0415
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0477" [label="n0477
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0514" [label="n0514
+(L)", shape=box, fillcolor="#cfe8ff"];
+    "alu.n0546" [label="n0546
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0550" [label="n0550
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0553" [label="n0553
+(L)", shape=box, fillcolor="#cfe8ff"];
+    "alu.n0556" [label="n0556
+(L)", shape=box, fillcolor="#cfe8ff"];
+    "alu.n0559" [label="n0559
+(L)", shape=box, fillcolor="#cfe8ff"];
+    "alu.n0749" [label="n0749
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0750" [label="n0750
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0751" [label="n0751
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0803" [label="n0803
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0846" [label="n0846
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0847" [label="n0847
+(L)", shape=box, fillcolor="#cfe8ff"];
+    "alu.n0848" [label="n0848
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0854" [label="n0854
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0861" [label="n0861
+(L)", shape=box, fillcolor="#cfe8ff"];
+    "alu.n0870" [label="n0870
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0871" [label="n0871
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0872" [label="n0872
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0873" [label="n0873
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0875" [label="n0875
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0877" [label="n0877
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0878" [label="n0878
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0879" [label="n0879
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0887" [label="n0887
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0889" [label="n0889
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0891" [label="n0891
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0893" [label="n0893
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0911" [label="n0911
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0912" [label="n0912
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0913" [label="n0913
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0914" [label="n0914
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.tmp" [label="tmp
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.xch" [label="xch
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.x21_clk2" [label="x21_clk2
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.x31_clk2" [label="x31_clk2
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.iow" [label="iow
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.n0342" [label="n0342
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.read_acc_3" [label="read_acc_3
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.cma" [label="cma
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.write_carry_2" [label="write_carry_2
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.write_acc_1" [label="write_acc_1
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.inc_isz" [label="inc_isz
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.ral" [label="ral
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.rar" [label="rar
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.com_n" [label="com_n
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.poc" [label="poc
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.add_group_4" [label="add_group_4
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.sub_group_6" [label="sub_group_6
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.kbp" [label="kbp
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.dcl" [label="dcl
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.tcs" [label="tcs
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.daa" [label="daa
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.o_ib" [label="o_ib
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.ope_n" [label="ope_n
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.a12" [label="a12
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.ior" [label="ior
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.inc_group_5" [label="inc_group_5
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.m12" [label="m12
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+    "alu.x12" [label="x12
+(N)", shape=ellipse, fillcolor="#cfe8ff"];
+  }
+  subgraph cluster_1 {
+    label="Domain 1";
+    color="#999999";
+    "alu.data" [label="data
+(L)", shape=box, fillcolor="#ffe6b3"];
+  }
+  "alu._rn0_dout" -> "alu.dout" [color="#bbbbbb" penwidth=1];
+  "alu._rn1_dout" -> "alu.dout" [color="#bbbbbb" penwidth=1];
+  "alu._rn2_dout" -> "alu.dout" [color="#bbbbbb" penwidth=1];
+  "alu._rn3_dout" -> "alu.dout" [color="#bbbbbb" penwidth=1];
+  "alu._rn4_dout" -> "alu.dout" [color="#bbbbbb" penwidth=1];
+  "alu.acb_ib" -> "alu.dout" [color="#bbbbbb" penwidth=1];
+  "alu.acc" -> "alu.acc_out" [color="#bbbbbb" penwidth=1];
+  "alu.acc" -> "alu.n0870" [color="#bbbbbb" penwidth=1];
+  "alu.acc" -> "alu.n0871" [color="#bbbbbb" penwidth=1];
+  "alu.acc" -> "alu.n0872" [color="#bbbbbb" penwidth=1];
+  "alu.acc" -> "alu.n0873" [color="#bbbbbb" penwidth=1];
+  "alu.acc_ada" -> "alu.n0870" [color="#bbbbbb" penwidth=1];
+  "alu.acc_ada" -> "alu.n0871" [color="#bbbbbb" penwidth=1];
+  "alu.acc_ada" -> "alu.n0872" [color="#bbbbbb" penwidth=1];
+  "alu.acc_ada" -> "alu.n0873" [color="#bbbbbb" penwidth=1];
+  "alu.acc_adac" -> "alu.n0870" [color="#bbbbbb" penwidth=1];
+  "alu.acc_adac" -> "alu.n0871" [color="#bbbbbb" penwidth=1];
+  "alu.acc_adac" -> "alu.n0872" [color="#bbbbbb" penwidth=1];
+  "alu.acc_adac" -> "alu.n0873" [color="#bbbbbb" penwidth=1];
+  "alu.acc_in" -> "alu.acc" [color="#bbbbbb" penwidth=1];
+  "alu.acc_in" -> "alu.add_0" [color="#bbbbbb" penwidth=1];
+  "alu.acc_in" -> "alu.cy" [color="#bbbbbb" penwidth=1];
+  "alu.acc_out" -> "alu.acc_0" [color="#bbbbbb" penwidth=1];
+  "alu.acc_out" -> "alu.n0345" [color="#bbbbbb" penwidth=1];
+  "alu.acc_out" -> "alu.n0354" [color="#bbbbbb" penwidth=1];
+  "alu.acc_out" -> "alu.n0355" [color="#bbbbbb" penwidth=1];
+  "alu.acc_out" -> "alu.n0363" [color="#bbbbbb" penwidth=1];
+  "alu.acc_out" -> "alu.n0364" [color="#bbbbbb" penwidth=1];
+  "alu.acc_out" -> "alu.n0370" [color="#bbbbbb" penwidth=1];
+  "alu.acc_out" -> "alu.n0371" [color="#bbbbbb" penwidth=1];
+  "alu.acc_out" -> "alu.n0377" [color="#bbbbbb" penwidth=1];
+  "alu.acc_out" -> "alu.n0803" [color="#bbbbbb" penwidth=1];
+  "alu.adc_cy" -> "alu.cy" [color="#bbbbbb" penwidth=1];
+  "alu.add_acc" -> "alu.acc" [color="#bbbbbb" penwidth=1];
+  "alu.add_ib" -> "alu.dout" [color="#bbbbbb" penwidth=1];
+  "alu.adsl" -> "alu.acc" [color="#bbbbbb" penwidth=1];
+  "alu.adsl" -> "alu.cy" [color="#bbbbbb" penwidth=1];
+  "alu.adsr" -> "alu.acc" [color="#bbbbbb" penwidth=1];
+  "alu.adsr" -> "alu.cy" [color="#bbbbbb" penwidth=1];
+  "alu.cy" -> "alu.cy_1" [color="#bbbbbb" penwidth=1];
+  "alu.cy" -> "alu.n0550" [color="#bbbbbb" penwidth=1];
+  "alu.cy_1" -> "alu._rn3_dout" [color="#bbbbbb" penwidth=1];
+  "alu.cy_1" -> "alu.acc" [color="#bbbbbb" penwidth=1];
+  "alu.cy_1" -> "alu.cy" [color="#bbbbbb" penwidth=1];
+  "alu.cy_1" -> "alu.n0803" [color="#bbbbbb" penwidth=1];
+  "alu.cy_ada" -> "alu.n0550" [color="#bbbbbb" penwidth=1];
+  "alu.cy_adac" -> "alu.n0550" [color="#bbbbbb" penwidth=1];
+  "alu.cy_ib" -> "alu.dout" [color="#bbbbbb" penwidth=1];
+  "alu.data" -> "alu.tmp" [color="#d62728" penwidth=2 label="L" fontcolor="#444444" fontsize=10];
+  "alu.n0345" -> "alu.n0357" [color="#bbbbbb" penwidth=1];
+  "alu.n0345" -> "alu.n0358" [color="#bbbbbb" penwidth=1];
+  "alu.n0345" -> "alu.n0359" [color="#bbbbbb" penwidth=1];
+  "alu.n0351" -> "alu.n0749" [color="#bbbbbb" penwidth=1];
+  "alu.n0351" -> "alu.n0750" [color="#bbbbbb" penwidth=1];
+  "alu.n0351" -> "alu.n0751" [color="#bbbbbb" penwidth=1];
+  "alu.n0354" -> "alu.n0358" [color="#bbbbbb" penwidth=1];
+  "alu.n0354" -> "alu.n0366" [color="#bbbbbb" penwidth=1];
+  "alu.n0355" -> "alu.n0749" [color="#bbbbbb" penwidth=1];
+  "alu.n0357" -> "alu._rn4_dout" [color="#bbbbbb" penwidth=1];
+  "alu.n0358" -> "alu._rn4_dout" [color="#bbbbbb" penwidth=1];
+  "alu.n0359" -> "alu._rn4_dout" [color="#bbbbbb" penwidth=1];
+  "alu.n0363" -> "alu.n0357" [color="#bbbbbb" penwidth=1];
+  "alu.n0363" -> "alu.n0358" [color="#bbbbbb" penwidth=1];
+  "alu.n0363" -> "alu.n0366" [color="#bbbbbb" penwidth=1];
+  "alu.n0364" -> "alu.n0750" [color="#bbbbbb" penwidth=1];
+  "alu.n0366" -> "alu._rn4_dout" [color="#bbbbbb" penwidth=1];
+  "alu.n0370" -> "alu.n0358" [color="#bbbbbb" penwidth=1];
+  "alu.n0370" -> "alu.n0359" [color="#bbbbbb" penwidth=1];
+  "alu.n0370" -> "alu.n0366" [color="#bbbbbb" penwidth=1];
+  "alu.n0371" -> "alu.n0751" [color="#bbbbbb" penwidth=1];
+  "alu.n0377" -> "alu.n0357" [color="#bbbbbb" penwidth=1];
+  "alu.n0377" -> "alu.n0358" [color="#bbbbbb" penwidth=1];
+  "alu.n0377" -> "alu.n0359" [color="#bbbbbb" penwidth=1];
+  "alu.n0377" -> "alu.n0366" [color="#bbbbbb" penwidth=1];
+  "alu.n0378" -> "alu.n0377" [color="#bbbbbb" penwidth=1];
+  "alu.n0403" -> "alu.cy" [color="#bbbbbb" penwidth=1];
+  "alu.n0403" -> "alu.n0357" [color="#bbbbbb" penwidth=1];
+  "alu.n0403" -> "alu.n0358" [color="#bbbbbb" penwidth=1];
+  "alu.n0415" -> "alu.cy" [color="#bbbbbb" penwidth=1];
+  "alu.n0415" -> "alu.dout" [color="#bbbbbb" penwidth=1];
+  "alu.n0477" -> "alu.adc_cy" [color="#bbbbbb" penwidth=1];
+  "alu.n0477" -> "alu.add_acc" [color="#bbbbbb" penwidth=1];
+  "alu.n0514" -> "alu.acc_in" [color="#2ca02c" penwidth=1.5];
+  "alu.n0546" -> "alu.n0550" [color="#bbbbbb" penwidth=1];
+  "alu.n0550" -> "alu.n0878" [color="#bbbbbb" penwidth=1];
+  "alu.n0550" -> "alu.n0911" [color="#bbbbbb" penwidth=1];
+  "alu.n0553" -> "alu.n0875" [color="#bbbbbb" penwidth=1];
+  "alu.n0553" -> "alu.n0878" [color="#bbbbbb" penwidth=1];
+  "alu.n0553" -> "alu.n0912" [color="#bbbbbb" penwidth=1];
+  "alu.n0556" -> "alu.n0875" [color="#bbbbbb" penwidth=1];
+  "alu.n0556" -> "alu.n0879" [color="#bbbbbb" penwidth=1];
+  "alu.n0556" -> "alu.n0913" [color="#bbbbbb" penwidth=1];
+  "alu.n0559" -> "alu.n0877" [color="#bbbbbb" penwidth=1];
+  "alu.n0559" -> "alu.n0879" [color="#bbbbbb" penwidth=1];
+  "alu.n0559" -> "alu.n0914" [color="#bbbbbb" penwidth=1];
+  "alu.n0749" -> "alu.cmram0" [color="#bbbbbb" penwidth=1];
+  "alu.n0749" -> "alu.cmram3" [color="#bbbbbb" penwidth=1];
+  "alu.n0750" -> "alu.cmram0" [color="#bbbbbb" penwidth=1];
+  "alu.n0750" -> "alu.cmram2" [color="#bbbbbb" penwidth=1];
+  "alu.n0751" -> "alu.cmram0" [color="#bbbbbb" penwidth=1];
+  "alu.n0751" -> "alu.cmram1" [color="#bbbbbb" penwidth=1];
+  "alu.n0803" -> "alu.n0378" [color="#bbbbbb" penwidth=1];
+  "alu.n0803" -> "alu.n0403" [color="#bbbbbb" penwidth=1];
+  "alu.n0846" -> "alu.acc_in" [color="#bbbbbb" penwidth=1];
+  "alu.n0847" -> "alu.acc_in" [color="#2ca02c" penwidth=1.5];
+  "alu.n0848" -> "alu.acc_in" [color="#bbbbbb" penwidth=1];
+  "alu.n0854" -> "alu.acc_out" [color="#bbbbbb" penwidth=1];
+  "alu.n0854" -> "alu.cy_1" [color="#bbbbbb" penwidth=1];
+  "alu.n0861" -> "alu.cy" [color="#bbbbbb" penwidth=1];
+  "alu.n0861" -> "alu.n0877" [color="#bbbbbb" penwidth=1];
+  "alu.n0870" -> "alu.n0878" [color="#bbbbbb" penwidth=1];
+  "alu.n0870" -> "alu.n0911" [color="#bbbbbb" penwidth=1];
+  "alu.n0871" -> "alu.n0875" [color="#bbbbbb" penwidth=1];
+  "alu.n0871" -> "alu.n0912" [color="#bbbbbb" penwidth=1];
+  "alu.n0872" -> "alu.n0879" [color="#bbbbbb" penwidth=1];
+  "alu.n0872" -> "alu.n0913" [color="#bbbbbb" penwidth=1];
+  "alu.n0873" -> "alu.n0877" [color="#bbbbbb" penwidth=1];
+  "alu.n0873" -> "alu.n0914" [color="#bbbbbb" penwidth=1];
+  "alu.n0877" -> "alu.n0878" [color="#bbbbbb" penwidth=1];
+  "alu.n0878" -> "alu.n0846" [color="#bbbbbb" penwidth=1];
+  "alu.n0879" -> "alu.n0848" [color="#bbbbbb" penwidth=1];
+  "alu.n0887" -> "alu.n0878" [color="#bbbbbb" penwidth=1];
+  "alu.n0887" -> "alu.n0911" [color="#bbbbbb" penwidth=1];
+  "alu.n0889" -> "alu.n0875" [color="#bbbbbb" penwidth=1];
+  "alu.n0889" -> "alu.n0912" [color="#bbbbbb" penwidth=1];
+  "alu.n0891" -> "alu.n0879" [color="#bbbbbb" penwidth=1];
+  "alu.n0891" -> "alu.n0913" [color="#bbbbbb" penwidth=1];
+  "alu.n0893" -> "alu.n0877" [color="#bbbbbb" penwidth=1];
+  "alu.n0893" -> "alu.n0914" [color="#bbbbbb" penwidth=1];
+  "alu.tmp" -> "alu.n0887" [color="#bbbbbb" penwidth=1];
+  "alu.tmp" -> "alu.n0889" [color="#bbbbbb" penwidth=1];
+  "alu.tmp" -> "alu.n0891" [color="#bbbbbb" penwidth=1];
+  "alu.tmp" -> "alu.n0893" [color="#bbbbbb" penwidth=1];
+  "alu.xch" -> "alu.acb_ib" [color="#bbbbbb" penwidth=1];
+  "alu.x21_clk2" -> "alu.acb_ib" [color="#bbbbbb" penwidth=1];
+  "alu.x21_clk2" -> "alu.n0351" [color="#bbbbbb" penwidth=1];
+  "alu.x21_clk2" -> "alu.n0415" [color="#bbbbbb" penwidth=1];
+  "alu.x31_clk2" -> "alu.acb_ib" [color="#bbbbbb" penwidth=1];
+  "alu.x31_clk2" -> "alu.add_ib" [color="#bbbbbb" penwidth=1];
+  "alu.x31_clk2" -> "alu.adsl" [color="#bbbbbb" penwidth=1];
+  "alu.x31_clk2" -> "alu.adsr" [color="#bbbbbb" penwidth=1];
+  "alu.x31_clk2" -> "alu.cy_ib" [color="#bbbbbb" penwidth=1];
+  "alu.x31_clk2" -> "alu.n0477" [color="#bbbbbb" penwidth=1];
+  "alu.iow" -> "alu.acb_ib" [color="#bbbbbb" penwidth=1];
+  "alu.iow" -> "alu.cy_ib" [color="#bbbbbb" penwidth=1];
+  "alu.n0342" -> "alu.acc_ada" [color="#bbbbbb" penwidth=1];
+  "alu.n0342" -> "alu.acc_adac" [color="#bbbbbb" penwidth=1];
+  "alu.n0342" -> "alu.cy_ada" [color="#bbbbbb" penwidth=1];
+  "alu.n0342" -> "alu.cy_adac" [color="#bbbbbb" penwidth=1];
+  "alu.n0342" -> "alu.n0546" [color="#bbbbbb" penwidth=1];
+  "alu.n0342" -> "alu.tmp" [color="#bbbbbb" penwidth=1];
+  "alu.read_acc_3" -> "alu.acc_ada" [color="#bbbbbb" penwidth=1];
+  "alu.cma" -> "alu.acc_adac" [color="#bbbbbb" penwidth=1];
+  "alu.write_carry_2" -> "alu.adc_cy" [color="#bbbbbb" penwidth=1];
+  "alu.write_acc_1" -> "alu.add_acc" [color="#bbbbbb" penwidth=1];
+  "alu.inc_isz" -> "alu.add_ib" [color="#bbbbbb" penwidth=1];
+  "alu.ral" -> "alu.adsl" [color="#bbbbbb" penwidth=1];
+  "alu.rar" -> "alu.adsr" [color="#bbbbbb" penwidth=1];
+  "alu.com_n" -> "alu.cmram0" [color="#bbbbbb" penwidth=1];
+  "alu.com_n" -> "alu.cmram1" [color="#bbbbbb" penwidth=1];
+  "alu.com_n" -> "alu.cmram2" [color="#bbbbbb" penwidth=1];
+  "alu.com_n" -> "alu.cmram3" [color="#bbbbbb" penwidth=1];
+  "alu.com_n" -> "alu.cmrom" [color="#bbbbbb" penwidth=1];
+  "alu.poc" -> "alu.cmrom" [color="#bbbbbb" penwidth=1];
+  "alu.poc" -> "alu.n0749" [color="#bbbbbb" penwidth=1];
+  "alu.poc" -> "alu.n0750" [color="#bbbbbb" penwidth=1];
+  "alu.poc" -> "alu.n0751" [color="#bbbbbb" penwidth=1];
+  "alu.add_group_4" -> "alu.cy_ada" [color="#bbbbbb" penwidth=1];
+  "alu.sub_group_6" -> "alu.cy_adac" [color="#bbbbbb" penwidth=1];
+  "alu.sub_group_6" -> "alu.n0887" [color="#bbbbbb" penwidth=1];
+  "alu.sub_group_6" -> "alu.n0889" [color="#bbbbbb" penwidth=1];
+  "alu.sub_group_6" -> "alu.n0891" [color="#bbbbbb" penwidth=1];
+  "alu.sub_group_6" -> "alu.n0893" [color="#bbbbbb" penwidth=1];
+  "alu.kbp" -> "alu.n0345" [color="#bbbbbb" penwidth=1];
+  "alu.kbp" -> "alu.n0354" [color="#bbbbbb" penwidth=1];
+  "alu.kbp" -> "alu.n0363" [color="#bbbbbb" penwidth=1];
+  "alu.kbp" -> "alu.n0370" [color="#bbbbbb" penwidth=1];
+  "alu.kbp" -> "alu.n0377" [color="#bbbbbb" penwidth=1];
+  "alu.dcl" -> "alu.n0351" [color="#bbbbbb" penwidth=1];
+  "alu.tcs" -> "alu.n0359" [color="#bbbbbb" penwidth=1];
+  "alu.tcs" -> "alu.n0366" [color="#bbbbbb" penwidth=1];
+  "alu.daa" -> "alu.n0378" [color="#bbbbbb" penwidth=1];
+  "alu.daa" -> "alu.n0403" [color="#bbbbbb" penwidth=1];
+  "alu.o_ib" -> "alu.n0378" [color="#bbbbbb" penwidth=1];
+  "alu.ope_n" -> "alu.n0415" [color="#bbbbbb" penwidth=1];
+  "alu.a12" -> "alu.n0477" [color="#bbbbbb" penwidth=1];
+  "alu.ior" -> "alu.n0477" [color="#bbbbbb" penwidth=1];
+  "alu.inc_group_5" -> "alu.n0546" [color="#bbbbbb" penwidth=1];
+  "alu.m12" -> "alu.n0550" [color="#bbbbbb" penwidth=1];
+  "alu.m12" -> "alu.n0870" [color="#bbbbbb" penwidth=1];
+  "alu.m12" -> "alu.n0871" [color="#bbbbbb" penwidth=1];
+  "alu.m12" -> "alu.n0872" [color="#bbbbbb" penwidth=1];
+  "alu.m12" -> "alu.n0873" [color="#bbbbbb" penwidth=1];
+  "alu.m12" -> "alu.n0887" [color="#bbbbbb" penwidth=1];
+  "alu.m12" -> "alu.n0889" [color="#bbbbbb" penwidth=1];
+  "alu.m12" -> "alu.n0891" [color="#bbbbbb" penwidth=1];
+  "alu.m12" -> "alu.n0893" [color="#bbbbbb" penwidth=1];
+  "alu.m12" -> "alu.tmp" [color="#bbbbbb" penwidth=1];
+  "alu.x12" -> "alu.n0854" [color="#bbbbbb" penwidth=1];
+  subgraph cluster_legend {
+    label="Legend";
+    fontsize=10;
+    color="#666666";
+    "LEG_LIN" [label="Linear (L)", shape=box, style=filled, fillcolor="#e6f2ff"];
+    "LEG_NON" [label="Nonlinear (N)", shape=ellipse, style=filled, fillcolor="#fff2db"];
+    "LEG_CROSS" [label="Cross Edge", shape=plaintext];
+    "LEG_REWARD" [label="Linear Same-Domain Edge", shape=plaintext];
+    "LEG_CROSS" -> "LEG_REWARD" [color="#d62728", penwidth=2];
+    "LEG_REWARD" -> "LEG_NON" [color="#2ca02c", penwidth=1.5];
+  }
+}

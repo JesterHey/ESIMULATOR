@@ -1,0 +1,11 @@
+Directive:
+Instance:
+(demo, 'demo')
+Term:
+(Term name:demo.a type:['Output'] msb:(IntConst 0) lsb:(IntConst 0))
+(Term name:demo.b type:['Output'] msb:(IntConst 0) lsb:(IntConst 0))
+(Term name:demo.c type:['Input'] msb:(IntConst 0) lsb:(IntConst 0))
+(Term name:demo.d type:['Input'] msb:(IntConst 0) lsb:(IntConst 0))
+Bind:
+(Bind dest:demo.a tree:(Operator Minus Next:(Operator Times Next:(Terminal demo.b),(Terminal demo.c)),(IntConst 1)))
+(Bind dest:demo.b tree:(Operator Minus Next:(Terminal demo.d),(IntConst 1)))

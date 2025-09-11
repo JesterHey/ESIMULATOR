@@ -269,7 +269,7 @@ class SimulatedAnnealing:
             if linear_nodes and random.random() < 0.7:
                 node = random.choice(linear_nodes)
                 new_partition[node] = 1 - new_partition[node]
-            elif nonlinear_nodes:
+            elif nonlinear_nodes and self.config.allow_nonlinear_optimization:
                 node = random.choice(nonlinear_nodes)
                 new_partition[node] = 1 - new_partition[node]
                 
@@ -405,13 +405,33 @@ if __name__ == "__main__":
         from analyzers.graph_loader import load_graph_from_json
         g = load_graph_from_json(str(graph_json))
         # 混合策略 + 域平衡 + 非负截断
-        cost_fn = get_cost_function('mixed', w_cross_linear=1.0, w_cross_nonlinear=1.5,
-                                    penalty_nonlinear_domain1=2.0, reward_linear_cluster=0.1,
-                                    balance_lambda=0.05, non_negative=True)
-        cfg = AnnealingConfig(iterations_per_temp=40, max_iterations=2500, multi_start_runs=3)
+        # 约束: 非线性只能在电子域(domain0); 鼓励线性尽量放到 ONN 域(domain1)
+        cost_fn = get_cost_function(
+            'mixed',
+            w_cross_linear=1.0,
+            w_cross_nonlinear=1.5,
+            penalty_nonlinear_domain1=2.0,
+            reward_linear_cluster=0.1,
+            hard_forbid_nonlinear_domain1=True,
+            reward_linear_in_domain1=0.05,
+            balance_lambda=0.05,
+            non_negative=True,
+        )
+        # 禁用非线性节点优化，确保它们固定在电子域(0)，与硬约束一致
+        cfg = AnnealingConfig(
+            iterations_per_temp=40,
+            max_iterations=2500,
+            multi_start_runs=3,
+            allow_nonlinear_optimization=False,
+        )
         sa = SimulatedAnnealing(cfg)
         res = sa.optimize_multi_start(g, cost_fn)
         export_path = sa.export_best_partition(res, 'results/4004_best_partition.json', g, cost_fn)
         analysis = sa.analyze_result(res)
-        print('[REAL GRAPH] best_cost=', res.best_cost,
-              'improve=%.2f%%' % (analysis['cost_improvement'] or 0.0), 'export =>', export_path)
+        print(
+            '[REAL GRAPH] best_cost=',
+            res.best_cost,
+            'improve=%.2f%%' % (analysis['cost_improvement'] or 0.0),
+            'export =>',
+            export_path,
+        )

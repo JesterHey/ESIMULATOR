@@ -1038,6 +1038,15 @@
       ],
       "expression_type": "branch",
       "in_degree_sources": 3
+    },
+    "alu.tmp": {
+      "is_linear": false,
+      "reason": "条件分支表达式",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch",
+      "in_degree_sources": 3
     }
   },
   "edges": [
@@ -1046,7 +1055,7 @@
       "alu._rn3_dout"
     ],
     [
-      "alu.n0366",
+      "alu.n0359",
       "alu._rn4_dout"
     ],
     [
@@ -1054,20 +1063,12 @@
       "alu._rn4_dout"
     ],
     [
-      "alu.n0359",
+      "alu.n0366",
       "alu._rn4_dout"
     ],
     [
       "alu.n0357",
       "alu._rn4_dout"
-    ],
-    [
-      "alu.x31_clk2",
-      "alu.acb_ib"
-    ],
-    [
-      "alu.iow",
-      "alu.acb_ib"
     ],
     [
       "alu.xch",
@@ -1078,7 +1079,15 @@
       "alu.acb_ib"
     ],
     [
-      "alu.adsl",
+      "alu.x31_clk2",
+      "alu.acb_ib"
+    ],
+    [
+      "alu.iow",
+      "alu.acb_ib"
+    ],
+    [
+      "alu.adsr",
       "alu.acc"
     ],
     [
@@ -1086,7 +1095,7 @@
       "alu.acc"
     ],
     [
-      "alu.adsr",
+      "alu.acc_in",
       "alu.acc"
     ],
     [
@@ -1094,7 +1103,7 @@
       "alu.acc"
     ],
     [
-      "alu.acc_in",
+      "alu.adsl",
       "alu.acc"
     ],
     [
@@ -1126,11 +1135,11 @@
       "alu.acc_in"
     ],
     [
-      "alu.n0848",
+      "alu.n0514",
       "alu.acc_in"
     ],
     [
-      "alu.n0514",
+      "alu.n0848",
       "alu.acc_in"
     ],
     [
@@ -1142,11 +1151,11 @@
       "alu.acc_out"
     ],
     [
-      "alu.write_carry_2",
+      "alu.n0477",
       "alu.adc_cy"
     ],
     [
-      "alu.n0477",
+      "alu.write_carry_2",
       "alu.adc_cy"
     ],
     [
@@ -1154,16 +1163,12 @@
       "alu.add_0"
     ],
     [
-      "alu.n0477",
-      "alu.add_acc"
-    ],
-    [
       "alu.write_acc_1",
       "alu.add_acc"
     ],
     [
-      "alu.x31_clk2",
-      "alu.add_ib"
+      "alu.n0477",
+      "alu.add_acc"
     ],
     [
       "alu.inc_isz",
@@ -1171,10 +1176,14 @@
     ],
     [
       "alu.x31_clk2",
-      "alu.adsl"
+      "alu.add_ib"
     ],
     [
       "alu.ral",
+      "alu.adsl"
+    ],
+    [
+      "alu.x31_clk2",
       "alu.adsl"
     ],
     [
@@ -1190,15 +1199,15 @@
       "alu.cmram0"
     ],
     [
+      "alu.n0751",
+      "alu.cmram0"
+    ],
+    [
       "alu.n0749",
       "alu.cmram0"
     ],
     [
       "alu.n0750",
-      "alu.cmram0"
-    ],
-    [
-      "alu.n0751",
       "alu.cmram0"
     ],
     [
@@ -1234,15 +1243,7 @@
       "alu.cmrom"
     ],
     [
-      "alu.n0415",
-      "alu.cy"
-    ],
-    [
-      "alu.adsl",
-      "alu.cy"
-    ],
-    [
-      "alu.cy_1",
+      "alu.n0861",
       "alu.cy"
     ],
     [
@@ -1250,15 +1251,11 @@
       "alu.cy"
     ],
     [
-      "alu.n0403",
+      "alu.cy_1",
       "alu.cy"
     ],
     [
-      "alu.n0861",
-      "alu.cy"
-    ],
-    [
-      "alu.adc_cy",
+      "alu.n0415",
       "alu.cy"
     ],
     [
@@ -1266,11 +1263,23 @@
       "alu.cy"
     ],
     [
-      "alu.cy",
-      "alu.cy_1"
+      "alu.adc_cy",
+      "alu.cy"
+    ],
+    [
+      "alu.n0403",
+      "alu.cy"
+    ],
+    [
+      "alu.adsl",
+      "alu.cy"
     ],
     [
       "alu.n0854",
+      "alu.cy_1"
+    ],
+    [
+      "alu.cy",
       "alu.cy_1"
     ],
     [
@@ -1298,7 +1307,7 @@
       "alu.cy_ib"
     ],
     [
-      "alu.acb_ib",
+      "alu._rn4_dout",
       "alu.dout"
     ],
     [
@@ -1306,19 +1315,11 @@
       "alu.dout"
     ],
     [
-      "alu._rn0_dout",
-      "alu.dout"
-    ],
-    [
-      "alu._rn4_dout",
-      "alu.dout"
-    ],
-    [
-      "alu.n0415",
-      "alu.dout"
-    ],
-    [
       "alu._rn3_dout",
+      "alu.dout"
+    ],
+    [
+      "alu._rn0_dout",
       "alu.dout"
     ],
     [
@@ -1326,35 +1327,43 @@
       "alu.dout"
     ],
     [
-      "alu.cy_ib",
-      "alu.dout"
-    ],
-    [
       "alu.add_ib",
       "alu.dout"
     ],
     [
-      "alu.acc_out",
-      "alu.n0345"
+      "alu.n0415",
+      "alu.dout"
+    ],
+    [
+      "alu.cy_ib",
+      "alu.dout"
+    ],
+    [
+      "alu.acb_ib",
+      "alu.dout"
     ],
     [
       "alu.kbp",
       "alu.n0345"
     ],
     [
-      "alu.x21_clk2",
-      "alu.n0351"
+      "alu.acc_out",
+      "alu.n0345"
     ],
     [
       "alu.dcl",
       "alu.n0351"
     ],
     [
-      "alu.acc_out",
-      "alu.n0354"
+      "alu.x21_clk2",
+      "alu.n0351"
     ],
     [
       "alu.kbp",
+      "alu.n0354"
+    ],
+    [
+      "alu.acc_out",
       "alu.n0354"
     ],
     [
@@ -1362,7 +1371,7 @@
       "alu.n0355"
     ],
     [
-      "alu.n0377",
+      "alu.n0345",
       "alu.n0357"
     ],
     [
@@ -1374,8 +1383,24 @@
       "alu.n0357"
     ],
     [
-      "alu.n0345",
+      "alu.n0377",
       "alu.n0357"
+    ],
+    [
+      "alu.n0363",
+      "alu.n0358"
+    ],
+    [
+      "alu.n0345",
+      "alu.n0358"
+    ],
+    [
+      "alu.n0403",
+      "alu.n0358"
+    ],
+    [
+      "alu.n0377",
+      "alu.n0358"
     ],
     [
       "alu.n0354",
@@ -1386,23 +1411,7 @@
       "alu.n0358"
     ],
     [
-      "alu.n0363",
-      "alu.n0358"
-    ],
-    [
-      "alu.n0403",
-      "alu.n0358"
-    ],
-    [
-      "alu.n0377",
-      "alu.n0358"
-    ],
-    [
       "alu.n0345",
-      "alu.n0358"
-    ],
-    [
-      "alu.n0370",
       "alu.n0359"
     ],
     [
@@ -1414,15 +1423,15 @@
       "alu.n0359"
     ],
     [
-      "alu.n0345",
+      "alu.n0370",
       "alu.n0359"
     ],
     [
-      "alu.acc_out",
+      "alu.kbp",
       "alu.n0363"
     ],
     [
-      "alu.kbp",
+      "alu.acc_out",
       "alu.n0363"
     ],
     [
@@ -1430,19 +1439,7 @@
       "alu.n0364"
     ],
     [
-      "alu.n0354",
-      "alu.n0366"
-    ],
-    [
-      "alu.n0370",
-      "alu.n0366"
-    ],
-    [
       "alu.n0363",
-      "alu.n0366"
-    ],
-    [
-      "alu.tcs",
       "alu.n0366"
     ],
     [
@@ -1450,8 +1447,16 @@
       "alu.n0366"
     ],
     [
-      "alu.acc_out",
-      "alu.n0370"
+      "alu.n0354",
+      "alu.n0366"
+    ],
+    [
+      "alu.tcs",
+      "alu.n0366"
+    ],
+    [
+      "alu.n0370",
+      "alu.n0366"
     ],
     [
       "alu.kbp",
@@ -1459,11 +1464,11 @@
     ],
     [
       "alu.acc_out",
-      "alu.n0371"
+      "alu.n0370"
     ],
     [
       "alu.acc_out",
-      "alu.n0377"
+      "alu.n0371"
     ],
     [
       "alu.kbp",
@@ -1474,7 +1479,15 @@
       "alu.n0377"
     ],
     [
+      "alu.acc_out",
+      "alu.n0377"
+    ],
+    [
       "alu.daa",
+      "alu.n0378"
+    ],
+    [
+      "alu.n0803",
       "alu.n0378"
     ],
     [
@@ -1482,10 +1495,6 @@
       "alu.n0378"
     ],
     [
-      "alu.n0803",
-      "alu.n0378"
-    ],
-    [
       "alu.daa",
       "alu.n0403"
     ],
@@ -1494,12 +1503,16 @@
       "alu.n0403"
     ],
     [
+      "alu.x21_clk2",
+      "alu.n0415"
+    ],
+    [
       "alu.ope_n",
       "alu.n0415"
     ],
     [
-      "alu.x21_clk2",
-      "alu.n0415"
+      "alu.a12",
+      "alu.n0477"
     ],
     [
       "alu.x31_clk2",
@@ -1507,10 +1520,6 @@
     ],
     [
       "alu.ior",
-      "alu.n0477"
-    ],
-    [
-      "alu.a12",
       "alu.n0477"
     ],
     [
@@ -1526,6 +1535,14 @@
       "alu.n0550"
     ],
     [
+      "alu.cy",
+      "alu.n0550"
+    ],
+    [
+      "alu.n0546",
+      "alu.n0550"
+    ],
+    [
       "alu.m12",
       "alu.n0550"
     ],
@@ -1534,19 +1551,7 @@
       "alu.n0550"
     ],
     [
-      "alu.n0546",
-      "alu.n0550"
-    ],
-    [
-      "alu.cy",
-      "alu.n0550"
-    ],
-    [
       "alu.n0351",
-      "alu.n0749"
-    ],
-    [
-      "alu.poc",
       "alu.n0749"
     ],
     [
@@ -1554,7 +1559,15 @@
       "alu.n0749"
     ],
     [
+      "alu.poc",
+      "alu.n0749"
+    ],
+    [
       "alu.n0351",
+      "alu.n0750"
+    ],
+    [
+      "alu.poc",
       "alu.n0750"
     ],
     [
@@ -1562,19 +1575,15 @@
       "alu.n0750"
     ],
     [
-      "alu.poc",
-      "alu.n0750"
-    ],
-    [
       "alu.n0351",
       "alu.n0751"
     ],
     [
-      "alu.poc",
+      "alu.n0371",
       "alu.n0751"
     ],
     [
-      "alu.n0371",
+      "alu.poc",
       "alu.n0751"
     ],
     [
@@ -1598,7 +1607,7 @@
       "alu.n0854"
     ],
     [
-      "alu.m12",
+      "alu.acc_ada",
       "alu.n0870"
     ],
     [
@@ -1610,11 +1619,11 @@
       "alu.n0870"
     ],
     [
-      "alu.acc_ada",
+      "alu.m12",
       "alu.n0870"
     ],
     [
-      "alu.m12",
+      "alu.acc_ada",
       "alu.n0871"
     ],
     [
@@ -1626,11 +1635,11 @@
       "alu.n0871"
     ],
     [
-      "alu.acc_ada",
+      "alu.m12",
       "alu.n0871"
     ],
     [
-      "alu.m12",
+      "alu.acc_ada",
       "alu.n0872"
     ],
     [
@@ -1642,11 +1651,11 @@
       "alu.n0872"
     ],
     [
-      "alu.acc_ada",
+      "alu.m12",
       "alu.n0872"
     ],
     [
-      "alu.m12",
+      "alu.acc_ada",
       "alu.n0873"
     ],
     [
@@ -1658,7 +1667,7 @@
       "alu.n0873"
     ],
     [
-      "alu.acc_ada",
+      "alu.m12",
       "alu.n0873"
     ],
     [
@@ -1670,12 +1679,20 @@
       "alu.n0875"
     ],
     [
+      "alu.n0556",
+      "alu.n0875"
+    ],
+    [
       "alu.n0871",
       "alu.n0875"
     ],
     [
-      "alu.n0556",
-      "alu.n0875"
+      "alu.n0873",
+      "alu.n0877"
+    ],
+    [
+      "alu.n0893",
+      "alu.n0877"
     ],
     [
       "alu.n0861",
@@ -1686,27 +1703,11 @@
       "alu.n0877"
     ],
     [
-      "alu.n0893",
-      "alu.n0877"
-    ],
-    [
-      "alu.n0873",
-      "alu.n0877"
-    ],
-    [
-      "alu.n0877",
-      "alu.n0878"
-    ],
-    [
       "alu.n0870",
       "alu.n0878"
     ],
     [
-      "alu.n0553",
-      "alu.n0878"
-    ],
-    [
-      "alu.n0550",
+      "alu.n0877",
       "alu.n0878"
     ],
     [
@@ -1714,15 +1715,15 @@
       "alu.n0878"
     ],
     [
-      "alu.n0872",
-      "alu.n0879"
+      "alu.n0550",
+      "alu.n0878"
+    ],
+    [
+      "alu.n0553",
+      "alu.n0878"
     ],
     [
       "alu.n0891",
-      "alu.n0879"
-    ],
-    [
-      "alu.n0559",
       "alu.n0879"
     ],
     [
@@ -1730,11 +1731,15 @@
       "alu.n0879"
     ],
     [
-      "alu.tmp",
-      "alu.n0887"
+      "alu.n0872",
+      "alu.n0879"
     ],
     [
-      "alu.m12",
+      "alu.n0559",
+      "alu.n0879"
+    ],
+    [
+      "alu.tmp",
       "alu.n0887"
     ],
     [
@@ -1742,15 +1747,19 @@
       "alu.n0887"
     ],
     [
+      "alu.m12",
+      "alu.n0887"
+    ],
+    [
       "alu.tmp",
       "alu.n0889"
     ],
     [
-      "alu.m12",
+      "alu.sub_group_6",
       "alu.n0889"
     ],
     [
-      "alu.sub_group_6",
+      "alu.m12",
       "alu.n0889"
     ],
     [
@@ -1758,11 +1767,11 @@
       "alu.n0891"
     ],
     [
-      "alu.m12",
+      "alu.sub_group_6",
       "alu.n0891"
     ],
     [
-      "alu.sub_group_6",
+      "alu.m12",
       "alu.n0891"
     ],
     [
@@ -1770,11 +1779,11 @@
       "alu.n0893"
     ],
     [
-      "alu.m12",
+      "alu.sub_group_6",
       "alu.n0893"
     ],
     [
-      "alu.sub_group_6",
+      "alu.m12",
       "alu.n0893"
     ],
     [
@@ -1782,19 +1791,19 @@
       "alu.n0911"
     ],
     [
-      "alu.n0870",
-      "alu.n0911"
-    ],
-    [
       "alu.n0550",
       "alu.n0911"
     ],
     [
-      "alu.n0553",
-      "alu.n0912"
+      "alu.n0870",
+      "alu.n0911"
     ],
     [
       "alu.n0889",
+      "alu.n0912"
+    ],
+    [
+      "alu.n0553",
       "alu.n0912"
     ],
     [
@@ -1802,7 +1811,7 @@
       "alu.n0912"
     ],
     [
-      "alu.n0872",
+      "alu.n0891",
       "alu.n0913"
     ],
     [
@@ -1810,7 +1819,7 @@
       "alu.n0913"
     ],
     [
-      "alu.n0891",
+      "alu.n0872",
       "alu.n0913"
     ],
     [
@@ -1818,12 +1827,24 @@
       "alu.n0914"
     ],
     [
+      "alu.n0893",
+      "alu.n0914"
+    ],
+    [
       "alu.n0559",
       "alu.n0914"
     ],
     [
-      "alu.n0893",
-      "alu.n0914"
+      "alu.data",
+      "alu.tmp"
+    ],
+    [
+      "alu.n0342",
+      "alu.tmp"
+    ],
+    [
+      "alu.m12",
+      "alu.tmp"
     ]
   ]
 }

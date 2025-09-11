@@ -154,6 +154,8 @@ def parse_expression(s: str, i: int = 0) -> Tuple[ExpressionNode, int]:
         msb_expr = _extract_tagged_subexpr(whole, "MSB:")
         lsb_expr = _extract_tagged_subexpr(whole, "LSB:")
         children = []
+        if var_expr is None or msb_expr is None or lsb_expr is None:
+            raise ParseError("Partselect 缺少必需的子表达式")
         var_node, _ = parse_expression(var_expr, 0)
         msb_node, _ = parse_expression(msb_expr, 0)
         lsb_node, _ = parse_expression(lsb_expr, 0)
@@ -277,7 +279,8 @@ class CorrectedLinearityAnalyzer:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
 
-        bind_pattern = r'\(Bind dest:([^\s]+).*?tree:(.*?)\)(?=\n\(Bind|\nBranch:|\n\n|\Z)'
+        # 兼容 CRLF 与行尾空白; 确保能正确分割多个 Bind 片段
+        bind_pattern = r'\(Bind\s+dest:([^\s]+).*?tree:(.*?)\)\s*(?=\r?\n\(Bind|\r?\nBranch:|\r?\n\r?\n|\Z)'
         matches = list(re.finditer(bind_pattern, content, re.DOTALL))
         self.total_expressions = len(matches)
         print(f"找到 {self.total_expressions} 个信号表达式")
@@ -563,4 +566,4 @@ def analyze_real_dfg(file_name):
     print(f"图 JSON 已保存到: {graph_json_path}")
 
 if __name__ == "__main__":
-    analyze_real_dfg('4004_dfg.txt')
+    analyze_real_dfg('demo_dfg.txt')

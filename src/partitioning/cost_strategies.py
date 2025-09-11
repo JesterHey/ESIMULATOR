@@ -76,6 +76,9 @@ def cost_mixed(graph: nx.DiGraph, partition: Dict[str, int], *,
                w_cross_nonlinear: float = 1.5,
                penalty_nonlinear_domain1: float = 2.0,
                reward_linear_cluster: float = 0.2,
+               # 新增: 硬约束与线性上域1偏好
+               hard_forbid_nonlinear_domain1: bool = False,
+               reward_linear_in_domain1: float = 0.0,
                balance_lambda: float = 0.0,
                non_negative: bool = True) -> float:
     """组合型成本 (可扩展版本):
@@ -89,14 +92,27 @@ def cost_mixed(graph: nx.DiGraph, partition: Dict[str, int], *,
     """
     cross = cost_weighted_cross(graph, partition, w_linear=w_cross_linear, w_nonlinear=w_cross_nonlinear)
     penalty = 0.0
+    nonlinear_domain1_nodes = 0
+    linear_domain1_nodes = 0
     for n, attrs in graph.nodes(data=True):
-        if not attrs.get('is_linear', False) and partition.get(n, 0) == 1:
+        is_lin = attrs.get('is_linear', False)
+        if not is_lin and partition.get(n, 0) == 1:
             penalty += penalty_nonlinear_domain1
+            nonlinear_domain1_nodes += 1
+        if is_lin and partition.get(n, 0) == 1:
+            linear_domain1_nodes += 1
+    # 硬约束: 非线性禁止进入域1
+    if hard_forbid_nonlinear_domain1 and nonlinear_domain1_nodes > 0:
+        return 1e12  # 大 M 罚值，表示不可行
+
     reward = 0.0
     for u, v in graph.edges():
         if (graph.nodes[u].get('is_linear') and graph.nodes[v].get('is_linear') and
             partition.get(u) == partition.get(v)):
             reward += reward_linear_cluster
+    # 线性节点放在域1的节点级奖励
+    if reward_linear_in_domain1 != 0.0 and linear_domain1_nodes > 0:
+        reward += reward_linear_in_domain1 * linear_domain1_nodes
     if balance_lambda != 0.0:
         # 二域计数差值
         domain0 = sum(1 for n in partition if partition[n] == 0)
@@ -166,6 +182,8 @@ def decompose_cost(graph: nx.DiGraph, partition: Dict[str, int], strategy_name: 
         w_cross_nonlinear = params.get('w_cross_nonlinear', 1.5)
         penalty_nonlinear_domain1 = params.get('penalty_nonlinear_domain1', 2.0)
         reward_linear_cluster = params.get('reward_linear_cluster', 0.2)
+        hard_forbid_nonlinear_domain1 = params.get('hard_forbid_nonlinear_domain1', False)
+        reward_linear_in_domain1 = params.get('reward_linear_in_domain1', 0.0)
         balance_lambda = params.get('balance_lambda', 0.0)
         non_negative = params.get('non_negative', True)
         # 详细诊断统计
@@ -180,16 +198,21 @@ def decompose_cost(graph: nx.DiGraph, partition: Dict[str, int], strategy_name: 
                     cross += w_cross_nonlinear
                     cross_nonlinear_edges += 1
         nonlinear_domain1_nodes = 0
+        linear_domain1_nodes = 0
         for n, attrs in graph.nodes(data=True):
             if not attrs.get('is_linear', False) and partition.get(n, 0) == 1:
                 penalty += penalty_nonlinear_domain1
                 nonlinear_domain1_nodes += 1
+            if attrs.get('is_linear', False) and partition.get(n, 0) == 1:
+                linear_domain1_nodes += 1
         linear_same_domain_edges = 0
         for u, v in graph.edges():
             if (graph.nodes[u].get('is_linear') and graph.nodes[v].get('is_linear') and
                 partition.get(u) == partition.get(v)):
                 reward += reward_linear_cluster
                 linear_same_domain_edges += 1
+        if reward_linear_in_domain1 != 0.0 and linear_domain1_nodes > 0:
+            reward += reward_linear_in_domain1 * linear_domain1_nodes
         if balance_lambda != 0.0:
             domain0 = sum(1 for n in partition if partition[n] == 0)
             domain1 = sum(1 for n in partition if partition[n] == 1)
@@ -197,8 +220,15 @@ def decompose_cost(graph: nx.DiGraph, partition: Dict[str, int], strategy_name: 
         else:
             domain0 = sum(1 for n in partition if partition[n] == 0)
             domain1 = sum(1 for n in partition if partition[n] == 1)
-        unclamped_total = cross + penalty + balance - reward
-        total = max(0.0, unclamped_total) if non_negative else unclamped_total
+        # 硬约束处理
+        constraint_penalty = 0.0
+        if hard_forbid_nonlinear_domain1 and nonlinear_domain1_nodes > 0:
+            unclamped_total = 1e12
+            total = unclamped_total
+            constraint_penalty = unclamped_total
+        else:
+            unclamped_total = cross + penalty + balance - reward
+            total = max(0.0, unclamped_total) if non_negative else unclamped_total
         return {
             'cross': float(cross),
             'penalty': float(penalty),
@@ -210,9 +240,11 @@ def decompose_cost(graph: nx.DiGraph, partition: Dict[str, int], strategy_name: 
             'cross_linear_edges': float(cross_linear_edges),
             'cross_nonlinear_edges': float(cross_nonlinear_edges),
             'nonlinear_domain1_nodes': float(nonlinear_domain1_nodes),
+            'linear_domain1_nodes': float(linear_domain1_nodes),
             'linear_same_domain_edges': float(linear_same_domain_edges),
             'domain0_size': float(domain0),
-            'domain1_size': float(domain1)
+            'domain1_size': float(domain1),
+            'constraint_penalty': float(constraint_penalty)
         }
     # 其它策略
     total = cross + penalty + balance - reward
