@@ -3,14 +3,43 @@
 用于搜索Verilog线性和非线性拆分的最优方案
 """
 
-import numpy as np
+import math
+try:
+    import numpy as np  # 优先使用 numpy
+except Exception:
+    # 轻量级兼容层：当 numpy 不可用时，提供最小所需 API
+    class _NP:
+        @staticmethod
+        def exp(x):
+            return math.exp(x)
+        @staticmethod
+        def var(arr):
+            if not arr:
+                return 0.0
+            m = sum(arr) / len(arr)
+            return sum((x - m) ** 2 for x in arr) / len(arr)
+        @staticmethod
+        def mean(arr):
+            if not arr:
+                return 0.0
+            return sum(arr) / len(arr)
+        class random:  # noqa: N801
+            @staticmethod
+            def seed(seed):
+                import random as _r
+                _r.seed(seed)
+    np = _NP()
 import random
 import copy
 from typing import Dict, List, Tuple, Optional, Callable, Any
 from dataclasses import dataclass
-import networkx as nx
+try:
+    import networkx as nx
+except Exception:
+    nx = None  # type: ignore
 from pathlib import Path
-from partitioning.cost_strategies import get_cost_function, decompose_cost
+# cost_strategies 仅在图级优化中用到，这里不做顶层导入以避免 networkx 依赖
+import json
 
 
 @dataclass
@@ -64,10 +93,13 @@ class SimulatedAnnealing:
         self.random_seed = seed
         if seed is not None:
             random.seed(seed)
-            np.random.seed(seed)
+            try:
+                np.random.seed(seed)  # 若为兼容层，则退化为 random.seed
+            except Exception:
+                pass
     
     def optimize(self, 
-                graph: nx.DiGraph,
+                graph: Any,
                 cost_function: Callable,
                 initial_partition: Optional[Dict[str, int]] = None) -> AnnealingResult:
         """执行单次模拟退火优化（支持自适应温度）"""
@@ -168,7 +200,7 @@ class SimulatedAnnealing:
         )
     
     def optimize_multi_start(self,
-                             graph: nx.DiGraph,
+                             graph: Any,
                              cost_function: Callable,
                              num_starts: Optional[int] = None) -> AnnealingResult:
         """多起点策略：多次随机初始解运行，返回最优结果"""
@@ -189,13 +221,14 @@ class SimulatedAnnealing:
         return best_overall
 
     # ---------------- 结果导出 / 分解 ----------------
-    def export_best_partition(self, result: AnnealingResult, path: str, graph: nx.DiGraph, cost_function: Callable):
+    def export_best_partition(self, result: AnnealingResult, path: str, graph: Any, cost_function: Callable):
         """导出最优分区 JSON，包含成本分解 (cross/penalty/reward/total)。
         当成本策略不支持分解字段时，缺失部分为0。"""
         strategy_name = getattr(cost_function, '_strategy_name', 'unknown')
         strategy_params = getattr(cost_function, '_strategy_params', {})
         breakdown = {}
         try:
+            from partitioning.cost_strategies import decompose_cost  # 局部导入
             breakdown = decompose_cost(graph, result.best_partition, strategy_name, strategy_params)
         except Exception:
             breakdown = {
@@ -219,7 +252,7 @@ class SimulatedAnnealing:
         path_obj.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
         return str(path_obj)
     
-    def _generate_linear_random_partition(self, graph: nx.DiGraph) -> Dict[str, int]:
+    def _generate_linear_random_partition(self, graph: Any) -> Dict[str, int]:
         """初始化分区：根据配置决定非线性节点的分配策略"""
         partition: Dict[str, int] = {}
         for node in graph.nodes():
@@ -235,7 +268,7 @@ class SimulatedAnnealing:
                     partition[node] = 0  # 非线性强制在电子域
         return partition
     
-    def _get_linear_nodes(self, graph: nx.DiGraph) -> List[str]:
+    def _get_linear_nodes(self, graph: Any) -> List[str]:
         """获取线性可变节点列表"""
         linear_nodes: List[str] = []
         for node in graph.nodes():
@@ -243,7 +276,7 @@ class SimulatedAnnealing:
                 linear_nodes.append(node)
         return linear_nodes
     
-    def _generate_neighbor_linear_only(self, partition: Dict[str, int], graph: nx.DiGraph) -> Dict[str, int]:
+    def _generate_neighbor_linear_only(self, partition: Dict[str, int], graph: Any) -> Dict[str, int]:
         """生成邻域解：支持线性和非线性节点的灵活聚类操作"""
         new_partition = copy.deepcopy(partition)
         linear_nodes = self._get_linear_nodes(graph)
@@ -397,15 +430,12 @@ class SimulatedAnnealing:
     
     
 if __name__ == "__main__":
-    # 仅运行真实图的优化流程；需先通过线性分析生成 results/4004_dfg_linearity_graph.json
+    # ---------------- 1) 真实图的优化流程 ----------------
     graph_json = Path('results/4004_dfg_linearity_graph.json')
-    if not graph_json.exists():
-        print('缺少真实图 JSON: results/4004_dfg_linearity_graph.json，请先运行线性分析生成该文件。')
-    else:
+    if graph_json.exists() and nx is not None:
         from analyzers.graph_loader import load_graph_from_json
         g = load_graph_from_json(str(graph_json))
-        # 混合策略 + 域平衡 + 非负截断
-        # 约束: 非线性只能在电子域(domain0); 鼓励线性尽量放到 ONN 域(domain1)
+        from partitioning.cost_strategies import get_cost_function  # 局部导入
         cost_fn = get_cost_function(
             'mixed',
             w_cross_linear=1.0,
@@ -417,7 +447,6 @@ if __name__ == "__main__":
             balance_lambda=0.05,
             non_negative=True,
         )
-        # 禁用非线性节点优化，确保它们固定在电子域(0)，与硬约束一致
         cfg = AnnealingConfig(
             iterations_per_temp=40,
             max_iterations=2500,
@@ -428,10 +457,250 @@ if __name__ == "__main__":
         res = sa.optimize_multi_start(g, cost_fn)
         export_path = sa.export_best_partition(res, 'results/4004_best_partition.json', g, cost_fn)
         analysis = sa.analyze_result(res)
-        print(
-            '[REAL GRAPH] best_cost=',
-            res.best_cost,
-            'improve=%.2f%%' % (analysis['cost_improvement'] or 0.0),
-            'export =>',
-            export_path,
+        print('[REAL GRAPH] best_cost=', res.best_cost, 'improve=%.2f%%' % (analysis['cost_improvement'] or 0.0), 'export =>', export_path)
+    else:
+        print('缺少真实图 JSON: results/4004_dfg_linearity_graph.json，已跳过图级优化。')
+
+    # ---------------- 2) Bind 掩码级的优化流程 ----------------
+    # 该部分实现一个简化成本模型：
+    # total = wi*Area + wz*Delay + w3*Power + wa*Interface
+    # 其中：
+    # - Area ~ a1*L - a2*E，L为当前掩码中1的数量（线性算子数），E为可融合边中被激活的条数（两端均为1）
+    # - Delay ~ d1*C，C为由1组成的连通分量数量 (近似链深度 proxy)
+    # - Power ~ p1*L
+    # - Interface ~ i1*(|sources| * L_norm)，sources来自 bind 的跨信号依赖；L_norm=L/max(1,op_count)
+
+    @dataclass
+    class BindCostWeights:
+        wi: float = 1.0   # Area 权重
+        wz: float = 1.0   # Delay 权重
+        w3: float = 1.0   # Power 权重
+        wa: float = 1.0   # Interface 权重
+        # 细分系数
+        area_a1: float = 1.0
+        area_a2: float = 0.5
+        delay_d1: float = 1.0
+        power_p1: float = 0.5
+        iface_i1: float = 0.2
+
+    class BindMaskProblem:
+        def __init__(self, bind_json_path: str):
+            self.path = bind_json_path
+            payload = json.loads(Path(bind_json_path).read_text(encoding='utf-8'))
+            self.binds = payload.get('binds', [])
+            # 预处理：为每个 bind 建立 operatorId -> idx 的映射及允许位集合
+            self.per_bind = []
+            for b in self.binds:
+                # 优先使用扩展工作集（operator + concat + partselect），兼容旧字段
+                order = b.get('workset_order') or b.get('operator_order', [])
+                mask = b.get('workset_mask') or b.get('operator_mask', [])
+                fadj = b.get('fusable_adj', [])
+                op_count = b.get('operator_count', len(order))
+                id_to_idx = {op_id: idx for idx, op_id in enumerate(order)}
+                allowed = {i for i, bit in enumerate(mask) if bit == 1}  # 仅原始线性位可翻转
+                # 只保留与 operator_order 对齐的可融合边
+                edges_idx = []
+                for a, c in fadj:
+                    if a in id_to_idx and c in id_to_idx:
+                        edges_idx.append((id_to_idx[a], id_to_idx[c]))
+                self.per_bind.append({
+                    'dest': b.get('dest'),
+                    'order': order,
+                    'orig_mask': mask,
+                    'mask_len': op_count,
+                    'allowed': allowed,
+                    'edges': edges_idx,
+                    'sources': b.get('sources', []),
+                })
+
+        def initial_state(self):
+            # 初始状态使用原始掩码（允许位默认=1）
+            state = []
+            for pb in self.per_bind:
+                state.append(list(pb['orig_mask']))
+            return state
+
+        def random_neighbor(self, state):
+            new_state = [list(m) for m in state]
+            # 随机选择一个存在可变位的 bind
+            candidates = [i for i, pb in enumerate(self.per_bind) if pb['allowed']]
+            if not candidates:
+                return new_state
+            bi = random.choice(candidates)
+            pb = self.per_bind[bi]
+            op_len = len(new_state[bi])
+            if op_len == 0:
+                return new_state
+            # 选择操作：flip / grow / shrink
+            op = random.choices(['flip', 'grow', 'shrink'], weights=[0.5, 0.3, 0.2], k=1)[0]
+            if op == 'flip':
+                idx = random.choice(list(pb['allowed']))
+                new_state[bi][idx] = 1 - new_state[bi][idx]
+            elif op == 'grow':
+                # 尝试把某个已为1的位置的相邻允许位设置为1
+                ones = [i for i, v in enumerate(new_state[bi]) if v == 1]
+                if ones:
+                    seed = random.choice(ones)
+                    neighbors = [j for a, c in pb['edges'] for j in ([a] if c == seed else ([c] if a == seed else []))]
+                    neighbors = [j for j in neighbors if j in pb['allowed']]
+                    if neighbors:
+                        k = random.randint(1, min(2, len(neighbors)))
+                        for j in random.sample(neighbors, k):
+                            new_state[bi][j] = 1
+            else:  # shrink
+                ones = [i for i, v in enumerate(new_state[bi]) if v == 1 and i in pb['allowed']]
+                if ones:
+                    k = random.randint(1, 1)
+                    for j in random.sample(ones, k):
+                        new_state[bi][j] = 0
+            return new_state
+
+        def metrics(self, state):
+            # 计算 Area/Delay/Power/Interface 四项的加总
+            total_L = 0
+            total_E = 0
+            total_C = 0
+            total_iface = 0.0
+            for m, pb in zip(state, self.per_bind):
+                L = sum(1 for v in m if v == 1)
+                # 激活边：两端均为1
+                E = 0
+                if pb['edges']:
+                    ones_set = {i for i, v in enumerate(m) if v == 1}
+                    for a, c in pb['edges']:
+                        if a in ones_set and c in ones_set:
+                            E += 1
+                # 组件数 C 近似 = L - E（假定 parent-child 边形成森林）
+                C = max(0, L - E)
+                L_norm = (L / max(1, pb['mask_len']))
+                iface = len(pb['sources']) * L_norm
+                total_L += L
+                total_E += E
+                total_C += C
+                total_iface += iface
+            return {
+                'L': total_L,
+                'E': total_E,
+                'C': total_C,
+                'IFACE': total_iface,
+            }
+
+        def cost(self, state, w: BindCostWeights):
+            m = self.metrics(state)
+            area = w.area_a1 * m['L'] - w.area_a2 * m['E']
+            delay = w.delay_d1 * m['C']
+            power = w.power_p1 * m['L']
+            iface = w.iface_i1 * m['IFACE']
+            total = w.wi * area + w.wz * delay + w.w3 * power + w.wa * iface
+            return total, {
+                'area': area,
+                'delay': delay,
+                'power': power,
+                'interface': iface,
+                'L': m['L'], 'E': m['E'], 'C': m['C'], 'IFACE': m['IFACE']
+            }
+
+    def run_bindmask_anneal(bind_json_path: str,
+                             weights: BindCostWeights,
+                             initial_temperature: float = 50.0,
+                             final_temperature: float = 0.2,
+                             cooling_rate: float = 0.95,
+                             iterations_per_temp: int = 50,
+                             max_iterations: int = 4000,
+                             multi_start_runs: int = 3,
+                             seed: Optional[int] = None,
+                             export_path: Optional[str] = None):
+        problem = BindMaskProblem(bind_json_path)
+        best_overall = None
+        best_overall_cost = float('inf')
+        base_seed = seed if seed is not None else random.randint(0, 10**9)
+        for r in range(max(1, multi_start_runs)):
+            if seed is not None:
+                random.seed(base_seed + r)
+                np.random.seed(base_seed + r)
+            state = problem.initial_state()
+            current = [list(m) for m in state]
+            current_cost, _ = problem.cost(current, weights)
+            best = [list(m) for m in current]
+            best_cost = current_cost
+            temp = initial_temperature
+            iter_cnt = 0
+            cost_hist = [current_cost]
+            while temp > final_temperature and iter_cnt < max_iterations:
+                for _ in range(iterations_per_temp):
+                    neigh = problem.random_neighbor(current)
+                    neigh_cost, _ = problem.cost(neigh, weights)
+                    delta = neigh_cost - current_cost
+                    if delta < 0 or np.exp(-delta / max(1e-9, temp)) > random.random():
+                        current = neigh
+                        current_cost = neigh_cost
+                        if current_cost < best_cost:
+                            best = [list(m) for m in current]
+                            best_cost = current_cost
+                    iter_cnt += 1
+                    cost_hist.append(current_cost)
+                temp *= cooling_rate
+            if best_cost < best_overall_cost:
+                best_overall = {
+                    'state': best,
+                    'cost': best_cost,
+                    'runs': r + 1,
+                    'history': cost_hist,
+                }
+                best_overall_cost = best_cost
+
+        # 导出
+        if export_path and best_overall is not None:
+            totals = problem.cost(best_overall['state'], weights)[1]
+            # 绑定回写
+            out_binds = []
+            for pb, m in zip(problem.per_bind, best_overall['state']):
+                # 统计单 bind 指标
+                L = sum(1 for v in m if v == 1)
+                ones_set = {i for i, v in enumerate(m) if v == 1}
+                E = sum(1 for a, c in pb['edges'] if a in ones_set and c in ones_set)
+                C = max(0, L - E)
+                out_binds.append({
+                    'dest': pb['dest'],
+                    'operator_order': list(pb['order']),
+                    'initial_mask': list(pb['orig_mask']),
+                    'best_mask': list(m),
+                    'stats': {'L': L, 'E': E, 'C': C, 'sources': list(pb['sources'])}
+                })
+            payload = {
+                'bind_json': bind_json_path,
+                'weights': vars(weights),
+                'best_total_cost': best_overall['cost'],
+                'totals': totals,
+                'binds': out_binds,
+            }
+            Path(export_path).parent.mkdir(parents=True, exist_ok=True)
+            Path(export_path).write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
+            print('[BIND SA] export =>', export_path)
+            return export_path
+        return None
+
+    bind_json = Path('results/4004_dfg_bind_masks.json')
+    if bind_json.exists():
+        w = BindCostWeights(
+            wi=1.0, wz=1.0, w3=0.5, wa=0.5,
+            area_a1=1.0, area_a2=0.6,
+            delay_d1=1.0,
+            power_p1=0.4,
+            iface_i1=0.2,
         )
+        out = run_bindmask_anneal(
+            str(bind_json), w,
+            initial_temperature=40.0,
+            final_temperature=0.5,
+            cooling_rate=0.92,
+            iterations_per_temp=40,
+            max_iterations=2500,
+            multi_start_runs=3,
+            seed=42,
+            export_path='results/4004_bindmask_sa_best.json'
+        )
+        if out is None:
+            print('[BIND SA] 未能生成结果文件')
+    else:
+        print('缺少 Bind 掩码 JSON: results/4004_dfg_bind_masks.json，已跳过 bind 级优化。')

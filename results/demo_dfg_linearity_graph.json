@@ -1,0 +1,37 @@
+{
+  "nodes": {
+    "demo.a": {
+      "is_linear": false,
+      "reason": "非线性算子:Times",
+      "operators": [
+        "Minus",
+        "Times"
+      ],
+      "expression_type": "operator",
+      "in_degree_sources": 2
+    },
+    "demo.b": {
+      "is_linear": true,
+      "reason": "线性AST",
+      "operators": [
+        "Minus"
+      ],
+      "expression_type": "operator",
+      "in_degree_sources": 1
+    }
+  },
+  "edges": [
+    [
+      "demo.c",
+      "demo.a"
+    ],
+    [
+      "demo.b",
+      "demo.a"
+    ],
+    [
+      "demo.d",
+      "demo.b"
+    ]
+  ]
+}

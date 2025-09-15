@@ -1,0 +1,73 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "run-sa-both",
+			"type": "shell",
+			"command": "python -u src/simulated_annealing.py",
+			"args": [],
+			"problemMatcher": []
+		},
+		{
+			"label": "run-sa-both-py3",
+			"type": "shell",
+			"command": "python3 -u src/simulated_annealing.py",
+			"args": [],
+			"problemMatcher": []
+		},
+		{
+			"label": "run-sa-both-py3-2",
+			"type": "shell",
+			"command": "python3 -u src/simulated_annealing.py",
+			"args": [],
+			"problemMatcher": []
+		},
+		{
+			"label": "run-sa-both-py3-3",
+			"type": "shell",
+			"command": "python3 -u src/simulated_annealing.py",
+			"args": [],
+			"problemMatcher": []
+		},
+		{
+			"label": "run-bind-sa-only",
+			"type": "shell",
+			"command": "python3 -u src/simulated_annealing.py",
+			"args": [],
+			"problemMatcher": []
+		},
+		{
+			"label": "run-bind-sa-only-2",
+			"type": "shell",
+			"command": "python3 -u src/simulated_annealing.py",
+			"args": [],
+			"problemMatcher": []
+		},
+		{
+			"label": "regen-4004-bind-masks",
+			"type": "shell",
+			"command": "python3 - <<'PY'\nfrom src.analyzers.dfg_linearity_corrector import analyze_real_dfg\nanalyze_real_dfg('4004_dfg.txt')\nPY",
+			"problemMatcher": []
+		},
+		{
+			"label": "run-bind-sa-workset",
+			"type": "shell",
+			"command": "python3 -u src/simulated_annealing.py",
+			"args": [],
+			"problemMatcher": []
+		},
+		{
+			"label": "run-analyze-4004-workset",
+			"type": "shell",
+			"command": "python3 - <<'PY'\nfrom src.analyzers.dfg_linearity_corrector import analyze_real_dfg\nanalyze_real_dfg('4004_dfg.txt')\nPY",
+			"problemMatcher": []
+		},
+		{
+			"label": "run-bind-sa-workset",
+			"type": "shell",
+			"command": "python3 -u src/simulated_annealing.py",
+			"args": [],
+			"problemMatcher": []
+		}
+	]
+}
