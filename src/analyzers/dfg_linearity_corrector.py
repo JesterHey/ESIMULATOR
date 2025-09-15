@@ -263,6 +263,8 @@ class CorrectedLinearityAnalyzer:
         self.total_expressions = 0
         # 依赖映射: dest -> set(sources)
         self.signal_dependencies: Dict[str, Set[str]] = defaultdict(set)
+        # 按 Bind 粒度的导出载荷（AST + mask + 可融合关系等）
+        self.bind_payloads: List[Dict] = []
     
     def analyze_dfg_file(self, file_path: str, *, export_graph_json: Optional[str] = None,
                          export_graph_gexf: Optional[str] = None) -> Dict:
@@ -306,50 +308,39 @@ class CorrectedLinearityAnalyzer:
                         'expression_type': 'constant'
                     }
                 else:
-                    try:
-                        ast_root, _ = parse_expression(tree_expr, 0)
-                        lin_info = evaluate_linearity(ast_root, self.linear_operators)
-                        ops: List[str] = []
-                        terminals: Set[str] = set()
+                    ast_root, _ = parse_expression(tree_expr, 0)
+                    # 注入 is_linear 到节点
+                    self._annotate_linearity(ast_root)
+                    lin_info = evaluate_linearity(ast_root, self.linear_operators)
+                    ops: List[str] = []
+                    terminals: Set[str] = set()
 
-                        def collect_ops(node: ExpressionNode):
-                            if node.node_type == 'operator':
-                                ops.append(node.value)
-                            elif node.node_type == 'terminal':
-                                term_name = node.value.strip().split()[0]
-                                if not term_name.isdigit():
-                                    terminals.add(term_name)
-                            for child in node.children:
-                                collect_ops(child)
+                    def collect_ops(node: ExpressionNode):
+                        if node.node_type == 'operator':
+                            ops.append(node.value)
+                        elif node.node_type == 'terminal':
+                            term_name = node.value.strip().split()[0]
+                            if not term_name.isdigit():
+                                terminals.add(term_name)
+                        for child in node.children:
+                            collect_ops(child)
 
-                        collect_ops(ast_root)
-                        reason = '线性AST' if lin_info['is_linear'] else ','.join(sorted(set(lin_info['reasons'])))
-                        analysis = {
-                            'is_linear': lin_info['is_linear'],
-                            'reason': reason,
-                            'complexity': 'complex',
-                            'operators': ops,
-                            'expression_type': ast_root.node_type
-                        }
-                        for src in terminals:
-                            if src != signal_name:
-                                self.signal_dependencies[signal_name].add(src)
-                    except Exception as e_ast:
-                        print(f"AST解析失败,回退旧逻辑: {e_ast}")
-                        if tree_expr.startswith('(Branch '):
-                            analysis = self._analyze_branch_expression(tree_expr)
-                        elif tree_expr.startswith('(Concat '):
-                            analysis = self._analyze_concat_expression(tree_expr)
-                        elif tree_expr.startswith('(Operator '):
-                            analysis = self._analyze_operator_expression(tree_expr)
-                        else:
-                            analysis = {
-                                'is_linear': False,
-                                'reason': f'解析错误: {str(e_ast)}',
-                                'complexity': 'error',
-                                'operators': [],
-                                'expression_type': 'unknown'
-                            }
+                    collect_ops(ast_root)
+                    reason = '线性AST' if lin_info['is_linear'] else ','.join(sorted(set(lin_info['reasons'])))
+                    analysis = {
+                        'is_linear': lin_info['is_linear'],
+                        'reason': reason,
+                        'complexity': 'complex',
+                        'operators': ops,
+                        'expression_type': ast_root.node_type
+                    }
+                    for src in terminals:
+                        if src != signal_name:
+                            self.signal_dependencies[signal_name].add(src)
+
+                    # 构建 Bind 粒度导出：AST + operator mask + 可融合邻接
+                    bind_payload = self._build_bind_payload(signal_name, ast_root)
+                    self.bind_payloads.append(bind_payload)
                 self.signal_analyses[signal_name] = analysis
             except Exception as e:
                 print(f"分析信号 {signal_name} 时出错: {e}")
@@ -369,6 +360,27 @@ class CorrectedLinearityAnalyzer:
         if export_graph_gexf and nx is not None:
             self._export_graph_gexf(graph_payload, export_graph_gexf)
         return report
+
+    # ---------------- Public: 导出 Bind 级 JSON ----------------
+    def export_bind_masks(self, dfg_path: str, out_path: str) -> str:
+        """对 DFG 进行解析并导出每个 Bind 的 AST+mask+可融合邻接。
+
+        返回: 写入的文件路径
+        """
+        # 清空历史绑定载荷
+        self.bind_payloads = []
+        # 运行一次分析（内部会填充 bind_payloads）
+        self.analyze_dfg_file(dfg_path)
+        payload = {
+            'file': dfg_path,
+            'binds': self.bind_payloads,
+            'total_binds': len(self.bind_payloads)
+        }
+        p = Path(out_path)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        p.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
+        print(f"Bind 掩码(JSON)已导出: {out_path}")
+        return str(p)
 
     # ---------------- 图构建与导出 ----------------
     def _build_graph_payload(self) -> Dict:
@@ -409,74 +421,164 @@ class CorrectedLinearityAnalyzer:
         nx.write_gexf(G, path)
         print(f"图数据(GEXF)已导出: {path}")
     
-    def _analyze_operator_expression(self, expr: str) -> Dict:
-        """旧方式：分析运算符表达式，基于正则扫描"""
-        operators_found = []
-        is_linear = True
-        nonlinear_reason = None
-        
-        operator_pattern = r'\(Operator (\w+) Next:'
-        matches = list(re.finditer(operator_pattern, expr))
-        
-        for match in matches:
-            operator = match.group(1)
-            operators_found.append(operator)
-            if operator in self.nonlinear_operators:
-                is_linear = False
-                if nonlinear_reason is None:
-                    nonlinear_reason = f'包含非线性运算符: {operator}'
-        
-        if '(Branch ' in expr:
-            is_linear = False
-            if nonlinear_reason is None:
-                nonlinear_reason = '包含条件分支'
-        
-        op_count = len(operators_found)
-        if op_count <= 1:
-            complexity = 'simple'
-        elif op_count <= 5:
-            complexity = 'moderate'
-        else:
-            complexity = 'complex'
-        
-        reason = nonlinear_reason if not is_linear else f'仅包含线性运算符: {operators_found}'
+    # ---------------- AST/掩码/可融合构建 ----------------
+    def _annotate_linearity(self, node: ExpressionNode) -> bool:
+        """自底向上计算并写回 node.is_linear，返回该节点线性性。"""
+        if node.node_type in ("terminal", "constant"):
+            node.is_linear = True
+            return True
+        if node.node_type == "operator":
+            child_lin = all(self._annotate_linearity(ch) for ch in node.children)
+            node.is_linear = (child_lin and node.value in self.linear_operators)
+            return bool(node.is_linear)
+        if node.node_type == "concat":
+            node.is_linear = all(self._annotate_linearity(ch) for ch in node.children)
+            return bool(node.is_linear)
+        if node.node_type == "partselect":
+            # 仅 Var 子节点决定线性性
+            if node.children:
+                var_lin = self._annotate_linearity(node.children[0])
+            else:
+                var_lin = False
+            # 仍然标记整体线性性，便于上层统计
+            for ch in node.children[1:]:
+                self._annotate_linearity(ch)
+            node.is_linear = var_lin
+            return bool(node.is_linear)
+        if node.node_type == "branch":
+            # 递归子树以确保子节点 is_linear 完整
+            for ch in node.children:
+                self._annotate_linearity(ch)
+            node.is_linear = False
+            return False
+        # unknown
+        for ch in node.children:
+            self._annotate_linearity(ch)
+        node.is_linear = False
+        return False
+
+    def _serialize_ast(self, root: ExpressionNode) -> Tuple[Dict[str, Dict], int, Dict[int, ExpressionNode]]:
+        """扁平化 AST 为 {id: attrs}，返回 (nodes_dict, root_id, id->node 映射)。"""
+        nodes: Dict[str, Dict] = {}
+        id_map: Dict[int, ExpressionNode] = {}
+        next_id = 0
+
+        def alloc_id() -> int:
+            nonlocal next_id
+            nid = next_id
+            next_id += 1
+            return nid
+
+        def walk(n: ExpressionNode) -> int:
+            nid = alloc_id()
+            id_map[nid] = n
+            child_ids = [walk(c) for c in n.children]
+            nodes[str(nid)] = {
+                'id': nid,
+                'type': n.node_type,
+                'value': n.value,
+                'children': child_ids,
+                'is_linear': bool(n.is_linear),
+            }
+            # mark：
+            # - operator: 1/0
+            # - concat/partselect: 1/0（用于 workset 掩码）
+            # - 其他: None
+            if n.node_type == 'operator':
+                nodes[str(nid)]['mark'] = 1 if n.is_linear else 0
+            elif n.node_type in ('concat', 'partselect'):
+                nodes[str(nid)]['mark'] = 1 if n.is_linear else 0
+            else:
+                nodes[str(nid)]['mark'] = None
+            return nid
+
+        root_id = walk(root)
+        return nodes, root_id, id_map
+
+    def _collect_operator_order_and_mask(self, nodes_dict: Dict[str, Dict], root_id: int) -> Tuple[List[int], List[int]]:
+        order: List[int] = []
+        mask: List[int] = []
+
+        def dfs(nid: int):
+            n = nodes_dict[str(nid)]
+            if n['type'] == 'operator':
+                order.append(nid)
+                mask.append(int(n.get('mark', 0) or 0))
+            for cid in n['children']:
+                dfs(cid)
+
+        dfs(root_id)
+        return order, mask
+
+    def _collect_workset_order_and_mask(self, nodes_dict: Dict[str, Dict], root_id: int) -> Tuple[List[int], List[int]]:
+        """收集可掩码工作集（operator + concat + partselect）的顺序与掩码。"""
+        order: List[int] = []
+        mask: List[int] = []
+
+        def dfs(nid: int):
+            n = nodes_dict[str(nid)]
+            if n['type'] in ('operator', 'concat', 'partselect'):
+                order.append(nid)
+                m = n.get('mark', None)
+                mask.append(int(m) if isinstance(m, int) else 0)
+            for cid in n['children']:
+                dfs(cid)
+
+        dfs(root_id)
+        return order, mask
+
+    def _has_branch(self, nodes_dict: Dict[str, Dict]) -> bool:
+        for k, v in nodes_dict.items():
+            if v.get('type') == 'branch':
+                return True
+        return False
+
+    def _build_fusable_adjacency(self, nodes_dict: Dict[str, Dict], root_id: int) -> List[List[int]]:
+        """可融合关系：线性工作集（operator/concat/partselect）父子之间建立无向边。"""
+        edges: Set[Tuple[int, int]] = set()
+
+        def dfs(nid: int):
+            n = nodes_dict[str(nid)]
+            for cid in n['children']:
+                c = nodes_dict[str(cid)]
+                # 不穿越分支；仅在父子均为线性 operator 时建立边
+                if n['type'] == 'branch' or c['type'] == 'branch':
+                    pass
+                else:
+                    if n['type'] in ('operator', 'concat', 'partselect') and c['type'] in ('operator', 'concat', 'partselect'):
+                        if n.get('mark') == 1 and c.get('mark') == 1:
+                            a, b = sorted((nid, cid))
+                            edges.add((a, b))
+                dfs(cid)
+
+        dfs(root_id)
+        return [[a, b] for (a, b) in sorted(edges)]
+
+    def _build_bind_payload(self, dest: str, ast_root: ExpressionNode) -> Dict:
+        nodes_dict, root_id, id_map = self._serialize_ast(ast_root)
+        operator_order, operator_mask = self._collect_operator_order_and_mask(nodes_dict, root_id)
+        workset_order, workset_mask = self._collect_workset_order_and_mask(nodes_dict, root_id)
+        fusable_adj = self._build_fusable_adjacency(nodes_dict, root_id)
+        bind_has_branch = self._has_branch(nodes_dict)
+        # 收集 sources（来自 signal_dependencies 已在主循环处理中填充）
+        sources = sorted(self.signal_dependencies.get(dest, []))
         return {
-            'is_linear': is_linear,
-            'reason': reason,
-            'complexity': complexity,
-            'operators': operators_found,
-            'expression_type': 'operator'
+            'dest': dest,
+            'ast': {
+                'nodes': nodes_dict,
+                'root': root_id
+            },
+            'operator_order': operator_order,
+            'operator_mask': operator_mask,
+            'workset_order': workset_order,
+            'workset_mask': workset_mask,
+            'fusable_adj': fusable_adj,
+            'bind_has_branch': bind_has_branch,
+            'sources': sources,
+            'operator_count': len(operator_order)
         }
     
-    def _analyze_branch_expression(self, expr: str) -> Dict:
-        """旧方式：分析分支表达式（条件分支默认非线性）"""
-        operator_pattern = r'\(Operator (\w+) Next:'
-        operators = re.findall(operator_pattern, expr)
-        return {
-            'is_linear': False,
-            'reason': '条件分支表达式（本质非线性）',
-            'complexity': 'complex',
-            'operators': operators,
-            'expression_type': 'branch'
-        }
     
-    def _analyze_concat_expression(self, expr: str) -> Dict:
-        """旧方式：分析拼接表达式，检查内部运算符的线性性"""
-        operator_pattern = r'\(Operator (\w+) Next:'
-        operators = re.findall(operator_pattern, expr)
-        is_linear = True
-        for op in operators:
-            if op in self.nonlinear_operators:
-                is_linear = False
-                break
-        reason = '线性拼接' if is_linear else '拼接中包含非线性子表达式'
-        return {
-            'is_linear': is_linear,
-            'reason': reason,
-            'complexity': 'moderate',
-            'operators': operators,
-            'expression_type': 'concat'
-        }
     
     def _generate_comprehensive_report(self) -> Dict:
         """生成全面的分析报告"""
@@ -521,6 +623,9 @@ def analyze_real_dfg(file_name):
     # 同时导出图 JSON 到 results 目录
     graph_json_path = f"results/{file_name[:-4]}_linearity_graph.json"
     report = analyzer.analyze_dfg_file(dfg_file, export_graph_json=graph_json_path)
+    # 导出 Bind 掩码 JSON
+    bind_json_path = f"results/{file_name[:-4]}_bind_masks.json"
+    analyzer.export_bind_masks(dfg_file, bind_json_path)
     print(f"\n=== 分析结果 ===")
     summary = report['summary']
     print(f"总表达式数: {summary['total_expressions']}")
@@ -538,7 +643,7 @@ def analyze_real_dfg(file_name):
         op_type = "线性" if op in analyzer.linear_operators else "非线性"
         print(f"  {op} ({op_type}): {count}")
     
-    print(f"\n3. 生成修正报告...")
+    print(f"\n生成修正报告...")
     with open(f"results/{file_name[:-4]}_linearity_analysis.txt", "w", encoding="utf-8") as f:
         f.write(f"{file_name}线性分析报告\n")
         f.write("=" * 50 + "\n\n")
@@ -566,4 +671,4 @@ def analyze_real_dfg(file_name):
     print(f"图 JSON 已保存到: {graph_json_path}")
 
 if __name__ == "__main__":
-    analyze_real_dfg('demo_dfg.txt')
+    analyze_real_dfg('4004_dfg.txt')
