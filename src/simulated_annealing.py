@@ -682,12 +682,19 @@ if __name__ == "__main__":
 
     bind_json = Path('results/4004_dfg_bind_masks.json')
     if bind_json.exists():
+        # ONN 偏好（优先减少模块数量 C 与接口成本）：
+        # - 提高延迟与接口权重 (wz, wa)，并提高 delay_d1/iface_i1
+        # - 提高融合奖励 area_a2，降低线性单元与功耗惩罚 (area_a1, power_p1)
         w = BindCostWeights(
-            wi=1.0, wz=1.0, w3=0.5, wa=0.5,
-            area_a1=1.0, area_a2=0.6,
-            delay_d1=1.0,
-            power_p1=0.4,
-            iface_i1=0.2,
+            wi=0.7,
+            wz=1.3,
+            w3=0.3,
+            wa=1.4,
+            area_a1=0.6,
+            area_a2=1.2,
+            delay_d1=1.2,
+            power_p1=0.3,
+            iface_i1=0.8,
         )
         out = run_bindmask_anneal(
             str(bind_json), w,

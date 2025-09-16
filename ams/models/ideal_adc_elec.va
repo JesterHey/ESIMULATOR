@@ -1,0 +1,19 @@
+`include "disciplines.vams"
+// Ideal ADC with electrical input and digital output (conceptual template)
+module ideal_adc_elec #(parameter integer BITS = 8, parameter real VFS = 1.0) (
+  input electrical vin,
+  output reg [BITS-1:0] code
+);
+  real v;
+  analog begin
+    v = V(vin);
+    // In real AMS, sampling/clocking would be added
+  end
+  always @* begin
+    real vclip; integer q;
+    vclip = (v > VFS) ? VFS : ((v < -VFS) ? -VFS : v);
+    q = integer(((vclip + VFS) / (2.0*VFS)) * ((1<<BITS) - 1) + 0.5);
+    if (q < 0) q = 0; if (q > ((1<<BITS)-1)) q = ((1<<BITS)-1);
+    code = q;
+  end
+endmodule

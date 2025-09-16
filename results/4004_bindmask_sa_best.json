@@ -1,0 +1,2905 @@
+{
+  "bind_json": "results/4004_dfg_bind_masks.json",
+  "weights": {
+    "wi": 0.7,
+    "wz": 1.3,
+    "w3": 0.3,
+    "wa": 1.4,
+    "area_a1": 0.6,
+    "area_a2": 1.2,
+    "delay_d1": 1.2,
+    "power_p1": 0.3,
+    "iface_i1": 0.8
+  },
+  "best_total_cost": 6.036648308316757,
+  "totals": {
+    "area": -156.6,
+    "delay": 34.8,
+    "power": 95.7,
+    "interface": 29.79046307736911,
+    "L": 319,
+    "E": 290,
+    "C": 29,
+    "IFACE": 37.23807884671139
+  },
+  "binds": [
+    {
+      "dest": "alu._rn3_dout",
+      "operator_order": [
+        0
+      ],
+      "initial_mask": [
+        1
+      ],
+      "best_mask": [
+        1
+      ],
+      "stats": {
+        "L": 1,
+        "E": 0,
+        "C": 1,
+        "sources": [
+          "alu.cy_1"
+        ]
+      }
+    },
+    {
+      "dest": "alu._rn4_dout",
+      "operator_order": [
+        0
+      ],
+      "initial_mask": [
+        1
+      ],
+      "best_mask": [
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0357",
+          "alu.n0358",
+          "alu.n0359",
+          "alu.n0366"
+        ]
+      }
+    },
+    {
+      "dest": "alu.acb_ib",
+      "operator_order": [
+        0,
+        1,
+        2,
+        4,
+        6,
+        8
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.iow",
+          "alu.x21_clk2",
+          "alu.x31_clk2",
+          "alu.xch"
+        ]
+      }
+    },
+    {
+      "dest": "alu.acc",
+      "operator_order": [
+        2,
+        3,
+        6,
+        8,
+        14,
+        15,
+        16,
+        19,
+        20,
+        21,
+        23,
+        27,
+        30,
+        31,
+        33,
+        37,
+        38,
+        39,
+        41,
+        45,
+        48,
+        49,
+        51
+      ],
+      "initial_mask": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "best_mask": [
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "stats": {
+        "L": 22,
+        "E": 19,
+        "C": 3,
+        "sources": [
+          "alu.acc_in",
+          "alu.add_acc",
+          "alu.adsl",
+          "alu.adsr",
+          "alu.cy_1"
+        ]
+      }
+    },
+    {
+      "dest": "alu.acc",
+      "operator_order": [],
+      "initial_mask": [],
+      "best_mask": [],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.acc_in",
+          "alu.add_acc",
+          "alu.adsl",
+          "alu.adsr",
+          "alu.cy_1"
+        ]
+      }
+    },
+    {
+      "dest": "alu.acc_0",
+      "operator_order": [
+        0
+      ],
+      "initial_mask": [
+        0
+      ],
+      "best_mask": [
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.acc_out"
+        ]
+      }
+    },
+    {
+      "dest": "alu.acc_ada",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0342",
+          "alu.read_acc_3"
+        ]
+      }
+    },
+    {
+      "dest": "alu.acc_adac",
+      "operator_order": [
+        0,
+        1,
+        2
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.cma",
+          "alu.n0342"
+        ]
+      }
+    },
+    {
+      "dest": "alu.acc_in",
+      "operator_order": [
+        0
+      ],
+      "initial_mask": [
+        1
+      ],
+      "best_mask": [
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0514",
+          "alu.n0846",
+          "alu.n0847",
+          "alu.n0848"
+        ]
+      }
+    },
+    {
+      "dest": "alu.acc_out",
+      "operator_order": [],
+      "initial_mask": [],
+      "best_mask": [],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.acc",
+          "alu.n0854"
+        ]
+      }
+    },
+    {
+      "dest": "alu.adc_cy",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0477",
+          "alu.write_carry_2"
+        ]
+      }
+    },
+    {
+      "dest": "alu.add_0",
+      "operator_order": [
+        0
+      ],
+      "initial_mask": [
+        0
+      ],
+      "best_mask": [
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.acc_in"
+        ]
+      }
+    },
+    {
+      "dest": "alu.add_acc",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0477",
+          "alu.write_acc_1"
+        ]
+      }
+    },
+    {
+      "dest": "alu.add_ib",
+      "operator_order": [
+        0,
+        1,
+        3
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.inc_isz",
+          "alu.x31_clk2"
+        ]
+      }
+    },
+    {
+      "dest": "alu.adsl",
+      "operator_order": [
+        0,
+        1,
+        3
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.ral",
+          "alu.x31_clk2"
+        ]
+      }
+    },
+    {
+      "dest": "alu.adsr",
+      "operator_order": [
+        0,
+        1,
+        3
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.rar",
+          "alu.x31_clk2"
+        ]
+      }
+    },
+    {
+      "dest": "alu.cmram0",
+      "operator_order": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        7,
+        9
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.com_n",
+          "alu.n0749",
+          "alu.n0750",
+          "alu.n0751"
+        ]
+      }
+    },
+    {
+      "dest": "alu.cmram1",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.com_n",
+          "alu.n0751"
+        ]
+      }
+    },
+    {
+      "dest": "alu.cmram2",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.com_n",
+          "alu.n0750"
+        ]
+      }
+    },
+    {
+      "dest": "alu.cmram3",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.com_n",
+          "alu.n0749"
+        ]
+      }
+    },
+    {
+      "dest": "alu.cmrom",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.com_n",
+          "alu.poc"
+        ]
+      }
+    },
+    {
+      "dest": "alu.cy",
+      "operator_order": [
+        2,
+        3,
+        6,
+        7,
+        8,
+        10,
+        14,
+        17,
+        18,
+        20,
+        26,
+        27,
+        28,
+        31,
+        33,
+        37,
+        39
+      ],
+      "initial_mask": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "best_mask": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 14,
+        "E": 12,
+        "C": 2,
+        "sources": [
+          "alu.acc_in",
+          "alu.adc_cy",
+          "alu.adsl",
+          "alu.adsr",
+          "alu.cy_1",
+          "alu.n0403",
+          "alu.n0415",
+          "alu.n0861"
+        ]
+      }
+    },
+    {
+      "dest": "alu.cy",
+      "operator_order": [
+        1
+      ],
+      "initial_mask": [
+        0
+      ],
+      "best_mask": [
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.acc_in",
+          "alu.adc_cy",
+          "alu.adsl",
+          "alu.adsr",
+          "alu.cy_1",
+          "alu.n0403",
+          "alu.n0415",
+          "alu.n0861"
+        ]
+      }
+    },
+    {
+      "dest": "alu.cy_1",
+      "operator_order": [],
+      "initial_mask": [],
+      "best_mask": [],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.cy",
+          "alu.n0854"
+        ]
+      }
+    },
+    {
+      "dest": "alu.cy_ada",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.add_group_4",
+          "alu.n0342"
+        ]
+      }
+    },
+    {
+      "dest": "alu.cy_adac",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0342",
+          "alu.sub_group_6"
+        ]
+      }
+    },
+    {
+      "dest": "alu.cy_ib",
+      "operator_order": [
+        0,
+        1,
+        3
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.iow",
+          "alu.x31_clk2"
+        ]
+      }
+    },
+    {
+      "dest": "alu.dout",
+      "operator_order": [],
+      "initial_mask": [],
+      "best_mask": [],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu._rn0_dout",
+          "alu._rn1_dout",
+          "alu._rn2_dout",
+          "alu._rn3_dout",
+          "alu._rn4_dout",
+          "alu.acb_ib",
+          "alu.add_ib",
+          "alu.cy_ib",
+          "alu.n0415"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0345",
+      "operator_order": [
+        0,
+        2
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.acc_out",
+          "alu.kbp"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0351",
+      "operator_order": [
+        0,
+        1,
+        3
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.dcl",
+          "alu.x21_clk2"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0354",
+      "operator_order": [
+        0,
+        2
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.acc_out",
+          "alu.kbp"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0355",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        1
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.acc_out"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0357",
+      "operator_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0345",
+          "alu.n0363",
+          "alu.n0377",
+          "alu.n0403"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0358",
+      "operator_order": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0345",
+          "alu.n0354",
+          "alu.n0363",
+          "alu.n0370",
+          "alu.n0377",
+          "alu.n0403"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0359",
+      "operator_order": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0345",
+          "alu.n0370",
+          "alu.n0377",
+          "alu.tcs"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0363",
+      "operator_order": [
+        0,
+        2
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.acc_out",
+          "alu.kbp"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0364",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        1
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.acc_out"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0366",
+      "operator_order": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0354",
+          "alu.n0363",
+          "alu.n0370",
+          "alu.n0377",
+          "alu.tcs"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0370",
+      "operator_order": [
+        0,
+        2
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.acc_out",
+          "alu.kbp"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0371",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        1
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.acc_out"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0377",
+      "operator_order": [
+        0,
+        1,
+        3,
+        6
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.acc_out",
+          "alu.kbp",
+          "alu.n0378"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0378",
+      "operator_order": [
+        0,
+        1,
+        2
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.daa",
+          "alu.n0803",
+          "alu.o_ib"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0403",
+      "operator_order": [
+        0,
+        1,
+        2
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.daa",
+          "alu.n0803"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0415",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.ope_n",
+          "alu.x21_clk2"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0477",
+      "operator_order": [
+        0,
+        1,
+        2,
+        3,
+        5,
+        7
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.a12",
+          "alu.ior",
+          "alu.x31_clk2"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0546",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.inc_group_5",
+          "alu.n0342"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0550",
+      "operator_order": [
+        5
+      ],
+      "initial_mask": [
+        0
+      ],
+      "best_mask": [
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.cy",
+          "alu.cy_ada",
+          "alu.cy_adac",
+          "alu.m12",
+          "alu.n0546"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0749",
+      "operator_order": [],
+      "initial_mask": [],
+      "best_mask": [],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0351",
+          "alu.n0355",
+          "alu.poc"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0750",
+      "operator_order": [],
+      "initial_mask": [],
+      "best_mask": [],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0351",
+          "alu.n0364",
+          "alu.poc"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0751",
+      "operator_order": [],
+      "initial_mask": [],
+      "best_mask": [],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0351",
+          "alu.n0371",
+          "alu.poc"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0803",
+      "operator_order": [
+        0,
+        1,
+        2,
+        3,
+        7,
+        8,
+        12
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "stats": {
+        "L": 1,
+        "E": 0,
+        "C": 1,
+        "sources": [
+          "alu.acc_out",
+          "alu.cy_1"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0846",
+      "operator_order": [
+        0
+      ],
+      "initial_mask": [
+        0
+      ],
+      "best_mask": [
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0878"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0848",
+      "operator_order": [
+        0
+      ],
+      "initial_mask": [
+        0
+      ],
+      "best_mask": [
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0879"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0854",
+      "operator_order": [
+        0,
+        1
+      ],
+      "initial_mask": [
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.x12"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0870",
+      "operator_order": [
+        2,
+        3,
+        5,
+        7,
+        13,
+        14,
+        16,
+        18,
+        22,
+        24,
+        30,
+        31,
+        32,
+        34,
+        36,
+        40,
+        42,
+        46,
+        48
+      ],
+      "initial_mask": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "best_mask": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "stats": {
+        "L": 16,
+        "E": 13,
+        "C": 3,
+        "sources": [
+          "alu.acc",
+          "alu.acc_ada",
+          "alu.acc_adac",
+          "alu.m12"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0871",
+      "operator_order": [
+        2,
+        3,
+        5,
+        6,
+        7,
+        9,
+        13,
+        16,
+        17,
+        19,
+        25,
+        26,
+        28,
+        29,
+        30,
+        32,
+        36,
+        39,
+        40,
+        42,
+        46,
+        47,
+        48,
+        50,
+        54,
+        57,
+        58,
+        60,
+        66,
+        67,
+        68,
+        70,
+        71,
+        72,
+        74,
+        78,
+        81,
+        82,
+        84,
+        88,
+        89,
+        90,
+        92,
+        96,
+        99,
+        100,
+        102,
+        106,
+        107,
+        108,
+        110,
+        114,
+        117,
+        118,
+        120
+      ],
+      "initial_mask": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "best_mask": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "stats": {
+        "L": 51,
+        "E": 46,
+        "C": 5,
+        "sources": [
+          "alu.acc",
+          "alu.acc_ada",
+          "alu.acc_adac",
+          "alu.m12"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0872",
+      "operator_order": [
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9,
+        11,
+        15,
+        19,
+        22,
+        23,
+        24,
+        25,
+        27,
+        31,
+        37,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        46,
+        50,
+        54,
+        57,
+        58,
+        59,
+        60,
+        62,
+        66,
+        70,
+        71,
+        72,
+        73,
+        74,
+        76,
+        80,
+        84,
+        87,
+        88,
+        89,
+        90,
+        92,
+        96,
+        102,
+        103,
+        104,
+        106,
+        107,
+        108,
+        109,
+        110,
+        112,
+        116,
+        120,
+        123,
+        124,
+        125,
+        126,
+        128,
+        132,
+        136,
+        137,
+        138,
+        139,
+        140,
+        142,
+        146,
+        150,
+        153,
+        154,
+        155,
+        156,
+        158,
+        162,
+        166,
+        167,
+        168,
+        169,
+        170,
+        172,
+        176,
+        180,
+        183,
+        184,
+        185,
+        186,
+        188,
+        192
+      ],
+      "initial_mask": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "best_mask": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "stats": {
+        "L": 88,
+        "E": 84,
+        "C": 4,
+        "sources": [
+          "alu.acc",
+          "alu.acc_ada",
+          "alu.acc_adac",
+          "alu.m12"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0873",
+      "operator_order": [
+        2,
+        3,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        13,
+        17,
+        21,
+        25,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        35,
+        39,
+        43,
+        49,
+        50,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        60,
+        64,
+        68,
+        72,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        82,
+        86,
+        90,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        102,
+        106,
+        110,
+        114,
+        117,
+        118,
+        119,
+        120,
+        121,
+        122,
+        124,
+        128,
+        132,
+        138,
+        139,
+        140,
+        142,
+        143,
+        144,
+        145,
+        146,
+        147,
+        148,
+        150,
+        154,
+        158,
+        162,
+        165,
+        166,
+        167,
+        168,
+        169,
+        170,
+        172,
+        176,
+        180,
+        184,
+        185,
+        186,
+        187,
+        188,
+        189,
+        190,
+        192,
+        196,
+        200,
+        204,
+        207,
+        208,
+        209,
+        210,
+        211,
+        212,
+        214,
+        218,
+        222,
+        226,
+        227,
+        228,
+        229,
+        230,
+        231,
+        232,
+        234,
+        238,
+        242,
+        246,
+        249,
+        250,
+        251,
+        252,
+        253,
+        254,
+        256,
+        260,
+        264
+      ],
+      "initial_mask": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "best_mask": [
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "stats": {
+        "L": 123,
+        "E": 116,
+        "C": 7,
+        "sources": [
+          "alu.acc",
+          "alu.acc_ada",
+          "alu.acc_adac",
+          "alu.m12"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0875",
+      "operator_order": [
+        0,
+        1,
+        2,
+        3,
+        7,
+        9,
+        10
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0553",
+          "alu.n0556",
+          "alu.n0871",
+          "alu.n0889"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0877",
+      "operator_order": [
+        0,
+        1,
+        2,
+        3,
+        7,
+        9,
+        10
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0559",
+          "alu.n0861",
+          "alu.n0873",
+          "alu.n0893"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0878",
+      "operator_order": [
+        0,
+        1,
+        2,
+        3,
+        7,
+        9,
+        10
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0550",
+          "alu.n0553",
+          "alu.n0870",
+          "alu.n0877",
+          "alu.n0887"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0879",
+      "operator_order": [
+        0,
+        1,
+        2,
+        3,
+        7,
+        9,
+        10
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0556",
+          "alu.n0559",
+          "alu.n0872",
+          "alu.n0891"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0887",
+      "operator_order": [
+        1,
+        2,
+        5,
+        6,
+        12
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "stats": {
+        "L": 2,
+        "E": 0,
+        "C": 2,
+        "sources": [
+          "alu.m12",
+          "alu.sub_group_6",
+          "alu.tmp"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0889",
+      "operator_order": [
+        1,
+        2,
+        5,
+        11,
+        12
+      ],
+      "initial_mask": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.m12",
+          "alu.sub_group_6",
+          "alu.tmp"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0891",
+      "operator_order": [
+        1,
+        2,
+        5,
+        6,
+        12
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "stats": {
+        "L": 1,
+        "E": 0,
+        "C": 1,
+        "sources": [
+          "alu.m12",
+          "alu.sub_group_6",
+          "alu.tmp"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0893",
+      "operator_order": [
+        1,
+        2,
+        5,
+        11,
+        12
+      ],
+      "initial_mask": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.m12",
+          "alu.sub_group_6",
+          "alu.tmp"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0911",
+      "operator_order": [
+        2,
+        3,
+        6,
+        7
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0550",
+          "alu.n0870",
+          "alu.n0887"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0912",
+      "operator_order": [
+        2,
+        3,
+        6,
+        7
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0553",
+          "alu.n0871",
+          "alu.n0889"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0913",
+      "operator_order": [
+        2,
+        3,
+        6,
+        7
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0556",
+          "alu.n0872",
+          "alu.n0891"
+        ]
+      }
+    },
+    {
+      "dest": "alu.n0914",
+      "operator_order": [
+        2,
+        3,
+        6,
+        7
+      ],
+      "initial_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "best_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.n0559",
+          "alu.n0873",
+          "alu.n0893"
+        ]
+      }
+    },
+    {
+      "dest": "alu.tmp",
+      "operator_order": [
+        4
+      ],
+      "initial_mask": [
+        0
+      ],
+      "best_mask": [
+        0
+      ],
+      "stats": {
+        "L": 0,
+        "E": 0,
+        "C": 0,
+        "sources": [
+          "alu.data",
+          "alu.m12",
+          "alu.n0342"
+        ]
+      }
+    }
+  ]
+}
