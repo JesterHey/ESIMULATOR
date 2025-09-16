@@ -125,7 +125,8 @@ python esimulator_cli.py compare --dfg-filename 4004_dfg.txt
 python tools/generate_ams_from_sa.py \
   --sa results/4004_bindmask_sa_best.json \
   --out ams/build \
-  --top ams/tb/ams_top_bind_connect.sv
+  --top ams/tb/ams_top_bind_connect.sv \
+  --backend lut
 ```
 
 生成物：

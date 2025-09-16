@@ -2,16 +2,17 @@
 # -*- coding: utf-8 -*-
 """
 根据 SA 结果（bind 掩码级）生成 AMS 包装：
-- 为每个 bind 生成一个占位的 ONN 包装模块 `bind_<dest_sanitized>.sv`
-- 生成汇接文件 `ams_top_bind_connect.sv`，用于实例化所有 bind 包装
-注意：当前版本不解析 RTL 细节，仅以占位接口展示如何接入 ADC/DAC 与 ONN 线性块。
+- 为每个 bind 生成一个包装模块 `bind_<dest_sanitized>.sv`
+- 支持后端选择：ONN（默认）或 LUT（纯数字仿真）
+- 生成汇接文件 `ams_top_bind_connect.sv`
+注意：当前版本不解析 RTL 细节，仅以占位接口展示链路。
 """
 import argparse
 import json
 from pathlib import Path
 import re
 
-TEMPLATE_BIND = """
+TEMPLATE_BIND_ONN = """
 // Auto-generated wrapper for bind: {dest}
 module bind_{name} #(parameter int WIDTH = 8) (
   input  logic              clk,
@@ -44,6 +45,24 @@ module bind_{name} #(parameter int WIDTH = 8) (
 endmodule
 """
 
+TEMPLATE_BIND_LUT = """
+// Auto-generated wrapper for bind: {dest}
+module bind_{name} #(parameter int WIDTH = 8) (
+  input  logic              clk,
+  input  logic              rst_n,
+  input  logic [WIDTH-1:0]  din,
+  output logic [WIDTH-1:0]  dout
+);
+  // Pure-digital LUT backend for traditional simulators
+  lut_block #(.WIDTH(WIDTH)) u_lut (
+    .clk (clk),
+    .rst_n (rst_n),
+    .din (din),
+    .dout(dout)
+  );
+endmodule
+"""
+
 TEMPLATE_CONNECT_TOP = """
 // Auto-generated AMS bind connection top
 module ams_top_bind_connect #(parameter int WIDTH=8) (
@@ -60,7 +79,7 @@ def sanitize(name: str) -> str:
     return re.sub(r"[^a-zA-Z0-9_]", "_", name)
 
 
-def generate(sa_path: Path, out_dir: Path):
+def generate(sa_path: Path, out_dir: Path, backend: str = 'onn'):
     payload = json.loads(sa_path.read_text(encoding='utf-8'))
     binds = payload.get('binds', [])
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -72,7 +91,10 @@ def generate(sa_path: Path, out_dir: Path):
         dest = b.get('dest', 'unknown')
         name = sanitize(dest)
         sv_path = out_dir / f"bind_{name}.sv"
-        sv_path.write_text(TEMPLATE_BIND.format(dest=dest, name=name), encoding='utf-8')
+        if backend == 'lut':
+            sv_path.write_text(TEMPLATE_BIND_LUT.format(dest=dest, name=name), encoding='utf-8')
+        else:
+            sv_path.write_text(TEMPLATE_BIND_ONN.format(dest=dest, name=name), encoding='utf-8')
         # 为连接顶层生成占位信号与实例
         wire_defs.append(f"  logic [7:0] din_{name};\n  logic [7:0] dout_{name};")
         inst_defs.append(
@@ -89,6 +111,7 @@ def main():
     ap.add_argument('--sa', type=str, required=True, help='SA best json path')
     ap.add_argument('--out', type=str, required=True, help='Output folder for generated SV')
     ap.add_argument('--top', type=str, default='', help='Optional: copy connect top to this path')
+    ap.add_argument('--backend', type=str, default='onn', choices=['onn','lut'], help='Wrapper backend implementation')
     args = ap.parse_args()
 
     sa_path = Path(args.sa)
@@ -96,7 +119,7 @@ def main():
     if not sa_path.exists():
         raise SystemExit(f"SA json not found: {sa_path}")
 
-    out = generate(sa_path, out_dir)
+    out = generate(sa_path, out_dir, backend=args.backend)
     print(f"[GEN] Generated AMS wrappers at: {out}")
 
     if args.top:
