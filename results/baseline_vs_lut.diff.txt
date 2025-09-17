@@ -1,0 +1,9 @@
+--- ams/out_base.txt	2025-09-17 10:01:27
++++ ams/out_lut.txt	2025-09-17 10:01:35
+@@ -222,5 +222,5 @@
+              2265000 cy_1=0 add_0=1 acc_0=1 cmrom=0 cmram=0000
+              2275000 cy_1=0 add_0=1 acc_0=1 cmrom=0 cmram=0000
+              2285000 cy_1=0 add_0=1 acc_0=1 cmrom=0 cmram=0000
+-ams/tb/tb_4004_baseline.sv:30: $finish called at 2295000 (1ps)
++ams/tb/tb_4004_ams.sv:30: $finish called at 2295000 (1ps)
+              2295000 cy_1=0 add_0=1 acc_0=1 cmrom=0 cmram=0000
