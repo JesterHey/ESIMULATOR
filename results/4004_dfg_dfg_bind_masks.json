@@ -53,9 +53,9 @@
       "fusable_adj": [],
       "operator_count": 1,
       "sources": [
-        "alu.n0357",
-        "alu.n0359",
         "alu.n0358",
+        "alu.n0359",
+        "alu.n0357",
         "alu.n0366"
       ]
     },
@@ -101,8 +101,8 @@
       ],
       "operator_count": 6,
       "sources": [
-        "alu.x21_clk2",
         "alu.iow",
+        "alu.x21_clk2",
         "alu.xch",
         "alu.x31_clk2"
       ]
@@ -193,10 +193,10 @@
       "fusable_adj": [],
       "operator_count": 1,
       "sources": [
+        "alu.n0514",
         "alu.n0847",
-        "alu.n0846",
         "alu.n0848",
-        "alu.n0514"
+        "alu.n0846"
       ]
     },
     {
@@ -228,8 +228,8 @@
       ],
       "operator_count": 2,
       "sources": [
-        "alu.write_carry_2",
-        "alu.n0477"
+        "alu.n0477",
+        "alu.write_carry_2"
       ]
     },
     {
@@ -400,10 +400,10 @@
       ],
       "operator_count": 7,
       "sources": [
-        "alu.n0750",
         "alu.n0749",
-        "alu.n0751",
-        "alu.com_n"
+        "alu.com_n",
+        "alu.n0750",
+        "alu.n0751"
       ]
     },
     {
@@ -424,8 +424,8 @@
       ],
       "operator_count": 2,
       "sources": [
-        "alu.n0751",
-        "alu.com_n"
+        "alu.com_n",
+        "alu.n0751"
       ]
     },
     {
@@ -446,8 +446,8 @@
       ],
       "operator_count": 2,
       "sources": [
-        "alu.n0750",
-        "alu.com_n"
+        "alu.com_n",
+        "alu.n0750"
       ]
     },
     {
@@ -505,9 +505,9 @@
       "fusable_adj": [],
       "operator_count": 1,
       "sources": [
+        "alu.n0415",
         "alu.adc_cy",
         "alu.n0861",
-        "alu.n0415",
         "alu.n0403"
       ]
     },
@@ -540,8 +540,8 @@
       ],
       "operator_count": 2,
       "sources": [
-        "alu.add_group_4",
-        "alu.n0342"
+        "alu.n0342",
+        "alu.add_group_4"
       ]
     },
     {
@@ -562,8 +562,8 @@
       ],
       "operator_count": 2,
       "sources": [
-        "alu.sub_group_6",
-        "alu.n0342"
+        "alu.n0342",
+        "alu.sub_group_6"
       ]
     },
     {
@@ -611,15 +611,15 @@
       "fusable_adj": [],
       "operator_count": 0,
       "sources": [
-        "alu.cy_ib",
-        "alu._rn0_dout",
-        "alu._rn2_dout",
-        "alu._rn4_dout",
         "alu._rn3_dout",
+        "alu._rn4_dout",
+        "alu.add_ib",
         "alu.n0415",
         "alu.acb_ib",
+        "alu._rn2_dout",
+        "alu.cy_ib",
         "alu._rn1_dout",
-        "alu.add_ib"
+        "alu._rn0_dout"
       ]
     },
     {
@@ -640,8 +640,8 @@
       ],
       "operator_count": 2,
       "sources": [
-        "alu.kbp",
-        "alu.acc_out"
+        "alu.acc_out",
+        "alu.kbp"
       ]
     },
     {
@@ -690,8 +690,8 @@
       ],
       "operator_count": 2,
       "sources": [
-        "alu.kbp",
-        "alu.acc_out"
+        "alu.acc_out",
+        "alu.kbp"
       ]
     },
     {
@@ -745,10 +745,10 @@
       ],
       "operator_count": 4,
       "sources": [
-        "alu.n0345",
-        "alu.n0363",
         "alu.n0377",
-        "alu.n0403"
+        "alu.n0363",
+        "alu.n0403",
+        "alu.n0345"
       ]
     },
     {
@@ -793,12 +793,12 @@
       ],
       "operator_count": 6,
       "sources": [
-        "alu.n0370",
-        "alu.n0363",
-        "alu.n0403",
-        "alu.n0345",
         "alu.n0377",
-        "alu.n0354"
+        "alu.n0363",
+        "alu.n0354",
+        "alu.n0370",
+        "alu.n0345",
+        "alu.n0403"
       ]
     },
     {
@@ -831,10 +831,10 @@
       ],
       "operator_count": 4,
       "sources": [
-        "alu.n0345",
-        "alu.n0370",
+        "alu.n0377",
         "alu.tcs",
-        "alu.n0377"
+        "alu.n0370",
+        "alu.n0345"
       ]
     },
     {
@@ -855,8 +855,8 @@
       ],
       "operator_count": 2,
       "sources": [
-        "alu.kbp",
-        "alu.acc_out"
+        "alu.acc_out",
+        "alu.kbp"
       ]
     },
     {
@@ -916,11 +916,11 @@
       ],
       "operator_count": 5,
       "sources": [
-        "alu.n0370",
-        "alu.n0363",
-        "alu.tcs",
         "alu.n0377",
-        "alu.n0354"
+        "alu.n0363",
+        "alu.n0354",
+        "alu.n0370",
+        "alu.tcs"
       ]
     },
     {
@@ -941,8 +941,8 @@
       ],
       "operator_count": 2,
       "sources": [
-        "alu.kbp",
-        "alu.acc_out"
+        "alu.acc_out",
+        "alu.kbp"
       ]
     },
     {
@@ -996,8 +996,8 @@
       ],
       "operator_count": 4,
       "sources": [
-        "alu.kbp",
         "alu.acc_out",
+        "alu.kbp",
         "alu.n0378"
       ]
     },
@@ -1025,8 +1025,8 @@
       ],
       "operator_count": 3,
       "sources": [
-        "alu.daa",
         "alu.o_ib",
+        "alu.daa",
         "alu.n0803"
       ]
     },
@@ -1122,8 +1122,8 @@
       ],
       "operator_count": 6,
       "sources": [
-        "alu.ior",
         "alu.a12",
+        "alu.ior",
         "alu.x31_clk2"
       ]
     },
@@ -1172,9 +1172,9 @@
       "sources": [
         "alu.cy_adac",
         "alu.n0546",
-        "alu.cy",
+        "alu.m12",
         "alu.cy_ada",
-        "alu.m12"
+        "alu.cy"
       ]
     },
     {
@@ -1215,8 +1215,8 @@
       "operator_count": 0,
       "sources": [
         "alu.poc",
-        "alu.n0351",
-        "alu.n0355"
+        "alu.n0355",
+        "alu.n0351"
       ]
     },
     {
@@ -1227,8 +1227,8 @@
       "operator_count": 0,
       "sources": [
         "alu.poc",
-        "alu.n0364",
-        "alu.n0351"
+        "alu.n0351",
+        "alu.n0364"
       ]
     },
     {
@@ -1238,8 +1238,8 @@
       "fusable_adj": [],
       "operator_count": 0,
       "sources": [
-        "alu.n0371",
         "alu.poc",
+        "alu.n0371",
         "alu.n0351"
       ]
     },
@@ -1291,8 +1291,8 @@
       ],
       "operator_count": 7,
       "sources": [
-        "alu.cy_1",
-        "alu.acc_out"
+        "alu.acc_out",
+        "alu.cy_1"
       ]
     },
     {
@@ -1388,9 +1388,9 @@
       ],
       "operator_count": 3,
       "sources": [
-        "alu.acc",
-        "alu.acc_ada",
         "alu.m12",
+        "alu.acc_ada",
+        "alu.acc",
         "alu.acc_adac"
       ]
     },
@@ -1424,9 +1424,9 @@
       ],
       "operator_count": 4,
       "sources": [
-        "alu.acc",
-        "alu.acc_ada",
         "alu.m12",
+        "alu.acc_ada",
+        "alu.acc",
         "alu.acc_adac"
       ]
     },
@@ -1460,9 +1460,9 @@
       ],
       "operator_count": 4,
       "sources": [
-        "alu.acc",
-        "alu.acc_ada",
         "alu.m12",
+        "alu.acc_ada",
+        "alu.acc",
         "alu.acc_adac"
       ]
     },
@@ -1496,9 +1496,9 @@
       ],
       "operator_count": 4,
       "sources": [
-        "alu.acc",
-        "alu.acc_ada",
         "alu.m12",
+        "alu.acc_ada",
+        "alu.acc",
         "alu.acc_adac"
       ]
     },
@@ -1550,9 +1550,9 @@
       ],
       "operator_count": 7,
       "sources": [
-        "alu.n0553",
         "alu.n0871",
         "alu.n0556",
+        "alu.n0553",
         "alu.n0889"
       ]
     },
@@ -1604,10 +1604,10 @@
       ],
       "operator_count": 7,
       "sources": [
+        "alu.n0559",
         "alu.n0861",
-        "alu.n0873",
         "alu.n0893",
-        "alu.n0559"
+        "alu.n0873"
       ]
     },
     {
@@ -1658,11 +1658,11 @@
       ],
       "operator_count": 7,
       "sources": [
+        "alu.n0870",
+        "alu.n0550",
         "alu.n0553",
         "alu.n0887",
-        "alu.n0870",
-        "alu.n0877",
-        "alu.n0550"
+        "alu.n0877"
       ]
     },
     {
@@ -1719,11 +1719,11 @@
       ],
       "operator_count": 8,
       "sources": [
-        "alu.tmp",
         "alu.n0559",
-        "alu.n0556",
         "alu.n0891",
-        "alu.n0872"
+        "alu.n0872",
+        "alu.n0556",
+        "alu.tmp"
       ]
     },
     {
@@ -1756,9 +1756,9 @@
       ],
       "operator_count": 4,
       "sources": [
-        "alu.tmp",
+        "alu.m12",
         "alu.sub_group_6",
-        "alu.m12"
+        "alu.tmp"
       ]
     },
     {
@@ -1791,9 +1791,9 @@
       ],
       "operator_count": 4,
       "sources": [
-        "alu.tmp",
+        "alu.m12",
         "alu.sub_group_6",
-        "alu.m12"
+        "alu.tmp"
       ]
     },
     {
@@ -1826,9 +1826,9 @@
       ],
       "operator_count": 4,
       "sources": [
-        "alu.tmp",
+        "alu.m12",
         "alu.sub_group_6",
-        "alu.m12"
+        "alu.tmp"
       ]
     },
     {
@@ -1855,8 +1855,8 @@
       ],
       "operator_count": 3,
       "sources": [
-        "alu.sub_group_6",
-        "alu.m12"
+        "alu.m12",
+        "alu.sub_group_6"
       ]
     },
     {
@@ -1890,8 +1890,8 @@
       "operator_count": 4,
       "sources": [
         "alu.n0887",
-        "alu.n0870",
-        "alu.n0550"
+        "alu.n0550",
+        "alu.n0870"
       ]
     },
     {
@@ -1924,8 +1924,8 @@
       ],
       "operator_count": 4,
       "sources": [
-        "alu.n0553",
         "alu.n0871",
+        "alu.n0553",
         "alu.n0889"
       ]
     },
@@ -1959,9 +1959,9 @@
       ],
       "operator_count": 4,
       "sources": [
-        "alu.n0556",
         "alu.n0891",
-        "alu.n0872"
+        "alu.n0872",
+        "alu.n0556"
       ]
     },
     {
@@ -1994,9 +1994,9 @@
       ],
       "operator_count": 4,
       "sources": [
-        "alu.n0873",
         "alu.n0559",
-        "alu.n0893"
+        "alu.n0893",
+        "alu.n0873"
       ]
     }
   ]

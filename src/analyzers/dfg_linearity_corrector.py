@@ -243,16 +243,25 @@ def evaluate_linearity(node: ExpressionNode, linear_ops: Set[str]) -> Dict:
 
 class CorrectedLinearityAnalyzer:
     
-    def __init__(self):
+    def __init__(self, linearity_mode: str = 'arith'):
+        """linearity_mode: 'arith' | 'gf2'
+        - 'arith': 线性算子为 {Plus, Minus, UnaryMinus, Concat, Partselect}
+        - 'gf2': 在 arith 基础上将 'Xor' 视为线性
+        """
+        self.linearity_mode = linearity_mode
         # 线性运算符定义（仅支持基本算术及位拼接操作）
         self.linear_operators = {
             'Plus', 'Minus', 'UnaryMinus',  # 基本算术运算
             'Concat', 'Partselect'          # 位操作（线性组合）
         }
+        if self.linearity_mode == 'gf2':
+            # GF(2) 中 XOR 为线性
+            self.linear_operators = set(self.linear_operators)
+            self.linear_operators.add('Xor')
         
         # 非线性运算符定义
         self.nonlinear_operators = {
-            'And', 'Or', 'Xor', 'Xnor',     # 逻辑运算
+            'And', 'Or', 'Xor', 'Xnor',     # 逻辑运算（若 gf2 模式，Xor 的固有线性标签会单独覆盖）
             'Unot', 'Unor', 'Uand', 'Uxor',  # 归约运算
             'Times', 'Divide', 'Mod',       # 乘除运算
             'Eq', 'NotEq', 'Lt', 'Gt', 'Lte', 'Gte',  # 比较运算
@@ -291,56 +300,45 @@ class CorrectedLinearityAnalyzer:
             signal_name = match.group(1)
             tree_expr = match.group(2).strip()
             try:
-                if tree_expr.startswith('(Terminal '):
-                    analysis = {
-                        'is_linear': True,
-                        'reason': '直接终端赋值',
-                        'complexity': 'simple',
-                        'operators': [],
-                        'expression_type': 'terminal'
-                    }
-                elif tree_expr.startswith('(IntCon') or tree_expr.startswith('(IntConst'):
-                    analysis = {
-                        'is_linear': True,
-                        'reason': '常量赋值',
-                        'complexity': 'simple',
-                        'operators': [],
-                        'expression_type': 'constant'
-                    }
-                else:
-                    ast_root, _ = parse_expression(tree_expr, 0)
-                    # 注入 is_linear 到节点
-                    self._annotate_linearity(ast_root)
-                    lin_info = evaluate_linearity(ast_root, self.linear_operators)
-                    ops: List[str] = []
-                    terminals: Set[str] = set()
+                # 统一路径：所有绑定都解析为 AST（包括 Terminal/Const）
+                ast_root, _ = parse_expression(tree_expr, 0)
+                # 注入 is_linear 到节点
+                self._annotate_linearity(ast_root)
+                lin_info = evaluate_linearity(ast_root, self.linear_operators)
 
-                    def collect_ops(node: ExpressionNode):
-                        if node.node_type == 'operator':
-                            ops.append(node.value)
-                        elif node.node_type == 'terminal':
-                            term_name = node.value.strip().split()[0]
-                            if not term_name.isdigit():
-                                terminals.add(term_name)
-                        for child in node.children:
-                            collect_ops(child)
+                ops: List[str] = []
+                terminals: Set[str] = set()
 
-                    collect_ops(ast_root)
-                    reason = '线性AST' if lin_info['is_linear'] else ','.join(sorted(set(lin_info['reasons'])))
-                    analysis = {
-                        'is_linear': lin_info['is_linear'],
-                        'reason': reason,
-                        'complexity': 'complex',
-                        'operators': ops,
-                        'expression_type': ast_root.node_type
-                    }
-                    for src in terminals:
-                        if src != signal_name:
-                            self.signal_dependencies[signal_name].add(src)
+                def collect_ops(node: ExpressionNode):
+                    if node.node_type == 'operator':
+                        ops.append(node.value)
+                    elif node.node_type == 'terminal':
+                        term_name = node.value.strip().split()[0]
+                        if not term_name.isdigit():
+                            terminals.add(term_name)
+                    for child in node.children:
+                        collect_ops(child)
 
-                    # 构建 Bind 粒度导出：AST + operator mask + 可融合邻接
-                    bind_payload = self._build_bind_payload(signal_name, ast_root)
-                    self.bind_payloads.append(bind_payload)
+                collect_ops(ast_root)
+                # 对于 Terminal/Const，复杂度标记为 simple；其余为 complex
+                complexity = 'simple' if ast_root.node_type in ('terminal', 'constant') else 'complex'
+                reason = '线性AST' if lin_info['is_linear'] else ','.join(sorted(set(lin_info['reasons'])))
+                analysis = {
+                    'is_linear': lin_info['is_linear'],
+                    'reason': reason,
+                    'complexity': complexity,
+                    'operators': ops,
+                    'expression_type': ast_root.node_type
+                }
+
+                # 填充依赖（alias 以前不会进入这里，现统一处理）
+                for src in terminals:
+                    if src != signal_name:
+                        self.signal_dependencies[signal_name].add(src)
+
+                # 构建 Bind 粒度导出：AST + operator/workset mask + 可融合邻接
+                bind_payload = self._build_bind_payload(signal_name, ast_root)
+                self.bind_payloads.append(bind_payload)
                 self.signal_analyses[signal_name] = analysis
             except Exception as e:
                 print(f"分析信号 {signal_name} 时出错: {e}")
@@ -362,7 +360,7 @@ class CorrectedLinearityAnalyzer:
         return report
 
     # ---------------- Public: 导出 Bind 级 JSON ----------------
-    def export_bind_masks(self, dfg_path: str, out_path: str) -> str:
+    def export_bind_masks(self, dfg_path: str, out_path: str, *, omit_trivial: bool = False, include_human_labels: bool = True) -> str:
         """对 DFG 进行解析并导出每个 Bind 的 AST+mask+可融合邻接。
 
         返回: 写入的文件路径
@@ -371,10 +369,20 @@ class CorrectedLinearityAnalyzer:
         self.bind_payloads = []
         # 运行一次分析（内部会填充 bind_payloads）
         self.analyze_dfg_file(dfg_path)
+        binds = self.bind_payloads
+        # 可选：过滤掉没有任何可掩码单元的 trivial 绑定
+        if omit_trivial:
+            binds = [b for b in binds if not b.get('is_trivial', False)]
+        # 可选：附加人类可读标签（为了兼容性，同时保留原有字段）
+        if include_human_labels:
+            for b in binds:
+                if 'workset_labels' not in b:
+                    # 兼容旧字段名
+                    b['workset_labels'] = self._build_workset_labels(b)
         payload = {
             'file': dfg_path,
-            'binds': self.bind_payloads,
-            'total_binds': len(self.bind_payloads)
+            'binds': binds,
+            'total_binds': len(binds)
         }
         p = Path(out_path)
         p.parent.mkdir(parents=True, exist_ok=True)
@@ -486,10 +494,19 @@ class CorrectedLinearityAnalyzer:
             # - 其他: None
             if n.node_type == 'operator':
                 nodes[str(nid)]['mark'] = 1 if n.is_linear else 0
+                nodes[str(nid)]['intrinsic_linear'] = 1 if self._op_intrinsic_linear(n.value) else 0
             elif n.node_type in ('concat', 'partselect'):
                 nodes[str(nid)]['mark'] = 1 if n.is_linear else 0
+                nodes[str(nid)]['intrinsic_linear'] = 1
+            elif n.node_type in ('terminal', 'constant'):
+                nodes[str(nid)]['mark'] = None
+                nodes[str(nid)]['intrinsic_linear'] = 1
+            elif n.node_type == 'branch':
+                nodes[str(nid)]['mark'] = None
+                nodes[str(nid)]['intrinsic_linear'] = 0
             else:
                 nodes[str(nid)]['mark'] = None
+                nodes[str(nid)]['intrinsic_linear'] = 0
             return nid
 
         root_id = walk(root)
@@ -562,7 +579,32 @@ class CorrectedLinearityAnalyzer:
         bind_has_branch = self._has_branch(nodes_dict)
         # 收集 sources（来自 signal_dependencies 已在主循环处理中填充）
         sources = sorted(self.signal_dependencies.get(dest, []))
-        return {
+        # 若为 alias/const 等简单绑定，补充来源；尽量避免空 sources
+        if not sources and ast_root.node_type == 'terminal':
+            sources = [self._extract_terminal_name(ast_root.value)]
+        const_value: Optional[str] = None
+        if ast_root.node_type == 'constant':
+            const_value = self._extract_const_repr(ast_root.value)
+            if not sources:
+                sources = [f"CONST({const_value})"]
+
+        # 绑定类型与“是否平凡”
+        bind_kind = (
+            'alias' if ast_root.node_type == 'terminal' else
+            'constant' if ast_root.node_type == 'constant' else
+            'branch' if bind_has_branch else
+            'opchain'
+        )
+        maskable_count = len(workset_order)
+        is_trivial = (maskable_count == 0)
+
+        # 与工作集对齐的固有线性掩码（不依赖子树线性）
+        workset_intrinsic_mask: List[int] = []
+        for nid in workset_order:
+            n = nodes_dict[str(nid)]
+            workset_intrinsic_mask.append(int(n.get('intrinsic_linear', 0)))
+
+        payload = {
             'dest': dest,
             'ast': {
                 'nodes': nodes_dict,
@@ -572,11 +614,52 @@ class CorrectedLinearityAnalyzer:
             'operator_mask': operator_mask,
             'workset_order': workset_order,
             'workset_mask': workset_mask,
+            'workset_intrinsic_mask': workset_intrinsic_mask,
             'fusable_adj': fusable_adj,
             'bind_has_branch': bind_has_branch,
             'sources': sources,
-            'operator_count': len(operator_order)
+            'operator_count': len(operator_order),
+            'bind_kind': bind_kind,
+            'maskable_count': maskable_count,
+            'is_trivial': is_trivial
         }
+        if const_value is not None:
+            payload['const_value'] = const_value
+        # 附加人类可读 workset 标签（不替代原字段）
+        payload['workset_labels'] = self._build_workset_labels(payload)
+        return payload
+
+    def _op_intrinsic_linear(self, op_name: str) -> bool:
+        """返回算子本征线性标签（不考虑子节点）。"""
+        if op_name in self.linear_operators:
+            return True
+        # gf2 模式下，Xor 已加入 linear_operators；这里兜底即可
+        return False
+
+    def _extract_terminal_name(self, terminal_value: str) -> str:
+        """从 Terminal 节点的 value 文本中提取信号名（最左 token）。"""
+        return terminal_value.strip().split()[0]
+
+    def _extract_const_repr(self, const_value: str) -> str:
+        """提取常量的简洁表示。直接返回去首尾空白的原文更稳妥。"""
+        return const_value.strip()
+
+    def _build_workset_labels(self, bind_payload: Dict) -> List[str]:
+        """构建人类可读的工作集标签，例如 "dest#op0:Or" / "dest#ps2:Partselect"。"""
+        dest = bind_payload.get('dest', '')
+        ast_nodes: Dict[str, Dict] = bind_payload.get('ast', {}).get('nodes', {})
+        labels: List[str] = []
+        for idx, nid in enumerate(bind_payload.get('workset_order', [])):
+            n = ast_nodes.get(str(nid), {})
+            t = n.get('type')
+            if t == 'operator':
+                label_kind = n.get('value', 'Op')
+            elif t in ('concat', 'partselect'):
+                label_kind = t.capitalize()
+            else:
+                label_kind = t or 'Node'
+            labels.append(f"{dest}#op{idx}:{label_kind}")
+        return labels
     
     
     
