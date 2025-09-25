@@ -241,39 +241,57 @@ def evaluate_linearity(node: ExpressionNode, linear_ops: Set[str]) -> Dict:
     # 未识别类型视为非线性
     return {"is_linear": False, "reasons": ["未知节点类型"]}
 
+import importlib.util
+
 class CorrectedLinearityAnalyzer:
-    
-    def __init__(self, linearity_mode: str = 'arith'):
-        """linearity_mode: 'arith' | 'gf2'
-        - 'arith': 线性算子为 {Plus, Minus, UnaryMinus, Concat, Partselect}
-        - 'gf2': 在 arith 基础上将 'Xor' 视为线性
+    def __init__(self, linearity_mode: str = 'arith', verilog_file: str = "", module_prefix: str = ""):
+        """
+        linearity_mode: 'arith' | 'gf2'
+        verilog_file: 可选，Verilog 文件路径，用于信号-行号映射
+        module_prefix: 可选，信号名前缀（如 'alu.'）
         """
         self.linearity_mode = linearity_mode
-        # 线性运算符定义（仅支持基本算术及位拼接操作）
         self.linear_operators = {
-            'Plus', 'Minus', 'UnaryMinus',  # 基本算术运算
-            'Concat', 'Partselect'          # 位操作（线性组合）
+            'Plus', 'Minus', 'UnaryMinus',
+            'Concat', 'Partselect'
         }
         if self.linearity_mode == 'gf2':
-            # GF(2) 中 XOR 为线性
             self.linear_operators = set(self.linear_operators)
             self.linear_operators.add('Xor')
-        
-        # 非线性运算符定义
         self.nonlinear_operators = {
-            'And', 'Or', 'Xor', 'Xnor',     # 逻辑运算（若 gf2 模式，Xor 的固有线性标签会单独覆盖）
-            'Unot', 'Unor', 'Uand', 'Uxor',  # 归约运算
-            'Times', 'Divide', 'Mod',       # 乘除运算
-            'Eq', 'NotEq', 'Lt', 'Gt', 'Lte', 'Gte',  # 比较运算
-            'Sll', 'Srl'                    # 位移运算
+            'And', 'Or', 'Xor', 'Xnor',
+            'Unot', 'Unor', 'Uand', 'Uxor',
+            'Times', 'Divide', 'Mod',
+            'Eq', 'NotEq', 'Lt', 'Gt', 'Lte', 'Gte',
+            'Sll', 'Srl'
         }
-        
         self.signal_analyses: Dict[str, Dict] = {}
         self.total_expressions = 0
-        # 依赖映射: dest -> set(sources)
         self.signal_dependencies: Dict[str, Set[str]] = defaultdict(set)
-        # 按 Bind 粒度的导出载荷（AST + mask + 可融合关系等）
         self.bind_payloads: List[Dict] = []
+        # --- 行号映射 ---
+        self.verilog_signal_linenos = None
+        if verilog_file:
+            # 动态导入 verilog_parser
+            verilog_parser = None
+            try:
+                import esimulator.utils.verilog_parser as verilog_parser
+            except ImportError:
+                parser_spec = importlib.util.find_spec("esimulator.utils.verilog_parser")
+                if parser_spec is not None and getattr(parser_spec, "origin", None):
+                    spec = importlib.util.spec_from_file_location("verilog_parser", parser_spec.origin)
+                    if spec is not None and spec.loader is not None:
+                        verilog_parser = importlib.util.module_from_spec(spec)
+                        spec.loader.exec_module(verilog_parser)
+            if verilog_parser:
+                try:
+                    self.verilog_signal_linenos = verilog_parser.parse_verilog_for_line_numbers(verilog_file, module_prefix)
+                except Exception as e:
+                    print(f"[LinearityAnalyzer] Verilog 行号解析失败: {e}")
+                    self.verilog_signal_linenos = None
+            else:
+                print("[LinearityAnalyzer] 未找到 verilog_parser，无法解析行号。")
+                self.verilog_signal_linenos = None
     
     def analyze_dfg_file(self, file_path: str, *, export_graph_json: Optional[str] = None,
                          export_graph_gexf: Optional[str] = None) -> Dict:
@@ -577,9 +595,7 @@ class CorrectedLinearityAnalyzer:
         workset_order, workset_mask = self._collect_workset_order_and_mask(nodes_dict, root_id)
         fusable_adj = self._build_fusable_adjacency(nodes_dict, root_id)
         bind_has_branch = self._has_branch(nodes_dict)
-        # 收集 sources（来自 signal_dependencies 已在主循环处理中填充）
         sources = sorted(self.signal_dependencies.get(dest, []))
-        # 若为 alias/const 等简单绑定，补充来源；尽量避免空 sources
         if not sources and ast_root.node_type == 'terminal':
             sources = [self._extract_terminal_name(ast_root.value)]
         const_value: Optional[str] = None
@@ -588,7 +604,6 @@ class CorrectedLinearityAnalyzer:
             if not sources:
                 sources = [f"CONST({const_value})"]
 
-        # 绑定类型与“是否平凡”
         bind_kind = (
             'alias' if ast_root.node_type == 'terminal' else
             'constant' if ast_root.node_type == 'constant' else
@@ -598,14 +613,29 @@ class CorrectedLinearityAnalyzer:
         maskable_count = len(workset_order)
         is_trivial = (maskable_count == 0)
 
-        # 与工作集对齐的固有线性掩码（不依赖子树线性）
         workset_intrinsic_mask: List[int] = []
         for nid in workset_order:
             n = nodes_dict[str(nid)]
             workset_intrinsic_mask.append(int(n.get('intrinsic_linear', 0)))
 
+        # --- 行号映射 ---
+        dest_location = None
+        source_locations = []
+        if self.verilog_signal_linenos:
+            dest_location = self.verilog_signal_linenos.get(dest, None)
+            for s in sources:
+                # 只对普通信号查找行号，常量/特殊名不查
+                if s.startswith("CONST("):
+                    source_locations.append(None)
+                else:
+                    source_locations.append(self.verilog_signal_linenos.get(s, None))
+        else:
+            dest_location = None
+            source_locations = [None for _ in sources]
+
         payload = {
             'dest': dest,
+            'dest_location': dest_location,
             'ast': {
                 'nodes': nodes_dict,
                 'root': root_id
@@ -618,6 +648,7 @@ class CorrectedLinearityAnalyzer:
             'fusable_adj': fusable_adj,
             'bind_has_branch': bind_has_branch,
             'sources': sources,
+            'source_locations': source_locations,
             'operator_count': len(operator_order),
             'bind_kind': bind_kind,
             'maskable_count': maskable_count,
@@ -625,7 +656,6 @@ class CorrectedLinearityAnalyzer:
         }
         if const_value is not None:
             payload['const_value'] = const_value
-        # 附加人类可读 workset 标签（不替代原字段）
         payload['workset_labels'] = self._build_workset_labels(payload)
         return payload
 

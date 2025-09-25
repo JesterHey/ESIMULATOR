@@ -33,7 +33,6 @@ def run_analyze(args: Any) -> None:
     try:
         result = analyzer.analyze_dfg_file(args.dfg_file)
 
-        # 生成报告
         report_gen = ReportGenerator(args.output)
 
         if args.format in ['txt', 'both']:
@@ -56,10 +55,11 @@ def run_analyze(args: Any) -> None:
             linearity_mode=getattr(args, 'linearity_mode', 'arith'),
             omit_trivial=getattr(args, 'omit_trivial', False),
             include_human_labels=True,
+            verilog_file=args.verilog_file if args.verilog_file else "",
+            module_prefix=args.module_prefix if hasattr(args, 'module_prefix') else '',
         )
         print(f"图/掩码已保存到: {graph_file}, {bind_file}")
 
-        # 打印摘要
         print("\n" + report_gen.generate_summary_report(result))
 
     except Exception as e:

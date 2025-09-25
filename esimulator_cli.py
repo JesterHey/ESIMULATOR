@@ -22,6 +22,8 @@ def main():
     linearity_parser.add_argument('--format', choices=['txt', 'json', 'both'], default='txt', help='输出格式')
     linearity_parser.add_argument('--linearity-mode', choices=['arith','gf2'], default='arith', help='线性判定模式 (arith/gf2)')
     linearity_parser.add_argument('--omit-trivial', action='store_true', help='导出时省略无可掩码单元的绑定')
+    linearity_parser.add_argument('--verilog-file', help='原始Verilog文件路径', default=None)
+    linearity_parser.add_argument('--module-prefix', help='信号名前缀（如alu.）', default='')
     
     # 对比分析命令
     compare_parser = subparsers.add_parser('compare', help='对比分析方法')

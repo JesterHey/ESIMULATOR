@@ -167,7 +167,7 @@ DFG线性分析摘要
 
     def generate_bind_masks_json(self, analysis_result: Dict[Any, Any], dfg_file: str, filename: str,
                                  *, linearity_mode: str = 'arith', omit_trivial: bool = False,
-                                 include_human_labels: bool = True) -> str:
+                                 include_human_labels: bool = True, verilog_file: str = None, module_prefix: str = "") -> str:
         """导出 *_dfg_bind_masks.json，供 src/simulated_annealing.py 的 Bind 掩码 SA 使用。
         约定字段（兼容 SA 脚本读取）：
           - binds: [
@@ -223,8 +223,11 @@ DFG线性分析摘要
             return filepath
 
         # 首选：增强版解析器
-        analyzer = CorrectedLinearityAnalyzer(linearity_mode=linearity_mode)
-        # 直接使用其导出，包含 omit_trivial 与 labels 等
+        analyzer = CorrectedLinearityAnalyzer(
+            linearity_mode=linearity_mode,
+            verilog_file=verilog_file if verilog_file else "",
+            module_prefix=module_prefix
+        )
         filepath = os.path.join(self.output_dir, filename)
         analyzer.export_bind_masks(dfg_file, filepath, omit_trivial=omit_trivial, include_human_labels=include_human_labels)
         filepath = os.path.join(self.output_dir, filename)
