@@ -1,4 +1,4 @@
-# 文件说明（4004_dfg_bind_masks.json）
+# DFG 分析 JSON 文件详解与调用说明
 
 ---
 
@@ -9,7 +9,7 @@
 {
   "file": "dfg_files/4004_dfg.txt",      // 源 DFG 文件路径
   "binds": [ ... ],                      // Bind 粒度的分析结果数组
-  "total_binds": 123                     // 绑定总数
+  "total_binds": 80                      // 绑定总数
 }
 ```
 
@@ -104,5 +104,6 @@ for bind in data['binds']:
 - 可用 `src/analyzers/dfg_linearity_corrector.py` 直接生成带行号的掩码 JSON。
 - 支持 CLI 一键生成：
   ```sh
-  python esimulator_cli.py analyze dfg_files/xxx_dfg.txt --verilog-file verilog_files/xxx.v --module-prefix alu.
+  python3 esimulator_cli.py analyze dfg_files/xxx_dfg.txt --verilog-file verilog_files/xxx.v --module-prefix alu.
   ```
+

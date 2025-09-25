@@ -71,8 +71,17 @@ def parse_expression(s: str, i: int = 0) -> Tuple[ExpressionNode, int]:
     支持 Terminal, IntConst/IntCon, Operator, Concat, Branch, Partselect 等简单规则  
     """
     i = _skip_ws(s, i)
-    if i >= len(s) or s[i] != '(':
-        raise ParseError(f"期望 '(' 于位置 {i}")
+    if i >= len(s):
+        # 空表达式直接返回 unknown
+        return ExpressionNode("unknown", "", [], position=i), i
+    if s[i] != '(': 
+        # 裸值直接识别为 constant 或 terminal
+        val = s[i:].strip()
+        # 数字、Verilog常量、数组下标、4'b0000等
+        if val.isdigit() or val.startswith("'") or val.replace('.', '', 1).isdigit() or ("'" in val and 'b' in val):
+            return ExpressionNode("constant", val, [], position=i), len(s)
+        else:
+            return ExpressionNode("terminal", val, [], position=i), len(s)
     # 读取关键字：识别节点类型
     j = i + 1
     j = _skip_ws(s, j)
@@ -100,13 +109,23 @@ def parse_expression(s: str, i: int = 0) -> Tuple[ExpressionNode, int]:
         # 持续读取子表达式
         while cursor < len(s):
             cursor = _skip_ws(s, cursor)
-            if s[cursor] != '(':
-                if s[cursor] == ',':
+            if s[cursor] != '(': 
+                # 兜底：裸值直接识别为 constant/terminal
+                val_start = cursor
+                while cursor < len(s) and s[cursor] not in ',)':
+                    cursor += 1
+                val = s[val_start:cursor].strip()
+                if val:
+                    if val.isdigit() or val.startswith("'") or val.replace('.', '', 1).isdigit() or ("'" in val and 'b' in val) or '[' in val:
+                        children.append(ExpressionNode("constant", val, [], position=val_start))
+                    else:
+                        children.append(ExpressionNode("terminal", val, [], position=val_start))
+                if cursor < len(s) and s[cursor] == ',':
                     cursor += 1
                     continue
-                if s[cursor] == ')':
+                if cursor < len(s) and s[cursor] == ')':
                     return ExpressionNode("operator", op_name, children, position=i), cursor+1
-                raise ParseError(f"Operator 中遇到未知字符 '{s[cursor]}' 于 {cursor}")
+                continue
             child, cursor = parse_expression(s, cursor)
             children.append(child)
             cursor = _skip_ws(s, cursor)
@@ -195,8 +214,16 @@ def _extract_tagged_subexpr(whole: str, tag: str, required: bool = True) -> Opti
         return None
     i = idx + len(tag)
     i = _skip_ws(whole, i)
-    if i >= len(whole) or whole[i] != '(':
-        raise ParseError(f"{tag} 后缺 '('")
+    if i >= len(whole):
+        if required:
+            raise ParseError(f"{tag} 后缺表达式")
+        return None
+    if whole[i] != '(': 
+        # 兜底：直接提取到下一个空白/逗号/右括号
+        j = i
+        while j < len(whole) and whole[j] not in ',) \n\t':
+            j += 1
+        return whole[i:j]
     sub, _ = _extract_parenthesized(whole, i)
     return sub
 

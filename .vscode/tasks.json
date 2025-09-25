@@ -148,8 +148,7 @@
 			],
 			"isBackground": false,
 			"group": "build"
-		}
-		,
+		},
 		{
 			"label": "Save Diff to results",
 			"type": "shell",
@@ -232,6 +231,20 @@
 				"$python"
 			],
 			"group": "build"
+		},
+		{
+			"label": "run analyze with verilog line info",
+			"type": "shell",
+			"command": "python esimulator_cli.py analyze dfg_files/4004_dfg.txt --verilog-file verilog_files/4004.v --module-prefix alu.",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "run analyze with verilog line info (python3)",
+			"type": "shell",
+			"command": "python3 esimulator_cli.py analyze dfg_files/4004_dfg.txt --verilog-file verilog_files/4004.v --module-prefix alu.",
+			"isBackground": false,
+			"problemMatcher": []
 		}
 	]
 }

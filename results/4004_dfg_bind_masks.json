@@ -2,6 +2,42 @@
   "file": "dfg_files/4004_dfg.txt",
   "binds": [
     {
+      "dest": "alu._rn0_dout",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "0": {
+            "id": 0,
+            "type": "terminal",
+            "value": "4'dx",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "4'dx"
+      ],
+      "source_locations": [
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "alias",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
       "dest": "alu._rn1_dout",
       "dest_location": null,
       "ast": {
@@ -72,6 +108,73 @@
       "maskable_count": 0,
       "is_trivial": true,
       "workset_labels": []
+    },
+    {
+      "dest": "alu._rn3_dout",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "3'dx",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "alu.cy_1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "concat",
+            "value": "Concat",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "workset_order": [
+        0
+      ],
+      "workset_mask": [
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "3'dx",
+        "alu.cy_1"
+      ],
+      "source_locations": [
+        null,
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "opchain",
+      "maskable_count": 1,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu._rn3_dout#op0:Concat"
+      ]
     },
     {
       "dest": "alu._rn4_dout",
@@ -352,6 +455,303 @@
           "1": {
             "id": 1,
             "type": "terminal",
+            "value": "alu.adsl",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.acc_in",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "constant",
+            "value": "'d2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              4,
+              5,
+              6
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "terminal",
+            "value": "alu.cy_1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "concat",
+            "value": "Concat",
+            "children": [
+              3,
+              7
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "terminal",
+            "value": "alu.adsr",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "11": {
+            "id": 11,
+            "type": "terminal",
+            "value": "1'dx",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "14": {
+            "id": 14,
+            "type": "terminal",
+            "value": "alu.cy_1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "16": {
+            "id": 16,
+            "type": "terminal",
+            "value": "alu.acc_in",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "17": {
+            "id": 17,
+            "type": "constant",
+            "value": "'d3",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "18": {
+            "id": 18,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "15": {
+            "id": 15,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              16,
+              17,
+              18
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "13": {
+            "id": 13,
+            "type": "concat",
+            "value": "Concat",
+            "children": [
+              14,
+              15
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "19": {
+            "id": 19,
+            "type": "constant",
+            "value": "'d3",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "20": {
+            "id": 20,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "12": {
+            "id": 12,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              13,
+              19,
+              20
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "concat",
+            "value": "Concat",
+            "children": [
+              11,
+              12
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              9,
+              10
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              8
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "workset_order": [
+        2,
+        3,
+        10,
+        12,
+        13,
+        15
+      ],
+      "workset_mask": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          2,
+          3
+        ],
+        [
+          10,
+          12
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          13,
+          15
+        ]
+      ],
+      "bind_has_branch": true,
+      "sources": [
+        "1'dx",
+        "alu.acc_in",
+        "alu.adsl",
+        "alu.adsr",
+        "alu.cy_1"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "branch",
+      "maskable_count": 6,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.acc#op0:Concat",
+        "alu.acc#op1:Partselect",
+        "alu.acc#op2:Concat",
+        "alu.acc#op3:Partselect",
+        "alu.acc#op4:Concat",
+        "alu.acc#op5:Partselect"
+      ]
+    },
+    {
+      "dest": "alu.acc",
+      "dest_location": 72,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
             "value": "alu.add_acc",
             "children": [],
             "is_linear": true,
@@ -390,10 +790,18 @@
       "fusable_adj": [],
       "bind_has_branch": true,
       "sources": [
+        "1'dx",
         "alu.acc_in",
-        "alu.add_acc"
+        "alu.add_acc",
+        "alu.adsl",
+        "alu.adsr",
+        "alu.cy_1"
       ],
       "source_locations": [
+        null,
+        null,
+        null,
+        null,
         null,
         null
       ],
@@ -1905,6 +2313,347 @@
       ]
     },
     {
+      "dest": "alu.cy",
+      "dest_location": 73,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.adsl",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "alu.acc_in",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "constant",
+            "value": "'d4",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "constant",
+            "value": "'d4",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              3,
+              4,
+              5
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "terminal",
+            "value": "alu.adsr",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "terminal",
+            "value": "alu.acc_in",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "11": {
+            "id": 11,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "12": {
+            "id": 12,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              10,
+              11,
+              12
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "13": {
+            "id": 13,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "14": {
+            "id": 14,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              9,
+              13,
+              14
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              7,
+              8
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              6
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "workset_order": [
+        2,
+        8,
+        9
+      ],
+      "workset_mask": [
+        1,
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          8,
+          9
+        ]
+      ],
+      "bind_has_branch": true,
+      "sources": [
+        "alu.acc_in",
+        "alu.adsl",
+        "alu.adsr"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "branch",
+      "maskable_count": 3,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.cy#op0:Partselect",
+        "alu.cy#op1:Partselect",
+        "alu.cy#op2:Partselect"
+      ]
+    },
+    {
+      "dest": "alu.cy",
+      "dest_location": 73,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "alu.n0403",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "alu.n0415",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              2,
+              3
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "1'd1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "terminal",
+            "value": "alu.adc_cy",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "terminal",
+            "value": "alu.n0861",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              6,
+              7
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              4,
+              5
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        1
+      ],
+      "operator_mask": [
+        0
+      ],
+      "workset_order": [
+        1
+      ],
+      "workset_mask": [
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "1'd1",
+        "alu.acc_in",
+        "alu.adc_cy",
+        "alu.adsl",
+        "alu.adsr",
+        "alu.n0403",
+        "alu.n0415",
+        "alu.n0861"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 1,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.cy#op0:And"
+      ]
+    },
+    {
       "dest": "alu.cy_1",
       "dest_location": null,
       "ast": {
@@ -2457,6 +3206,106 @@
       "workset_labels": []
     },
     {
+      "dest": "alu.n0345",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.kbp",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "alu.acc_out",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "4'd8",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Eq",
+            "children": [
+              3,
+              4
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        2
+      ],
+      "operator_mask": [
+        0,
+        0
+      ],
+      "workset_order": [
+        0,
+        2
+      ],
+      "workset_mask": [
+        0,
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "4'd8",
+        "alu.acc_out",
+        "alu.kbp"
+      ],
+      "source_locations": [
+        null,
+        158,
+        null
+      ],
+      "operator_count": 2,
+      "bind_kind": "opchain",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0345#op0:And",
+        "alu.n0345#op1:Eq"
+      ]
+    },
+    {
       "dest": "alu.n0351",
       "dest_location": null,
       "ast": {
@@ -2559,6 +3408,200 @@
         "alu.n0351#op0:Unot",
         "alu.n0351#op1:Or",
         "alu.n0351#op2:Unot"
+      ]
+    },
+    {
+      "dest": "alu.n0354",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.kbp",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "alu.acc_out",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "4'd4",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Eq",
+            "children": [
+              3,
+              4
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        2
+      ],
+      "operator_mask": [
+        0,
+        0
+      ],
+      "workset_order": [
+        0,
+        2
+      ],
+      "workset_mask": [
+        0,
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "4'd4",
+        "alu.acc_out",
+        "alu.kbp"
+      ],
+      "source_locations": [
+        null,
+        158,
+        null
+      ],
+      "operator_count": 2,
+      "bind_kind": "opchain",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0354#op0:And",
+        "alu.n0354#op1:Eq"
+      ]
+    },
+    {
+      "dest": "alu.n0355",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "alu.acc_out",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "constant",
+            "value": "'d2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "constant",
+            "value": "'d2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              2,
+              3,
+              4
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              1
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0
+      ],
+      "operator_mask": [
+        0
+      ],
+      "workset_order": [
+        0,
+        1
+      ],
+      "workset_mask": [
+        0,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "alu.acc_out"
+      ],
+      "source_locations": [
+        158
+      ],
+      "operator_count": 1,
+      "bind_kind": "opchain",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0355#op0:Unot",
+        "alu.n0355#op1:Partselect"
       ]
     },
     {
@@ -3058,6 +4101,200 @@
       ]
     },
     {
+      "dest": "alu.n0363",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.kbp",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "alu.acc_out",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "4'd2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Eq",
+            "children": [
+              3,
+              4
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        2
+      ],
+      "operator_mask": [
+        0,
+        0
+      ],
+      "workset_order": [
+        0,
+        2
+      ],
+      "workset_mask": [
+        0,
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "4'd2",
+        "alu.acc_out",
+        "alu.kbp"
+      ],
+      "source_locations": [
+        null,
+        158,
+        null
+      ],
+      "operator_count": 2,
+      "bind_kind": "opchain",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0363#op0:And",
+        "alu.n0363#op1:Eq"
+      ]
+    },
+    {
+      "dest": "alu.n0364",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "alu.acc_out",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              2,
+              3,
+              4
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              1
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0
+      ],
+      "operator_mask": [
+        0
+      ],
+      "workset_order": [
+        0,
+        1
+      ],
+      "workset_mask": [
+        0,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "alu.acc_out"
+      ],
+      "source_locations": [
+        158
+      ],
+      "operator_count": 1,
+      "bind_kind": "opchain",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0364#op0:Unot",
+        "alu.n0364#op1:Partselect"
+      ]
+    },
+    {
       "dest": "alu.n0366",
       "dest_location": null,
       "ast": {
@@ -3230,6 +4467,346 @@
         "alu.n0366#op2:Or",
         "alu.n0366#op3:Or",
         "alu.n0366#op4:Or"
+      ]
+    },
+    {
+      "dest": "alu.n0370",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.kbp",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "alu.acc_out",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "4'd1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Eq",
+            "children": [
+              3,
+              4
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        2
+      ],
+      "operator_mask": [
+        0,
+        0
+      ],
+      "workset_order": [
+        0,
+        2
+      ],
+      "workset_mask": [
+        0,
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "4'd1",
+        "alu.acc_out",
+        "alu.kbp"
+      ],
+      "source_locations": [
+        null,
+        158,
+        null
+      ],
+      "operator_count": 2,
+      "bind_kind": "opchain",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0370#op0:And",
+        "alu.n0370#op1:Eq"
+      ]
+    },
+    {
+      "dest": "alu.n0371",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "alu.acc_out",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              2,
+              3,
+              4
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              1
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0
+      ],
+      "operator_mask": [
+        0
+      ],
+      "workset_order": [
+        0,
+        1
+      ],
+      "workset_mask": [
+        0,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "alu.acc_out"
+      ],
+      "source_locations": [
+        158
+      ],
+      "operator_count": 1,
+      "bind_kind": "opchain",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0371#op0:Unot",
+        "alu.n0371#op1:Partselect"
+      ]
+    },
+    {
+      "dest": "alu.n0377",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "alu.kbp",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.acc_out",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "4'd0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "operator",
+            "value": "Eq",
+            "children": [
+              4,
+              5
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              2,
+              3
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "7": {
+            "id": 7,
+            "type": "terminal",
+            "value": "alu.n0378",
+            "children": [],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              7
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              1,
+              6
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        1,
+        3,
+        6
+      ],
+      "operator_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "workset_order": [
+        0,
+        1,
+        3,
+        6
+      ],
+      "workset_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "4'd0",
+        "alu.acc_out",
+        "alu.kbp",
+        "alu.n0378"
+      ],
+      "source_locations": [
+        null,
+        158,
+        null,
+        null
+      ],
+      "operator_count": 4,
+      "bind_kind": "opchain",
+      "maskable_count": 4,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0377#op0:Or",
+        "alu.n0377#op1:And",
+        "alu.n0377#op2:Eq",
+        "alu.n0377#op3:Unot"
       ]
     },
     {
@@ -3845,6 +5422,191 @@
       ]
     },
     {
+      "dest": "alu.n0550",
+      "dest_location": 131,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.cy_ada",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "alu.cy",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.cy_adac",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "terminal",
+            "value": "alu.cy",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              6
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "8": {
+            "id": 8,
+            "type": "terminal",
+            "value": "alu.n0546",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "terminal",
+            "value": "1'd1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "11": {
+            "id": 11,
+            "type": "terminal",
+            "value": "alu.m12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "12": {
+            "id": 12,
+            "type": "terminal",
+            "value": "1'd0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              11,
+              12
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "7": {
+            "id": 7,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              8,
+              9,
+              10
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "3": {
+            "id": 3,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              4,
+              5,
+              7
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              3
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        5
+      ],
+      "operator_mask": [
+        0
+      ],
+      "workset_order": [
+        5
+      ],
+      "workset_mask": [
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "1'd0",
+        "1'd1",
+        "alu.cy",
+        "alu.cy_ada",
+        "alu.cy_adac",
+        "alu.m12",
+        "alu.n0546"
+      ],
+      "source_locations": [
+        null,
+        null,
+        73,
+        null,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 1,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0550#op0:Unot"
+      ]
+    },
+    {
       "dest": "alu.n0553",
       "dest_location": null,
       "ast": {
@@ -3951,6 +5713,535 @@
       "maskable_count": 0,
       "is_trivial": true,
       "workset_labels": []
+    },
+    {
+      "dest": "alu.n0749",
+      "dest_location": 219,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.poc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "1'd1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.n0351",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "alu.n0355",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              4,
+              5
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              3
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "1'd1",
+        "alu.n0351",
+        "alu.n0355",
+        "alu.poc"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "branch",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "alu.n0750",
+      "dest_location": 219,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.poc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "1'd1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.n0351",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "alu.n0364",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              4,
+              5
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              3
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "1'd1",
+        "alu.n0351",
+        "alu.n0364",
+        "alu.poc"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "branch",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "alu.n0751",
+      "dest_location": 219,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.poc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "1'd1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.n0351",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "alu.n0371",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              4,
+              5
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              3
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "1'd1",
+        "alu.n0351",
+        "alu.n0371",
+        "alu.poc"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "branch",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "alu.n0803",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.acc_out",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "constant",
+            "value": "'d3",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "constant",
+            "value": "'d3",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              4,
+              5,
+              6
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "terminal",
+            "value": "alu.acc_out",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "constant",
+            "value": "'d2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "11": {
+            "id": 11,
+            "type": "constant",
+            "value": "'d2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              9,
+              10,
+              11
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "13": {
+            "id": 13,
+            "type": "terminal",
+            "value": "alu.acc_out",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "14": {
+            "id": 14,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "15": {
+            "id": 15,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "12": {
+            "id": 12,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              13,
+              14,
+              15
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              8,
+              12
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              3,
+              7
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "16": {
+            "id": 16,
+            "type": "terminal",
+            "value": "alu.cy_1",
+            "children": [],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              2,
+              16
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              1
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        1,
+        2,
+        7
+      ],
+      "operator_mask": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "workset_order": [
+        0,
+        1,
+        2,
+        3,
+        7,
+        8,
+        12
+      ],
+      "workset_mask": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        0,
+        0,
+        1,
+        0,
+        1,
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "alu.acc_out",
+        "alu.cy_1"
+      ],
+      "source_locations": [
+        158,
+        null
+      ],
+      "operator_count": 4,
+      "bind_kind": "opchain",
+      "maskable_count": 7,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0803#op0:Unot",
+        "alu.n0803#op1:Or",
+        "alu.n0803#op2:And",
+        "alu.n0803#op3:Partselect",
+        "alu.n0803#op4:Or",
+        "alu.n0803#op5:Partselect",
+        "alu.n0803#op6:Partselect"
+      ]
     },
     {
       "dest": "alu.n0846",
@@ -4217,6 +6508,1006 @@
       "maskable_count": 0,
       "is_trivial": true,
       "workset_labels": []
+    },
+    {
+      "dest": "alu.n0870",
+      "dest_location": 119,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.acc_adac",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.acc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              4
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "5": {
+            "id": 5,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              3,
+              5,
+              6
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "terminal",
+            "value": "alu.acc_ada",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "terminal",
+            "value": "alu.acc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "11": {
+            "id": 11,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "12": {
+            "id": 12,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              10,
+              11,
+              12
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "14": {
+            "id": 14,
+            "type": "terminal",
+            "value": "alu.m12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "15": {
+            "id": 15,
+            "type": "terminal",
+            "value": "1'd0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "13": {
+            "id": 13,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              14,
+              15
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "7": {
+            "id": 7,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              8,
+              9,
+              13
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              7
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        3
+      ],
+      "operator_mask": [
+        0
+      ],
+      "workset_order": [
+        2,
+        3,
+        9
+      ],
+      "workset_mask": [
+        0,
+        0,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        0,
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "1'd0",
+        "alu.acc",
+        "alu.acc_ada",
+        "alu.acc_adac",
+        "alu.m12"
+      ],
+      "source_locations": [
+        null,
+        72,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 3,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0870#op0:Partselect",
+        "alu.n0870#op1:Unot",
+        "alu.n0870#op2:Partselect"
+      ]
+    },
+    {
+      "dest": "alu.n0871",
+      "dest_location": 119,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.acc_adac",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.acc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              4
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "5": {
+            "id": 5,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              3,
+              5,
+              6
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "terminal",
+            "value": "alu.acc_ada",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "11": {
+            "id": 11,
+            "type": "terminal",
+            "value": "alu.acc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "12": {
+            "id": 12,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "13": {
+            "id": 13,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              11,
+              12,
+              13
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "14": {
+            "id": 14,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "15": {
+            "id": 15,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              10,
+              14,
+              15
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "17": {
+            "id": 17,
+            "type": "terminal",
+            "value": "alu.m12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "18": {
+            "id": 18,
+            "type": "terminal",
+            "value": "1'd0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "16": {
+            "id": 16,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              17,
+              18
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "7": {
+            "id": 7,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              8,
+              9,
+              16
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              7
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        3
+      ],
+      "operator_mask": [
+        0
+      ],
+      "workset_order": [
+        2,
+        3,
+        9,
+        10
+      ],
+      "workset_mask": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          9,
+          10
+        ]
+      ],
+      "bind_has_branch": true,
+      "sources": [
+        "1'd0",
+        "alu.acc",
+        "alu.acc_ada",
+        "alu.acc_adac",
+        "alu.m12"
+      ],
+      "source_locations": [
+        null,
+        72,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 4,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0871#op0:Partselect",
+        "alu.n0871#op1:Unot",
+        "alu.n0871#op2:Partselect",
+        "alu.n0871#op3:Partselect"
+      ]
+    },
+    {
+      "dest": "alu.n0872",
+      "dest_location": 119,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.acc_adac",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.acc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              4
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "5": {
+            "id": 5,
+            "type": "constant",
+            "value": "'d2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "constant",
+            "value": "'d2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              3,
+              5,
+              6
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "terminal",
+            "value": "alu.acc_ada",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "11": {
+            "id": 11,
+            "type": "terminal",
+            "value": "alu.acc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "12": {
+            "id": 12,
+            "type": "constant",
+            "value": "'d2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "13": {
+            "id": 13,
+            "type": "constant",
+            "value": "'d2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              11,
+              12,
+              13
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "14": {
+            "id": 14,
+            "type": "constant",
+            "value": "'d2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "15": {
+            "id": 15,
+            "type": "constant",
+            "value": "'d2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              10,
+              14,
+              15
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "17": {
+            "id": 17,
+            "type": "terminal",
+            "value": "alu.m12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "18": {
+            "id": 18,
+            "type": "terminal",
+            "value": "1'd0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "16": {
+            "id": 16,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              17,
+              18
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "7": {
+            "id": 7,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              8,
+              9,
+              16
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              7
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        3
+      ],
+      "operator_mask": [
+        0
+      ],
+      "workset_order": [
+        2,
+        3,
+        9,
+        10
+      ],
+      "workset_mask": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          9,
+          10
+        ]
+      ],
+      "bind_has_branch": true,
+      "sources": [
+        "1'd0",
+        "alu.acc",
+        "alu.acc_ada",
+        "alu.acc_adac",
+        "alu.m12"
+      ],
+      "source_locations": [
+        null,
+        72,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 4,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0872#op0:Partselect",
+        "alu.n0872#op1:Unot",
+        "alu.n0872#op2:Partselect",
+        "alu.n0872#op3:Partselect"
+      ]
+    },
+    {
+      "dest": "alu.n0873",
+      "dest_location": 119,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.acc_adac",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.acc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              4
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "5": {
+            "id": 5,
+            "type": "constant",
+            "value": "'d3",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "constant",
+            "value": "'d3",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              3,
+              5,
+              6
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "terminal",
+            "value": "alu.acc_ada",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "11": {
+            "id": 11,
+            "type": "terminal",
+            "value": "alu.acc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "12": {
+            "id": 12,
+            "type": "constant",
+            "value": "'d3",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "13": {
+            "id": 13,
+            "type": "constant",
+            "value": "'d3",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              11,
+              12,
+              13
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "14": {
+            "id": 14,
+            "type": "constant",
+            "value": "'d3",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "15": {
+            "id": 15,
+            "type": "constant",
+            "value": "'d3",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              10,
+              14,
+              15
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "17": {
+            "id": 17,
+            "type": "terminal",
+            "value": "alu.m12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "18": {
+            "id": 18,
+            "type": "terminal",
+            "value": "1'd0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "16": {
+            "id": 16,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              17,
+              18
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "7": {
+            "id": 7,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              8,
+              9,
+              16
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              7
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        3
+      ],
+      "operator_mask": [
+        0
+      ],
+      "workset_order": [
+        2,
+        3,
+        9,
+        10
+      ],
+      "workset_mask": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        0,
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          9,
+          10
+        ]
+      ],
+      "bind_has_branch": true,
+      "sources": [
+        "1'd0",
+        "alu.acc",
+        "alu.acc_ada",
+        "alu.acc_adac",
+        "alu.m12"
+      ],
+      "source_locations": [
+        null,
+        72,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 4,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0873#op0:Partselect",
+        "alu.n0873#op1:Unot",
+        "alu.n0873#op2:Partselect",
+        "alu.n0873#op3:Partselect"
+      ]
     },
     {
       "dest": "alu.n0875",
@@ -5129,6 +8420,642 @@
       ]
     },
     {
+      "dest": "alu.n0887",
+      "dest_location": 102,
+      "ast": {
+        "nodes": {
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "alu.sub_group_6",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.m12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              3,
+              4
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              2
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "6": {
+            "id": 6,
+            "type": "constant",
+            "value": "[@1]",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              6
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "8": {
+            "id": 8,
+            "type": "terminal",
+            "value": "alu.sub_group_6",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "terminal",
+            "value": "[@1]",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              8,
+              9
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              5,
+              7
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        1,
+        2,
+        5
+      ],
+      "operator_mask": [
+        0,
+        0,
+        0
+      ],
+      "workset_order": [
+        1,
+        2,
+        5
+      ],
+      "workset_mask": [
+        0,
+        0,
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        0,
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "[@1]",
+        "alu.m12",
+        "alu.sub_group_6"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null
+      ],
+      "operator_count": 3,
+      "bind_kind": "branch",
+      "maskable_count": 3,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0887#op0:Unot",
+        "alu.n0887#op1:Or",
+        "alu.n0887#op2:Unot"
+      ]
+    },
+    {
+      "dest": "alu.n0889",
+      "dest_location": 102,
+      "ast": {
+        "nodes": {
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "alu.sub_group_6",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.m12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              3,
+              4
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              2
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "[@1]",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "terminal",
+            "value": "alu.sub_group_6",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "constant",
+            "value": "[@1]",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              9
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "6": {
+            "id": 6,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              7,
+              8
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              5,
+              6
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        1,
+        2,
+        8
+      ],
+      "operator_mask": [
+        0,
+        0,
+        0
+      ],
+      "workset_order": [
+        1,
+        2,
+        8
+      ],
+      "workset_mask": [
+        0,
+        0,
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        0,
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "[@1]",
+        "alu.m12",
+        "alu.sub_group_6"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null
+      ],
+      "operator_count": 3,
+      "bind_kind": "branch",
+      "maskable_count": 3,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0889#op0:Unot",
+        "alu.n0889#op1:Or",
+        "alu.n0889#op2:Unot"
+      ]
+    },
+    {
+      "dest": "alu.n0891",
+      "dest_location": 102,
+      "ast": {
+        "nodes": {
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "alu.sub_group_6",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.m12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              3,
+              4
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              2
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "6": {
+            "id": 6,
+            "type": "constant",
+            "value": "[@1]",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              6
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "8": {
+            "id": 8,
+            "type": "terminal",
+            "value": "alu.sub_group_6",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "terminal",
+            "value": "[@1]",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              8,
+              9
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              5,
+              7
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        1,
+        2,
+        5
+      ],
+      "operator_mask": [
+        0,
+        0,
+        0
+      ],
+      "workset_order": [
+        1,
+        2,
+        5
+      ],
+      "workset_mask": [
+        0,
+        0,
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        0,
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "[@1]",
+        "alu.m12",
+        "alu.sub_group_6"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null
+      ],
+      "operator_count": 3,
+      "bind_kind": "branch",
+      "maskable_count": 3,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0891#op0:Unot",
+        "alu.n0891#op1:Or",
+        "alu.n0891#op2:Unot"
+      ]
+    },
+    {
+      "dest": "alu.n0893",
+      "dest_location": 102,
+      "ast": {
+        "nodes": {
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "alu.sub_group_6",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "alu.m12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              3,
+              4
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              2
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "[@1]",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "terminal",
+            "value": "alu.sub_group_6",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "constant",
+            "value": "[@1]",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              9
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "6": {
+            "id": 6,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              7,
+              8
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              5,
+              6
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        1,
+        2,
+        8
+      ],
+      "operator_mask": [
+        0,
+        0,
+        0
+      ],
+      "workset_order": [
+        1,
+        2,
+        8
+      ],
+      "workset_mask": [
+        0,
+        0,
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        0,
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "[@1]",
+        "alu.m12",
+        "alu.sub_group_6"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null
+      ],
+      "operator_count": 3,
+      "bind_kind": "branch",
+      "maskable_count": 3,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.n0893#op0:Unot",
+        "alu.n0893#op1:Or",
+        "alu.n0893#op2:Unot"
+      ]
+    },
+    {
       "dest": "alu.n0911",
       "dest_location": null,
       "ast": {
@@ -5787,7 +9714,124 @@
         "alu.n0914#op2:Unot",
         "alu.n0914#op3:And"
       ]
+    },
+    {
+      "dest": "alu.tmp",
+      "dest_location": 93,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "alu.m12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "4'd15",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "alu.n0342",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              5
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "6": {
+            "id": 6,
+            "type": "terminal",
+            "value": "alu.data",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              4,
+              6
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              3
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        4
+      ],
+      "operator_mask": [
+        0
+      ],
+      "workset_order": [
+        4
+      ],
+      "workset_mask": [
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "4'd15",
+        "alu.data",
+        "alu.m12",
+        "alu.n0342"
+      ],
+      "source_locations": [
+        null,
+        211,
+        null,
+        null
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 1,
+      "is_trivial": false,
+      "workset_labels": [
+        "alu.tmp#op0:Unot"
+      ]
     }
   ],
-  "total_binds": 54
+  "total_binds": 81
 }
