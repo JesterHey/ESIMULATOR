@@ -1,0 +1,15 @@
+信号对比报告 (DFG vs Verilog)
+========================================
+
+Verilog 文件: /Users/xuxiaolan/PycharmProjects/ESIMULATOR/verilog_files/4004.v
+DFG 文件: /Users/xuxiaolan/PycharmProjects/ESIMULATOR/dfg_files/4004_dfg.txt
+模块前缀: alu.
+
+概要:
+  总信号名(并集): 118
+  Verilog 提取信号: 73
+  导出绑定条目: 81
+  仅存在于 Verilog 的信号: 0
+  作为 bind 目标但无 Verilog 行号的: 0
+  绑定中存在源行号不完整的: 0
+

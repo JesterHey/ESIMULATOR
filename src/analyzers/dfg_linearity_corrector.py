@@ -278,6 +278,9 @@ class CorrectedLinearityAnalyzer:
         module_prefix: 可选，信号名前缀（如 'alu.'）
         """
         self.linearity_mode = linearity_mode
+        # 保存初始化参数，便于后续导出时写回
+        self.verilog_file = verilog_file
+        self.module_prefix = module_prefix
         self.linear_operators = {
             'Plus', 'Minus', 'UnaryMinus',
             'Concat', 'Partselect'
@@ -414,6 +417,8 @@ class CorrectedLinearityAnalyzer:
         self.bind_payloads = []
         # 运行一次分析（内部会填充 bind_payloads）
         self.analyze_dfg_file(dfg_path)
+        # 在导出前补充 Verilog 覆盖（对于无 bind 的参与信号也生成合成条目）
+        self._ensure_verilog_signal_coverage()
         binds = self.bind_payloads
         # 可选：过滤掉没有任何可掩码单元的 trivial 绑定
         if omit_trivial:
@@ -426,6 +431,8 @@ class CorrectedLinearityAnalyzer:
                     b['workset_labels'] = self._build_workset_labels(b)
         payload = {
             'file': dfg_path,
+            # 若存在行号映射，则输出实际 verilog 文件路径，否则为 None
+            'verilog_file': (self.verilog_file if self.verilog_signal_linenos else None),
             'binds': binds,
             'total_binds': len(binds)
         }
@@ -645,6 +652,15 @@ class CorrectedLinearityAnalyzer:
             n = nodes_dict[str(nid)]
             workset_intrinsic_mask.append(int(n.get('intrinsic_linear', 0)))
 
+        # 绑定内的运算符类型集合（便于消费方直接读取）
+        operator_types: List[str] = []
+        for k, n in nodes_dict.items():
+            if n.get('type') == 'operator':
+                val = n.get('value')
+                if isinstance(val, str):
+                    operator_types.append(val)
+        operator_types = sorted(list(set(operator_types)))
+
         # --- 行号映射 ---
         dest_location = None
         source_locations = []
@@ -669,6 +685,7 @@ class CorrectedLinearityAnalyzer:
             },
             'operator_order': operator_order,
             'operator_mask': operator_mask,
+            'operator_types': operator_types,
             'workset_order': workset_order,
             'workset_mask': workset_mask,
             'workset_intrinsic_mask': workset_intrinsic_mask,
@@ -685,6 +702,78 @@ class CorrectedLinearityAnalyzer:
             payload['const_value'] = const_value
         payload['workset_labels'] = self._build_workset_labels(payload)
         return payload
+
+    def _ensure_verilog_signal_coverage(self):
+        """补充：对于出现在 Verilog 且参与 DFG（作为 dest 或 source）但没有对应 bind 的信号，
+        生成合成条目，至少包含行号与其被使用到的运算符类型集合。
+        前置条件：self.verilog_signal_linenos 可用。
+        """
+        if not self.verilog_signal_linenos:
+            return
+        # 已有的 bind 目的集合
+        existing_dests = {b.get('dest') for b in self.bind_payloads}
+        # 作为 source 参与的信号集合
+        involved_sources = set()
+        for b in self.bind_payloads:
+            for s in b.get('sources', []):
+                involved_sources.add(s)
+        # 目标集合：verilog 出现 且 (是 bind 目标 或 作为 source 参与)
+        candidates = set(self.verilog_signal_linenos.keys()) & (existing_dests | involved_sources)
+        to_create = [sig for sig in candidates if sig not in existing_dests]
+        if not to_create:
+            return
+        # 反向索引：signal -> 在哪些 bind 中作为 source 出现
+        usage_map: Dict[str, List[Dict]] = defaultdict(list)
+        for b in self.bind_payloads:
+            for s in b.get('sources', []):
+                usage_map[s].append(b)
+        # 为每个缺失的信号创建合成 payload
+        for sig in sorted(to_create):
+            dest_location = self.verilog_signal_linenos.get(sig)
+            # 汇总其参与到的运算符类型集合（来自使用它的 bind 的 operator_types）
+            usage_ops: Set[str] = set()
+            for b in usage_map.get(sig, []):
+                for op in b.get('operator_types', []):
+                    usage_ops.add(op)
+            # 构造一个最小 AST（单个 terminal）
+            nodes_dict = {
+                "0": {
+                    'id': 0,
+                    'type': 'terminal',
+                    'value': sig,
+                    'children': [],
+                    'is_linear': True,
+                    'mark': None,
+                    'intrinsic_linear': 1,
+                }
+            }
+            payload = {
+                'dest': sig,
+                'dest_location': dest_location,
+                'ast': {
+                    'nodes': nodes_dict,
+                    'root': 0
+                },
+                'operator_order': [],
+                'operator_mask': [],
+                'operator_types': [],
+                'workset_order': [],
+                'workset_mask': [],
+                'workset_intrinsic_mask': [],
+                'fusable_adj': [],
+                'bind_has_branch': False,
+                'sources': [],
+                'source_locations': [],
+                'operator_count': 0,
+                'bind_kind': 'verilog_only',
+                'maskable_count': 0,
+                'is_trivial': True,
+                'workset_labels': [],
+                # 参与到其它绑定中的运算符类型（基于使用）
+                'usage_operator_types': sorted(usage_ops),
+                'usage_bind_count': len(usage_map.get(sig, [])),
+            }
+            self.bind_payloads.append(payload)
 
     def _op_intrinsic_linear(self, op_name: str) -> bool:
         """返回算子本征线性标签（不考虑子节点）。"""

@@ -4,7 +4,53 @@
 """
 from __future__ import annotations
 import re
-from typing import Dict
+from typing import Dict, List
+
+def _split_commas_outside_braces(s: str) -> List[str]:
+    """按逗号分割，但忽略花括号/圆括号/方括号内的逗号。"""
+    parts: List[str] = []
+    depth_brace = depth_paren = depth_brack = 0
+    start = 0
+    for i, ch in enumerate(s):
+        if ch == '{':
+            depth_brace += 1
+        elif ch == '}':
+            depth_brace = max(0, depth_brace - 1)
+        elif ch == '(':
+            depth_paren += 1
+        elif ch == ')':
+            depth_paren = max(0, depth_paren - 1)
+        elif ch == '[':
+            depth_brack += 1
+        elif ch == ']':
+            depth_brack = max(0, depth_brack - 1)
+        elif ch == ',' and depth_brace == 0 and depth_paren == 0 and depth_brack == 0:
+            parts.append(s[start:i])
+            start = i + 1
+    tail = s[start:].strip()
+    if tail:
+        parts.append(tail)
+    return parts
+
+
+def _sanitize_identifier(token: str) -> str:
+    """提取合法的 Verilog 标识符前缀（去掉数组/切片/多余符号）。"""
+    token = token.strip()
+    # 去掉左侧类型限定、range 等
+    # 仅提取以字母或下划线开头的标识符
+    m = re.match(r"^[A-Za-z_][A-Za-z0-9_$]*", token)
+    return m.group(0) if m else ""
+
+def _strip_leading_type_keywords(s: str) -> str:
+    """移除名称左侧可能出现的类型关键字（reg/wire/signed）。"""
+    s = s.lstrip()
+    while True:
+        m = re.match(r"^(?:reg|wire|signed)\b\s*", s, flags=re.IGNORECASE)
+        if not m:
+            break
+        s = s[m.end():]
+    return s.lstrip()
+
 
 def parse_verilog_for_line_numbers(file_path: str, module_prefix: str = "") -> Dict[str, int]:
     """
@@ -19,40 +65,76 @@ def parse_verilog_for_line_numbers(file_path: str, module_prefix: str = "") -> D
     """
     line_map: Dict[str, int] = {}
     # 正则表达式匹配 input, output, reg, wire, assign 的目标信号
-    # 支持向量 [msb:lsb] 和多信号声明
-    patterns = [
-        # input/output/reg/wire [signed] [range] signal1, signal2, ...;
-        re.compile(r"^\s*(?:input|output|reg|wire)\s*(?:signed\s*)?(?:\[[^\]]+\]\s*)?((?:\w+\s*,?\s*)+);"),
-        # assign signal = ...;
-        re.compile(r"^\s*assign\s+(\w+)\s*="),
-    ]
+    # 支持向量 [msb:lsb] 和多信号声明（含多行）
+    decl_pattern_single = re.compile(r"^\s*(?:input|output|reg|wire)\s*(?:signed\s*)?(?:\[[^\]]+\]\s*)?([^;]+);", re.IGNORECASE)
+    decl_header_pattern = re.compile(r"^\s*(?:input|output|reg|wire)\b", re.IGNORECASE)
+    decl_payload_pattern = re.compile(r"^\s*(?:input|output|reg|wire)\s*(?:signed\s*)?(?:\[[^\]]+\]\s*)?(.+?)\s*;\s*$", re.IGNORECASE)
+    assign_pattern = re.compile(r"^\s*assign\s+(\w+)\s*=", re.IGNORECASE)
 
     try:
         with open(file_path, 'r', encoding='utf-8') as f:
-            for line_num, line in enumerate(f, 1):
+            in_decl = False
+            decl_buf = ""
+            decl_start_line = 0
+
+            for line_num, raw in enumerate(f, 1):
                 # 跳过注释
-                line = line.split('//')[0].strip()
+                line = raw.split('//')[0].strip()
                 if not line:
                     continue
 
-                for pattern in patterns:
-                    match = pattern.search(line)
-                    if match:
-                        # 对于声明语句，可能有多个信号
-                        if ',' in match.group(1):
-                            signals = [s.strip() for s in match.group(1).split(',') if s.strip()]
-                            for sig in signals:
-                                full_name = f"{module_prefix}{sig}" if module_prefix else sig
+                if in_decl:
+                    decl_buf += " " + line
+                    if ';' in line:
+                        # 结束多行声明
+                        m = decl_payload_pattern.search(decl_buf)
+                        if m:
+                            names_payload = m.group(1)
+                            chunks = _split_commas_outside_braces(names_payload)
+                            for chunk in chunks:
+                                left = chunk.split('=')[0]
+                                left = _strip_leading_type_keywords(left)
+                                name = _sanitize_identifier(left)
+                                if not name:
+                                    continue
+                                full_name = f"{module_prefix}{name}" if module_prefix else name
                                 if full_name not in line_map:
-                                    line_map[full_name] = line_num
-                        else:
-                            # assign 或单信号声明
-                            sig = match.group(1).strip()
-                            full_name = f"{module_prefix}{sig}" if module_prefix else sig
-                            if full_name not in line_map:
-                                line_map[full_name] = line_num
-                        # 一行只匹配一种模式
-                        break
+                                    line_map[full_name] = decl_start_line
+                        # 重置
+                        in_decl = False
+                        decl_buf = ""
+                        decl_start_line = 0
+                    continue
+
+                # 尝试单行声明
+                decl_match = decl_pattern_single.search(line)
+                if decl_match:
+                    names_payload = decl_match.group(1)
+                    chunks = _split_commas_outside_braces(names_payload)
+                    for chunk in chunks:
+                        left = chunk.split('=')[0]
+                        left = _strip_leading_type_keywords(left)
+                        name = _sanitize_identifier(left)
+                        if not name:
+                            continue
+                        full_name = f"{module_prefix}{name}" if module_prefix else name
+                        if full_name not in line_map:
+                            line_map[full_name] = line_num
+                    continue
+
+                # 多行声明起始（无分号）
+                if decl_header_pattern.search(line) and ';' not in line:
+                    in_decl = True
+                    decl_buf = line
+                    decl_start_line = line_num
+                    continue
+
+                assign_match = assign_pattern.search(line)
+                if assign_match:
+                    sig = assign_match.group(1).strip()
+                    full_name = f"{module_prefix}{sig}" if module_prefix else sig
+                    if full_name not in line_map:
+                        line_map[full_name] = line_num
     except FileNotFoundError:
         print(f"[VerilogParser] 警告: Verilog 文件未找到 at {file_path}")
         return {}

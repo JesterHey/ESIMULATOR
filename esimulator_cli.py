@@ -28,6 +28,13 @@ def main():
     # 对比分析命令
     compare_parser = subparsers.add_parser('compare', help='对比分析方法')
     compare_parser.add_argument('dfg_file', help='DFG文件路径')
+    # 信号对比命令
+    compare_signals_parser = subparsers.add_parser('compare-signals', help='对比 Verilog/DFG/绑定 中所有信号覆盖与行号情况')
+    compare_signals_parser.add_argument('dfg_file', help='DFG文件路径')
+    compare_signals_parser.add_argument('--verilog-file', required=True, help='原始Verilog文件路径')
+    compare_signals_parser.add_argument('--module-prefix', default='', help='信号名前缀（如alu.）')
+    compare_signals_parser.add_argument('--output', '-o', help='输出目录', default='results')
+    compare_signals_parser.add_argument('--linearity-mode', choices=['arith','gf2'], default='arith', help='线性判定模式 (arith/gf2)')
     
     # 批量分析命令
     batch_parser = subparsers.add_parser('batch', help='批量分析多个DFG文件')
@@ -75,6 +82,9 @@ def main():
     elif args.command == 'compare':
         from esimulator.cli.compare_command import run_compare
         run_compare(args)
+    elif args.command == 'compare-signals':
+        from esimulator.cli.compare_signals_command import run_compare_signals
+        run_compare_signals(args)
     elif args.command == 'batch':
         from esimulator.cli.batch_command import run_batch
         run_batch(args)
