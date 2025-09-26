@@ -1,19 +1,23 @@
 # ESIMULATOR
 
-面向异构硬件（ONN/AMS）的数字电路数据流图（DFG）分析、Bind/Workset 级掩码优化与可视化平台。
+基于 Pyverilog 产出的 DFG 进行“Bind 级线性分析与标注”的小型工具集：
+从 Verilog 与 DFG 出发，产出带有 Verilog 行号映射、AST 顺序与掩码、源/目的地定位等的结构化 JSON 与文本报告，并支持基础可视化与信号覆盖对比。
 
-核心流程：Verilog → DFG → Bind 级 AST 分析 → Workset 掩码与可融合关系 → 模拟退火优化 → 可视化 → AMS 生成与连通检查。
+当前阶段聚焦于“分析与标注”；后续的 0/1 合并优化（原模拟退火路径）已暂缓，不作为主线功能。
 
 —
 
-## 核心特性
+## 工作流程概览
 
-- Bind 级 AST 分析：逐个 bind 表达式构建 AST，识别 Operator/Concat/Partselect/Branch/Terminal 等。
-- Workset 掩码与可融合关系：为每个 bind 导出 `workset_order`/`workset_mask` 与 `fusable_adj`，并标记 `bind_has_branch`、`sources`、`operator_count`。
-- 模拟退火（SA）在 Bind/Workset 级：以掩码为优化变量，支持邻域操作（flip/grow/shrink），在多目标成本下搜索最优。
-- 成本模型贴合 ONN/AMS：综合 Area/Delay/Power/Interface，支持“优先模块数量与接口”的权重配置。
-- 可视化支持回退：无 `networkx` 也可导出 DOT；若安装 `networkx`，则启用增强版布局和样式。
-- AMS/RNM 脚手架与生成器：从 SA 结果自动生成 ONN/RNM 包装与顶层连接，便于快速连通检查与后续电气模型替换。
+Verilog + DFG → Bind 级 AST 分析与线性标注 → 报告/JSON → 可视化（可选）→ 全量信号覆盖对比（可选）。
+
+工具要点：
+
+- Bind 级 AST 构建：识别 Operator / Concat / Partselect / Branch / Terminal。
+- 线性判定：支持算术域（arith）与 GF(2) 两种模式；可按需过滤“无可掩码单元”的平凡绑定。
+- 掩码与邻接：导出 workset 顺序与掩码、可融合邻接（fusable_adj）、人类可读标签。
+- Verilog 行号：为 bind 的目标与各源标注对应 Verilog 行号；可传入模块前缀以匹配命名空间（如 `alu.`）。
+- 覆盖验证：提供“compare-signals”对比 Verilog/DFG/绑定 的覆盖与行号完整性。
 
 —
 
@@ -22,128 +26,29 @@
 ```text
 ESIMULATOR/
 ├── dfg_files/                     # 输入 DFG 文件
-├── results/                       # 分析与优化输出（JSON/DOT/报告）
-├── esimulator/                    # CLI 与内部模块
-│   ├── cli/                       # analyze / visualize / batch / compare
-│   └── visual/                    # 可视化导出（含无 networkx 回退）
+├── verilog_files/                 # 示例 Verilog 文件
+├── results/                       # 分析与可视化输出（JSON/DOT/报告）
+├── esimulator/
+│   ├── cli/                       # analyze / visualize / batch / compare / compare-signals
+│   ├── core/                      # dfg_parser / linearity_analyzer / report_generator
+│   ├── utils/                     # verilog_parser（行号映射）
+│   └── visual/                    # 可视化导出
 ├── src/
-│   ├── analyzers/
-│   │   └── dfg_linearity_corrector.py   # Bind/Workset 分析与掩码生成
-│   └── simulated_annealing.py           # Bind/Workset 级 SA 优化
-├── ams/
-│   ├── models/                    # RNM 与电气模板（ideal_adc/dac 等）
-│   ├── tb/                        # 连接顶层与测试平台（4004 示例）
-│   └── build/                     # 由生成器输出的包装模块
-├── tools/
-│   └── generate_ams_from_sa.py    # 从 SA 结果生成 AMS 包装/连接文件
+│   └── analyzers/
+│       └── dfg_linearity_corrector.py   # Bind 级增强分析/导出
 ├── esimulator_cli.py              # 命令行入口
 └── docs/                          # 文档
 ```
 
 —
 
-## 快速上手
-
-1) 安装
+## 安装
 
 ```bash
 pip install -e .
 ```
 
-可选依赖：可视化增强需 `networkx`
-
-```bash
-pip install networkx
-```
-
-1) 运行完整流程（以 4004 为例）
-
-```bash
-python esimulator_cli.py batch --dfg-filename 4004_dfg.txt
-```
-
-对应输入文件应位于 `dfg_files/4004_dfg.txt`。
-
-1) 单步运行
-
-- 仅分析（生成 Bind/Workset 掩码与图）：
-
-```bash
-python esimulator_cli.py analyze --dfg-filename 4004_dfg.txt
-```
-
-- 仅可视化（生成 DOT，自动适配有/无 networkx）：
-
-```bash
-python esimulator_cli.py visualize --dfg-filename 4004_dfg.txt --out results
-```
-
-- 仅优化（在已有 bind 掩码基础上运行 SA）：
-
-```bash
-python esimulator_cli.py compare --dfg-filename 4004_dfg.txt
-```
-
-—
-
-## 输出文件
-
-- `results/4004_dfg_linearity_analysis.txt`：按 bind 的线性/非线性统计与原因小结。
-- `results/4004_dfg_linearity_graph.json`：用于可视化/下游流程的图数据。
-- `results/4004_dfg_bind_masks.json`：每个 bind 的 workset 顺序、掩码、可融合关系、分支与源列表等。
-- `results/4004_dfg.dot`：DFG 视图（如启用 visualize）。
-- `results/4004_bindmask_sa_best.json`：SA 最优结果，包含权重、度量与总成本。
-
-—
-
-## SA 成本模型与邻域
-
-- 邻域操作：
-  - flip：在某个 bind 的 workset 掩码位上 1↔0 翻转。
-  - grow/shrink：沿 `fusable_adj` 在局部簇内扩张/收缩线性簇（受 `bind_has_branch` 约束）。
-- 度量项（示例）：
-  - L：线性 workset 总数
-  - E：非线性 workset 总数
-  - C：近似模块数（线性簇数量）
-  - IFACE：跨域/跨簇接口度量
-- 成本（示例可调）：
-  - Area = a1*L − a2*E
-  - Delay = d1*C
-  - Power = p1*L
-  - Interface = i1*IFACE
-  - Total = wi*Area + wz*Delay + w3*Power + wa*Interface
-
-针对“优先模块数量与接口”的需求，可增大 `wz` 与 `wa`，并适当调节 `a1/a2`、`d1/p1/i1`。
-
-—
-
-## AMS/RNM 生成与连通检查
-
-从 SA 结果快速生成 RNM 包装与连接顶层，用于连通性验证：
-
-```bash
-python tools/generate_ams_from_sa.py \
-  --sa results/4004_bindmask_sa_best.json \
-  --out ams/build \
-  --top ams/tb/ams_top_bind_connect.sv \
-  --backend lut
-```
-
-生成物：
-
-- `ams/build/bind_*.sv`：按 bind/workset 生成的包装模块（可连接到 ONN/RNM 模块）。
-- `ams/tb/ams_top_bind_connect.sv`：连接顶层（示例已提供，亦可自定义）。
-
-示例 RNM/电气模型位于 `ams/models/`，包含 `ideal_adc.sv`、`ideal_dac.sv`、`onn_linear_block.sv` 等；后续可替换为 Verilog‑AMS 电气模型（`*.va`）。
-
-—
-
-## 可视化与依赖
-
-- 默认不强制依赖 `networkx`。
-- 若未安装 `networkx`，仍可导出基础 DOT；安装后可启用增强版样式与布局。
-
-安装命令：
+可选依赖：可视化增强需要 `networkx`
 
 ```bash
 pip install networkx
@@ -151,11 +56,69 @@ pip install networkx
 
 —
 
-## 已知限制
+## 常用命令
 
-- DFG 输入需由外部工具生成（本仓库不包含 Verilog→DFG 转换工具链）。
-- SA 成本模型与度量可按目标硬件继续校准；文档中的权重为示例配置。
-- 可视化当前以 DOT 为主；若需 PNG/SVG 输出，请使用 Graphviz：`dot -Tpng results/xxx.dot -o results/xxx.png`。
+以下命令均在仓库根目录执行。
+
+1. 进行分析并导出报告/JSON（推荐同时传入 Verilog 文件以产生行号映射）
+
+```bash
+python esimulator_cli.py analyze dfg_files/4004_dfg.txt \
+  --output results \
+  --linearity-mode arith \
+  --verilog-file verilog_files/4004.v \
+  --module-prefix ""
+```
+
+生成内容见“输出物”一节。
+
+1. 全量信号覆盖与行号完整性对比（可选）
+
+```bash
+python esimulator_cli.py compare-signals dfg_files/4004_dfg.txt \
+  --verilog-file verilog_files/4004.v \
+  --module-prefix "" \
+  --output results
+```
+
+1. 可视化导出（DOT 等；安装 `networkx` 可增强样式）
+
+```bash
+python esimulator_cli.py visualize dfg_files/4004_dfg.txt --output results/visualizations
+```
+
+1. 批量模式（对目录下的所有 DFG 执行 analyze）
+
+```bash
+python esimulator_cli.py batch dfg_files --output results
+```
+
+备注：`compare` 子命令仅用于旧方法对比打印，非主流程；原“模拟退火/合并优化”路径已暂缓，不在文档主线中展开。
+
+—
+
+## 输出物（以 4004 为例）
+
+- 文本报告：`results/4004_dfg_linearity_analysis.txt`
+- 图数据：`results/4004_dfg_linearity_graph.json`（可视化/下游）
+- Bind 级 JSON：`results/4004_dfg_bind_masks.json`
+  - 关键字段：
+    - `dest` / `sources`
+    - `operator_order` 与 `operator_mask`（或 `workset_order` / `workset_mask`）
+    - `fusable_adj`、`operator_types`、`bind_kind`、`maskable_count`、`is_trivial`
+    - `dest_location` 与 `source_locations`（Verilog 行号）
+    - `verilog_file`、`linearity_mode`、`workset_labels`
+- 信号覆盖对比：`results/4004_dfg_signal_compare.txt` 与 `.json`
+- 可视化 DOT：`results/4004_dfg.dot`（若运行 visualize）
+
+—
+
+## 已知限制与注意事项
+
+- DFG 输入由上游（如基于 Pyverilog 的流程）生成，本仓库不包含 Verilog→DFG 的转换实现。
+- 行号映射采用轻量级正则解析：支持常见的声明/赋值形式与多行声明；模块 ANSI 风格端口行（无分号）可能不计入映射。
+- GF(2) 与算术域的线性定义不同，选择前请确认期望的代数域；默认使用 `arith`。
+- 若未安装 `networkx`，可视化仍可导出基础 DOT；增强样式需额外安装。
 
 —
 

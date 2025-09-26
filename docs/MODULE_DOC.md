@@ -1,92 +1,98 @@
-# 模块说明
+# 模块说明（Module Doc）
 
-本文件说明三大模块：分析器（Bind/Workset 级）、优化器（SA）、可视化与生成器（AMS/RNM）。
+本文件聚焦当前主线能力：DFG/Bind 级线性分析与标注、报告与 JSON 导出、可视化、以及“全量信号覆盖对比”。
+—
+
+## 1) 分析器（CorrectedLinearityAnalyzer）
+
+文件：`src/analyzers/dfg_linearity_corrector.py`
+
+### 职责
+
+- 解析 DFG（S-expression 风格）为 Bind 级 AST，兼容 Terminal/Operator/Concat/Partselect/Branch 等节点。
+- 依据算术域（arith）或 GF(2) 进行线性性判定并生成掩码。
+- 汇总 Workset 顺序、可融合邻接、操作符类型集合、分支与是否平凡等元信息。
+- 若提供 Verilog 文件与模块前缀，补充绑定目标与源的行号映射（dest_location/source_locations）。
+- 覆盖补全：将仅在 Verilog 中出现且参与绑定的信号，生成“合成条目”，用于 compare-signals 覆盖分析。
+
+核心输出（按 bind，一条记录一个字典，字段可能随模式略有差异）：
+
+- `dest`: 绑定目标信号名
+- `sources`: 源信号名数组（常量以 `CONST(...)` 表示）
+- `operator_order` 与 `operator_mask`（或 `workset_order` / `workset_mask`）
+- `fusable_adj`: 可融合邻接边列表
+- `operator_types`: 本绑定中出现过的运算符去重集合
+- `bind_kind`: 表达式类别（如 assign/unary/concat/partselect/branch）
+- `maskable_count`: 可置 1 的掩码位数量
+- `is_trivial`: 是否为“无可掩码单元”的平凡绑定
+- `dest_location`: 目标在 Verilog 中的行号（存在时）
+- `source_locations`: 各源在 Verilog 中的行号（存在时；端口行可能为空）
+- `verilog_file`, `linearity_mode`, `workset_labels`（可读标签，便于 UI）
 
 —
 
-## 1) 分析器 `src/analyzers/dfg_linearity_corrector.py`
+## 2) 报告与导出（ReportGenerator）
 
-职责：将 `dfg_files/*.txt` 中的 bind 表达式解析为 AST，抽取 Workset 并打上线性掩码，导出可融合关系和上下文信息。
+文件：`esimulator/core/report_generator.py`
 
-输出（列表，元素为每个 bind）：
+### 功能
 
-```json
-{
-  "bind_index": 0,
-  "bind_statement": "...",
-  "workset_order": ["ADD_0", "CONCAT_1", "PSL_2"],
-  "workset_mask": [1, 1, 0],
-  "fusable_adj": {"ADD_0": ["CONCAT_1"]},
-  "bind_has_branch": false,
-  "sources": ["a", "b"],
-  "operator_count": 1
-}
-```
+- 文本报告（`*_linearity_analysis.txt`）：总体统计、类型与复杂度分布、非线性原因、逐信号结论。
+- 图数据（`*_linearity_graph.json`）：`{ nodes, edges }`，节点含 is_linear/reason/operators 等，边来自 Terminal 依赖。
+- Bind JSON（`*_dfg_bind_masks.json`）：封装第 1 节的绑定级数组，供外部消费与可视化。
 
-并导出：
+调用示例：
 
-- `results/*_linearity_analysis.txt`（统计摘要）
-- `results/*_linearity_graph.json`（用于可视化/下游）
-- `results/*_bind_masks.json`（供 SA 使用）
+```python
+from esimulator.core.report_generator import ReportGenerator
 
-—
-
-## 2) 优化器 `src/simulated_annealing.py`
-
-职责：读取 `*_bind_masks.json`，在 Bind/Workset 掩码空间搜索最优，目标是综合 Area/Delay/Power/Interface 最小。
-
-邻域与度量：
-
-- 邻域 flip/grow/shrink；分支限制由 `bind_has_branch` 约束；融合关系参照 `fusable_adj`。
-- 统计 L/E/C/IFACE 等度量，成本示例：
-  - Area = a1*L − a2*E
-  - Delay = d1*C
-  - Power = p1*L
-  - Interface = i1*IFACE
-  - Total = wi*Area + wz*Delay + w3*Power + wa*Interface
-
-输出：`results/*_bindmask_sa_best.json`，包含权重、度量与总成本，以及最优掩码集合。
-
-—
-
-## 3) 可视化与生成器
-
-可视化：
-
-- `esimulator/visual` 提供 `visualize` 命令的实现：
-  - 默认从 `results/*_linearity_graph.json` 读取图。
-  - 无 `networkx` 也能导出 DOT（降级回退）。
-  - 安装 `networkx` 启用增强版布局与样式。
-
-AMS 生成器：
-
-- `tools/generate_ams_from_sa.py` 读取 SA 最优结果，生成：
-  - `ams/build/bind_*.sv` 包装模块
-  - `ams/tb/ams_top_bind_connect.sv` 连接顶层
-  - RNM/电气模板位于 `ams/models/`
-
-—
-
-## 4) 命令行 `esimulator_cli.py`
-
-- `analyze`：解析 bind，导出图与掩码
-- `visualize`：输出 DOT（自动回退）
-- `compare`：运行 SA（基于已有掩码）
-- `batch`：analyze → compare → 可选 visualize
-
-示例：
-
-```bash
-python esimulator_cli.py analyze --dfg-filename 4004_dfg.txt
-python esimulator_cli.py compare --dfg-filename 4004_dfg.txt
-python esimulator_cli.py visualize --dfg-filename 4004_dfg.txt --out results
+report = ReportGenerator("results")
+graph_path = report.generate_graph_json(analysis_result, dfg_file, "4004_dfg_linearity_graph.json")
+bind_path = report.generate_bind_masks_json(
+    analysis_result, dfg_file, "4004_dfg_bind_masks.json",
+    linearity_mode="arith", omit_trivial=False,
+    include_human_labels=True,
+    verilog_file="verilog_files/4004.v", module_prefix=""
+)
 ```
 
 —
 
-## 5) 扩展与注意
+## 3) Verilog 行号解析器（verilog_parser）
 
-- 线性规则与 Workset 定义可在分析器中扩展（含 concat/partselect）。
-- SA 权重可按“优先模块数量与接口”进行调优，见 README。
-- DFG 输入需外部工具生成；可视化导出为 DOT，PNG/SVG 需自装 Graphviz。
+文件：`esimulator/utils/verilog_parser.py`
+
+### 说明
+
+- 通过正则解析常见 `input/output/reg/wire/assign` 的目标名，支持多行声明与逗号分隔（忽略大括号/括号内逗号）。
+- 返回 `dict[str,int]` 的首次出现行号映射，用于绑定记录补充 `dest_location`/`source_locations`。
+- ANSI 风格端口（无分号）目前可能不记行号；这不影响目标行号与大多数源的标注。
+
+—
+
+## 4) 命令与参数（CLI）
+
+入口：`esimulator_cli.py`
+
+- `analyze <dfg_file>`：执行分析与导出报告/JSON
+  - `--output/-o` 输出目录（默认 `results`）
+  - `--linearity-mode {arith,gf2}` 代数域（默认 arith）
+  - `--omit-trivial` 省略平凡绑定
+  - `--verilog-file` Verilog 文件（用于行号）
+  - `--module-prefix` 模块前缀（如 `alu.`）
+
+- `compare-signals <dfg_file> --verilog-file <v> [--module-prefix <p>]`：
+  - 生成 `<stem>_signal_compare.txt/.json`，核对覆盖范围、缺失行号等。
+
+- `visualize <dfg_file>`：导出 DOT/HTML（无 networkx 亦可）
+
+- `batch <dir>`：对目录内所有 DFG 运行 analyze
+
+—
+
+## 5) 注意与扩展
+
+- DFG 输入需由外部工具生成；本项目提供后续分析与标注能力。
+- GF(2) 与 arith 的线性定义不同，务必按目标使用选择参数。
+- 若需要将模块端口行也标注行号，可扩展 verilog_parser 的 ANSI 端口解析；当前工具链默认允许端口源的行号为空。
 
