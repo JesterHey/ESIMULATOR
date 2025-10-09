@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+import importlib.util
 import re
 from collections import defaultdict
 from dataclasses import dataclass
@@ -12,6 +13,7 @@ try:
 except ImportError:  # 允许在未安装 networkx 时继续运行文本分析
     nx = None  # type: ignore
 
+
 @dataclass
 class ExpressionNode:
     """表达式树节点"""
@@ -20,7 +22,7 @@ class ExpressionNode:
     children: List['ExpressionNode']
     is_linear: Optional[bool] = None
     position: Optional[int] = None  # 在原始表达式中的位置
-    
+
     def __str__(self, depth=0):
         indent = "  " * depth
         if self.node_type == 'operator':
@@ -31,14 +33,17 @@ class ExpressionNode:
         else:
             return f"{indent}{self.value} ({self.node_type})\n"
 
+
 class ParseError(Exception):
     pass
+
 
 def _skip_ws(s: str, i: int) -> int:
     """跳过空白字符，返回新索引"""
     while i < len(s) and s[i].isspace():
         i += 1
     return i
+
 
 def _read_token(s: str, i: int, stop_chars: str = "():, \n\t") -> Tuple[str, int]:
     """读取 token，直到遇到指定停止字符"""
@@ -48,6 +53,7 @@ def _read_token(s: str, i: int, stop_chars: str = "():, \n\t") -> Tuple[str, int
     if start == i:
         raise ParseError(f"期待 token 于位置 {i}")
     return s[start:i], i
+
 
 def _extract_parenthesized(s: str, i: int) -> Tuple[str, int]:
     """从索引 i 开始，提取完整的括号内容，返回该子串及下一个索引位置"""
@@ -65,6 +71,7 @@ def _extract_parenthesized(s: str, i: int) -> Tuple[str, int]:
         i += 1
     raise ParseError(f"括号未闭合，起点 {start}")
 
+
 def parse_expression(s: str, i: int = 0) -> Tuple[ExpressionNode, int]:
     """
     递归解析表达式文本，返回 ExpressionNode 对象及新索引位置
@@ -74,7 +81,7 @@ def parse_expression(s: str, i: int = 0) -> Tuple[ExpressionNode, int]:
     if i >= len(s):
         # 空表达式直接返回 unknown
         return ExpressionNode("unknown", "", [], position=i), i
-    if s[i] != '(': 
+    if s[i] != '(':
         # 裸值直接识别为 constant 或 terminal
         val = s[i:].strip()
         # 数字、Verilog常量、数组下标、4'b0000等
@@ -91,7 +98,8 @@ def parse_expression(s: str, i: int = 0) -> Tuple[ExpressionNode, int]:
     if key.startswith("Terminal") or key.startswith("IntCon") or key.startswith("IntConst"):
         whole, end = _extract_parenthesized(s, i)
         # 将内部内容作为值存储
-        node_type = 'constant' if key.startswith("IntCon") or key.startswith("IntConst") else 'terminal'
+        node_type = 'constant' if key.startswith(
+            "IntCon") or key.startswith("IntConst") else 'terminal'
         value = whole[len("(" + key): -1].strip()
         return ExpressionNode(node_type=node_type, value=value, children=[], position=i), end
     if key == "Operator":
@@ -109,7 +117,7 @@ def parse_expression(s: str, i: int = 0) -> Tuple[ExpressionNode, int]:
         # 持续读取子表达式
         while cursor < len(s):
             cursor = _skip_ws(s, cursor)
-            if s[cursor] != '(': 
+            if s[cursor] != '(':
                 # 兜底：裸值直接识别为 constant/terminal
                 val_start = cursor
                 while cursor < len(s) and s[cursor] not in ',)':
@@ -117,9 +125,11 @@ def parse_expression(s: str, i: int = 0) -> Tuple[ExpressionNode, int]:
                 val = s[val_start:cursor].strip()
                 if val:
                     if val.isdigit() or val.startswith("'") or val.replace('.', '', 1).isdigit() or ("'" in val and 'b' in val) or '[' in val:
-                        children.append(ExpressionNode("constant", val, [], position=val_start))
+                        children.append(ExpressionNode(
+                            "constant", val, [], position=val_start))
                     else:
-                        children.append(ExpressionNode("terminal", val, [], position=val_start))
+                        children.append(ExpressionNode(
+                            "terminal", val, [], position=val_start))
                 if cursor < len(s) and s[cursor] == ',':
                     cursor += 1
                     continue
@@ -184,6 +194,7 @@ def parse_expression(s: str, i: int = 0) -> Tuple[ExpressionNode, int]:
     whole, end = _extract_parenthesized(s, i)
     return ExpressionNode("unknown", whole, [], position=i), end
 
+
 def _split_top_exprs(s: str) -> List[str]:
     """根据逗号分隔顶层子表达式，利用括号深度判断切分"""
     parts = []
@@ -202,6 +213,7 @@ def _split_top_exprs(s: str) -> List[str]:
         parts.append(tail)
     return parts
 
+
 def _extract_tagged_subexpr(whole: str, tag: str, required: bool = True) -> Optional[str]:
     """
     从整体字符串中提取标记后的括号内子表达式
@@ -218,7 +230,7 @@ def _extract_tagged_subexpr(whole: str, tag: str, required: bool = True) -> Opti
         if required:
             raise ParseError(f"{tag} 后缺表达式")
         return None
-    if whole[i] != '(': 
+    if whole[i] != '(':
         # 兜底：直接提取到下一个空白/逗号/右括号
         j = i
         while j < len(whole) and whole[j] not in ',) \n\t':
@@ -226,6 +238,7 @@ def _extract_tagged_subexpr(whole: str, tag: str, required: bool = True) -> Opti
         return whole[i:j]
     sub, _ = _extract_parenthesized(whole, i)
     return sub
+
 
 def evaluate_linearity(node: ExpressionNode, linear_ops: Set[str]) -> Dict:
     """
@@ -239,7 +252,8 @@ def evaluate_linearity(node: ExpressionNode, linear_ops: Set[str]) -> Dict:
     if node.node_type in ("terminal", "constant"):
         return {"is_linear": True, "reasons": []}
     if node.node_type == "operator":
-        child_infos = [evaluate_linearity(child, linear_ops) for child in node.children]
+        child_infos = [evaluate_linearity(
+            child, linear_ops) for child in node.children]
         if all(info["is_linear"] for info in child_infos) and node.value in linear_ops:
             return {"is_linear": True, "reasons": []}
         reasons = []
@@ -250,7 +264,8 @@ def evaluate_linearity(node: ExpressionNode, linear_ops: Set[str]) -> Dict:
                 reasons.extend(info["reasons"])
         return {"is_linear": False, "reasons": reasons}
     if node.node_type == "concat":
-        child_infos = [evaluate_linearity(child, linear_ops) for child in node.children]
+        child_infos = [evaluate_linearity(
+            child, linear_ops) for child in node.children]
         if all(info["is_linear"] for info in child_infos):
             return {"is_linear": True, "reasons": []}
         reasons = []
@@ -268,7 +283,6 @@ def evaluate_linearity(node: ExpressionNode, linear_ops: Set[str]) -> Dict:
     # 未识别类型视为非线性
     return {"is_linear": False, "reasons": ["未知节点类型"]}
 
-import importlib.util
 
 class CorrectedLinearityAnalyzer:
     def __init__(self, linearity_mode: str = 'arith', verilog_file: str = "", module_prefix: str = ""):
@@ -283,17 +297,14 @@ class CorrectedLinearityAnalyzer:
         self.module_prefix = module_prefix
         self.linear_operators = {
             'Plus', 'Minus', 'UnaryMinus',
-            'Concat', 'Partselect'
+            'And', 'Or', 'Xor', 'Eq', 'Sll', 'Srl'
         }
         if self.linearity_mode == 'gf2':
             self.linear_operators = set(self.linear_operators)
             self.linear_operators.add('Xor')
         self.nonlinear_operators = {
-            'And', 'Or', 'Xor', 'Xnor',
             'Unot', 'Unor', 'Uand', 'Uxor',
-            'Times', 'Divide', 'Mod',
-            'Eq', 'NotEq', 'Lt', 'Gt', 'Lte', 'Gte',
-            'Sll', 'Srl'
+            'Times', 'Divide', 'Mod', 'NotEq', 'Lt', 'Gt', 'Lte', 'Gte','Concat','Partselect'
         }
         self.signal_analyses: Dict[str, Dict] = {}
         self.total_expressions = 0
@@ -307,22 +318,25 @@ class CorrectedLinearityAnalyzer:
             try:
                 import esimulator.utils.verilog_parser as verilog_parser
             except ImportError:
-                parser_spec = importlib.util.find_spec("esimulator.utils.verilog_parser")
+                parser_spec = importlib.util.find_spec(
+                    "esimulator.utils.verilog_parser")
                 if parser_spec is not None and getattr(parser_spec, "origin", None):
-                    spec = importlib.util.spec_from_file_location("verilog_parser", parser_spec.origin)
+                    spec = importlib.util.spec_from_file_location(
+                        "verilog_parser", parser_spec.origin)
                     if spec is not None and spec.loader is not None:
                         verilog_parser = importlib.util.module_from_spec(spec)
                         spec.loader.exec_module(verilog_parser)
             if verilog_parser:
                 try:
-                    self.verilog_signal_linenos = verilog_parser.parse_verilog_for_line_numbers(verilog_file, module_prefix)
+                    self.verilog_signal_linenos = verilog_parser.parse_verilog_for_line_numbers(
+                        verilog_file, module_prefix)
                 except Exception as e:
                     print(f"[LinearityAnalyzer] Verilog 行号解析失败: {e}")
                     self.verilog_signal_linenos = None
             else:
                 print("[LinearityAnalyzer] 未找到 verilog_parser，无法解析行号。")
                 self.verilog_signal_linenos = None
-    
+
     def analyze_dfg_file(self, file_path: str, *, export_graph_json: Optional[str] = None,
                          export_graph_gexf: Optional[str] = None) -> Dict:
         """分析DFG文件，按表达式级别进行线性分析并可导出图结构
@@ -334,7 +348,7 @@ class CorrectedLinearityAnalyzer:
         返回:
             综合报告 dict (新增 'graph' 键, 内含 nodes 与 edges )
         """
-        
+
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
 
@@ -369,8 +383,10 @@ class CorrectedLinearityAnalyzer:
 
                 collect_ops(ast_root)
                 # 对于 Terminal/Const，复杂度标记为 simple；其余为 complex
-                complexity = 'simple' if ast_root.node_type in ('terminal', 'constant') else 'complex'
-                reason = '线性AST' if lin_info['is_linear'] else ','.join(sorted(set(lin_info['reasons'])))
+                complexity = 'simple' if ast_root.node_type in (
+                    'terminal', 'constant') else 'complex'
+                reason = '线性AST' if lin_info['is_linear'] else ','.join(
+                    sorted(set(lin_info['reasons'])))
                 analysis = {
                     'is_linear': lin_info['is_linear'],
                     'reason': reason,
@@ -438,7 +454,8 @@ class CorrectedLinearityAnalyzer:
         }
         p = Path(out_path)
         p.parent.mkdir(parents=True, exist_ok=True)
-        p.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
+        p.write_text(json.dumps(payload, ensure_ascii=False,
+                     indent=2), encoding='utf-8')
         print(f"Bind 掩码(JSON)已导出: {out_path}")
         return str(p)
 
@@ -480,7 +497,7 @@ class CorrectedLinearityAnalyzer:
         Path(path).parent.mkdir(parents=True, exist_ok=True)
         nx.write_gexf(G, path)
         print(f"图数据(GEXF)已导出: {path}")
-    
+
     # ---------------- AST/掩码/可融合构建 ----------------
     def _annotate_linearity(self, node: ExpressionNode) -> bool:
         """自底向上计算并写回 node.is_linear，返回该节点线性性。"""
@@ -488,11 +505,14 @@ class CorrectedLinearityAnalyzer:
             node.is_linear = True
             return True
         if node.node_type == "operator":
-            child_lin = all(self._annotate_linearity(ch) for ch in node.children)
-            node.is_linear = (child_lin and node.value in self.linear_operators)
+            child_lin = all(self._annotate_linearity(ch)
+                            for ch in node.children)
+            node.is_linear = (
+                child_lin and node.value in self.linear_operators)
             return bool(node.is_linear)
         if node.node_type == "concat":
-            node.is_linear = all(self._annotate_linearity(ch) for ch in node.children)
+            node.is_linear = all(self._annotate_linearity(ch)
+                                 for ch in node.children)
             return bool(node.is_linear)
         if node.node_type == "partselect":
             # 仅 Var 子节点决定线性性
@@ -540,13 +560,11 @@ class CorrectedLinearityAnalyzer:
                 'children': child_ids,
                 'is_linear': bool(n.is_linear),
             }
-            # mark：
-            # - operator: 1/0
-            # - concat/partselect: 1/0（用于 workset 掩码）
-            # - 其他: None
+
             if n.node_type == 'operator':
                 nodes[str(nid)]['mark'] = 1 if n.is_linear else 0
-                nodes[str(nid)]['intrinsic_linear'] = 1 if self._op_intrinsic_linear(n.value) else 0
+                nodes[str(nid)]['intrinsic_linear'] = 1 if self._op_intrinsic_linear(
+                    n.value) else 0
             elif n.node_type in ('concat', 'partselect'):
                 nodes[str(nid)]['mark'] = 1 if n.is_linear else 0
                 nodes[str(nid)]['intrinsic_linear'] = 1
@@ -625,8 +643,10 @@ class CorrectedLinearityAnalyzer:
 
     def _build_bind_payload(self, dest: str, ast_root: ExpressionNode) -> Dict:
         nodes_dict, root_id, id_map = self._serialize_ast(ast_root)
-        operator_order, operator_mask = self._collect_operator_order_and_mask(nodes_dict, root_id)
-        workset_order, workset_mask = self._collect_workset_order_and_mask(nodes_dict, root_id)
+        operator_order, operator_mask = self._collect_operator_order_and_mask(
+            nodes_dict, root_id)
+        workset_order, workset_mask = self._collect_workset_order_and_mask(
+            nodes_dict, root_id)
         fusable_adj = self._build_fusable_adjacency(nodes_dict, root_id)
         bind_has_branch = self._has_branch(nodes_dict)
         sources = sorted(self.signal_dependencies.get(dest, []))
@@ -671,7 +691,8 @@ class CorrectedLinearityAnalyzer:
                 if s.startswith("CONST("):
                     source_locations.append(None)
                 else:
-                    source_locations.append(self.verilog_signal_linenos.get(s, None))
+                    source_locations.append(
+                        self.verilog_signal_linenos.get(s, None))
         else:
             dest_location = None
             source_locations = [None for _ in sources]
@@ -718,7 +739,8 @@ class CorrectedLinearityAnalyzer:
             for s in b.get('sources', []):
                 involved_sources.add(s)
         # 目标集合：verilog 出现 且 (是 bind 目标 或 作为 source 参与)
-        candidates = set(self.verilog_signal_linenos.keys()) & (existing_dests | involved_sources)
+        candidates = set(self.verilog_signal_linenos.keys()) & (
+            existing_dests | involved_sources)
         to_create = [sig for sig in candidates if sig not in existing_dests]
         if not to_create:
             return
@@ -793,7 +815,8 @@ class CorrectedLinearityAnalyzer:
     def _build_workset_labels(self, bind_payload: Dict) -> List[str]:
         """构建人类可读的工作集标签，例如 "dest#op0:Or" / "dest#ps2:Partselect"。"""
         dest = bind_payload.get('dest', '')
-        ast_nodes: Dict[str, Dict] = bind_payload.get('ast', {}).get('nodes', {})
+        ast_nodes: Dict[str, Dict] = bind_payload.get(
+            'ast', {}).get('nodes', {})
         labels: List[str] = []
         for idx, nid in enumerate(bind_payload.get('workset_order', [])):
             n = ast_nodes.get(str(nid), {})
@@ -806,30 +829,30 @@ class CorrectedLinearityAnalyzer:
                 label_kind = t or 'Node'
             labels.append(f"{dest}#op{idx}:{label_kind}")
         return labels
-    
-    
-    
+
     def _generate_comprehensive_report(self) -> Dict:
         """生成全面的分析报告"""
-        linear_count = sum(1 for analysis in self.signal_analyses.values() if analysis['is_linear'])
+        linear_count = sum(
+            1 for analysis in self.signal_analyses.values() if analysis['is_linear'])
         nonlinear_count = self.total_expressions - linear_count
-        
+
         complexity_stats = defaultdict(int)
         expression_type_stats = defaultdict(int)
         nonlinear_reasons = defaultdict(int)
-        
+
         for signal, analysis in self.signal_analyses.items():
             complexity_stats[analysis['complexity']] += 1
             expression_type_stats[analysis['expression_type']] += 1
             if not analysis['is_linear']:
-                reason = analysis['reason'].split(':')[0] if ':' in analysis['reason'] else analysis['reason']
+                reason = analysis['reason'].split(
+                    ':')[0] if ':' in analysis['reason'] else analysis['reason']
                 nonlinear_reasons[reason] += 1
-        
+
         operator_usage = defaultdict(int)
         for analysis in self.signal_analyses.values():
             for op in analysis['operators']:
                 operator_usage[op] += 1
-        
+
         return {
             'summary': {
                 'total_expressions': self.total_expressions,
@@ -844,34 +867,39 @@ class CorrectedLinearityAnalyzer:
             'detailed_analyses': self.signal_analyses
         }
 
+
 def analyze_real_dfg(file_name):
     """分析真实的DFG文件"""
     analyzer = CorrectedLinearityAnalyzer()
     dfg_file = f"/Users/xuxiaolan/PycharmProjects/ESIMULATOR/dfg_files/{file_name}"
-    
+
     # 同时导出图 JSON 到 results 目录
     graph_json_path = f"results/{file_name[:-4]}_linearity_graph.json"
-    report = analyzer.analyze_dfg_file(dfg_file, export_graph_json=graph_json_path)
+    report = analyzer.analyze_dfg_file(
+        dfg_file, export_graph_json=graph_json_path)
     # 导出 Bind 掩码 JSON
     bind_json_path = f"results/{file_name[:-4]}_bind_masks.json"
     analyzer.export_bind_masks(dfg_file, bind_json_path)
     print(f"\n=== 分析结果 ===")
     summary = report['summary']
     print(f"总表达式数: {summary['total_expressions']}")
-    print(f"线性表达式: {summary['linear_expressions']} ({summary['linearity_ratio']:.1%})")
-    print(f"非线性表达式: {summary['nonlinear_expressions']} ({1-summary['linearity_ratio']:.1%})")
-    
+    print(
+        f"线性表达式: {summary['linear_expressions']} ({summary['linearity_ratio']:.1%})")
+    print(
+        f"非线性表达式: {summary['nonlinear_expressions']} ({1-summary['linearity_ratio']:.1%})")
+
     print(f"\n表达式类型分布:")
     for expr_type, count in report['expression_type_distribution'].items():
         percentage = count / summary['total_expressions'] * 100
         print(f"  {expr_type}: {count} ({percentage:.1f}%)")
-    
+
     print(f"\n运算符使用统计（前10位）:")
-    sorted_ops = sorted(report['operator_usage'].items(), key=lambda x: x[1], reverse=True)
+    sorted_ops = sorted(report['operator_usage'].items(),
+                        key=lambda x: x[1], reverse=True)
     for op, count in sorted_ops[:10]:
         op_type = "线性" if op in analyzer.linear_operators else "非线性"
         print(f"  {op} ({op_type}): {count}")
-    
+
     print(f"\n生成修正报告...")
     with open(f"results/{file_name[:-4]}_linearity_analysis.txt", "w", encoding="utf-8") as f:
         f.write(f"{file_name}线性分析报告\n")
@@ -879,8 +907,10 @@ def analyze_real_dfg(file_name):
         f.write("分析结果:\n")
         f.write("-" * 15 + "\n")
         f.write(f"总表达式数: {summary['total_expressions']}\n")
-        f.write(f"线性表达式: {summary['linear_expressions']} ({summary['linearity_ratio']:.1%})\n")
-        f.write(f"非线性表达式: {summary['nonlinear_expressions']} ({1-summary['linearity_ratio']:.1%})\n\n")
+        f.write(
+            f"线性表达式: {summary['linear_expressions']} ({summary['linearity_ratio']:.1%})\n")
+        f.write(
+            f"非线性表达式: {summary['nonlinear_expressions']} ({1-summary['linearity_ratio']:.1%})\n\n")
         f.write("表达式类型分布:\n")
         f.write("-" * 20 + "\n")
         for expr_type, count in report['expression_type_distribution'].items():
@@ -895,9 +925,10 @@ def analyze_real_dfg(file_name):
         for signal, analysis in sorted(report['detailed_analyses'].items()):
             linearity = "线性" if analysis['is_linear'] else "非线性"
             f.write(f"{signal:<20}: {linearity:<6} - {analysis['reason']}\n")
-    
+
     print(f"报告已保存到: results/{file_name[:-4]}_linearity_analysis.txt")
     print(f"图 JSON 已保存到: {graph_json_path}")
+
 
 if __name__ == "__main__":
     analyze_real_dfg('4004_dfg.txt')
