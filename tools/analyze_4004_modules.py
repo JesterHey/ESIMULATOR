@@ -22,6 +22,7 @@ import json
 import subprocess
 from pathlib import Path
 from typing import List, Dict
+import sys
 
 ROOT = Path(__file__).resolve().parent.parent
 DFG_DIR = ROOT / 'dfg_files'
@@ -56,7 +57,7 @@ def analyze_module(module: str, args) -> Dict:
 
     # 1) analyze
     run([
-        'python', str(CLI), 'analyze', str(dfg_path),
+        sys.executable, str(CLI), 'analyze', str(dfg_path),
         '--output', str(out_dir),
         '--linearity-mode', args.linearity_mode,
         '--verilog-file', str(v_path),
@@ -65,7 +66,7 @@ def analyze_module(module: str, args) -> Dict:
 
     # 2) compare-signals
     run([
-        'python', str(CLI), 'compare-signals', str(dfg_path),
+        sys.executable, str(CLI), 'compare-signals', str(dfg_path),
         '--verilog-file', str(v_path),
         '--module-prefix', module_prefix,
         '--output', str(out_dir),
@@ -95,20 +96,74 @@ def analyze_module(module: str, args) -> Dict:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--modules', default='alu,instruction_decode,instruction_pointer,scratchpad,timing_io',
-                    help='逗号分隔的模块名列表 (默认: 4004 五大核心板)')
+    # 单次运行：直接使用现有 DFG + Verilog
+    ap.add_argument('--dfg-file', help='直接指定 DFG 文件，走单次分析路径')
+    ap.add_argument('--verilog-file', help='直接指定 Verilog 文件，走单次分析路径')
+    ap.add_argument('--module-prefix', default='', help='信号名前缀（如 alu.）')
+    # 批量运行：按模块名推断 dfg_files/<module>_dfg.txt 与 verilog_files/<module>.v
+    ap.add_argument('--modules', default='alu',
+                    help='逗号分隔的模块名列表 (默认: alu)')
     ap.add_argument('--out', default='results', help='输出目录 (默认 results)')
     ap.add_argument('--linearity-mode', choices=['arith', 'gf2'], default='arith')
     ap.add_argument('--no-prefix', action='store_true', help='DFG 中信号未加模块名前缀时使用')
     args = ap.parse_args()
 
-    modules = [m.strip() for m in args.modules.split(',') if m.strip()]
+    # 优先：单次运行（DFG + Verilog 直接路径）
+    if args.dfg_file and args.verilog_file:
+        dfg_path = Path(args.dfg_file)
+        v_path = Path(args.verilog_file)
+        out_dir = Path(args.out)
+        out_dir.mkdir(parents=True, exist_ok=True)
 
-    overall: List[Dict] = []
-    for mod in modules:
-        print(f'\n===== 分析模块: {mod} =====')
-        info = analyze_module(mod, args)
-        overall.append(info)
+        if not dfg_path.exists() or not v_path.exists():
+            overall = [{
+                'module': dfg_path.stem,
+                'dfg_exists': dfg_path.exists(),
+                'verilog_exists': v_path.exists(),
+                'skipped': True
+            }]
+        else:
+            # analyze
+            run([
+                sys.executable, str(CLI), 'analyze', str(dfg_path),
+                '--output', str(out_dir),
+                '--linearity-mode', args.linearity_mode,
+                '--verilog-file', str(v_path),
+                '--module-prefix', args.module_prefix or ''
+            ])
+            # compare-signals
+            run([
+                sys.executable, str(CLI), 'compare-signals', str(dfg_path),
+                '--verilog-file', str(v_path),
+                '--module-prefix', args.module_prefix or '',
+                '--output', str(out_dir),
+                '--linearity-mode', args.linearity_mode,
+            ])
+            stem = dfg_path.stem
+            sig_json = out_dir / f'{stem}_signal_compare.json'
+            summary = {}
+            if sig_json.exists():
+                try:
+                    data = json.loads(sig_json.read_text(encoding='utf-8'))
+                    summary = data.get('summary', {})
+                except Exception as e:
+                    summary = {'error': str(e)}
+            overall = [{
+                'module': stem,
+                'dfg_file': str(dfg_path),
+                'verilog_file': str(v_path),
+                'linearity_mode': args.linearity_mode,
+                'summary': summary,
+                'skipped': False
+            }]
+    else:
+        # 批量运行（原逻辑，需 dfg_files/<module>_dfg.txt 存在）
+        modules = [m.strip() for m in args.modules.split(',') if m.strip()]
+        overall: List[Dict] = []
+        for mod in modules:
+            print(f'\n===== 分析模块: {mod} =====')
+            info = analyze_module(mod, args)
+            overall.append(info)
 
     overall_path = Path(args.out) / 'overall_summary.json'
     overall_path.write_text(json.dumps(overall, ensure_ascii=False, indent=2), encoding='utf-8')

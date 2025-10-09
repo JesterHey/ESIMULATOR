@@ -1,10 +1,15 @@
 {
-  "verilog_file": "/Users/xuxiaolan/PycharmProjects/ESIMULATOR/verilog_files/4004.v",
-  "dfg_file": "/Users/xuxiaolan/PycharmProjects/ESIMULATOR/dfg_files/4004_dfg.txt",
+  "verilog_file": "verilog_files/4004.v",
+  "dfg_file": "dfg_files/4004_dfg.txt",
   "module_prefix": "alu.",
   "summary": {
-    "total_names": 118,
-    "verilog_only": [],
+    "total_names": 122,
+    "verilog_only": [
+      "alu.inout",
+      "alu.input",
+      "alu.output",
+      "alu.sysclk"
+    ],
     "bind_only_dests": [
       "alu._rn0_dout",
       "alu._rn1_dout",
@@ -62,7 +67,7 @@
     ],
     "missing_line_for_bind_dests": [],
     "bind_with_incomplete_source_locations": [],
-    "verilog_signals": 73,
+    "verilog_signals": 77,
     "bind_count": 81
   },
   "by_name": {
@@ -812,6 +817,34 @@
       "in_verilog": false,
       "as_bind_dest": false,
       "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "alu.inout": {
+      "name": "alu.inout",
+      "in_verilog": true,
+      "as_bind_dest": false,
+      "as_source": false,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "alu.input": {
+      "name": "alu.input",
+      "in_verilog": true,
+      "as_bind_dest": false,
+      "as_source": false,
       "has_payload_entry": false,
       "bind_kind": null,
       "dest_location": null,
@@ -1710,6 +1743,20 @@
       "maskable_count": null,
       "is_trivial": null
     },
+    "alu.output": {
+      "name": "alu.output",
+      "in_verilog": true,
+      "as_bind_dest": false,
+      "as_source": false,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
     "alu.poc": {
       "name": "alu.poc",
       "in_verilog": false,
@@ -1771,6 +1818,20 @@
       "in_verilog": false,
       "as_bind_dest": false,
       "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "alu.sysclk": {
+      "name": "alu.sysclk",
+      "in_verilog": true,
+      "as_bind_dest": false,
+      "as_source": false,
       "has_payload_entry": false,
       "bind_kind": null,
       "dest_location": null,
