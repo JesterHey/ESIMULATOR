@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="880" height="520" viewBox="0 0 880 520">
+  <style>
+    .box { fill:#fff7ed; stroke:#f59e0b; stroke-width:1.5; rx:8; }
+    .title { font: 700 16px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif; fill:#7c2d12; }
+    .text { font: 13px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif; fill:#7c2d12; }
+    .arrow { stroke:#92400e; stroke-width:1.5; marker-end:url(#arrow); fill:none; }
+    .label { font: 12px -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif; fill:#7c2d12; }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#92400e" />
+    </marker>
+  </defs>
+
+  <text x="20" y="30" class="title">表达式线性判定流程（简化）</text>
+
+  <g transform="translate(40,60)">
+    <rect class="box" x="0" y="0" width="240" height="80"/>
+    <text x="16" y="28" class="text">输入：Bind 表达式树</text>
+    <text x="16" y="52" class="label">(Bind dest: X tree: ...)</text>
+  </g>
+
+  <g transform="translate(320,60)">
+    <rect class="box" x="0" y="0" width="240" height="80"/>
+    <text x="16" y="28" class="text">子式递归分析</text>
+    <text x="16" y="52" class="label">所有子式需要先判定</text>
+  </g>
+
+  <g transform="translate(600,60)">
+    <rect class="box" x="0" y="0" width="240" height="80"/>
+    <text x="16" y="28" class="text">汇总子式结论</text>
+    <text x="16" y="52" class="label">若任一子式非线性→整体非线性</text>
+  </g>
+
+  <g transform="translate(40,180)">
+    <rect class="box" x="0" y="0" width="240" height="100"/>
+    <text x="16" y="28" class="text">算子规则（域相关）</text>
+    <text x="16" y="52" class="label">arith: 排除 XOR 等</text>
+    <text x="16" y="74" class="label">gf2: 视 XOR 为线性</text>
+  </g>
+
+  <g transform="translate(320,180)">
+    <rect class="box" x="0" y="0" width="240" height="100"/>
+    <text x="16" y="28" class="text">始终非线性</text>
+    <text x="16" y="52" class="label">分支(?:)、移位、Concat</text>
+  </g>
+
+  <g transform="translate(600,180)">
+    <rect class="box" x="0" y="0" width="240" height="100"/>
+    <text x="16" y="28" class="text">结论与标注</text>
+    <text x="16" y="52" class="label">is_linear / intrinsic_linear</text>
+    <text x="16" y="74" class="label">原因：nonlinear_op / branch 等</text>
+  </g>
+
+  <g transform="translate(40,320)">
+    <rect class="box" x="0" y="0" width="240" height="100"/>
+    <text x="16" y="28" class="text">掩码与邻接</text>
+    <text x="16" y="52" class="label">Bind-level 掩码 / fusable</text>
+  </g>
+
+  <g transform="translate(320,320)">
+    <rect class="box" x="0" y="0" width="240" height="100"/>
+    <text x="16" y="28" class="text">行号映射</text>
+    <text x="16" y="52" class="label">源/目的行号，便于对比</text>
+  </g>
+
+  <g transform="translate(600,320)">
+    <rect class="box" x="0" y="0" width="240" height="100"/>
+    <text x="16" y="28" class="text">输出</text>
+    <text x="16" y="52" class="label">*linearity_graph.json / *bind_masks.json</text>
+  </g>
+
+  <!-- Arrows -->
+  <path class="arrow" d="M 280 100 L 320 100" />
+  <path class="arrow" d="M 560 100 L 600 100" />
+
+  <path class="arrow" d="M 160 140 L 160 180" />
+  <path class="arrow" d="M 440 140 L 440 180" />
+  <path class="arrow" d="M 720 140 L 720 180" />
+
+  <path class="arrow" d="M 160 280 L 160 320" />
+  <path class="arrow" d="M 440 280 L 440 320" />
+  <path class="arrow" d="M 720 280 L 720 320" />
+</svg>
