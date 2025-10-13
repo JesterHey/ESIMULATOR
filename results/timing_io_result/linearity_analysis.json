@@ -1,0 +1,360 @@
+{
+  "metadata": {
+    "generated_at": "2025-10-11T17:42:46.983685",
+    "tool_version": "2.0.0",
+    "analysis_type": "dfg_linearity",
+    "operator_linearity_tags": {
+      "Minus": 1,
+      "Xor": 1,
+      "And": 1,
+      "Or": 1,
+      "Srl": 1,
+      "Eq": 1,
+      "Sll": 1,
+      "UnaryMinus": 1,
+      "Plus": 1
+    }
+  },
+  "analysis_result": {
+    "summary": {
+      "total_expressions": 39,
+      "linear_expressions": 9,
+      "nonlinear_expressions": 30,
+      "linearity_ratio": 0.23076923076923078
+    },
+    "complexity_distribution": {
+      "complex": 12,
+      "unknown": 10,
+      "simple": 12,
+      "moderate": 5
+    },
+    "expression_type_distribution": {
+      "branch": 12,
+      "unknown": 10,
+      "terminal": 9,
+      "operator": 8
+    },
+    "nonlinear_reasons": {
+      "条件分支表达式（本质非线性）": 12,
+      "未识别的表达式类型": 10,
+      "包含非线性运算符": 8
+    },
+    "operator_usage": {
+      "Or": 11,
+      "And": 5,
+      "Unot": 7,
+      "Unor": 1
+    },
+    "detailed_analyses": {
+      "timing_io.L": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Or",
+          "Or",
+          "And",
+          "Or"
+        ],
+        "expression_type": "branch"
+      },
+      "timing_io._rn0_data_in": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: 4'd15...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "timing_io._rn1_data_in": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: 4'dx...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "timing_io._rn2_data_in": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: 4'd0...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "timing_io._rn3_data_in": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "timing_io.a12": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d0...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "timing_io.a22": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d1...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "timing_io.a32": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d2...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "timing_io.clk1": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "timing_io.clk2": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "timing_io.cmram0_pad": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "timing_io.cmram1_pad": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "timing_io.cmram2_pad": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "timing_io.cmram3_pad": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "timing_io.cmrom_pad": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "timing_io.data": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "timing_io.data_in": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "timing_io.data_out": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "timing_io.data_pad": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "timing_io.gate": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "simple",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "operator"
+      },
+      "timing_io.m12": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d3...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "timing_io.m22": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d4...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "timing_io.master": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unor"
+        ],
+        "expression_type": "branch"
+      },
+      "timing_io.n0278": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "timing_io.n0279": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "moderate",
+        "operators": [
+          "Unot",
+          "Or"
+        ],
+        "expression_type": "operator"
+      },
+      "timing_io.n0432": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "simple",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "operator"
+      },
+      "timing_io.n0659": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Or",
+        "complexity": "moderate",
+        "operators": [
+          "Or",
+          "And",
+          "And"
+        ],
+        "expression_type": "operator"
+      },
+      "timing_io.n0676": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Or",
+        "complexity": "moderate",
+        "operators": [
+          "Or",
+          "Or"
+        ],
+        "expression_type": "operator"
+      },
+      "timing_io.n0685": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "branch"
+      },
+      "timing_io.n0699": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "branch"
+      },
+      "timing_io.n0700": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Or",
+        "complexity": "moderate",
+        "operators": [
+          "Or",
+          "Or",
+          "And"
+        ],
+        "expression_type": "operator"
+      },
+      "timing_io.n0702": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "simple",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "operator"
+      },
+      "timing_io.n0707": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "timing_io.n0708": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "moderate",
+        "operators": [
+          "Unot",
+          "Or",
+          "Or",
+          "And"
+        ],
+        "expression_type": "operator"
+      },
+      "timing_io.poc": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "timing_io.slave": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "timing_io.sync_pad": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "timing_io.x12": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d5...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "timing_io.x22": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d6...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      }
+    }
+  }
+}

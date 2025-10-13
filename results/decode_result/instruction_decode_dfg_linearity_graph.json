@@ -1,0 +1,1621 @@
+{
+  "nodes": {
+    "instruction_decode.add": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.add_group_4": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Or",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.adm": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.bbl": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.clb": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.clc": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.cma": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.cmc": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.cn_n": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.com_n": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_decode.daa": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.dac": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.data": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_decode.dc": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.dcl": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.fim_src": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.fin_fim": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.fin_fim_src_jin": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Or",
+      "operators": [
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.iac": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.inc": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.inc_group_5": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.inc_isz": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.inc_isz_add_sub_xch_ld": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Or",
+      "operators": [
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.inc_isz_xch": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Or",
+      "operators": [
+        "Or",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.io": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.ior": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.iow": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.isz": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.jcn": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.jcn_isz": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Or",
+      "operators": [
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.jin_fin": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.jms": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.jun": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.jun_jms": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Or",
+      "operators": [
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.kbp": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.ld": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.ldm": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.ldm_bbl": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Or",
+      "operators": [
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.n0329": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_decode.n0332": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "And",
+        "And",
+        "And",
+        "And",
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.n0337": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.n0342": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_decode.n0343": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_decode.n0360": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_decode.n0362": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_decode.n0368": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "And",
+        "And",
+        "Or",
+        "Or",
+        "And",
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.n0375": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.n0380": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_decode.n0397": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_decode.n0405": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_decode.n0413": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "And",
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.n0414": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_decode.n0419": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "And",
+        "And",
+        "Unot",
+        "Or",
+        "Unot",
+        "And",
+        "Or",
+        "Unot",
+        "Or",
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.n0425": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_decode.n0433": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_decode.n0486": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Or",
+        "And",
+        "And",
+        "And"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.n0782": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Or",
+        "And",
+        "And"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.n0797": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_decode.n0801": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_decode.n0805": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_decode.nop": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.o_ib": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.opa": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_decode.opa0_n": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.opa_ib": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.ope": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.ope_n": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.opr": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_decode.ral": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.rar": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.read_acc_3": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.sbm": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.sc": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.sc_m12_clk2": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "And"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.sc_m22_clk2": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "And"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.src": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.stc": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.sub": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Eq",
+      "operators": [
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.sub_group_6": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Or",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.tcc": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.tcs": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Eq"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.write_acc_1": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.write_carry_2": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.x21_clk2": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_decode.x31_clk2": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    }
+  },
+  "edges": [
+    [
+      "instruction_decode.opr",
+      "instruction_decode.add"
+    ],
+    [
+      "instruction_decode.tcs",
+      "instruction_decode.add_group_4"
+    ],
+    [
+      "instruction_decode.tcc",
+      "instruction_decode.add_group_4"
+    ],
+    [
+      "instruction_decode.adm",
+      "instruction_decode.add_group_4"
+    ],
+    [
+      "instruction_decode.add",
+      "instruction_decode.add_group_4"
+    ],
+    [
+      "instruction_decode.io",
+      "instruction_decode.adm"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.adm"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.bbl"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.clb"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.clb"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.clc"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.clc"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.cma"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.cma"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.cmc"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.cmc"
+    ],
+    [
+      "instruction_decode.n0397",
+      "instruction_decode.cn_n"
+    ],
+    [
+      "instruction_decode.n0782",
+      "instruction_decode.com_n"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.daa"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.daa"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.dac"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.dac"
+    ],
+    [
+      "instruction_decode.opa_ib",
+      "instruction_decode.data"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.data"
+    ],
+    [
+      "instruction_decode.sc",
+      "instruction_decode.dc"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.dcl"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.dcl"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.fim_src"
+    ],
+    [
+      "instruction_decode.fin_fim_src_jin",
+      "instruction_decode.fin_fim"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.fin_fim"
+    ],
+    [
+      "instruction_decode.fim_src",
+      "instruction_decode.fin_fim_src_jin"
+    ],
+    [
+      "instruction_decode.jin_fin",
+      "instruction_decode.fin_fim_src_jin"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.iac"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.iac"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.inc"
+    ],
+    [
+      "instruction_decode.inc_isz",
+      "instruction_decode.inc_group_5"
+    ],
+    [
+      "instruction_decode.stc",
+      "instruction_decode.inc_group_5"
+    ],
+    [
+      "instruction_decode.iac",
+      "instruction_decode.inc_group_5"
+    ],
+    [
+      "instruction_decode.inc",
+      "instruction_decode.inc_isz"
+    ],
+    [
+      "instruction_decode.isz",
+      "instruction_decode.inc_isz"
+    ],
+    [
+      "instruction_decode.sc",
+      "instruction_decode.inc_isz"
+    ],
+    [
+      "instruction_decode.inc",
+      "instruction_decode.inc_isz_add_sub_xch_ld"
+    ],
+    [
+      "instruction_decode.isz",
+      "instruction_decode.inc_isz_add_sub_xch_ld"
+    ],
+    [
+      "instruction_decode.add",
+      "instruction_decode.inc_isz_add_sub_xch_ld"
+    ],
+    [
+      "instruction_decode.sub",
+      "instruction_decode.inc_isz_add_sub_xch_ld"
+    ],
+    [
+      "instruction_decode.xch",
+      "instruction_decode.inc_isz_add_sub_xch_ld"
+    ],
+    [
+      "instruction_decode.ld",
+      "instruction_decode.inc_isz_add_sub_xch_ld"
+    ],
+    [
+      "instruction_decode.inc",
+      "instruction_decode.inc_isz_xch"
+    ],
+    [
+      "instruction_decode.isz",
+      "instruction_decode.inc_isz_xch"
+    ],
+    [
+      "instruction_decode.xch",
+      "instruction_decode.inc_isz_xch"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.io"
+    ],
+    [
+      "instruction_decode.io",
+      "instruction_decode.ior"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.ior"
+    ],
+    [
+      "instruction_decode.io",
+      "instruction_decode.iow"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.iow"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.isz"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.jcn"
+    ],
+    [
+      "instruction_decode.jcn",
+      "instruction_decode.jcn_isz"
+    ],
+    [
+      "instruction_decode.isz",
+      "instruction_decode.jcn_isz"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.jin_fin"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.jms"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.jun"
+    ],
+    [
+      "instruction_decode.jun",
+      "instruction_decode.jun_jms"
+    ],
+    [
+      "instruction_decode.jms",
+      "instruction_decode.jun_jms"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.kbp"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.kbp"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.ld"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.ldm"
+    ],
+    [
+      "instruction_decode.ldm",
+      "instruction_decode.ldm_bbl"
+    ],
+    [
+      "instruction_decode.bbl",
+      "instruction_decode.ldm_bbl"
+    ],
+    [
+      "instruction_decode.io",
+      "instruction_decode.n0329"
+    ],
+    [
+      "instruction_decode.n0329",
+      "instruction_decode.n0329"
+    ],
+    [
+      "instruction_decode.poc",
+      "instruction_decode.n0329"
+    ],
+    [
+      "instruction_decode.x22",
+      "instruction_decode.n0332"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.n0332"
+    ],
+    [
+      "instruction_decode.n0337",
+      "instruction_decode.n0332"
+    ],
+    [
+      "instruction_decode.clk1",
+      "instruction_decode.n0332"
+    ],
+    [
+      "instruction_decode.n0360",
+      "instruction_decode.n0337"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.n0337"
+    ],
+    [
+      "instruction_decode.n0332",
+      "instruction_decode.n0342"
+    ],
+    [
+      "instruction_decode.clk1",
+      "instruction_decode.n0343"
+    ],
+    [
+      "instruction_decode.n0362",
+      "instruction_decode.n0343"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.n0360"
+    ],
+    [
+      "instruction_decode.x12",
+      "instruction_decode.n0360"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.n0362"
+    ],
+    [
+      "instruction_decode.n0368",
+      "instruction_decode.n0362"
+    ],
+    [
+      "instruction_decode.sc",
+      "instruction_decode.n0368"
+    ],
+    [
+      "instruction_decode.fin_fim",
+      "instruction_decode.n0368"
+    ],
+    [
+      "instruction_decode.jcn_isz",
+      "instruction_decode.n0368"
+    ],
+    [
+      "instruction_decode.jun_jms",
+      "instruction_decode.n0368"
+    ],
+    [
+      "instruction_decode.x32",
+      "instruction_decode.n0368"
+    ],
+    [
+      "instruction_decode.n0343",
+      "instruction_decode.n0368"
+    ],
+    [
+      "instruction_decode.x32",
+      "instruction_decode.n0368"
+    ],
+    [
+      "instruction_decode.n0380",
+      "instruction_decode.n0375"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.n0375"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.n0380"
+    ],
+    [
+      "instruction_decode.x22",
+      "instruction_decode.n0380"
+    ],
+    [
+      "instruction_decode.clk1",
+      "instruction_decode.n0397"
+    ],
+    [
+      "instruction_decode.n0405",
+      "instruction_decode.n0397"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.n0405"
+    ],
+    [
+      "instruction_decode.n0413",
+      "instruction_decode.n0405"
+    ],
+    [
+      "instruction_decode.sc",
+      "instruction_decode.n0413"
+    ],
+    [
+      "instruction_decode.n0419",
+      "instruction_decode.n0413"
+    ],
+    [
+      "instruction_decode.x32",
+      "instruction_decode.n0413"
+    ],
+    [
+      "instruction_decode.x32",
+      "instruction_decode.n0413"
+    ],
+    [
+      "instruction_decode.n0397",
+      "instruction_decode.n0413"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.n0414"
+    ],
+    [
+      "instruction_decode.a22",
+      "instruction_decode.n0414"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.n0414"
+    ],
+    [
+      "instruction_decode.add_0",
+      "instruction_decode.n0419"
+    ],
+    [
+      "instruction_decode.isz",
+      "instruction_decode.n0419"
+    ],
+    [
+      "instruction_decode.jcn",
+      "instruction_decode.n0419"
+    ],
+    [
+      "instruction_decode.n0486",
+      "instruction_decode.n0419"
+    ],
+    [
+      "instruction_decode.n0486",
+      "instruction_decode.n0419"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.n0425"
+    ],
+    [
+      "instruction_decode.x12",
+      "instruction_decode.n0425"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.n0433"
+    ],
+    [
+      "instruction_decode.m12",
+      "instruction_decode.n0433"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.n0486"
+    ],
+    [
+      "instruction_decode.acc_0",
+      "instruction_decode.n0486"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.n0486"
+    ],
+    [
+      "instruction_decode.cy_1",
+      "instruction_decode.n0486"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.n0486"
+    ],
+    [
+      "instruction_decode.n0432",
+      "instruction_decode.n0486"
+    ],
+    [
+      "instruction_decode.n0801",
+      "instruction_decode.n0782"
+    ],
+    [
+      "instruction_decode.n0329",
+      "instruction_decode.n0782"
+    ],
+    [
+      "instruction_decode.src",
+      "instruction_decode.n0782"
+    ],
+    [
+      "instruction_decode.n0805",
+      "instruction_decode.n0782"
+    ],
+    [
+      "instruction_decode.n0797",
+      "instruction_decode.n0782"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.n0797"
+    ],
+    [
+      "instruction_decode.n0414",
+      "instruction_decode.n0797"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.n0801"
+    ],
+    [
+      "instruction_decode.n0433",
+      "instruction_decode.n0801"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.n0805"
+    ],
+    [
+      "instruction_decode.n0425",
+      "instruction_decode.n0805"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.nop"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.o_ib"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.o_ib"
+    ],
+    [
+      "instruction_decode.sc_m22_clk2",
+      "instruction_decode.opa"
+    ],
+    [
+      "instruction_decode.data",
+      "instruction_decode.opa"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.opa0_n"
+    ],
+    [
+      "instruction_decode.ldm_bbl",
+      "instruction_decode.opa_ib"
+    ],
+    [
+      "instruction_decode.jun_jms",
+      "instruction_decode.opa_ib"
+    ],
+    [
+      "instruction_decode.x21_clk2",
+      "instruction_decode.opa_ib"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.ope"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.ope_n"
+    ],
+    [
+      "instruction_decode.sc_m12_clk2",
+      "instruction_decode.opr"
+    ],
+    [
+      "instruction_decode.data",
+      "instruction_decode.opr"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.ral"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.ral"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.rar"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.rar"
+    ],
+    [
+      "instruction_decode.daa",
+      "instruction_decode.read_acc_3"
+    ],
+    [
+      "instruction_decode.rar",
+      "instruction_decode.read_acc_3"
+    ],
+    [
+      "instruction_decode.ral",
+      "instruction_decode.read_acc_3"
+    ],
+    [
+      "instruction_decode.dac",
+      "instruction_decode.read_acc_3"
+    ],
+    [
+      "instruction_decode.iac",
+      "instruction_decode.read_acc_3"
+    ],
+    [
+      "instruction_decode.sbm",
+      "instruction_decode.read_acc_3"
+    ],
+    [
+      "instruction_decode.adm",
+      "instruction_decode.read_acc_3"
+    ],
+    [
+      "instruction_decode.sub",
+      "instruction_decode.read_acc_3"
+    ],
+    [
+      "instruction_decode.add",
+      "instruction_decode.read_acc_3"
+    ],
+    [
+      "instruction_decode.io",
+      "instruction_decode.sbm"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.sbm"
+    ],
+    [
+      "instruction_decode.n0343",
+      "instruction_decode.sc"
+    ],
+    [
+      "instruction_decode.sc",
+      "instruction_decode.sc_m12_clk2"
+    ],
+    [
+      "instruction_decode.m12",
+      "instruction_decode.sc_m12_clk2"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.sc_m12_clk2"
+    ],
+    [
+      "instruction_decode.sc",
+      "instruction_decode.sc_m22_clk2"
+    ],
+    [
+      "instruction_decode.m22",
+      "instruction_decode.sc_m22_clk2"
+    ],
+    [
+      "instruction_decode.clk2",
+      "instruction_decode.sc_m22_clk2"
+    ],
+    [
+      "instruction_decode.fim_src",
+      "instruction_decode.src"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.src"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.stc"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.stc"
+    ],
+    [
+      "instruction_decode.opr",
+      "instruction_decode.sub"
+    ],
+    [
+      "instruction_decode.cmc",
+      "instruction_decode.sub_group_6"
+    ],
+    [
+      "instruction_decode.sbm",
+      "instruction_decode.sub_group_6"
+    ],
+    [
+      "instruction_decode.sub",
+      "instruction_decode.sub_group_6"
+    ],
+    [
+      "instruction_decode.m12",
+      "instruction_decode.sub_group_6"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.tcc"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.tcc"
+    ],
+    [
+      "instruction_decode.ope",
+      "instruction_decode.tcs"
+    ],
+    [
+      "instruction_decode.opa",
+      "instruction_decode.tcs"
+    ],
+    [
+      "instruction_decode.kbp",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.tcs",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.daa",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.xch",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.poc",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.cma",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.tcc",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.dac",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.iac",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.clb",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.ior",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.ld",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.sub",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.add",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.ldm_bbl",
+      "instruction_decode.write_acc_1"
+    ],
+    [
+      "instruction_decode.tcs",
+      "instruction_decode.write_carry_2"
+    ],
+    [
+      "instruction_decode.poc",
+      "instruction_decode.write_carry_2"
+    ],
+    [
+      "instruction_decode.tcc",
+      "instruction_decode.write_carry_2"
+    ],
+    [
+      "instruction_decode.stc",
+      "instruction_decode.write_carry_2"
+    ],
+    [
+      "instruction_decode.cmc",
+      "instruction_decode.write_carry_2"
+    ],
+    [
+      "instruction_decode.dac",
+      "instruction_decode.write_carry_2"
+    ],
+    [
+      "instruction_decode.iac",
+      "instruction_decode.write_carry_2"
+    ],
+    [
+      "instruction_decode.clc",
+      "instruction_decode.write_carry_2"
+    ],
+    [
+      "instruction_decode.clb",
+      "instruction_decode.write_carry_2"
+    ],
+    [
+      "instruction_decode.sbm",
+      "instruction_decode.write_carry_2"
+    ],
+    [
+      "instruction_decode.adm",
+      "instruction_decode.write_carry_2"
+    ],
+    [
+      "instruction_decode.sub",
+      "instruction_decode.write_carry_2"
+    ],
+    [
+      "instruction_decode.add",
+      "instruction_decode.write_carry_2"
+    ],
+    [
+      "instruction_decode.n0337",
+      "instruction_decode.x21_clk2"
+    ],
+    [
+      "instruction_decode.n0375",
+      "instruction_decode.x31_clk2"
+    ]
+  ]
+}

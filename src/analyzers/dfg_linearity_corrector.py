@@ -245,7 +245,7 @@ def evaluate_linearity(node: ExpressionNode, linear_ops: Set[str]) -> Dict:
     递归评估 AST 中节点的线性性：
     - Terminal/constant 为线性
     - Operator 节点：如果本身在线性集合中且所有子节点线性，则整体线性，否则非线性
-    - Concat 节点：所有子节点均线性为线性，否则非线性
+    - Concat 节点：按策略标记（此实现中统一视为非线性）
     - Branch 默认非线性（可扩展）
     - Partselect 仅检查 Var 子节点
     """
@@ -264,14 +264,14 @@ def evaluate_linearity(node: ExpressionNode, linear_ops: Set[str]) -> Dict:
                 reasons.extend(info["reasons"])
         return {"is_linear": False, "reasons": reasons}
     if node.node_type == "concat":
-        child_infos = [evaluate_linearity(
-            child, linear_ops) for child in node.children]
-        if all(info["is_linear"] for info in child_infos):
-            return {"is_linear": True, "reasons": []}
+        # 统一将 Concat 视为非线性；仍递归评估子节点以给出原因链
+        child_infos = [evaluate_linearity(child, linear_ops) for child in node.children]
         reasons = []
         for info in child_infos:
             if not info["is_linear"]:
                 reasons.extend(info["reasons"])
+        if not reasons:
+            reasons.append("Concat 视为非线性")
         return {"is_linear": False, "reasons": reasons}
     if node.node_type == "partselect":
         # 只评价 Var 子节点（第一个子节点），MSB和LSB通常为常量
@@ -511,9 +511,11 @@ class CorrectedLinearityAnalyzer:
                 child_lin and node.value in self.linear_operators)
             return bool(node.is_linear)
         if node.node_type == "concat":
-            node.is_linear = all(self._annotate_linearity(ch)
-                                 for ch in node.children)
-            return bool(node.is_linear)
+            # 统一策略：将 Concat 视为非线性，但仍遍历子节点以填充其 is_linear
+            for ch in node.children:
+                self._annotate_linearity(ch)
+            node.is_linear = False
+            return False
         if node.node_type == "partselect":
             # 仅 Var 子节点决定线性性
             if node.children:
@@ -565,7 +567,12 @@ class CorrectedLinearityAnalyzer:
                 nodes[str(nid)]['mark'] = 1 if n.is_linear else 0
                 nodes[str(nid)]['intrinsic_linear'] = 1 if self._op_intrinsic_linear(
                     n.value) else 0
-            elif n.node_type in ('concat', 'partselect'):
+            elif n.node_type == 'concat':
+                # Concat 统一非线性
+                nodes[str(nid)]['mark'] = 1 if n.is_linear else 0
+                nodes[str(nid)]['intrinsic_linear'] = 0
+            elif n.node_type == 'partselect':
+                # Partselect 的本征线性为 1，但 mark 取决于 var 子节点
                 nodes[str(nid)]['mark'] = 1 if n.is_linear else 0
                 nodes[str(nid)]['intrinsic_linear'] = 1
             elif n.node_type in ('terminal', 'constant'):

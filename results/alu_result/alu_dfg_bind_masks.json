@@ -1,6 +1,6 @@
 {
-  "file": "dfg_files/4004_dfg.txt",
-  "verilog_file": "verilog_files/4004.v",
+  "file": "dfg_files/alu_dfg.txt",
+  "verilog_file": "4004_full_verilog/alu.v",
   "binds": [
     {
       "dest": "alu._rn0_dout",

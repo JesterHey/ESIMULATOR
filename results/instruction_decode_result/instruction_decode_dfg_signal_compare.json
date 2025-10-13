@@ -1,0 +1,1962 @@
+{
+  "verilog_file": "4004_full_verilog/instruction_decode.v",
+  "dfg_file": "dfg_files/instruction_decode_dfg.txt",
+  "module_prefix": "instruction_decode.",
+  "summary": {
+    "total_names": 122,
+    "verilog_only": [
+      "instruction_decode.inout",
+      "instruction_decode.input",
+      "instruction_decode.output",
+      "instruction_decode.sysclk"
+    ],
+    "bind_only_dests": [],
+    "bind_only_sources": [
+      "1'd0",
+      "1'd1",
+      "4'd0",
+      "4'd1",
+      "4'd10",
+      "4'd11",
+      "4'd12",
+      "4'd13",
+      "4'd14",
+      "4'd15",
+      "4'd2",
+      "4'd3",
+      "4'd4",
+      "4'd5",
+      "4'd6",
+      "4'd7",
+      "4'd8",
+      "4'd9",
+      "4'dx",
+      "instruction_decode.a22",
+      "instruction_decode.acc_0",
+      "instruction_decode.add_0",
+      "instruction_decode.clk1",
+      "instruction_decode.clk2",
+      "instruction_decode.cy_1",
+      "instruction_decode.m12",
+      "instruction_decode.m22",
+      "instruction_decode.n0432",
+      "instruction_decode.poc",
+      "instruction_decode.x12",
+      "instruction_decode.x22",
+      "instruction_decode.x32"
+    ],
+    "missing_line_for_bind_dests": [],
+    "bind_with_incomplete_source_locations": [],
+    "verilog_signals": 90,
+    "bind_count": 86
+  },
+  "by_name": {
+    "1'd0": {
+      "name": "1'd0",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "1'd1": {
+      "name": "1'd1",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd0": {
+      "name": "4'd0",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd1": {
+      "name": "4'd1",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd10": {
+      "name": "4'd10",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd11": {
+      "name": "4'd11",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd12": {
+      "name": "4'd12",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd13": {
+      "name": "4'd13",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd14": {
+      "name": "4'd14",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd15": {
+      "name": "4'd15",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd2": {
+      "name": "4'd2",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd3": {
+      "name": "4'd3",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd4": {
+      "name": "4'd4",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd5": {
+      "name": "4'd5",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd6": {
+      "name": "4'd6",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd7": {
+      "name": "4'd7",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd8": {
+      "name": "4'd8",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'd9": {
+      "name": "4'd9",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "4'dx": {
+      "name": "4'dx",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.a22": {
+      "name": "instruction_decode.a22",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.acc_0": {
+      "name": "instruction_decode.acc_0",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.add": {
+      "name": "instruction_decode.add",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 117,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.add_0": {
+      "name": "instruction_decode.add_0",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.add_group_4": {
+      "name": "instruction_decode.add_group_4",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 167,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 4,
+      "is_trivial": false
+    },
+    "instruction_decode.adm": {
+      "name": "instruction_decode.adm",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 156,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.bbl": {
+      "name": "instruction_decode.bbl",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 121,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.clb": {
+      "name": "instruction_decode.clb",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 137,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.clc": {
+      "name": "instruction_decode.clc",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 138,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.clk1": {
+      "name": "instruction_decode.clk1",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.clk2": {
+      "name": "instruction_decode.clk2",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.cma": {
+      "name": "instruction_decode.cma",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 141,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.cmc": {
+      "name": "instruction_decode.cmc",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 140,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.cn_n": {
+      "name": "instruction_decode.cn_n",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 183,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.com_n": {
+      "name": "instruction_decode.com_n",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "alias",
+      "dest_location": 244,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": null,
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.cy_1": {
+      "name": "instruction_decode.cy_1",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.daa": {
+      "name": "instruction_decode.daa",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 149,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.dac": {
+      "name": "instruction_decode.dac",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 146,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.data": {
+      "name": "instruction_decode.data",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "branch",
+      "dest_location": 252,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": null,
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.dc": {
+      "name": "instruction_decode.dc",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 196,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.dcl": {
+      "name": "instruction_decode.dcl",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 151,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.fim_src": {
+      "name": "instruction_decode.fim_src",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 111,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.fin_fim": {
+      "name": "instruction_decode.fin_fim",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 159,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 3,
+      "is_trivial": false
+    },
+    "instruction_decode.fin_fim_src_jin": {
+      "name": "instruction_decode.fin_fim_src_jin",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 133,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.iac": {
+      "name": "instruction_decode.iac",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 139,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.inc": {
+      "name": "instruction_decode.inc",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 115,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.inc_group_5": {
+      "name": "instruction_decode.inc_group_5",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 168,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 3,
+      "is_trivial": false
+    },
+    "instruction_decode.inc_isz": {
+      "name": "instruction_decode.inc_isz",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 130,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Or"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.inc_isz_add_sub_xch_ld": {
+      "name": "instruction_decode.inc_isz_add_sub_xch_ld",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 132,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 5,
+      "is_trivial": false
+    },
+    "instruction_decode.inc_isz_xch": {
+      "name": "instruction_decode.inc_isz_xch",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 131,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.inout": {
+      "name": "instruction_decode.inout",
+      "in_verilog": true,
+      "as_bind_dest": false,
+      "as_source": false,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.input": {
+      "name": "instruction_decode.input",
+      "in_verilog": true,
+      "as_bind_dest": false,
+      "as_source": false,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.io": {
+      "name": "instruction_decode.io",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 123,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.ior": {
+      "name": "instruction_decode.ior",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 155,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 3,
+      "is_trivial": false
+    },
+    "instruction_decode.iow": {
+      "name": "instruction_decode.iow",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 154,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 3,
+      "is_trivial": false
+    },
+    "instruction_decode.isz": {
+      "name": "instruction_decode.isz",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 116,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.jcn": {
+      "name": "instruction_decode.jcn",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 110,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.jcn_isz": {
+      "name": "instruction_decode.jcn_isz",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 127,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.jin_fin": {
+      "name": "instruction_decode.jin_fin",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 112,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.jms": {
+      "name": "instruction_decode.jms",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 114,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.jun": {
+      "name": "instruction_decode.jun",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 113,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.jun_jms": {
+      "name": "instruction_decode.jun_jms",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 128,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.kbp": {
+      "name": "instruction_decode.kbp",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 150,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.ld": {
+      "name": "instruction_decode.ld",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 119,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.ldm": {
+      "name": "instruction_decode.ldm",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 122,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.ldm_bbl": {
+      "name": "instruction_decode.ldm_bbl",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 129,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.m12": {
+      "name": "instruction_decode.m12",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.m22": {
+      "name": "instruction_decode.m22",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.n0329": {
+      "name": "instruction_decode.n0329",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "alias",
+      "dest_location": 217,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": null,
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.n0332": {
+      "name": "instruction_decode.n0332",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 247,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 7,
+      "is_trivial": false
+    },
+    "instruction_decode.n0337": {
+      "name": "instruction_decode.n0337",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 204,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.n0342": {
+      "name": "instruction_decode.n0342",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "alias",
+      "dest_location": 248,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": null,
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.n0343": {
+      "name": "instruction_decode.n0343",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "branch",
+      "dest_location": 186,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.n0360": {
+      "name": "instruction_decode.n0360",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "branch",
+      "dest_location": 199,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.n0362": {
+      "name": "instruction_decode.n0362",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "branch",
+      "dest_location": 188,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": null,
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.n0368": {
+      "name": "instruction_decode.n0368",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 187,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 8,
+      "is_trivial": false
+    },
+    "instruction_decode.n0375": {
+      "name": "instruction_decode.n0375",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 213,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.n0380": {
+      "name": "instruction_decode.n0380",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "branch",
+      "dest_location": 208,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.n0397": {
+      "name": "instruction_decode.n0397",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "branch",
+      "dest_location": 172,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.n0405": {
+      "name": "instruction_decode.n0405",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "branch",
+      "dest_location": 176,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": null,
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.n0413": {
+      "name": "instruction_decode.n0413",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 175,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 6,
+      "is_trivial": false
+    },
+    "instruction_decode.n0414": {
+      "name": "instruction_decode.n0414",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "branch",
+      "dest_location": 219,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": null,
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.n0419": {
+      "name": "instruction_decode.n0419",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 174,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 11,
+      "is_trivial": false
+    },
+    "instruction_decode.n0425": {
+      "name": "instruction_decode.n0425",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "branch",
+      "dest_location": 235,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": null,
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.n0432": {
+      "name": "instruction_decode.n0432",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.n0433": {
+      "name": "instruction_decode.n0433",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "branch",
+      "dest_location": 227,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": null,
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.n0486": {
+      "name": "instruction_decode.n0486",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 173,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 9,
+      "is_trivial": false
+    },
+    "instruction_decode.n0782": {
+      "name": "instruction_decode.n0782",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 243,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 5,
+      "is_trivial": false
+    },
+    "instruction_decode.n0797": {
+      "name": "instruction_decode.n0797",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "verilog_only",
+      "dest_location": 219,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.n0801": {
+      "name": "instruction_decode.n0801",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "verilog_only",
+      "dest_location": 227,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.n0805": {
+      "name": "instruction_decode.n0805",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "verilog_only",
+      "dest_location": 235,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.nop": {
+      "name": "instruction_decode.nop",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 109,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.o_ib": {
+      "name": "instruction_decode.o_ib",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 136,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 3,
+      "is_trivial": false
+    },
+    "instruction_decode.opa": {
+      "name": "instruction_decode.opa",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "branch",
+      "dest_location": 101,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": null,
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.opa0_n": {
+      "name": "instruction_decode.opa0_n",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 106,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.opa_ib": {
+      "name": "instruction_decode.opa_ib",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 251,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 3,
+      "is_trivial": false
+    },
+    "instruction_decode.ope": {
+      "name": "instruction_decode.ope",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 124,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.ope_n": {
+      "name": "instruction_decode.ope_n",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 126,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.opr": {
+      "name": "instruction_decode.opr",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "branch",
+      "dest_location": 94,
+      "source_locations_complete": true,
+      "operator_types": [],
+      "usage_operator_types": null,
+      "maskable_count": 0,
+      "is_trivial": true
+    },
+    "instruction_decode.output": {
+      "name": "instruction_decode.output",
+      "in_verilog": true,
+      "as_bind_dest": false,
+      "as_source": false,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.poc": {
+      "name": "instruction_decode.poc",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.ral": {
+      "name": "instruction_decode.ral",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 142,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.rar": {
+      "name": "instruction_decode.rar",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 143,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.read_acc_3": {
+      "name": "instruction_decode.read_acc_3",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 166,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 9,
+      "is_trivial": false
+    },
+    "instruction_decode.sbm": {
+      "name": "instruction_decode.sbm",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 157,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.sc": {
+      "name": "instruction_decode.sc",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 195,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.sc_m12_clk2": {
+      "name": "instruction_decode.sc_m12_clk2",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 90,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.sc_m22_clk2": {
+      "name": "instruction_decode.sc_m22_clk2",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 91,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.src": {
+      "name": "instruction_decode.src",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 160,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.stc": {
+      "name": "instruction_decode.stc",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 148,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.sub": {
+      "name": "instruction_decode.sub",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 118,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.sub_group_6": {
+      "name": "instruction_decode.sub_group_6",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 169,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 4,
+      "is_trivial": false
+    },
+    "instruction_decode.sysclk": {
+      "name": "instruction_decode.sysclk",
+      "in_verilog": true,
+      "as_bind_dest": false,
+      "as_source": false,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.tcc": {
+      "name": "instruction_decode.tcc",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 144,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.tcs": {
+      "name": "instruction_decode.tcs",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 147,
+      "source_locations_complete": true,
+      "operator_types": [
+        "And",
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 2,
+      "is_trivial": false
+    },
+    "instruction_decode.write_acc_1": {
+      "name": "instruction_decode.write_acc_1",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 162,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 15,
+      "is_trivial": false
+    },
+    "instruction_decode.write_carry_2": {
+      "name": "instruction_decode.write_carry_2",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 164,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Or",
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 13,
+      "is_trivial": false
+    },
+    "instruction_decode.x12": {
+      "name": "instruction_decode.x12",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.x21_clk2": {
+      "name": "instruction_decode.x21_clk2",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 205,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.x22": {
+      "name": "instruction_decode.x22",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.x31_clk2": {
+      "name": "instruction_decode.x31_clk2",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": false,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 214,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Unot"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    },
+    "instruction_decode.x32": {
+      "name": "instruction_decode.x32",
+      "in_verilog": false,
+      "as_bind_dest": false,
+      "as_source": true,
+      "has_payload_entry": false,
+      "bind_kind": null,
+      "dest_location": null,
+      "source_locations_complete": null,
+      "operator_types": null,
+      "usage_operator_types": null,
+      "maskable_count": null,
+      "is_trivial": null
+    },
+    "instruction_decode.xch": {
+      "name": "instruction_decode.xch",
+      "in_verilog": true,
+      "as_bind_dest": true,
+      "as_source": true,
+      "has_payload_entry": true,
+      "bind_kind": "opchain",
+      "dest_location": 120,
+      "source_locations_complete": true,
+      "operator_types": [
+        "Eq"
+      ],
+      "usage_operator_types": null,
+      "maskable_count": 1,
+      "is_trivial": false
+    }
+  }
+}
