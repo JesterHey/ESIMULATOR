@@ -1,0 +1,14 @@
+Directive:
+(1, '`timescale 1ns / 1ps\n')
+(2, '`default_nettype none\n')
+Instance:
+(counter, 'counter')
+Term:
+(Term name:counter.q type:['Output', 'Reg'] msb:(IntConst 0) lsb:(IntConst 0))
+(Term name:counter.q_n type:['Reg'] msb:(IntConst 0) lsb:(IntConst 0))
+(Term name:counter.step_a type:['Input', 'Wire'] msb:(IntConst 0) lsb:(IntConst 0))
+(Term name:counter.step_b type:['Input', 'Wire'] msb:(IntConst 0) lsb:(IntConst 0))
+(Term name:counter.sysclk type:['Input', 'Wire'] msb:(IntConst 0) lsb:(IntConst 0))
+Bind:
+(Bind dest:counter.q tree:(Branch Cond:(Terminal counter.step_a) True:(Operator Unot Next:(Terminal counter.q_n))))
+(Bind dest:counter.q_n tree:(Branch Cond:(Terminal counter.step_b) True:(Terminal counter.q)))

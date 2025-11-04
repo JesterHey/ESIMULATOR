@@ -7,7 +7,7 @@
 // This file is part of the MCS-4 project hosted at OpenCores:
 //      http://www.opencores.org/cores/mcs-4/
 // 
-// Copyright © 2012 by Reece Pollack <rrpollack@opencores.org>
+// Copyright ï¿½ 2012 by Reece Pollack <rrpollack@opencores.org>
 // 
 // These materials are provided under the Creative Commons
 // "Attribution-NonCommercial-ShareAlike" Public License. They
@@ -23,10 +23,10 @@ module counter(
 	input  wire	sysclk,
 	input  wire	step_a,
 	input  wire	step_b,
-	output reg	q = 1'b0
+	output reg	q
 	);
 
-	reg q_n = 1'b1;
+	reg q_n;
 	always @(posedge sysclk) begin
 		if (step_a)	q <= ~q_n;
 		if (step_b) q_n <= q;

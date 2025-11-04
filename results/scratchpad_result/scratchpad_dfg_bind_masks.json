@@ -1,0 +1,4036 @@
+{
+  "file": "dfg_files/scratchpad_dfg.txt",
+  "verilog_file": "4004_full_verilog/scratchpad.v",
+  "binds": [
+    {
+      "dest": "scratchpad._rn0_dout",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.dram_temp",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "constant",
+            "value": "'d3",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              1,
+              2,
+              3
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [
+        0
+      ],
+      "workset_mask": [
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.dram_temp"
+      ],
+      "source_locations": [
+        67
+      ],
+      "operator_count": 0,
+      "bind_kind": "opchain",
+      "maskable_count": 1,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad._rn0_dout#op0:Partselect"
+      ]
+    },
+    {
+      "dest": "scratchpad._rn1_dout",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.dram_temp",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "constant",
+            "value": "'d7",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "constant",
+            "value": "'d4",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              1,
+              2,
+              3
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [
+        0
+      ],
+      "workset_mask": [
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.dram_temp"
+      ],
+      "source_locations": [
+        67
+      ],
+      "operator_count": 0,
+      "bind_kind": "opchain",
+      "maskable_count": 1,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad._rn1_dout#op0:Partselect"
+      ]
+    },
+    {
+      "dest": "scratchpad._rn2_dout",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "0": {
+            "id": 0,
+            "type": "terminal",
+            "value": "4'dx",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "4'dx"
+      ],
+      "source_locations": [
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "alias",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.data",
+      "dest_location": 169,
+      "ast": {
+        "nodes": {
+          "0": {
+            "id": 0,
+            "type": "terminal",
+            "value": "scratchpad.dout",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.dout"
+      ],
+      "source_locations": [
+        161
+      ],
+      "operator_count": 0,
+      "bind_kind": "alias",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.din_n",
+      "dest_location": 68,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.m12_m22_clk1_m11_m12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "scratchpad.data",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              3
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        2
+      ],
+      "operator_mask": [
+        0
+      ],
+      "operator_types": [
+        "Unot"
+      ],
+      "workset_order": [
+        2
+      ],
+      "workset_mask": [
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "scratchpad.data",
+        "scratchpad.m12_m22_clk1_m11_m12"
+      ],
+      "source_locations": [
+        169,
+        null
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 1,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.din_n#op0:Unot"
+      ]
+    },
+    {
+      "dest": "scratchpad.dout",
+      "dest_location": 161,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "1'd1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "scratchpad.rrab0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "Eq",
+            "children": [
+              2,
+              3
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "scratchpad._rn0_dout",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "terminal",
+            "value": "1'd1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "terminal",
+            "value": "scratchpad.rrab1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "operator",
+            "value": "Eq",
+            "children": [
+              7,
+              8
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "terminal",
+            "value": "scratchpad._rn1_dout",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "terminal",
+            "value": "scratchpad._rn2_dout",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              6,
+              9,
+              10
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              4,
+              5
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        1,
+        6
+      ],
+      "operator_mask": [
+        1,
+        1
+      ],
+      "operator_types": [
+        "Eq"
+      ],
+      "workset_order": [
+        1,
+        6
+      ],
+      "workset_mask": [
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "1'd1",
+        "scratchpad._rn0_dout",
+        "scratchpad._rn1_dout",
+        "scratchpad._rn2_dout",
+        "scratchpad.rrab0",
+        "scratchpad.rrab1"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null,
+        null,
+        122,
+        130
+      ],
+      "operator_count": 2,
+      "bind_kind": "branch",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.dout#op0:Eq",
+        "scratchpad.dout#op1:Eq"
+      ]
+    },
+    {
+      "dest": "scratchpad.dram_array",
+      "dest_location": 66,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.row_write",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "scratchpad.dram_temp",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "scratchpad.dram_temp",
+        "scratchpad.row_write"
+      ],
+      "source_locations": [
+        67,
+        108
+      ],
+      "operator_count": 0,
+      "bind_kind": "branch",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.dram_temp",
+      "dest_location": 67,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.wrab0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "scratchpad.din_n",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              3
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "scratchpad.row_read",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "unknown",
+            "value": "(Pointer Var:(Terminal scratchpad.dram_array) PTR:(Terminal scratchpad.row))",
+            "children": [],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "8": {
+            "id": 8,
+            "type": "constant",
+            "value": "'d3",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              7,
+              8,
+              9
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 1
+          },
+          "11": {
+            "id": 11,
+            "type": "terminal",
+            "value": "scratchpad.precharge",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "12": {
+            "id": 12,
+            "type": "terminal",
+            "value": "4'd0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              11,
+              12
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "4": {
+            "id": 4,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              5,
+              6,
+              10
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              4
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        2
+      ],
+      "operator_mask": [
+        0
+      ],
+      "operator_types": [
+        "Unot"
+      ],
+      "workset_order": [
+        2,
+        6
+      ],
+      "workset_mask": [
+        0,
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "4'd0",
+        "scratchpad.din_n",
+        "scratchpad.precharge",
+        "scratchpad.row_read",
+        "scratchpad.wrab0"
+      ],
+      "source_locations": [
+        null,
+        68,
+        106,
+        107,
+        136
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.dram_temp#op0:Unot",
+        "scratchpad.dram_temp#op1:Partselect"
+      ]
+    },
+    {
+      "dest": "scratchpad.dram_temp",
+      "dest_location": 67,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.wrab1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "scratchpad.din_n",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              3
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "scratchpad.row_read",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "unknown",
+            "value": "(Pointer Var:(Terminal scratchpad.dram_array) PTR:(Terminal scratchpad.row))",
+            "children": [],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "8": {
+            "id": 8,
+            "type": "constant",
+            "value": "'d7",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "constant",
+            "value": "'d4",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              7,
+              8,
+              9
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 1
+          },
+          "11": {
+            "id": 11,
+            "type": "terminal",
+            "value": "scratchpad.precharge",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "12": {
+            "id": 12,
+            "type": "terminal",
+            "value": "4'd0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              11,
+              12
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "4": {
+            "id": 4,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              5,
+              6,
+              10
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              4
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        2
+      ],
+      "operator_mask": [
+        0
+      ],
+      "operator_types": [
+        "Unot"
+      ],
+      "workset_order": [
+        2,
+        6
+      ],
+      "workset_mask": [
+        0,
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "4'd0",
+        "scratchpad.din_n",
+        "scratchpad.precharge",
+        "scratchpad.row_read",
+        "scratchpad.wrab0",
+        "scratchpad.wrab1"
+      ],
+      "source_locations": [
+        null,
+        68,
+        106,
+        107,
+        136,
+        137
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.dram_temp#op0:Unot",
+        "scratchpad.dram_temp#op1:Partselect"
+      ]
+    },
+    {
+      "dest": "scratchpad.n0564",
+      "dest_location": 134,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "scratchpad.opa0_n",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "scratchpad.fin_fim_src_jin",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              2,
+              3
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "scratchpad.dc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              1,
+              4
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        1
+      ],
+      "operator_mask": [
+        1,
+        1
+      ],
+      "operator_types": [
+        "And"
+      ],
+      "workset_order": [
+        0,
+        1
+      ],
+      "workset_mask": [
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          0,
+          1
+        ]
+      ],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.dc",
+        "scratchpad.fin_fim_src_jin",
+        "scratchpad.opa0_n"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null
+      ],
+      "operator_count": 2,
+      "bind_kind": "opchain",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.n0564#op0:And",
+        "scratchpad.n0564#op1:And"
+      ]
+    },
+    {
+      "dest": "scratchpad.n0568",
+      "dest_location": 135,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "scratchpad.inc_isz_xch",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "scratchpad.x32",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              2,
+              3
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "scratchpad.sc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              1,
+              4
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        1
+      ],
+      "operator_mask": [
+        1,
+        1
+      ],
+      "operator_types": [
+        "And"
+      ],
+      "workset_order": [
+        0,
+        1
+      ],
+      "workset_mask": [
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          0,
+          1
+        ]
+      ],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.inc_isz_xch",
+        "scratchpad.sc",
+        "scratchpad.x32"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null
+      ],
+      "operator_count": 2,
+      "bind_kind": "opchain",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.n0568#op0:And",
+        "scratchpad.n0568#op1:And"
+      ]
+    },
+    {
+      "dest": "scratchpad.n0592",
+      "dest_location": 124,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.clk2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "scratchpad.x22",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "terminal",
+            "value": "scratchpad.fin_fim_src_jin",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              5,
+              6
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "terminal",
+            "value": "scratchpad.opa0_n",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              10
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "11": {
+            "id": 11,
+            "type": "terminal",
+            "value": "scratchpad.x12",
+            "children": [],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              9,
+              11
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 1
+          },
+          "12": {
+            "id": 12,
+            "type": "terminal",
+            "value": "scratchpad.inc_isz_add_sub_xch_ld",
+            "children": [],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              8,
+              12
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              4,
+              7
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              3
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        2,
+        3,
+        4,
+        7,
+        8,
+        9
+      ],
+      "operator_mask": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "workset_order": [
+        2,
+        3,
+        4,
+        7,
+        8,
+        9
+      ],
+      "workset_mask": [
+        0,
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "scratchpad.clk2",
+        "scratchpad.fin_fim_src_jin",
+        "scratchpad.inc_isz_add_sub_xch_ld",
+        "scratchpad.opa0_n",
+        "scratchpad.x12",
+        "scratchpad.x22"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 6,
+      "bind_kind": "branch",
+      "maskable_count": 6,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.n0592#op0:Unot",
+        "scratchpad.n0592#op1:Or",
+        "scratchpad.n0592#op2:And",
+        "scratchpad.n0592#op3:And",
+        "scratchpad.n0592#op4:And",
+        "scratchpad.n0592#op5:Unot"
+      ]
+    },
+    {
+      "dest": "scratchpad.n0615",
+      "dest_location": 116,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.clk2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "scratchpad.x12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "terminal",
+            "value": "scratchpad.fin_fim_src_jin",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "terminal",
+            "value": "scratchpad.opa0_n",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "terminal",
+            "value": "scratchpad.inc_isz_add_sub_xch_ld",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              8,
+              9
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              6,
+              7
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              4,
+              5
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              3
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        2,
+        3,
+        5,
+        7
+      ],
+      "operator_mask": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "workset_order": [
+        2,
+        3,
+        5,
+        7
+      ],
+      "workset_mask": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        1,
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          3,
+          5
+        ],
+        [
+          5,
+          7
+        ]
+      ],
+      "bind_has_branch": true,
+      "sources": [
+        "scratchpad.clk2",
+        "scratchpad.fin_fim_src_jin",
+        "scratchpad.inc_isz_add_sub_xch_ld",
+        "scratchpad.opa0_n",
+        "scratchpad.x12"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 4,
+      "bind_kind": "branch",
+      "maskable_count": 4,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.n0615#op0:Unot",
+        "scratchpad.n0615#op1:And",
+        "scratchpad.n0615#op2:Or",
+        "scratchpad.n0615#op3:And"
+      ]
+    },
+    {
+      "dest": "scratchpad.precharge",
+      "dest_location": 106,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "scratchpad.sc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "scratchpad.a22",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "scratchpad.m22",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              4,
+              5
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              2,
+              3
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "terminal",
+            "value": "scratchpad.clk2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              1,
+              6
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        1,
+        3
+      ],
+      "operator_mask": [
+        1,
+        1,
+        1
+      ],
+      "operator_types": [
+        "And",
+        "Or"
+      ],
+      "workset_order": [
+        0,
+        1,
+        3
+      ],
+      "workset_mask": [
+        1,
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.a22",
+        "scratchpad.clk2",
+        "scratchpad.m22",
+        "scratchpad.sc"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 3,
+      "bind_kind": "opchain",
+      "maskable_count": 3,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.precharge#op0:And",
+        "scratchpad.precharge#op1:And",
+        "scratchpad.precharge#op2:Or"
+      ]
+    },
+    {
+      "dest": "scratchpad.reg_rfsh",
+      "dest_location": 71,
+      "ast": {
+        "nodes": {
+          "0": {
+            "id": 0,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_0.q",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.reg_rfsh_0.q"
+      ],
+      "source_locations": [
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "alias",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.reg_rfsh",
+      "dest_location": 71,
+      "ast": {
+        "nodes": {
+          "0": {
+            "id": 0,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_1.q",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.reg_rfsh_0.q",
+        "scratchpad.reg_rfsh_1.q"
+      ],
+      "source_locations": [
+        null,
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "alias",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.reg_rfsh",
+      "dest_location": 71,
+      "ast": {
+        "nodes": {
+          "0": {
+            "id": 0,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_2.q",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.reg_rfsh_0.q",
+        "scratchpad.reg_rfsh_1.q",
+        "scratchpad.reg_rfsh_2.q"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "alias",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_0.q",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_0.step_a",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_0.q_n",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              3
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        2
+      ],
+      "operator_mask": [
+        0
+      ],
+      "operator_types": [
+        "Unot"
+      ],
+      "workset_order": [
+        2
+      ],
+      "workset_mask": [
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "scratchpad.reg_rfsh_0.q_n",
+        "scratchpad.reg_rfsh_0.step_a"
+      ],
+      "source_locations": [
+        null,
+        null
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 1,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.reg_rfsh_0.q#op0:Unot"
+      ]
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_0.q_n",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_0.step_b",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_0.q",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "scratchpad.reg_rfsh_0.q",
+        "scratchpad.reg_rfsh_0.step_b"
+      ],
+      "source_locations": [
+        null,
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "branch",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_0.step_a",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "0": {
+            "id": 0,
+            "type": "terminal",
+            "value": "scratchpad.clk1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.clk1"
+      ],
+      "source_locations": [
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "alias",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_0.step_b",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "0": {
+            "id": 0,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_step",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.reg_rfsh_step"
+      ],
+      "source_locations": [
+        72
+      ],
+      "operator_count": 0,
+      "bind_kind": "alias",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_0.sysclk",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "0": {
+            "id": 0,
+            "type": "terminal",
+            "value": "scratchpad.sysclk",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.sysclk"
+      ],
+      "source_locations": [
+        22
+      ],
+      "operator_count": 0,
+      "bind_kind": "alias",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_1.q",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_1.step_a",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_1.q_n",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              3
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        2
+      ],
+      "operator_mask": [
+        0
+      ],
+      "operator_types": [
+        "Unot"
+      ],
+      "workset_order": [
+        2
+      ],
+      "workset_mask": [
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "scratchpad.reg_rfsh_1.q_n",
+        "scratchpad.reg_rfsh_1.step_a"
+      ],
+      "source_locations": [
+        null,
+        null
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 1,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.reg_rfsh_1.q#op0:Unot"
+      ]
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_1.q_n",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_1.step_b",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_1.q",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "scratchpad.reg_rfsh_1.q",
+        "scratchpad.reg_rfsh_1.step_b"
+      ],
+      "source_locations": [
+        null,
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "branch",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_1.step_a",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              1,
+              2,
+              3
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [
+        0
+      ],
+      "workset_mask": [
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.reg_rfsh"
+      ],
+      "source_locations": [
+        71
+      ],
+      "operator_count": 0,
+      "bind_kind": "opchain",
+      "maskable_count": 1,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.reg_rfsh_1.step_a#op0:Partselect"
+      ]
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_1.step_b",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "constant",
+            "value": "'d0",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              2,
+              3,
+              4
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              1
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0
+      ],
+      "operator_mask": [
+        0
+      ],
+      "operator_types": [
+        "Unot"
+      ],
+      "workset_order": [
+        0,
+        1
+      ],
+      "workset_mask": [
+        0,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.reg_rfsh"
+      ],
+      "source_locations": [
+        71
+      ],
+      "operator_count": 1,
+      "bind_kind": "opchain",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.reg_rfsh_1.step_b#op0:Unot",
+        "scratchpad.reg_rfsh_1.step_b#op1:Partselect"
+      ]
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_1.sysclk",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "0": {
+            "id": 0,
+            "type": "terminal",
+            "value": "scratchpad.sysclk",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.sysclk"
+      ],
+      "source_locations": [
+        22
+      ],
+      "operator_count": 0,
+      "bind_kind": "alias",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_2.q",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_2.step_a",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_2.q_n",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              3
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        2
+      ],
+      "operator_mask": [
+        0
+      ],
+      "operator_types": [
+        "Unot"
+      ],
+      "workset_order": [
+        2
+      ],
+      "workset_mask": [
+        0
+      ],
+      "workset_intrinsic_mask": [
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "scratchpad.reg_rfsh_2.q_n",
+        "scratchpad.reg_rfsh_2.step_a"
+      ],
+      "source_locations": [
+        null,
+        null
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 1,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.reg_rfsh_2.q#op0:Unot"
+      ]
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_2.q_n",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_2.step_b",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh_2.q",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "scratchpad.reg_rfsh_2.q",
+        "scratchpad.reg_rfsh_2.step_b"
+      ],
+      "source_locations": [
+        null,
+        null
+      ],
+      "operator_count": 0,
+      "bind_kind": "branch",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_2.step_a",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              1,
+              2,
+              3
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [
+        0
+      ],
+      "workset_mask": [
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.reg_rfsh"
+      ],
+      "source_locations": [
+        71
+      ],
+      "operator_count": 0,
+      "bind_kind": "opchain",
+      "maskable_count": 1,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.reg_rfsh_2.step_a#op0:Partselect"
+      ]
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_2.step_b",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              2,
+              3,
+              4
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              1
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0
+      ],
+      "operator_mask": [
+        0
+      ],
+      "operator_types": [
+        "Unot"
+      ],
+      "workset_order": [
+        0,
+        1
+      ],
+      "workset_mask": [
+        0,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.reg_rfsh"
+      ],
+      "source_locations": [
+        71
+      ],
+      "operator_count": 1,
+      "bind_kind": "opchain",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.reg_rfsh_2.step_b#op0:Unot",
+        "scratchpad.reg_rfsh_2.step_b#op1:Partselect"
+      ]
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_2.sysclk",
+      "dest_location": null,
+      "ast": {
+        "nodes": {
+          "0": {
+            "id": 0,
+            "type": "terminal",
+            "value": "scratchpad.sysclk",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.sysclk"
+      ],
+      "source_locations": [
+        22
+      ],
+      "operator_count": 0,
+      "bind_kind": "alias",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
+    },
+    {
+      "dest": "scratchpad.reg_rfsh_step",
+      "dest_location": 72,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "scratchpad.sc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "scratchpad.a12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              2,
+              3
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "scratchpad.clk2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              1,
+              4
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        1
+      ],
+      "operator_mask": [
+        1,
+        1
+      ],
+      "operator_types": [
+        "And"
+      ],
+      "workset_order": [
+        0,
+        1
+      ],
+      "workset_mask": [
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          0,
+          1
+        ]
+      ],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.a12",
+        "scratchpad.clk2",
+        "scratchpad.sc"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null
+      ],
+      "operator_count": 2,
+      "bind_kind": "opchain",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.reg_rfsh_step#op0:And",
+        "scratchpad.reg_rfsh_step#op1:And"
+      ]
+    },
+    {
+      "dest": "scratchpad.row",
+      "dest_location": 96,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.sc_m22_clk2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "scratchpad.data",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "constant",
+            "value": "'d3",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "constant",
+            "value": "'d1",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "partselect",
+            "value": "Partselect",
+            "children": [
+              3,
+              4,
+              5
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "terminal",
+            "value": "scratchpad.sc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "terminal",
+            "value": "scratchpad.a22",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              8,
+              9
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "terminal",
+            "value": "scratchpad.reg_rfsh",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              7,
+              10
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          },
+          "0": {
+            "id": 0,
+            "type": "branch",
+            "value": "Branch",
+            "children": [
+              1,
+              2,
+              6
+            ],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        7
+      ],
+      "operator_mask": [
+        1
+      ],
+      "operator_types": [
+        "And"
+      ],
+      "workset_order": [
+        2,
+        7
+      ],
+      "workset_mask": [
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        1
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": true,
+      "sources": [
+        "scratchpad.a22",
+        "scratchpad.data",
+        "scratchpad.reg_rfsh",
+        "scratchpad.sc",
+        "scratchpad.sc_m22_clk2"
+      ],
+      "source_locations": [
+        null,
+        169,
+        71,
+        null,
+        null
+      ],
+      "operator_count": 1,
+      "bind_kind": "branch",
+      "maskable_count": 2,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.row#op0:Partselect",
+        "scratchpad.row#op1:And"
+      ]
+    },
+    {
+      "dest": "scratchpad.row_read",
+      "dest_location": 107,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "scratchpad.poc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "terminal",
+            "value": "scratchpad.clk2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "terminal",
+            "value": "scratchpad.sc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              6,
+              7
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "9": {
+            "id": 9,
+            "type": "terminal",
+            "value": "scratchpad.a32",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "10": {
+            "id": 10,
+            "type": "terminal",
+            "value": "scratchpad.x12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              9,
+              10
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              5,
+              8
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              4
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              2,
+              3
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              1
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        8
+      ],
+      "operator_mask": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "workset_order": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        8
+      ],
+      "workset_mask": [
+        0,
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        1,
+        0,
+        1,
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          4,
+          5
+        ],
+        [
+          4,
+          8
+        ]
+      ],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.a32",
+        "scratchpad.clk2",
+        "scratchpad.poc",
+        "scratchpad.sc",
+        "scratchpad.x12"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 6,
+      "bind_kind": "opchain",
+      "maskable_count": 6,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.row_read#op0:Unot",
+        "scratchpad.row_read#op1:Or",
+        "scratchpad.row_read#op2:Unot",
+        "scratchpad.row_read#op3:And",
+        "scratchpad.row_read#op4:And",
+        "scratchpad.row_read#op5:Or"
+      ]
+    },
+    {
+      "dest": "scratchpad.row_write",
+      "dest_location": 108,
+      "ast": {
+        "nodes": {
+          "2": {
+            "id": 2,
+            "type": "terminal",
+            "value": "scratchpad.sc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "scratchpad.a12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "scratchpad.m12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              4,
+              5
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              2,
+              3
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "terminal",
+            "value": "scratchpad.clk2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              1,
+              6
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        1,
+        3
+      ],
+      "operator_mask": [
+        1,
+        1,
+        1
+      ],
+      "operator_types": [
+        "And",
+        "Or"
+      ],
+      "workset_order": [
+        0,
+        1,
+        3
+      ],
+      "workset_mask": [
+        1,
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          3
+        ]
+      ],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.a12",
+        "scratchpad.clk2",
+        "scratchpad.m12",
+        "scratchpad.sc"
+      ],
+      "source_locations": [
+        null,
+        null,
+        null,
+        null
+      ],
+      "operator_count": 3,
+      "bind_kind": "opchain",
+      "maskable_count": 3,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.row_write#op0:And",
+        "scratchpad.row_write#op1:And",
+        "scratchpad.row_write#op2:Or"
+      ]
+    },
+    {
+      "dest": "scratchpad.rrab0",
+      "dest_location": 122,
+      "ast": {
+        "nodes": {
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "scratchpad.dc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "scratchpad.n0615",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              3,
+              4
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "scratchpad.clk2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              2,
+              5
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              1
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        1,
+        2
+      ],
+      "operator_mask": [
+        0,
+        1,
+        1
+      ],
+      "operator_types": [
+        "Or",
+        "Unot"
+      ],
+      "workset_order": [
+        0,
+        1,
+        2
+      ],
+      "workset_mask": [
+        0,
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          1,
+          2
+        ]
+      ],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.clk2",
+        "scratchpad.dc",
+        "scratchpad.n0615"
+      ],
+      "source_locations": [
+        null,
+        null,
+        116
+      ],
+      "operator_count": 3,
+      "bind_kind": "opchain",
+      "maskable_count": 3,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.rrab0#op0:Unot",
+        "scratchpad.rrab0#op1:Or",
+        "scratchpad.rrab0#op2:Or"
+      ]
+    },
+    {
+      "dest": "scratchpad.rrab1",
+      "dest_location": 130,
+      "ast": {
+        "nodes": {
+          "3": {
+            "id": 3,
+            "type": "terminal",
+            "value": "scratchpad.dc",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "scratchpad.n0592",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              3,
+              4
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "scratchpad.clk2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "1": {
+            "id": 1,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              2,
+              5
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              1
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        1,
+        2
+      ],
+      "operator_mask": [
+        0,
+        1,
+        1
+      ],
+      "operator_types": [
+        "Or",
+        "Unot"
+      ],
+      "workset_order": [
+        0,
+        1,
+        2
+      ],
+      "workset_mask": [
+        0,
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        0,
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          1,
+          2
+        ]
+      ],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.clk2",
+        "scratchpad.dc",
+        "scratchpad.n0592"
+      ],
+      "source_locations": [
+        null,
+        null,
+        124
+      ],
+      "operator_count": 3,
+      "bind_kind": "opchain",
+      "maskable_count": 3,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.rrab1#op0:Unot",
+        "scratchpad.rrab1#op1:Or",
+        "scratchpad.rrab1#op2:Or"
+      ]
+    },
+    {
+      "dest": "scratchpad.wrab0",
+      "dest_location": 136,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.clk2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "scratchpad.m12",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "scratchpad.n0564",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              4,
+              5
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "terminal",
+            "value": "scratchpad.opa0_n",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "terminal",
+            "value": "scratchpad.n0568",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              7,
+              8
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              3,
+              6
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        2,
+        3,
+        6
+      ],
+      "operator_mask": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "operator_types": [
+        "And",
+        "Or"
+      ],
+      "workset_order": [
+        0,
+        2,
+        3,
+        6
+      ],
+      "workset_mask": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        1,
+        1,
+        1
+      ],
+      "fusable_adj": [
+        [
+          0,
+          2
+        ],
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          6
+        ]
+      ],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.clk2",
+        "scratchpad.m12",
+        "scratchpad.n0564",
+        "scratchpad.n0568",
+        "scratchpad.opa0_n"
+      ],
+      "source_locations": [
+        null,
+        null,
+        134,
+        135,
+        null
+      ],
+      "operator_count": 4,
+      "bind_kind": "opchain",
+      "maskable_count": 4,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.wrab0#op0:And",
+        "scratchpad.wrab0#op1:Or",
+        "scratchpad.wrab0#op2:And",
+        "scratchpad.wrab0#op3:And"
+      ]
+    },
+    {
+      "dest": "scratchpad.wrab1",
+      "dest_location": 137,
+      "ast": {
+        "nodes": {
+          "1": {
+            "id": 1,
+            "type": "terminal",
+            "value": "scratchpad.clk2",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "4": {
+            "id": 4,
+            "type": "terminal",
+            "value": "scratchpad.m22",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "5": {
+            "id": 5,
+            "type": "terminal",
+            "value": "scratchpad.n0564",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "3": {
+            "id": 3,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              4,
+              5
+            ],
+            "is_linear": true,
+            "mark": 1,
+            "intrinsic_linear": 1
+          },
+          "8": {
+            "id": 8,
+            "type": "terminal",
+            "value": "scratchpad.opa0_n",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "7": {
+            "id": 7,
+            "type": "operator",
+            "value": "Unot",
+            "children": [
+              8
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 0
+          },
+          "9": {
+            "id": 9,
+            "type": "terminal",
+            "value": "scratchpad.n0568",
+            "children": [],
+            "is_linear": false,
+            "mark": null,
+            "intrinsic_linear": 1
+          },
+          "6": {
+            "id": 6,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              7,
+              9
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 1
+          },
+          "2": {
+            "id": 2,
+            "type": "operator",
+            "value": "Or",
+            "children": [
+              3,
+              6
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 1
+          },
+          "0": {
+            "id": 0,
+            "type": "operator",
+            "value": "And",
+            "children": [
+              1,
+              2
+            ],
+            "is_linear": false,
+            "mark": 0,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [
+        0,
+        2,
+        3,
+        6,
+        7
+      ],
+      "operator_mask": [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "operator_types": [
+        "And",
+        "Or",
+        "Unot"
+      ],
+      "workset_order": [
+        0,
+        2,
+        3,
+        6,
+        7
+      ],
+      "workset_mask": [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "workset_intrinsic_mask": [
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [
+        "scratchpad.clk2",
+        "scratchpad.m22",
+        "scratchpad.n0564",
+        "scratchpad.n0568",
+        "scratchpad.opa0_n"
+      ],
+      "source_locations": [
+        null,
+        null,
+        134,
+        135,
+        null
+      ],
+      "operator_count": 5,
+      "bind_kind": "opchain",
+      "maskable_count": 5,
+      "is_trivial": false,
+      "workset_labels": [
+        "scratchpad.wrab1#op0:And",
+        "scratchpad.wrab1#op1:Or",
+        "scratchpad.wrab1#op2:And",
+        "scratchpad.wrab1#op3:And",
+        "scratchpad.wrab1#op4:Unot"
+      ]
+    },
+    {
+      "dest": "scratchpad.sysclk",
+      "dest_location": 22,
+      "ast": {
+        "nodes": {
+          "0": {
+            "id": 0,
+            "type": "terminal",
+            "value": "scratchpad.sysclk",
+            "children": [],
+            "is_linear": true,
+            "mark": null,
+            "intrinsic_linear": 1
+          }
+        },
+        "root": 0
+      },
+      "operator_order": [],
+      "operator_mask": [],
+      "operator_types": [],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
+      "fusable_adj": [],
+      "bind_has_branch": false,
+      "sources": [],
+      "source_locations": [],
+      "operator_count": 0,
+      "bind_kind": "verilog_only",
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": [],
+      "usage_operator_types": [],
+      "usage_bind_count": 3
+    }
+  ],
+  "total_binds": 41
+}

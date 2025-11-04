@@ -1,0 +1,49 @@
+{
+  "metadata": {
+    "generated_at": "2025-11-04T15:47:56.733487",
+    "tool_version": "2.0.0",
+    "analysis_type": "dfg_linearity",
+    "operator_linearity_tags": {
+      "Sll": 1,
+      "Eq": 1,
+      "Or": 1,
+      "Plus": 1,
+      "Xor": 1,
+      "UnaryMinus": 1,
+      "And": 1,
+      "Srl": 1,
+      "Minus": 1
+    }
+  },
+  "analysis_result": {
+    "summary": {
+      "total_expressions": 1,
+      "linear_expressions": 0,
+      "nonlinear_expressions": 1,
+      "linearity_ratio": 0.0
+    },
+    "complexity_distribution": {
+      "complex": 1
+    },
+    "expression_type_distribution": {
+      "branch": 1
+    },
+    "nonlinear_reasons": {
+      "条件分支表达式（本质非线性）": 1
+    },
+    "operator_usage": {
+      "Unot": 1
+    },
+    "detailed_analyses": {
+      "counter.q": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "branch"
+      }
+    }
+  }
+}

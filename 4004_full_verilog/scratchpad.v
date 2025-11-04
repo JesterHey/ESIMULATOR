@@ -7,7 +7,7 @@
 // This file is part of the MCS-4 project hosted at OpenCores:
 //      http://www.opencores.org/cores/mcs-4/
 // 
-// Copyright © 2012 by Reece Pollack <rrpollack@opencores.org>
+// Copyright ï¿½ 2012 by Reece Pollack <rrpollack@opencores.org>
 // 
 // These materials are provided under the Creative Commons
 // "Attribution-NonCommercial-ShareAlike" Public License. They
@@ -18,6 +18,20 @@
 // details of this license.
 //
 ////////////////////////////////////////////////////////////////////////
+module counter(
+	input  wire	sysclk,
+	input  wire	step_a,
+	input  wire	step_b,
+	output reg	q
+	);
+
+	reg q_n;
+	always @(posedge sysclk) begin
+		if (step_a)	q <= ~q_n;
+		if (step_b) q_n <= q;
+	end
+
+endmodule
 
 module scratchpad (
 	input  wire			sysclk,					// 50 MHz FPGA clock
@@ -146,7 +160,6 @@ module scratchpad (
 	// Manage the data output mux
 	reg   [3:0]	dout;
 	always @* begin
-		(* PARALLEL_CASE *)
 		case (1'b1)
 			rrab0:		dout = dram_temp[ 3:0];
 			rrab1:		dout = dram_temp[ 7:4];

@@ -1,0 +1,86 @@
+instruction_decode.add, Eq, 1
+instruction_decode.add_group_4, Unot, Or, Or, Or, 0 1 1 1
+instruction_decode.adm, And, Eq, 1 1
+instruction_decode.bbl, Eq, 1
+instruction_decode.clb, And, Eq, 1 1
+instruction_decode.clc, And, Eq, 1 1
+instruction_decode.cma, And, Eq, 1 1
+instruction_decode.cmc, And, Eq, 1 1
+instruction_decode.cn_n, Unot, 0
+instruction_decode.com_n, 0
+instruction_decode.daa, And, Eq, 1 1
+instruction_decode.dac, And, Eq, 1 1
+instruction_decode.data, 0
+instruction_decode.dc, Unot, 0
+instruction_decode.dcl, And, Eq, 1 1
+instruction_decode.fim_src, Eq, 1
+instruction_decode.fin_fim, And, Unot, Partselect, 0 0 1
+instruction_decode.fin_fim_src_jin, Or, 1
+instruction_decode.iac, And, Eq, 1 1
+instruction_decode.inc, Eq, 1
+instruction_decode.inc_group_5, Unot, Or, Or, 0 1 1
+instruction_decode.inc_isz, And, Or, 1 1
+instruction_decode.inc_isz_add_sub_xch_ld, Or, Or, Or, Or, Or, 1 1 1 1 1
+instruction_decode.inc_isz_xch, Or, Or, 1 1
+instruction_decode.io, Eq, 1
+instruction_decode.ior, And, Eq, Partselect, 1 1 1
+instruction_decode.iow, And, Eq, Partselect, 1 1 1
+instruction_decode.isz, Eq, 1
+instruction_decode.jcn, Eq, 1
+instruction_decode.jcn_isz, Or, 1
+instruction_decode.jin_fin, Eq, 1
+instruction_decode.jms, Eq, 1
+instruction_decode.jun, Eq, 1
+instruction_decode.jun_jms, Or, 1
+instruction_decode.kbp, And, Eq, 1 1
+instruction_decode.ld, Eq, 1
+instruction_decode.ldm, Eq, 1
+instruction_decode.ldm_bbl, Or, 1
+instruction_decode.n0329, 0
+instruction_decode.n0332, Unot, Or, And, And, And, And, Unot, 0 0 1 1 0 0 0
+instruction_decode.n0337, Unot, Or, 0 1
+instruction_decode.n0342, 0
+instruction_decode.n0343, Unot, 0
+instruction_decode.n0360, Unot, 0
+instruction_decode.n0362, 0
+instruction_decode.n0368, Unot, Or, And, And, Or, Or, And, Unot, 0 0 1 1 1 1 0 0
+instruction_decode.n0375, Unot, Or, 0 1
+instruction_decode.n0380, Unot, 0
+instruction_decode.n0397, Unot, 0
+instruction_decode.n0405, 0
+instruction_decode.n0413, Unot, Or, And, And, Or, Unot, 0 0 1 1 0 0
+instruction_decode.n0414, 0
+instruction_decode.n0419, Unot, And, And, Unot, Or, Unot, And, Or, Unot, Or, Unot, 0 0 0 0 0 0 0 0 0 0 0
+instruction_decode.n0425, 0
+instruction_decode.n0433, 0
+instruction_decode.n0486, Unot, Or, Or, And, Partselect, And, Partselect, And, Partselect, 0 1 1 1 1 1 1 1 1
+instruction_decode.n0782, Unot, Or, Or, And, And, 0 1 1 1 1
+instruction_decode.nop, Eq, 1
+instruction_decode.o_ib, And, Eq, Partselect, 1 1 1
+instruction_decode.opa, 0
+instruction_decode.opa0_n, Unot, Partselect, 0 1
+instruction_decode.opa_ib, And, Or, Unot, 0 1 0
+instruction_decode.ope, Eq, 1
+instruction_decode.ope_n, Unot, 0
+instruction_decode.opr, 0
+instruction_decode.ral, And, Eq, 1 1
+instruction_decode.rar, And, Eq, 1 1
+instruction_decode.read_acc_3, Unot, Or, Or, Or, Or, Or, Or, Or, Or, 0 1 1 1 1 1 1 1 1
+instruction_decode.sbm, And, Eq, 1 1
+instruction_decode.sc, Unot, 0
+instruction_decode.sc_m12_clk2, And, And, 1 1
+instruction_decode.sc_m22_clk2, And, And, 1 1
+instruction_decode.src, And, Partselect, 1 1
+instruction_decode.stc, And, Eq, 1 1
+instruction_decode.sub, Eq, 1
+instruction_decode.sub_group_6, Unot, Or, Or, Or, 0 1 1 1
+instruction_decode.tcc, And, Eq, 1 1
+instruction_decode.tcs, And, Eq, 1 1
+instruction_decode.write_acc_1, Unot, Or, Or, Or, Or, Or, Or, Or, Or, Or, Or, Or, Or, Or, Or, 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+instruction_decode.write_carry_2, Unot, Or, Or, Or, Or, Or, Or, Or, Or, Or, Or, Or, Or, 0 1 1 1 1 1 1 1 1 1 1 1 1
+instruction_decode.x21_clk2, Unot, 0
+instruction_decode.x31_clk2, Unot, 0
+instruction_decode.xch, Eq, 1
+instruction_decode.n0797, 0
+instruction_decode.n0801, 0
+instruction_decode.n0805, 0

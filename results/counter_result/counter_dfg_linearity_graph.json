@@ -1,0 +1,22 @@
+{
+  "nodes": {
+    "counter.q": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    }
+  },
+  "edges": [
+    [
+      "counter.step_a",
+      "counter.q"
+    ],
+    [
+      "counter.q_n",
+      "counter.q"
+    ]
+  ]
+}

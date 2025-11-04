@@ -1,0 +1,39 @@
+timing_io.L, Or, Or, And, Or, 1 1 1 1
+timing_io._rn0_data_in, 0
+timing_io._rn1_data_in, 0
+timing_io._rn2_data_in, 0
+timing_io._rn3_data_in, 0
+timing_io.a12, Partselect, 1
+timing_io.a22, Partselect, 1
+timing_io.a32, Partselect, 1
+timing_io.clk1, 0
+timing_io.clk2, 0
+timing_io.cmram0_pad, 0
+timing_io.cmram1_pad, 0
+timing_io.cmram2_pad, 0
+timing_io.cmram3_pad, 0
+timing_io.cmrom_pad, 0
+timing_io.data, 0
+timing_io.data_in, 0
+timing_io.data_out, 0
+timing_io.data_pad, 0
+timing_io.gate, Unot, 0
+timing_io.m12, Partselect, 1
+timing_io.m22, Partselect, 1
+timing_io.master, Concat, Unor, 0 0
+timing_io.n0278, 0
+timing_io.n0279, Unot, Or, 0 1
+timing_io.n0432, Unot, 0
+timing_io.n0659, Or, And, And, 1 1 1
+timing_io.n0676, Or, Or, 1 1
+timing_io.n0685, Unot, 0
+timing_io.n0699, Unot, 0
+timing_io.n0700, Or, Or, And, 1 1 1
+timing_io.n0702, Unot, 0
+timing_io.n0707, 0
+timing_io.n0708, Unot, Or, Or, And, 0 1 1 1
+timing_io.poc, 0
+timing_io.slave, 0
+timing_io.x12, Partselect, 1
+timing_io.x22, Partselect, 1
+timing_io.x32, Partselect, 1
