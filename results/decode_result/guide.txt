@@ -14,7 +14,7 @@ instruction_decode.data, 0
 instruction_decode.dc, Unot, 0
 instruction_decode.dcl, And, Eq, 1 1
 instruction_decode.fim_src, Eq, 1
-instruction_decode.fin_fim, And, Unot, Partselect, 0 0 1
+instruction_decode.fin_fim, And, Unot, Partselect, 1 0 1
 instruction_decode.fin_fim_src_jin, Or, 1
 instruction_decode.iac, And, Eq, 1 1
 instruction_decode.inc, Eq, 1
@@ -37,20 +37,20 @@ instruction_decode.ld, Eq, 1
 instruction_decode.ldm, Eq, 1
 instruction_decode.ldm_bbl, Or, 1
 instruction_decode.n0329, 0
-instruction_decode.n0332, Unot, Or, And, And, And, And, Unot, 0 0 1 1 0 0 0
+instruction_decode.n0332, Unot, Or, And, And, And, And, Unot, 0 1 1 1 1 1 0
 instruction_decode.n0337, Unot, Or, 0 1
 instruction_decode.n0342, 0
 instruction_decode.n0343, Unot, 0
 instruction_decode.n0360, Unot, 0
 instruction_decode.n0362, 0
-instruction_decode.n0368, Unot, Or, And, And, Or, Or, And, Unot, 0 0 1 1 1 1 0 0
+instruction_decode.n0368, Unot, Or, And, And, Or, Or, And, Unot, 0 1 1 1 1 1 1 0
 instruction_decode.n0375, Unot, Or, 0 1
 instruction_decode.n0380, Unot, 0
 instruction_decode.n0397, Unot, 0
 instruction_decode.n0405, 0
-instruction_decode.n0413, Unot, Or, And, And, Or, Unot, 0 0 1 1 0 0
+instruction_decode.n0413, Unot, Or, And, And, Or, Unot, 0 1 1 1 1 0
 instruction_decode.n0414, 0
-instruction_decode.n0419, Unot, And, And, Unot, Or, Unot, And, Or, Unot, Or, Unot, 0 0 0 0 0 0 0 0 0 0 0
+instruction_decode.n0419, Unot, And, And, Unot, Or, Unot, And, Or, Unot, Or, Unot, 0 1 1 0 1 0 1 1 0 1 0
 instruction_decode.n0425, 0
 instruction_decode.n0433, 0
 instruction_decode.n0486, Unot, Or, Or, And, Partselect, And, Partselect, And, Partselect, 0 1 1 1 1 1 1 1 1
@@ -59,7 +59,7 @@ instruction_decode.nop, Eq, 1
 instruction_decode.o_ib, And, Eq, Partselect, 1 1 1
 instruction_decode.opa, 0
 instruction_decode.opa0_n, Unot, Partselect, 0 1
-instruction_decode.opa_ib, And, Or, Unot, 0 1 0
+instruction_decode.opa_ib, And, Or, Unot, 1 1 0
 instruction_decode.ope, Eq, 1
 instruction_decode.ope_n, Unot, 0
 instruction_decode.opr, 0

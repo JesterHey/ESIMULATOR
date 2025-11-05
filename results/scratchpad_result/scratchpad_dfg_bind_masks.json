@@ -53,15 +53,9 @@
       "operator_order": [],
       "operator_mask": [],
       "operator_types": [],
-      "workset_order": [
-        0
-      ],
-      "workset_mask": [
-        1
-      ],
-      "workset_intrinsic_mask": [
-        1
-      ],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
       "fusable_adj": [],
       "bind_has_branch": false,
       "sources": [
@@ -72,11 +66,9 @@
       ],
       "operator_count": 0,
       "bind_kind": "opchain",
-      "maskable_count": 1,
-      "is_trivial": false,
-      "workset_labels": [
-        "scratchpad._rn0_dout#op0:Partselect"
-      ]
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
     },
     {
       "dest": "scratchpad._rn1_dout",
@@ -129,15 +121,9 @@
       "operator_order": [],
       "operator_mask": [],
       "operator_types": [],
-      "workset_order": [
-        0
-      ],
-      "workset_mask": [
-        1
-      ],
-      "workset_intrinsic_mask": [
-        1
-      ],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
       "fusable_adj": [],
       "bind_has_branch": false,
       "sources": [
@@ -148,11 +134,9 @@
       ],
       "operator_count": 0,
       "bind_kind": "opchain",
-      "maskable_count": 1,
-      "is_trivial": false,
-      "workset_labels": [
-        "scratchpad._rn1_dout#op0:Partselect"
-      ]
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
     },
     {
       "dest": "scratchpad._rn2_dout",
@@ -696,16 +680,13 @@
         "Unot"
       ],
       "workset_order": [
-        2,
-        6
+        2
       ],
       "workset_mask": [
-        0,
         0
       ],
       "workset_intrinsic_mask": [
-        0,
-        1
+        0
       ],
       "fusable_adj": [],
       "bind_has_branch": true,
@@ -725,11 +706,10 @@
       ],
       "operator_count": 1,
       "bind_kind": "branch",
-      "maskable_count": 2,
+      "maskable_count": 1,
       "is_trivial": false,
       "workset_labels": [
-        "scratchpad.dram_temp#op0:Unot",
-        "scratchpad.dram_temp#op1:Partselect"
+        "scratchpad.dram_temp#op0:Unot"
       ]
     },
     {
@@ -884,16 +864,13 @@
         "Unot"
       ],
       "workset_order": [
-        2,
-        6
+        2
       ],
       "workset_mask": [
-        0,
         0
       ],
       "workset_intrinsic_mask": [
-        0,
-        1
+        0
       ],
       "fusable_adj": [],
       "bind_has_branch": true,
@@ -915,11 +892,10 @@
       ],
       "operator_count": 1,
       "bind_kind": "branch",
-      "maskable_count": 2,
+      "maskable_count": 1,
       "is_trivial": false,
       "workset_labels": [
-        "scratchpad.dram_temp#op0:Unot",
-        "scratchpad.dram_temp#op1:Partselect"
+        "scratchpad.dram_temp#op0:Unot"
       ]
     },
     {
@@ -1207,7 +1183,7 @@
             "type": "terminal",
             "value": "scratchpad.x12",
             "children": [],
-            "is_linear": false,
+            "is_linear": true,
             "mark": null,
             "intrinsic_linear": 1
           },
@@ -1228,7 +1204,7 @@
             "type": "terminal",
             "value": "scratchpad.inc_isz_add_sub_xch_ld",
             "children": [],
-            "is_linear": false,
+            "is_linear": true,
             "mark": null,
             "intrinsic_linear": 1
           },
@@ -2252,15 +2228,9 @@
       "operator_order": [],
       "operator_mask": [],
       "operator_types": [],
-      "workset_order": [
-        0
-      ],
-      "workset_mask": [
-        1
-      ],
-      "workset_intrinsic_mask": [
-        1
-      ],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
       "fusable_adj": [],
       "bind_has_branch": false,
       "sources": [
@@ -2271,11 +2241,9 @@
       ],
       "operator_count": 0,
       "bind_kind": "opchain",
-      "maskable_count": 1,
-      "is_trivial": false,
-      "workset_labels": [
-        "scratchpad.reg_rfsh_1.step_a#op0:Partselect"
-      ]
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
     },
     {
       "dest": "scratchpad.reg_rfsh_1.step_b",
@@ -2346,16 +2314,13 @@
         "Unot"
       ],
       "workset_order": [
-        0,
-        1
+        0
       ],
       "workset_mask": [
-        0,
-        1
+        0
       ],
       "workset_intrinsic_mask": [
-        0,
-        1
+        0
       ],
       "fusable_adj": [],
       "bind_has_branch": false,
@@ -2367,11 +2332,10 @@
       ],
       "operator_count": 1,
       "bind_kind": "opchain",
-      "maskable_count": 2,
+      "maskable_count": 1,
       "is_trivial": false,
       "workset_labels": [
-        "scratchpad.reg_rfsh_1.step_b#op0:Unot",
-        "scratchpad.reg_rfsh_1.step_b#op1:Partselect"
+        "scratchpad.reg_rfsh_1.step_b#op0:Unot"
       ]
     },
     {
@@ -2607,15 +2571,9 @@
       "operator_order": [],
       "operator_mask": [],
       "operator_types": [],
-      "workset_order": [
-        0
-      ],
-      "workset_mask": [
-        1
-      ],
-      "workset_intrinsic_mask": [
-        1
-      ],
+      "workset_order": [],
+      "workset_mask": [],
+      "workset_intrinsic_mask": [],
       "fusable_adj": [],
       "bind_has_branch": false,
       "sources": [
@@ -2626,11 +2584,9 @@
       ],
       "operator_count": 0,
       "bind_kind": "opchain",
-      "maskable_count": 1,
-      "is_trivial": false,
-      "workset_labels": [
-        "scratchpad.reg_rfsh_2.step_a#op0:Partselect"
-      ]
+      "maskable_count": 0,
+      "is_trivial": true,
+      "workset_labels": []
     },
     {
       "dest": "scratchpad.reg_rfsh_2.step_b",
@@ -2701,16 +2657,13 @@
         "Unot"
       ],
       "workset_order": [
-        0,
-        1
+        0
       ],
       "workset_mask": [
-        0,
-        1
+        0
       ],
       "workset_intrinsic_mask": [
-        0,
-        1
+        0
       ],
       "fusable_adj": [],
       "bind_has_branch": false,
@@ -2722,11 +2675,10 @@
       ],
       "operator_count": 1,
       "bind_kind": "opchain",
-      "maskable_count": 2,
+      "maskable_count": 1,
       "is_trivial": false,
       "workset_labels": [
-        "scratchpad.reg_rfsh_2.step_b#op0:Unot",
-        "scratchpad.reg_rfsh_2.step_b#op1:Partselect"
+        "scratchpad.reg_rfsh_2.step_b#op0:Unot"
       ]
     },
     {
@@ -3005,15 +2957,12 @@
         "And"
       ],
       "workset_order": [
-        2,
         7
       ],
       "workset_mask": [
-        1,
         1
       ],
       "workset_intrinsic_mask": [
-        1,
         1
       ],
       "fusable_adj": [],
@@ -3034,11 +2983,10 @@
       ],
       "operator_count": 1,
       "bind_kind": "branch",
-      "maskable_count": 2,
+      "maskable_count": 1,
       "is_trivial": false,
       "workset_labels": [
-        "scratchpad.row#op0:Partselect",
-        "scratchpad.row#op1:And"
+        "scratchpad.row#op0:And"
       ]
     },
     {
@@ -3885,7 +3833,7 @@
             "type": "terminal",
             "value": "scratchpad.n0568",
             "children": [],
-            "is_linear": false,
+            "is_linear": true,
             "mark": null,
             "intrinsic_linear": 1
           },

@@ -1,15 +1,15 @@
-scratchpad._rn0_dout, Partselect, 1
-scratchpad._rn1_dout, Partselect, 1
+scratchpad._rn0_dout, 0
+scratchpad._rn1_dout, 0
 scratchpad._rn2_dout, 0
 scratchpad.data, 0
 scratchpad.din_n, Unot, 0
 scratchpad.dout, Eq, Eq, 1 1
 scratchpad.dram_array, 0
-scratchpad.dram_temp, Unot, Partselect, 0 0
-scratchpad.dram_temp, Unot, Partselect, 0 0
+scratchpad.dram_temp, Unot, 0
+scratchpad.dram_temp, Unot, 0
 scratchpad.n0564, And, And, 1 1
 scratchpad.n0568, And, And, 1 1
-scratchpad.n0592, Unot, Or, And, And, And, Unot, 0 0 1 0 0 0
+scratchpad.n0592, Unot, Or, And, And, And, Unot, 0 1 1 1 1 0
 scratchpad.n0615, Unot, And, Or, And, 0 1 1 1
 scratchpad.precharge, And, And, Or, 1 1 1
 scratchpad.reg_rfsh, 0
@@ -22,20 +22,20 @@ scratchpad.reg_rfsh_0.step_b, 0
 scratchpad.reg_rfsh_0.sysclk, 0
 scratchpad.reg_rfsh_1.q, Unot, 0
 scratchpad.reg_rfsh_1.q_n, 0
-scratchpad.reg_rfsh_1.step_a, Partselect, 1
-scratchpad.reg_rfsh_1.step_b, Unot, Partselect, 0 1
+scratchpad.reg_rfsh_1.step_a, 0
+scratchpad.reg_rfsh_1.step_b, Unot, 0
 scratchpad.reg_rfsh_1.sysclk, 0
 scratchpad.reg_rfsh_2.q, Unot, 0
 scratchpad.reg_rfsh_2.q_n, 0
-scratchpad.reg_rfsh_2.step_a, Partselect, 1
-scratchpad.reg_rfsh_2.step_b, Unot, Partselect, 0 1
+scratchpad.reg_rfsh_2.step_a, 0
+scratchpad.reg_rfsh_2.step_b, Unot, 0
 scratchpad.reg_rfsh_2.sysclk, 0
 scratchpad.reg_rfsh_step, And, And, 1 1
-scratchpad.row, Partselect, And, 1 1
-scratchpad.row_read, Unot, Or, Unot, And, And, Or, 0 0 0 1 1 1
+scratchpad.row, And, 1
+scratchpad.row_read, Unot, Or, Unot, And, And, Or, 0 1 0 1 1 1
 scratchpad.row_write, And, And, Or, 1 1 1
 scratchpad.rrab0, Unot, Or, Or, 0 1 1
 scratchpad.rrab1, Unot, Or, Or, 0 1 1
 scratchpad.wrab0, And, Or, And, And, 1 1 1 1
-scratchpad.wrab1, And, Or, And, And, Unot, 0 0 1 0 0
+scratchpad.wrab1, And, Or, And, And, Unot, 1 1 1 1 0
 scratchpad.sysclk, 0

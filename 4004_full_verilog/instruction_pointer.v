@@ -18,6 +18,20 @@
 // details of this license.
 //
 ////////////////////////////////////////////////////////////////////////
+module counter(
+	input  wire	sysclk,
+	input  wire	step_a,
+	input  wire	step_b,
+	output reg	q
+	);
+
+	reg q_n;
+	always @(posedge sysclk) begin
+		if (step_a)	q <= ~q_n;
+		if (step_b) q_n <= q;
+	end
+
+endmodule
 
 module instruction_pointer (
 	input  wire			sysclk,					// 50 MHz FPGA clock
@@ -183,7 +197,7 @@ module instruction_pointer (
 	// Manage the data output mux
 	reg   [3:0]	dout;
 	always @* begin
-		(* PARALLEL_CASE *)
+		// (* PARALLEL_CASE *)
 		case (1'b1)
 			radb0:		dout = dram_temp[ 3:0];
 			radb1:		dout = dram_temp[ 7:4];

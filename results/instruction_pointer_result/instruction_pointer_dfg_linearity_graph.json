@@ -1,0 +1,988 @@
+{
+  "nodes": {
+    "instruction_pointer._rn0_dout": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal instruction_pointer.dram...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "instruction_pointer._rn1_dout": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal instruction_pointer.dram...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "instruction_pointer._rn2_dout": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal instruction_pointer.dram...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "instruction_pointer._rn3_dout": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: 4'dx...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "instruction_pointer.addr_ptr": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_pointer.addr_ptr_0.q": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.addr_ptr_0.q_n": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.addr_ptr_0.step_a": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_pointer.addr_ptr_0.step_b": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_pointer.addr_ptr_0.sysclk": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_pointer.addr_ptr_1.q": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.addr_ptr_1.q_n": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.addr_ptr_1.step_a": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal instruction_pointer.addr...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "instruction_pointer.addr_ptr_1.step_b": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.addr_ptr_1.sysclk": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_pointer.addr_ptr_step": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Unot",
+        "Unot",
+        "Or",
+        "And",
+        "Or",
+        "Or",
+        "And",
+        "And"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.addr_rfsh": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_pointer.addr_rfsh_0.q": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.addr_rfsh_0.q_n": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.addr_rfsh_0.step_a": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_pointer.addr_rfsh_0.step_b": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_pointer.addr_rfsh_0.sysclk": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_pointer.addr_rfsh_1.q": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.addr_rfsh_1.q_n": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.addr_rfsh_1.step_a": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal instruction_pointer.addr...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "instruction_pointer.addr_rfsh_1.step_b": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.addr_rfsh_1.sysclk": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_pointer.addr_rfsh_step": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "And",
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.carry_in": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.carry_out": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.data": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "instruction_pointer.din_n": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.dout": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Eq",
+        "Eq",
+        "Eq"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.dram_array": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.dram_temp": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.incr_in": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.incr_out": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Or",
+        "And",
+        "Or",
+        "Plus"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.inh": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Or",
+      "operators": [
+        "Or",
+        "And",
+        "And",
+        "Or",
+        "And",
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.n0322": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.n0374": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.n0384": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.n0416": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.n0438": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot",
+        "Or",
+        "And",
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.n0517": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot",
+        "Or"
+      ],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.precharge": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Or",
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.radb0": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.radb1": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.radb2": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.row": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "instruction_pointer.row_read": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "And",
+        "And",
+        "Unot",
+        "Or",
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.row_write": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Or",
+        "And",
+        "Unot",
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.wadb0": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Unot",
+        "Unot",
+        "Or",
+        "Or",
+        "And",
+        "And",
+        "And",
+        "Or",
+        "And",
+        "And",
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "instruction_pointer.wadb1": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Unot",
+        "Unot",
+        "Or",
+        "Or",
+        "And",
+        "And",
+        "And",
+        "Or",
+        "And",
+        "And",
+        "Unot"
+      ],
+      "expression_type": "operator"
+    }
+  },
+  "edges": [
+    [
+      "instruction_pointer.dram_temp",
+      "instruction_pointer._rn0_dout"
+    ],
+    [
+      "instruction_pointer.dram_temp",
+      "instruction_pointer._rn1_dout"
+    ],
+    [
+      "instruction_pointer.dram_temp",
+      "instruction_pointer._rn2_dout"
+    ],
+    [
+      "instruction_pointer.addr_ptr_1.q",
+      "instruction_pointer.addr_ptr"
+    ],
+    [
+      "instruction_pointer.addr_ptr_0.step_a",
+      "instruction_pointer.addr_ptr_0.q"
+    ],
+    [
+      "instruction_pointer.addr_ptr_0.q_n",
+      "instruction_pointer.addr_ptr_0.q"
+    ],
+    [
+      "instruction_pointer.addr_ptr_0.step_b",
+      "instruction_pointer.addr_ptr_0.q_n"
+    ],
+    [
+      "instruction_pointer.addr_ptr_0.q",
+      "instruction_pointer.addr_ptr_0.q_n"
+    ],
+    [
+      "instruction_pointer.clk1",
+      "instruction_pointer.addr_ptr_0.step_a"
+    ],
+    [
+      "instruction_pointer.addr_ptr_step",
+      "instruction_pointer.addr_ptr_0.step_b"
+    ],
+    [
+      "instruction_pointer.sysclk",
+      "instruction_pointer.addr_ptr_0.sysclk"
+    ],
+    [
+      "instruction_pointer.addr_ptr_1.step_a",
+      "instruction_pointer.addr_ptr_1.q"
+    ],
+    [
+      "instruction_pointer.addr_ptr_1.q_n",
+      "instruction_pointer.addr_ptr_1.q"
+    ],
+    [
+      "instruction_pointer.addr_ptr_1.step_b",
+      "instruction_pointer.addr_ptr_1.q_n"
+    ],
+    [
+      "instruction_pointer.addr_ptr_1.q",
+      "instruction_pointer.addr_ptr_1.q_n"
+    ],
+    [
+      "instruction_pointer.addr_ptr",
+      "instruction_pointer.addr_ptr_1.step_a"
+    ],
+    [
+      "instruction_pointer.addr_ptr",
+      "instruction_pointer.addr_ptr_1.step_b"
+    ],
+    [
+      "instruction_pointer.sysclk",
+      "instruction_pointer.addr_ptr_1.sysclk"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.addr_ptr_step"
+    ],
+    [
+      "instruction_pointer.m22",
+      "instruction_pointer.addr_ptr_step"
+    ],
+    [
+      "instruction_pointer.x12",
+      "instruction_pointer.addr_ptr_step"
+    ],
+    [
+      "instruction_pointer.x22",
+      "instruction_pointer.addr_ptr_step"
+    ],
+    [
+      "instruction_pointer.bbl",
+      "instruction_pointer.addr_ptr_step"
+    ],
+    [
+      "instruction_pointer.m22",
+      "instruction_pointer.addr_ptr_step"
+    ],
+    [
+      "instruction_pointer.dc",
+      "instruction_pointer.addr_ptr_step"
+    ],
+    [
+      "instruction_pointer.jms",
+      "instruction_pointer.addr_ptr_step"
+    ],
+    [
+      "instruction_pointer.addr_rfsh_1.q",
+      "instruction_pointer.addr_rfsh"
+    ],
+    [
+      "instruction_pointer.addr_rfsh_0.step_a",
+      "instruction_pointer.addr_rfsh_0.q"
+    ],
+    [
+      "instruction_pointer.addr_rfsh_0.q_n",
+      "instruction_pointer.addr_rfsh_0.q"
+    ],
+    [
+      "instruction_pointer.addr_rfsh_0.step_b",
+      "instruction_pointer.addr_rfsh_0.q_n"
+    ],
+    [
+      "instruction_pointer.addr_rfsh_0.q",
+      "instruction_pointer.addr_rfsh_0.q_n"
+    ],
+    [
+      "instruction_pointer.clk1",
+      "instruction_pointer.addr_rfsh_0.step_a"
+    ],
+    [
+      "instruction_pointer.addr_rfsh_step",
+      "instruction_pointer.addr_rfsh_0.step_b"
+    ],
+    [
+      "instruction_pointer.sysclk",
+      "instruction_pointer.addr_rfsh_0.sysclk"
+    ],
+    [
+      "instruction_pointer.addr_rfsh_1.step_a",
+      "instruction_pointer.addr_rfsh_1.q"
+    ],
+    [
+      "instruction_pointer.addr_rfsh_1.q_n",
+      "instruction_pointer.addr_rfsh_1.q"
+    ],
+    [
+      "instruction_pointer.addr_rfsh_1.step_b",
+      "instruction_pointer.addr_rfsh_1.q_n"
+    ],
+    [
+      "instruction_pointer.addr_rfsh_1.q",
+      "instruction_pointer.addr_rfsh_1.q_n"
+    ],
+    [
+      "instruction_pointer.addr_rfsh",
+      "instruction_pointer.addr_rfsh_1.step_a"
+    ],
+    [
+      "instruction_pointer.addr_rfsh",
+      "instruction_pointer.addr_rfsh_1.step_b"
+    ],
+    [
+      "instruction_pointer.sysclk",
+      "instruction_pointer.addr_rfsh_1.sysclk"
+    ],
+    [
+      "instruction_pointer.inh",
+      "instruction_pointer.addr_rfsh_step"
+    ],
+    [
+      "instruction_pointer.x32",
+      "instruction_pointer.addr_rfsh_step"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.addr_rfsh_step"
+    ],
+    [
+      "instruction_pointer.clk1",
+      "instruction_pointer.carry_in"
+    ],
+    [
+      "instruction_pointer.carry_out",
+      "instruction_pointer.carry_in"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.carry_out"
+    ],
+    [
+      "instruction_pointer.incr_out",
+      "instruction_pointer.carry_out"
+    ],
+    [
+      "instruction_pointer.dout",
+      "instruction_pointer.data"
+    ],
+    [
+      "instruction_pointer.incr_out",
+      "instruction_pointer.din_n"
+    ],
+    [
+      "instruction_pointer.radb0",
+      "instruction_pointer.dout"
+    ],
+    [
+      "instruction_pointer._rn0_dout",
+      "instruction_pointer.dout"
+    ],
+    [
+      "instruction_pointer.radb1",
+      "instruction_pointer.dout"
+    ],
+    [
+      "instruction_pointer._rn1_dout",
+      "instruction_pointer.dout"
+    ],
+    [
+      "instruction_pointer.radb2",
+      "instruction_pointer.dout"
+    ],
+    [
+      "instruction_pointer._rn2_dout",
+      "instruction_pointer.dout"
+    ],
+    [
+      "instruction_pointer._rn3_dout",
+      "instruction_pointer.dout"
+    ],
+    [
+      "instruction_pointer.row_write",
+      "instruction_pointer.dram_array"
+    ],
+    [
+      "instruction_pointer.dram_temp",
+      "instruction_pointer.dram_array"
+    ],
+    [
+      "instruction_pointer.wadb2",
+      "instruction_pointer.dram_temp"
+    ],
+    [
+      "instruction_pointer.din_n",
+      "instruction_pointer.dram_temp"
+    ],
+    [
+      "instruction_pointer.row_read",
+      "instruction_pointer.dram_temp"
+    ],
+    [
+      "instruction_pointer.dram_array",
+      "instruction_pointer.dram_temp"
+    ],
+    [
+      "instruction_pointer.row",
+      "instruction_pointer.dram_temp"
+    ],
+    [
+      "instruction_pointer.precharge",
+      "instruction_pointer.dram_temp"
+    ],
+    [
+      "instruction_pointer.m12_m22_clk1_m11_m12",
+      "instruction_pointer.incr_in"
+    ],
+    [
+      "instruction_pointer.data",
+      "instruction_pointer.incr_in"
+    ],
+    [
+      "instruction_pointer.a12",
+      "instruction_pointer.incr_out"
+    ],
+    [
+      "instruction_pointer.a22",
+      "instruction_pointer.incr_out"
+    ],
+    [
+      "instruction_pointer.a32",
+      "instruction_pointer.incr_out"
+    ],
+    [
+      "instruction_pointer.carry_in",
+      "instruction_pointer.incr_out"
+    ],
+    [
+      "instruction_pointer.incr_in",
+      "instruction_pointer.incr_out"
+    ],
+    [
+      "instruction_pointer.incr_in",
+      "instruction_pointer.incr_out"
+    ],
+    [
+      "instruction_pointer.jin_fin",
+      "instruction_pointer.inh"
+    ],
+    [
+      "instruction_pointer.sc",
+      "instruction_pointer.inh"
+    ],
+    [
+      "instruction_pointer.jun_jms",
+      "instruction_pointer.inh"
+    ],
+    [
+      "instruction_pointer.jcn_isz",
+      "instruction_pointer.inh"
+    ],
+    [
+      "instruction_pointer.cn_n",
+      "instruction_pointer.inh"
+    ],
+    [
+      "instruction_pointer.dc",
+      "instruction_pointer.inh"
+    ],
+    [
+      "instruction_pointer.sc",
+      "instruction_pointer.n0322"
+    ],
+    [
+      "instruction_pointer.cn_n",
+      "instruction_pointer.n0322"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.n0374"
+    ],
+    [
+      "instruction_pointer.a22",
+      "instruction_pointer.n0374"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.n0384"
+    ],
+    [
+      "instruction_pointer.a12",
+      "instruction_pointer.n0384"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.n0416"
+    ],
+    [
+      "instruction_pointer.x32",
+      "instruction_pointer.n0416"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.n0438"
+    ],
+    [
+      "instruction_pointer.x12",
+      "instruction_pointer.n0438"
+    ],
+    [
+      "instruction_pointer.inh",
+      "instruction_pointer.n0438"
+    ],
+    [
+      "instruction_pointer.a32",
+      "instruction_pointer.n0438"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.n0517"
+    ],
+    [
+      "instruction_pointer.m22",
+      "instruction_pointer.n0517"
+    ],
+    [
+      "instruction_pointer.x22",
+      "instruction_pointer.n0517"
+    ],
+    [
+      "instruction_pointer.n0517",
+      "instruction_pointer.precharge"
+    ],
+    [
+      "instruction_pointer.inh",
+      "instruction_pointer.precharge"
+    ],
+    [
+      "instruction_pointer.clk1",
+      "instruction_pointer.precharge"
+    ],
+    [
+      "instruction_pointer.n0416",
+      "instruction_pointer.radb0"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.radb0"
+    ],
+    [
+      "instruction_pointer.n0384",
+      "instruction_pointer.radb1"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.radb1"
+    ],
+    [
+      "instruction_pointer.n0374",
+      "instruction_pointer.radb2"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.radb2"
+    ],
+    [
+      "instruction_pointer.x32",
+      "instruction_pointer.row"
+    ],
+    [
+      "instruction_pointer.addr_ptr",
+      "instruction_pointer.row"
+    ],
+    [
+      "instruction_pointer.x12",
+      "instruction_pointer.row"
+    ],
+    [
+      "instruction_pointer.addr_rfsh",
+      "instruction_pointer.row"
+    ],
+    [
+      "instruction_pointer.poc",
+      "instruction_pointer.row_read"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.row_read"
+    ],
+    [
+      "instruction_pointer.x12",
+      "instruction_pointer.row_read"
+    ],
+    [
+      "instruction_pointer.x32",
+      "instruction_pointer.row_read"
+    ],
+    [
+      "instruction_pointer.inh",
+      "instruction_pointer.row_read"
+    ],
+    [
+      "instruction_pointer.n0438",
+      "instruction_pointer.row_write"
+    ],
+    [
+      "instruction_pointer.jin_fin",
+      "instruction_pointer.row_write"
+    ],
+    [
+      "instruction_pointer.sc",
+      "instruction_pointer.row_write"
+    ],
+    [
+      "instruction_pointer.clk1",
+      "instruction_pointer.row_write"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.wadb0"
+    ],
+    [
+      "instruction_pointer.a12",
+      "instruction_pointer.wadb0"
+    ],
+    [
+      "instruction_pointer.sc",
+      "instruction_pointer.wadb0"
+    ],
+    [
+      "instruction_pointer.jin_fin",
+      "instruction_pointer.wadb0"
+    ],
+    [
+      "instruction_pointer.x32",
+      "instruction_pointer.wadb0"
+    ],
+    [
+      "instruction_pointer.jcn_isz",
+      "instruction_pointer.wadb0"
+    ],
+    [
+      "instruction_pointer.n0322",
+      "instruction_pointer.wadb0"
+    ],
+    [
+      "instruction_pointer.jun_jms",
+      "instruction_pointer.wadb0"
+    ],
+    [
+      "instruction_pointer.sc",
+      "instruction_pointer.wadb0"
+    ],
+    [
+      "instruction_pointer.m22",
+      "instruction_pointer.wadb0"
+    ],
+    [
+      "instruction_pointer.clk2",
+      "instruction_pointer.wadb1"
+    ],
+    [
+      "instruction_pointer.a22",
+      "instruction_pointer.wadb1"
+    ],
+    [
+      "instruction_pointer.sc",
+      "instruction_pointer.wadb1"
+    ],
+    [
+      "instruction_pointer.jin_fin",
+      "instruction_pointer.wadb1"
+    ],
+    [
+      "instruction_pointer.x22",
+      "instruction_pointer.wadb1"
+    ],
+    [
+      "instruction_pointer.jcn_isz",
+      "instruction_pointer.wadb1"
+    ],
+    [
+      "instruction_pointer.n0322",
+      "instruction_pointer.wadb1"
+    ],
+    [
+      "instruction_pointer.jun_jms",
+      "instruction_pointer.wadb1"
+    ],
+    [
+      "instruction_pointer.sc",
+      "instruction_pointer.wadb1"
+    ],
+    [
+      "instruction_pointer.m12",
+      "instruction_pointer.wadb1"
+    ]
+  ]
+}

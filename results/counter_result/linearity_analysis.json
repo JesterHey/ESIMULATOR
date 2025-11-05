@@ -1,18 +1,18 @@
 {
   "metadata": {
-    "generated_at": "2025-11-04T15:47:56.733487",
+    "generated_at": "2025-11-05T22:23:01.930018",
     "tool_version": "2.0.0",
     "analysis_type": "dfg_linearity",
     "operator_linearity_tags": {
       "Sll": 1,
-      "Eq": 1,
       "Or": 1,
+      "Minus": 1,
+      "UnaryMinus": 1,
       "Plus": 1,
       "Xor": 1,
-      "UnaryMinus": 1,
       "And": 1,
-      "Srl": 1,
-      "Minus": 1
+      "Eq": 1,
+      "Srl": 1
     }
   },
   "analysis_result": {

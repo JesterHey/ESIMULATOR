@@ -30,7 +30,9 @@ def convert_json_to_guide(json_path: Path, output_path: Path):
 
         ast_nodes = bind.get("ast", {}).get("nodes", {})
         workset_order = bind.get("workset_order", [])
-        workset_mask = bind.get("workset_mask", [])
+        # 使用 intrinsic_mask 而不是 workset_mask
+        # intrinsic_mask 只看操作符本身是否线性，不考虑子节点
+        workset_mask = bind.get("workset_intrinsic_mask", [])
 
         operator_names = []
         for node_id in workset_order:

@@ -353,7 +353,8 @@ class CorrectedLinearityAnalyzer:
             content = f.read()
 
         # 兼容 CRLF 与行尾空白; 确保能正确分割多个 Bind 片段
-        bind_pattern = r'\(Bind\s+dest:([^\s]+).*?tree:(.*?)\)\s*(?=\r?\n\(Bind|\r?\nBranch:|\r?\n\r?\n|\Z)'
+        # 修改后的正则：支持连续的 Bind（后面紧跟着另一个 Bind 或文件结束）
+        bind_pattern = r'\(Bind\s+dest:([^\s]+).*?tree:(.*?)\)(?=\s*(?:\(Bind|\Z))'
         matches = list(re.finditer(bind_pattern, content, re.DOTALL))
         self.total_expressions = len(matches)
         print(f"找到 {self.total_expressions} 个信号表达式")
@@ -555,12 +556,19 @@ class CorrectedLinearityAnalyzer:
             nid = alloc_id()
             id_map[nid] = n
             child_ids = [walk(c) for c in n.children]
+            # 对于 terminal 和 constant 节点，强制设置 is_linear 为 True
+            # 这样可以避免因 is_linear 初始值为 None 导致的问题
+            if n.node_type in ('terminal', 'constant'):
+                is_linear_value = True
+            else:
+                is_linear_value = bool(n.is_linear)
+            
             nodes[str(nid)] = {
                 'id': nid,
                 'type': n.node_type,
                 'value': n.value,
                 'children': child_ids,
-                'is_linear': bool(n.is_linear),
+                'is_linear': is_linear_value,
             }
 
             if n.node_type == 'operator':
@@ -605,13 +613,19 @@ class CorrectedLinearityAnalyzer:
         return order, mask
 
     def _collect_workset_order_and_mask(self, nodes_dict: Dict[str, Dict], root_id: int) -> Tuple[List[int], List[int]]:
-        """收集可掩码工作集（operator + concat + partselect）的顺序与掩码。"""
+        """收集可掩码工作集（operator + concat），跳过 partselect 节点。"""
         order: List[int] = []
         mask: List[int] = []
 
         def dfs(nid: int):
             n = nodes_dict[str(nid)]
-            if n['type'] in ('operator', 'concat', 'partselect'):
+            # 跳过 partselect，但继续处理其子节点
+            if n['type'] == 'partselect':
+                for cid in n['children']:
+                    dfs(cid)
+                return
+            # 只收集 operator 和 concat 节点
+            if n['type'] in ('operator', 'concat'):
                 order.append(nid)
                 m = n.get('mark', None)
                 mask.append(int(m) if isinstance(m, int) else 0)
@@ -628,18 +642,18 @@ class CorrectedLinearityAnalyzer:
         return False
 
     def _build_fusable_adjacency(self, nodes_dict: Dict[str, Dict], root_id: int) -> List[List[int]]:
-        """可融合关系：线性工作集（operator/concat/partselect）父子之间建立无向边。"""
+        """可融合关系：线性工作集（operator/concat）父子之间建立无向边，跳过 partselect。"""
         edges: Set[Tuple[int, int]] = set()
 
         def dfs(nid: int):
             n = nodes_dict[str(nid)]
             for cid in n['children']:
                 c = nodes_dict[str(cid)]
-                # 不穿越分支；仅在父子均为线性 operator 时建立边
+                # 不穿越分支；仅在父子均为线性 operator/concat 时建立边（排除 partselect）
                 if n['type'] == 'branch' or c['type'] == 'branch':
                     pass
                 else:
-                    if n['type'] in ('operator', 'concat', 'partselect') and c['type'] in ('operator', 'concat', 'partselect'):
+                    if n['type'] in ('operator', 'concat') and c['type'] in ('operator', 'concat'):
                         if n.get('mark') == 1 and c.get('mark') == 1:
                             a, b = sorted((nid, cid))
                             edges.add((a, b))
