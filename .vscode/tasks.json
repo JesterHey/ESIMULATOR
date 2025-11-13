@@ -68,6 +68,183 @@
 			"command": "python3 -u src/simulated_annealing.py",
 			"args": [],
 			"problemMatcher": []
+		},
+		{
+			"label": "Run Bind SA (simulated_annealing.py)",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"-u",
+				"src/simulated_annealing.py"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$python"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Generate AMS from SA (4004)",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"tools/generate_ams_from_sa.py",
+				"--sa",
+				"results/4004_bindmask_sa_best.json",
+				"--out",
+				"ams/build",
+				"--top",
+				"ams/tb/ams_top_bind_connect.sv"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$python"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Generate AMS from SA (4004, LUT backend)",
+			"type": "shell",
+			"command": "bash",
+			"args": [
+				"-lc",
+				"rm -rf ams/build/*; python3 tools/generate_ams_from_sa.py --sa results/4004_bindmask_sa_best.json --out ams/build --top ams/tb/ams_top_bind_connect.sv --backend lut"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$python"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Compile TB 4004 LUT (iverilog)",
+			"type": "shell",
+			"command": "bash",
+			"args": [
+				"-lc",
+				"iverilog -g2012 -o sim.out verilog_files/4004.v ams/build/*.sv ams/models/lut_block.sv ams/tb/tb_4004_ams.sv && vvp sim.out +seed=1 | tee ams/out_lut.txt"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Compile TB 4004 Baseline (iverilog)",
+			"type": "shell",
+			"command": "bash",
+			"args": [
+				"-lc",
+				"iverilog -g2012 -o sim_base.out verilog_files/4004.v ams/tb/tb_4004_baseline.sv && vvp sim_base.out +seed=1 | tee ams/out_base.txt"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Diff Baseline vs LUT outputs",
+			"type": "shell",
+			"command": "bash",
+			"args": [
+				"-lc",
+				"diff -u ams/out_base.txt ams/out_lut.txt || true"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Save Diff to results",
+			"type": "shell",
+			"command": "bash",
+			"args": [
+				"-lc",
+				"mkdir -p results; diff -u ams/out_base.txt ams/out_lut.txt > results/baseline_vs_lut.diff.txt || true; if cmp -s ams/out_base.txt ams/out_lut.txt; then echo \"No differences\" > results/baseline_vs_lut.diff.txt; fi; cp ams/out_base.txt results/baseline_out.txt; cp ams/out_lut.txt results/lut_out.txt; echo \"Saved: results/baseline_vs_lut.diff.txt\""
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Compile TB 4004 AMS (VCS-style)",
+			"type": "shell",
+			"command": "bash",
+			"args": [
+				"-lc",
+				"echo 'Compiling TB with VCS-style command (no run)...'; echo 'This requires a local VCS toolchain if actually executed.'; true"
+			],
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Pipeline Step 1: Analyze 4004 DFG",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"esimulator_cli.py",
+				"analyze",
+				"dfg_files/4004_dfg.txt",
+				"--output",
+				"results",
+				"--format",
+				"both"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$python"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Pipeline Step 2: Visualize 4004 DFG",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"esimulator_cli.py",
+				"visualize",
+				"dfg_files/4004_dfg.txt",
+				"--output",
+				"results",
+				"--focus",
+				"alu.cy_1",
+				"--depth",
+				"2"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$python"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Pipeline Step 2 (retry): Visualize 4004 DFG",
+			"type": "shell",
+			"command": "python3",
+			"args": [
+				"esimulator_cli.py",
+				"visualize",
+				"dfg_files/4004_dfg.txt",
+				"--output",
+				"results",
+				"--focus",
+				"alu.cy_1",
+				"--depth",
+				"2"
+			],
+			"isBackground": false,
+			"problemMatcher": [
+				"$python"
+			],
+			"group": "build"
+		},
+		{
+			"label": "run analyze with verilog line info",
+			"type": "shell",
+			"command": "python esimulator_cli.py analyze dfg_files/4004_dfg.txt --verilog-file verilog_files/4004.v --module-prefix alu.",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "run analyze with verilog line info (python3)",
+			"type": "shell",
+			"command": "python3 esimulator_cli.py analyze dfg_files/4004_dfg.txt --verilog-file verilog_files/4004.v --module-prefix alu.",
+			"isBackground": false,
+			"problemMatcher": []
 		}
 	]
 }

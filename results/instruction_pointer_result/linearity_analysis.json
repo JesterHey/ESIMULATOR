@@ -1,0 +1,543 @@
+{
+  "metadata": {
+    "generated_at": "2025-11-05T22:23:59.456184",
+    "tool_version": "2.0.0",
+    "analysis_type": "dfg_linearity",
+    "operator_linearity_tags": {
+      "Minus": 1,
+      "Srl": 1,
+      "And": 1,
+      "Sll": 1,
+      "UnaryMinus": 1,
+      "Eq": 1,
+      "Plus": 1,
+      "Xor": 1,
+      "Or": 1
+    }
+  },
+  "analysis_result": {
+    "summary": {
+      "total_expressions": 57,
+      "linear_expressions": 11,
+      "nonlinear_expressions": 46,
+      "linearity_ratio": 0.19298245614035087
+    },
+    "complexity_distribution": {
+      "unknown": 6,
+      "simple": 14,
+      "complex": 27,
+      "moderate": 6
+    },
+    "expression_type_distribution": {
+      "unknown": 6,
+      "terminal": 11,
+      "branch": 21,
+      "operator": 15
+    },
+    "nonlinear_reasons": {
+      "未识别的表达式类型": 6,
+      "条件分支表达式（本质非线性）": 21,
+      "包含非线性运算符": 15
+    },
+    "operator_usage": {
+      "Unot": 38,
+      "Or": 27,
+      "And": 24,
+      "Eq": 3,
+      "Plus": 1
+    },
+    "detailed_analyses": {
+      "instruction_pointer._rn0_dout": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: (Partselect Var:(Terminal instruction_pointer.dram...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "instruction_pointer._rn1_dout": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: (Partselect Var:(Terminal instruction_pointer.dram...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "instruction_pointer._rn2_dout": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: (Partselect Var:(Terminal instruction_pointer.dram...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "instruction_pointer._rn3_dout": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: 4'dx...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "instruction_pointer.addr_ptr": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "instruction_pointer.addr_ptr_0.q": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.addr_ptr_0.q_n": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.addr_ptr_0.step_a": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "instruction_pointer.addr_ptr_0.step_b": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "instruction_pointer.addr_ptr_0.sysclk": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "instruction_pointer.addr_ptr_1.q": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.addr_ptr_1.q_n": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.addr_ptr_1.step_a": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: (Partselect Var:(Terminal instruction_pointer.addr...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "instruction_pointer.addr_ptr_1.step_b": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "simple",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.addr_ptr_1.sysclk": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "instruction_pointer.addr_ptr_step": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "complex",
+        "operators": [
+          "Unot",
+          "Or",
+          "Unot",
+          "Unot",
+          "Or",
+          "And",
+          "Or",
+          "Or",
+          "And",
+          "And"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.addr_rfsh": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "instruction_pointer.addr_rfsh_0.q": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.addr_rfsh_0.q_n": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.addr_rfsh_0.step_a": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "instruction_pointer.addr_rfsh_0.step_b": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "instruction_pointer.addr_rfsh_0.sysclk": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "instruction_pointer.addr_rfsh_1.q": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.addr_rfsh_1.q_n": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.addr_rfsh_1.step_a": {
+        "is_linear": false,
+        "reason": "未识别的表达式类型: (Partselect Var:(Terminal instruction_pointer.addr...",
+        "complexity": "unknown",
+        "operators": [],
+        "expression_type": "unknown"
+      },
+      "instruction_pointer.addr_rfsh_1.step_b": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "simple",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.addr_rfsh_1.sysclk": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "instruction_pointer.addr_rfsh_step": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: And",
+        "complexity": "moderate",
+        "operators": [
+          "And",
+          "And",
+          "Unot"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.carry_in": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.carry_out": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.data": {
+        "is_linear": true,
+        "reason": "直接终端赋值",
+        "complexity": "simple",
+        "operators": [],
+        "expression_type": "terminal"
+      },
+      "instruction_pointer.din_n": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "simple",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.dout": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Eq",
+          "Eq",
+          "Eq"
+        ],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.dram_array": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.dram_temp": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.incr_in": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.incr_out": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Or",
+          "And",
+          "Or",
+          "Plus"
+        ],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.inh": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Or",
+        "complexity": "complex",
+        "operators": [
+          "Or",
+          "And",
+          "And",
+          "Or",
+          "And",
+          "Unot"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.n0322": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "moderate",
+        "operators": [
+          "Unot",
+          "Or"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.n0374": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.n0384": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.n0416": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unot"
+        ],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.n0438": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unot",
+          "Or",
+          "And",
+          "Unot"
+        ],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.n0517": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [
+          "Unot",
+          "Or"
+        ],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.precharge": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "moderate",
+        "operators": [
+          "Unot",
+          "Or",
+          "Or",
+          "Unot"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.radb0": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "moderate",
+        "operators": [
+          "Unot",
+          "Or"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.radb1": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "moderate",
+        "operators": [
+          "Unot",
+          "Or"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.radb2": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "moderate",
+        "operators": [
+          "Unot",
+          "Or"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.row": {
+        "is_linear": false,
+        "reason": "条件分支表达式（本质非线性）",
+        "complexity": "complex",
+        "operators": [],
+        "expression_type": "branch"
+      },
+      "instruction_pointer.row_read": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: And",
+        "complexity": "complex",
+        "operators": [
+          "And",
+          "And",
+          "And",
+          "Unot",
+          "Or",
+          "Unot"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.row_write": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "complex",
+        "operators": [
+          "Unot",
+          "Or",
+          "Or",
+          "And",
+          "Unot",
+          "Unot"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.wadb0": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "complex",
+        "operators": [
+          "Unot",
+          "Or",
+          "Unot",
+          "Unot",
+          "Or",
+          "Or",
+          "And",
+          "And",
+          "And",
+          "Or",
+          "And",
+          "And",
+          "Unot"
+        ],
+        "expression_type": "operator"
+      },
+      "instruction_pointer.wadb1": {
+        "is_linear": false,
+        "reason": "包含非线性运算符: Unot",
+        "complexity": "complex",
+        "operators": [
+          "Unot",
+          "Or",
+          "Unot",
+          "Unot",
+          "Or",
+          "Or",
+          "And",
+          "And",
+          "And",
+          "Or",
+          "And",
+          "And",
+          "Unot"
+        ],
+        "expression_type": "operator"
+      }
+    }
+  }
+}

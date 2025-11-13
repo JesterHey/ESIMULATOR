@@ -1,0 +1,646 @@
+{
+  "nodes": {
+    "scratchpad._rn0_dout": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal scratchpad.dram_temp) MS...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "scratchpad._rn1_dout": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal scratchpad.dram_temp) MS...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "scratchpad._rn2_dout": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: 4'dx...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "scratchpad.data": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "scratchpad.din_n": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "scratchpad.dout": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Eq",
+        "Eq"
+      ],
+      "expression_type": "branch"
+    },
+    "scratchpad.dram_array": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "scratchpad.dram_temp": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "scratchpad.n0564": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "And"
+      ],
+      "expression_type": "operator"
+    },
+    "scratchpad.n0568": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "And"
+      ],
+      "expression_type": "operator"
+    },
+    "scratchpad.n0592": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot",
+        "Or",
+        "And",
+        "And",
+        "And",
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "scratchpad.n0615": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot",
+        "And",
+        "Or",
+        "And"
+      ],
+      "expression_type": "branch"
+    },
+    "scratchpad.precharge": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "And",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "scratchpad.reg_rfsh": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "scratchpad.reg_rfsh_0.q": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "scratchpad.reg_rfsh_0.q_n": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "scratchpad.reg_rfsh_0.step_a": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "scratchpad.reg_rfsh_0.step_b": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "scratchpad.reg_rfsh_0.sysclk": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "scratchpad.reg_rfsh_1.q": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "scratchpad.reg_rfsh_1.q_n": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "scratchpad.reg_rfsh_1.step_a": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal scratchpad.reg_rfsh) MSB...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "scratchpad.reg_rfsh_1.step_b": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "scratchpad.reg_rfsh_1.sysclk": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "scratchpad.reg_rfsh_2.q": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "scratchpad.reg_rfsh_2.q_n": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "scratchpad.reg_rfsh_2.step_a": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal scratchpad.reg_rfsh) MSB...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "scratchpad.reg_rfsh_2.step_b": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "scratchpad.reg_rfsh_2.sysclk": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "scratchpad.reg_rfsh_step": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "And"
+      ],
+      "expression_type": "operator"
+    },
+    "scratchpad.row": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "And"
+      ],
+      "expression_type": "branch"
+    },
+    "scratchpad.row_read": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Unot",
+        "And",
+        "And",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "scratchpad.row_write": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "And",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "scratchpad.rrab0": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "scratchpad.rrab1": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "scratchpad.wrab0": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: And",
+      "operators": [
+        "And",
+        "Or",
+        "And",
+        "And"
+      ],
+      "expression_type": "operator"
+    }
+  },
+  "edges": [
+    [
+      "scratchpad.dram_temp",
+      "scratchpad._rn0_dout"
+    ],
+    [
+      "scratchpad.dram_temp",
+      "scratchpad._rn1_dout"
+    ],
+    [
+      "scratchpad.dout",
+      "scratchpad.data"
+    ],
+    [
+      "scratchpad.m12_m22_clk1_m11_m12",
+      "scratchpad.din_n"
+    ],
+    [
+      "scratchpad.data",
+      "scratchpad.din_n"
+    ],
+    [
+      "scratchpad.rrab0",
+      "scratchpad.dout"
+    ],
+    [
+      "scratchpad._rn0_dout",
+      "scratchpad.dout"
+    ],
+    [
+      "scratchpad.rrab1",
+      "scratchpad.dout"
+    ],
+    [
+      "scratchpad._rn1_dout",
+      "scratchpad.dout"
+    ],
+    [
+      "scratchpad._rn2_dout",
+      "scratchpad.dout"
+    ],
+    [
+      "scratchpad.row_write",
+      "scratchpad.dram_array"
+    ],
+    [
+      "scratchpad.dram_temp",
+      "scratchpad.dram_array"
+    ],
+    [
+      "scratchpad.wrab1",
+      "scratchpad.dram_temp"
+    ],
+    [
+      "scratchpad.din_n",
+      "scratchpad.dram_temp"
+    ],
+    [
+      "scratchpad.row_read",
+      "scratchpad.dram_temp"
+    ],
+    [
+      "scratchpad.dram_array",
+      "scratchpad.dram_temp"
+    ],
+    [
+      "scratchpad.row",
+      "scratchpad.dram_temp"
+    ],
+    [
+      "scratchpad.precharge",
+      "scratchpad.dram_temp"
+    ],
+    [
+      "scratchpad.opa0_n",
+      "scratchpad.n0564"
+    ],
+    [
+      "scratchpad.fin_fim_src_jin",
+      "scratchpad.n0564"
+    ],
+    [
+      "scratchpad.dc",
+      "scratchpad.n0564"
+    ],
+    [
+      "scratchpad.inc_isz_xch",
+      "scratchpad.n0568"
+    ],
+    [
+      "scratchpad.x32",
+      "scratchpad.n0568"
+    ],
+    [
+      "scratchpad.sc",
+      "scratchpad.n0568"
+    ],
+    [
+      "scratchpad.clk2",
+      "scratchpad.n0592"
+    ],
+    [
+      "scratchpad.x22",
+      "scratchpad.n0592"
+    ],
+    [
+      "scratchpad.fin_fim_src_jin",
+      "scratchpad.n0592"
+    ],
+    [
+      "scratchpad.opa0_n",
+      "scratchpad.n0592"
+    ],
+    [
+      "scratchpad.x12",
+      "scratchpad.n0592"
+    ],
+    [
+      "scratchpad.inc_isz_add_sub_xch_ld",
+      "scratchpad.n0592"
+    ],
+    [
+      "scratchpad.clk2",
+      "scratchpad.n0615"
+    ],
+    [
+      "scratchpad.x12",
+      "scratchpad.n0615"
+    ],
+    [
+      "scratchpad.fin_fim_src_jin",
+      "scratchpad.n0615"
+    ],
+    [
+      "scratchpad.opa0_n",
+      "scratchpad.n0615"
+    ],
+    [
+      "scratchpad.inc_isz_add_sub_xch_ld",
+      "scratchpad.n0615"
+    ],
+    [
+      "scratchpad.sc",
+      "scratchpad.precharge"
+    ],
+    [
+      "scratchpad.a22",
+      "scratchpad.precharge"
+    ],
+    [
+      "scratchpad.m22",
+      "scratchpad.precharge"
+    ],
+    [
+      "scratchpad.clk2",
+      "scratchpad.precharge"
+    ],
+    [
+      "scratchpad.reg_rfsh_2.q",
+      "scratchpad.reg_rfsh"
+    ],
+    [
+      "scratchpad.reg_rfsh_0.step_a",
+      "scratchpad.reg_rfsh_0.q"
+    ],
+    [
+      "scratchpad.reg_rfsh_0.q_n",
+      "scratchpad.reg_rfsh_0.q"
+    ],
+    [
+      "scratchpad.reg_rfsh_0.step_b",
+      "scratchpad.reg_rfsh_0.q_n"
+    ],
+    [
+      "scratchpad.reg_rfsh_0.q",
+      "scratchpad.reg_rfsh_0.q_n"
+    ],
+    [
+      "scratchpad.clk1",
+      "scratchpad.reg_rfsh_0.step_a"
+    ],
+    [
+      "scratchpad.reg_rfsh_step",
+      "scratchpad.reg_rfsh_0.step_b"
+    ],
+    [
+      "scratchpad.sysclk",
+      "scratchpad.reg_rfsh_0.sysclk"
+    ],
+    [
+      "scratchpad.reg_rfsh_1.step_a",
+      "scratchpad.reg_rfsh_1.q"
+    ],
+    [
+      "scratchpad.reg_rfsh_1.q_n",
+      "scratchpad.reg_rfsh_1.q"
+    ],
+    [
+      "scratchpad.reg_rfsh_1.step_b",
+      "scratchpad.reg_rfsh_1.q_n"
+    ],
+    [
+      "scratchpad.reg_rfsh_1.q",
+      "scratchpad.reg_rfsh_1.q_n"
+    ],
+    [
+      "scratchpad.reg_rfsh",
+      "scratchpad.reg_rfsh_1.step_a"
+    ],
+    [
+      "scratchpad.reg_rfsh",
+      "scratchpad.reg_rfsh_1.step_b"
+    ],
+    [
+      "scratchpad.sysclk",
+      "scratchpad.reg_rfsh_1.sysclk"
+    ],
+    [
+      "scratchpad.reg_rfsh_2.step_a",
+      "scratchpad.reg_rfsh_2.q"
+    ],
+    [
+      "scratchpad.reg_rfsh_2.q_n",
+      "scratchpad.reg_rfsh_2.q"
+    ],
+    [
+      "scratchpad.reg_rfsh_2.step_b",
+      "scratchpad.reg_rfsh_2.q_n"
+    ],
+    [
+      "scratchpad.reg_rfsh_2.q",
+      "scratchpad.reg_rfsh_2.q_n"
+    ],
+    [
+      "scratchpad.reg_rfsh",
+      "scratchpad.reg_rfsh_2.step_a"
+    ],
+    [
+      "scratchpad.reg_rfsh",
+      "scratchpad.reg_rfsh_2.step_b"
+    ],
+    [
+      "scratchpad.sysclk",
+      "scratchpad.reg_rfsh_2.sysclk"
+    ],
+    [
+      "scratchpad.sc",
+      "scratchpad.reg_rfsh_step"
+    ],
+    [
+      "scratchpad.a12",
+      "scratchpad.reg_rfsh_step"
+    ],
+    [
+      "scratchpad.clk2",
+      "scratchpad.reg_rfsh_step"
+    ],
+    [
+      "scratchpad.sc_m22_clk2",
+      "scratchpad.row"
+    ],
+    [
+      "scratchpad.data",
+      "scratchpad.row"
+    ],
+    [
+      "scratchpad.sc",
+      "scratchpad.row"
+    ],
+    [
+      "scratchpad.a22",
+      "scratchpad.row"
+    ],
+    [
+      "scratchpad.reg_rfsh",
+      "scratchpad.row"
+    ],
+    [
+      "scratchpad.poc",
+      "scratchpad.row_read"
+    ],
+    [
+      "scratchpad.clk2",
+      "scratchpad.row_read"
+    ],
+    [
+      "scratchpad.sc",
+      "scratchpad.row_read"
+    ],
+    [
+      "scratchpad.a32",
+      "scratchpad.row_read"
+    ],
+    [
+      "scratchpad.x12",
+      "scratchpad.row_read"
+    ],
+    [
+      "scratchpad.sc",
+      "scratchpad.row_write"
+    ],
+    [
+      "scratchpad.a12",
+      "scratchpad.row_write"
+    ],
+    [
+      "scratchpad.m12",
+      "scratchpad.row_write"
+    ],
+    [
+      "scratchpad.clk2",
+      "scratchpad.row_write"
+    ],
+    [
+      "scratchpad.dc",
+      "scratchpad.rrab0"
+    ],
+    [
+      "scratchpad.n0615",
+      "scratchpad.rrab0"
+    ],
+    [
+      "scratchpad.clk2",
+      "scratchpad.rrab0"
+    ],
+    [
+      "scratchpad.dc",
+      "scratchpad.rrab1"
+    ],
+    [
+      "scratchpad.n0592",
+      "scratchpad.rrab1"
+    ],
+    [
+      "scratchpad.clk2",
+      "scratchpad.rrab1"
+    ],
+    [
+      "scratchpad.clk2",
+      "scratchpad.wrab0"
+    ],
+    [
+      "scratchpad.m12",
+      "scratchpad.wrab0"
+    ],
+    [
+      "scratchpad.n0564",
+      "scratchpad.wrab0"
+    ],
+    [
+      "scratchpad.opa0_n",
+      "scratchpad.wrab0"
+    ],
+    [
+      "scratchpad.n0568",
+      "scratchpad.wrab0"
+    ]
+  ]
+}

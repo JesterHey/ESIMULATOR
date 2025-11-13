@@ -1,0 +1,560 @@
+{
+  "nodes": {
+    "timing_io.L": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Or",
+        "Or",
+        "And",
+        "Or"
+      ],
+      "expression_type": "branch"
+    },
+    "timing_io._rn0_data_in": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: 4'd15...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "timing_io._rn1_data_in": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: 4'dx...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "timing_io._rn2_data_in": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: 4'd0...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "timing_io._rn3_data_in": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "timing_io.a12": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d0...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "timing_io.a22": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d1...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "timing_io.a32": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d2...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "timing_io.clk1": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "timing_io.clk2": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "timing_io.cmram0_pad": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "timing_io.cmram1_pad": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "timing_io.cmram2_pad": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "timing_io.cmram3_pad": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "timing_io.cmrom_pad": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "timing_io.data": {
+      "is_linear": true,
+      "reason": "直接终端赋值",
+      "operators": [],
+      "expression_type": "terminal"
+    },
+    "timing_io.data_in": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "timing_io.data_out": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "timing_io.data_pad": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "timing_io.gate": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "timing_io.m12": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d3...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "timing_io.m22": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d4...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "timing_io.master": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unor"
+      ],
+      "expression_type": "branch"
+    },
+    "timing_io.n0278": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "timing_io.n0279": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "timing_io.n0432": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "timing_io.n0659": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Or",
+      "operators": [
+        "Or",
+        "And",
+        "And"
+      ],
+      "expression_type": "operator"
+    },
+    "timing_io.n0676": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Or",
+      "operators": [
+        "Or",
+        "Or"
+      ],
+      "expression_type": "operator"
+    },
+    "timing_io.n0685": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "timing_io.n0699": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "branch"
+    },
+    "timing_io.n0700": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Or",
+      "operators": [
+        "Or",
+        "Or",
+        "And"
+      ],
+      "expression_type": "operator"
+    },
+    "timing_io.n0702": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot"
+      ],
+      "expression_type": "operator"
+    },
+    "timing_io.n0707": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "timing_io.n0708": {
+      "is_linear": false,
+      "reason": "包含非线性运算符: Unot",
+      "operators": [
+        "Unot",
+        "Or",
+        "Or",
+        "And"
+      ],
+      "expression_type": "operator"
+    },
+    "timing_io.poc": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "timing_io.slave": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "timing_io.sync_pad": {
+      "is_linear": false,
+      "reason": "条件分支表达式（本质非线性）",
+      "operators": [],
+      "expression_type": "branch"
+    },
+    "timing_io.x12": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d5...",
+      "operators": [],
+      "expression_type": "unknown"
+    },
+    "timing_io.x22": {
+      "is_linear": false,
+      "reason": "未识别的表达式类型: (Partselect Var:(Terminal timing_io.slave) MSB:'d6...",
+      "operators": [],
+      "expression_type": "unknown"
+    }
+  },
+  "edges": [
+    [
+      "timing_io.clk2",
+      "timing_io.L"
+    ],
+    [
+      "timing_io.a32",
+      "timing_io.L"
+    ],
+    [
+      "timing_io.m12",
+      "timing_io.L"
+    ],
+    [
+      "timing_io.x12",
+      "timing_io.L"
+    ],
+    [
+      "timing_io.ior",
+      "timing_io.L"
+    ],
+    [
+      "timing_io.poc",
+      "timing_io.L"
+    ],
+    [
+      "timing_io.data_pad",
+      "timing_io._rn3_data_in"
+    ],
+    [
+      "timing_io.slave",
+      "timing_io.a12"
+    ],
+    [
+      "timing_io.slave",
+      "timing_io.a22"
+    ],
+    [
+      "timing_io.slave",
+      "timing_io.a32"
+    ],
+    [
+      "timing_io.clk1_pad",
+      "timing_io.clk1"
+    ],
+    [
+      "timing_io.clk2_pad",
+      "timing_io.clk2"
+    ],
+    [
+      "timing_io.cmram0",
+      "timing_io.cmram0_pad"
+    ],
+    [
+      "timing_io.cmram1",
+      "timing_io.cmram1_pad"
+    ],
+    [
+      "timing_io.cmram2",
+      "timing_io.cmram2_pad"
+    ],
+    [
+      "timing_io.cmram3",
+      "timing_io.cmram3_pad"
+    ],
+    [
+      "timing_io.cmrom",
+      "timing_io.cmrom_pad"
+    ],
+    [
+      "timing_io.data_in",
+      "timing_io.data"
+    ],
+    [
+      "timing_io.n0659",
+      "timing_io.data_in"
+    ],
+    [
+      "timing_io._rn0_data_in",
+      "timing_io.data_in"
+    ],
+    [
+      "timing_io.n0676",
+      "timing_io.data_in"
+    ],
+    [
+      "timing_io._rn1_data_in",
+      "timing_io.data_in"
+    ],
+    [
+      "timing_io.poc",
+      "timing_io.data_in"
+    ],
+    [
+      "timing_io._rn2_data_in",
+      "timing_io.data_in"
+    ],
+    [
+      "timing_io._rn3_data_in",
+      "timing_io.data_in"
+    ],
+    [
+      "timing_io.n0702",
+      "timing_io.data_out"
+    ],
+    [
+      "timing_io.data",
+      "timing_io.data_out"
+    ],
+    [
+      "timing_io.poc",
+      "timing_io.data_pad"
+    ],
+    [
+      "timing_io.n0700",
+      "timing_io.data_pad"
+    ],
+    [
+      "timing_io.data_out",
+      "timing_io.data_pad"
+    ],
+    [
+      "timing_io.n0708",
+      "timing_io.gate"
+    ],
+    [
+      "timing_io.slave",
+      "timing_io.m12"
+    ],
+    [
+      "timing_io.slave",
+      "timing_io.m22"
+    ],
+    [
+      "timing_io.slave",
+      "timing_io.m22"
+    ],
+    [
+      "timing_io.clk2",
+      "timing_io.master"
+    ],
+    [
+      "timing_io.clk2",
+      "timing_io.n0278"
+    ],
+    [
+      "timing_io.n0279",
+      "timing_io.n0278"
+    ],
+    [
+      "timing_io.a32",
+      "timing_io.n0279"
+    ],
+    [
+      "timing_io.m12",
+      "timing_io.n0279"
+    ],
+    [
+      "timing_io.test_pad",
+      "timing_io.n0432"
+    ],
+    [
+      "timing_io.clk2",
+      "timing_io.n0659"
+    ],
+    [
+      "timing_io.n0685",
+      "timing_io.n0659"
+    ],
+    [
+      "timing_io.clk1",
+      "timing_io.n0659"
+    ],
+    [
+      "timing_io.L",
+      "timing_io.n0659"
+    ],
+    [
+      "timing_io.clk1",
+      "timing_io.n0676"
+    ],
+    [
+      "timing_io.n0685",
+      "timing_io.n0676"
+    ],
+    [
+      "timing_io.n0699",
+      "timing_io.n0676"
+    ],
+    [
+      "timing_io.clk1",
+      "timing_io.n0685"
+    ],
+    [
+      "timing_io.L",
+      "timing_io.n0685"
+    ],
+    [
+      "timing_io.n0702",
+      "timing_io.n0699"
+    ],
+    [
+      "timing_io.L",
+      "timing_io.n0699"
+    ],
+    [
+      "timing_io.n0707",
+      "timing_io.n0700"
+    ],
+    [
+      "timing_io.L",
+      "timing_io.n0700"
+    ],
+    [
+      "timing_io.n0702",
+      "timing_io.n0700"
+    ],
+    [
+      "timing_io.poc",
+      "timing_io.n0700"
+    ],
+    [
+      "timing_io.clk2",
+      "timing_io.n0702"
+    ],
+    [
+      "timing_io.clk1",
+      "timing_io.n0707"
+    ],
+    [
+      "timing_io.L",
+      "timing_io.n0707"
+    ],
+    [
+      "timing_io.n0278",
+      "timing_io.n0708"
+    ],
+    [
+      "timing_io.clk1",
+      "timing_io.n0708"
+    ],
+    [
+      "timing_io.m12",
+      "timing_io.n0708"
+    ],
+    [
+      "timing_io.m22",
+      "timing_io.n0708"
+    ],
+    [
+      "timing_io.poc_pad",
+      "timing_io.poc"
+    ],
+    [
+      "timing_io.a12",
+      "timing_io.poc"
+    ],
+    [
+      "timing_io.poc",
+      "timing_io.poc"
+    ],
+    [
+      "timing_io.clk1",
+      "timing_io.slave"
+    ],
+    [
+      "timing_io.master",
+      "timing_io.slave"
+    ],
+    [
+      "timing_io.clk2",
+      "timing_io.sync_pad"
+    ],
+    [
+      "timing_io.master",
+      "timing_io.sync_pad"
+    ],
+    [
+      "timing_io.slave",
+      "timing_io.x12"
+    ],
+    [
+      "timing_io.slave",
+      "timing_io.x22"
+    ]
+  ]
+}

@@ -428,6 +428,210 @@ class SimulatedAnnealing:
         
         return analysis
     
+
+# ---------------- Bind 掩码级 SA：类型与工具（供外部导入） ----------------
+
+@dataclass
+class BindCostWeights:
+    wi: float = 1.0
+    wz: float = 1.0
+    w3: float = 1.0
+    wa: float = 1.0
+    area_a1: float = 1.0
+    area_a2: float = 0.5
+    delay_d1: float = 1.0
+    power_p1: float = 0.5
+    iface_i1: float = 0.2
+
+
+class BindMaskProblem:
+    def __init__(self, bind_json_path: str):
+        self.path = bind_json_path
+        payload = json.loads(Path(bind_json_path).read_text(encoding='utf-8'))
+        self.binds = payload.get('binds', [])
+        self.per_bind = []
+        for b in self.binds:
+            order = b.get('workset_order') or b.get('operator_order', [])
+            mask = b.get('workset_mask') or b.get('operator_mask', [])
+            fadj = b.get('fusable_adj', [])
+            op_count = b.get('operator_count', len(order))
+            id_to_idx = {op_id: idx for idx, op_id in enumerate(order)}
+            allowed = {i for i, bit in enumerate(mask) if bit == 1}
+            edges_idx = []
+            for a, c in fadj:
+                if a in id_to_idx and c in id_to_idx:
+                    edges_idx.append((id_to_idx[a], id_to_idx[c]))
+            self.per_bind.append({
+                'dest': b.get('dest'),
+                'order': order,
+                'orig_mask': mask,
+                'mask_len': op_count,
+                'allowed': allowed,
+                'edges': edges_idx,
+                'sources': b.get('sources', []),
+            })
+
+    def initial_state(self):
+        state = []
+        for pb in self.per_bind:
+            state.append(list(pb['orig_mask']))
+        return state
+
+    def random_neighbor(self, state):
+        new_state = [list(m) for m in state]
+        candidates = [i for i, pb in enumerate(self.per_bind) if pb['allowed']]
+        if not candidates:
+            return new_state
+        bi = random.choice(candidates)
+        pb = self.per_bind[bi]
+        op_len = len(new_state[bi])
+        if op_len == 0:
+            return new_state
+        op = random.choices(['flip', 'grow', 'shrink'], weights=[0.5, 0.3, 0.2], k=1)[0]
+        if op == 'flip':
+            idx = random.choice(list(pb['allowed']))
+            new_state[bi][idx] = 1 - new_state[bi][idx]
+        elif op == 'grow':
+            ones = [i for i, v in enumerate(new_state[bi]) if v == 1]
+            if ones:
+                seed = random.choice(ones)
+                neighbors = [j for a, c in pb['edges'] for j in ([a] if c == seed else ([c] if a == seed else []))]
+                neighbors = [j for j in neighbors if j in pb['allowed']]
+                if neighbors:
+                    k = random.randint(1, min(2, len(neighbors)))
+                    for j in random.sample(neighbors, k):
+                        new_state[bi][j] = 1
+        else:  # shrink
+            ones = [i for i, v in enumerate(new_state[bi]) if v == 1 and i in pb['allowed']]
+            if ones:
+                k = random.randint(1, 1)
+                for j in random.sample(ones, k):
+                    new_state[bi][j] = 0
+        return new_state
+
+    def metrics(self, state):
+        total_L = 0
+        total_E = 0
+        total_C = 0
+        total_iface = 0.0
+        for m, pb in zip(state, self.per_bind):
+            L = sum(1 for v in m if v == 1)
+            E = 0
+            if pb['edges']:
+                ones_set = {i for i, v in enumerate(m) if v == 1}
+                for a, c in pb['edges']:
+                    if a in ones_set and c in ones_set:
+                        E += 1
+            C = max(0, L - E)
+            L_norm = (L / max(1, pb['mask_len']))
+            iface = len(pb['sources']) * L_norm
+            total_L += L
+            total_E += E
+            total_C += C
+            total_iface += iface
+        return {
+            'L': total_L,
+            'E': total_E,
+            'C': total_C,
+            'IFACE': total_iface,
+        }
+
+    def cost(self, state, w: BindCostWeights):
+        m = self.metrics(state)
+        area = w.area_a1 * m['L'] - w.area_a2 * m['E']
+        delay = w.delay_d1 * m['C']
+        power = w.power_p1 * m['L']
+        iface = w.iface_i1 * m['IFACE']
+        total = w.wi * area + w.wz * delay + w.w3 * power + w.wa * iface
+        return total, {
+            'area': area,
+            'delay': delay,
+            'power': power,
+            'interface': iface,
+            'L': m['L'], 'E': m['E'], 'C': m['C'], 'IFACE': m['IFACE']
+        }
+
+
+def run_bindmask_anneal(bind_json_path: str,
+                         weights: BindCostWeights,
+                         initial_temperature: float = 50.0,
+                         final_temperature: float = 0.2,
+                         cooling_rate: float = 0.95,
+                         iterations_per_temp: int = 50,
+                         max_iterations: int = 4000,
+                         multi_start_runs: int = 3,
+                         seed: Optional[int] = None,
+                         export_path: Optional[str] = None):
+    problem = BindMaskProblem(bind_json_path)
+    best_overall = None
+    best_overall_cost = float('inf')
+    base_seed = seed if seed is not None else random.randint(0, 10**9)
+    for r in range(max(1, multi_start_runs)):
+        if seed is not None:
+            random.seed(base_seed + r)
+            try:
+                np.random.seed(base_seed + r)
+            except Exception:
+                pass
+        state = problem.initial_state()
+        current = [list(m) for m in state]
+        current_cost, _ = problem.cost(current, weights)
+        best = [list(m) for m in current]
+        best_cost = current_cost
+        temp = initial_temperature
+        iter_cnt = 0
+        cost_hist = [current_cost]
+        while temp > final_temperature and iter_cnt < max_iterations:
+            for _ in range(iterations_per_temp):
+                neigh = problem.random_neighbor(current)
+                neigh_cost, _ = problem.cost(neigh, weights)
+                delta = neigh_cost - current_cost
+                if delta < 0 or np.exp(-delta / max(1e-9, temp)) > random.random():
+                    current = neigh
+                    current_cost = neigh_cost
+                    if current_cost < best_cost:
+                        best = [list(m) for m in current]
+                        best_cost = current_cost
+                iter_cnt += 1
+                cost_hist.append(current_cost)
+            temp *= cooling_rate
+        if best_cost < best_overall_cost:
+            best_overall = {
+                'state': best,
+                'cost': best_cost,
+                'runs': r + 1,
+                'history': cost_hist,
+            }
+            best_overall_cost = best_cost
+
+    if export_path and best_overall is not None:
+        totals = problem.cost(best_overall['state'], weights)[1]
+        out_binds = []
+        for pb, m in zip(problem.per_bind, best_overall['state']):
+            L = sum(1 for v in m if v == 1)
+            ones_set = {i for i, v in enumerate(m) if v == 1}
+            E = sum(1 for a, c in pb['edges'] if a in ones_set and c in ones_set)
+            C = max(0, L - E)
+            out_binds.append({
+                'dest': pb['dest'],
+                'operator_order': list(pb['order']),
+                'initial_mask': list(pb['orig_mask']),
+                'best_mask': list(m),
+                'stats': {'L': L, 'E': E, 'C': C, 'sources': list(pb['sources'])}
+            })
+        payload = {
+            'bind_json': bind_json_path,
+            'weights': vars(weights),
+            'best_total_cost': best_overall['cost'],
+            'totals': totals,
+            'binds': out_binds,
+        }
+        Path(export_path).parent.mkdir(parents=True, exist_ok=True)
+        Path(export_path).write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
+        print('[BIND SA] export =>', export_path)
+        return export_path
+    return None
+
     
 if __name__ == "__main__":
     # ---------------- 1) 真实图的优化流程 ----------------
@@ -470,224 +674,21 @@ if __name__ == "__main__":
     # - Power ~ p1*L
     # - Interface ~ i1*(|sources| * L_norm)，sources来自 bind 的跨信号依赖；L_norm=L/max(1,op_count)
 
-    @dataclass
-    class BindCostWeights:
-        wi: float = 1.0   # Area 权重
-        wz: float = 1.0   # Delay 权重
-        w3: float = 1.0   # Power 权重
-        wa: float = 1.0   # Interface 权重
-        # 细分系数
-        area_a1: float = 1.0
-        area_a2: float = 0.5
-        delay_d1: float = 1.0
-        power_p1: float = 0.5
-        iface_i1: float = 0.2
-
-    class BindMaskProblem:
-        def __init__(self, bind_json_path: str):
-            self.path = bind_json_path
-            payload = json.loads(Path(bind_json_path).read_text(encoding='utf-8'))
-            self.binds = payload.get('binds', [])
-            # 预处理：为每个 bind 建立 operatorId -> idx 的映射及允许位集合
-            self.per_bind = []
-            for b in self.binds:
-                # 优先使用扩展工作集（operator + concat + partselect），兼容旧字段
-                order = b.get('workset_order') or b.get('operator_order', [])
-                mask = b.get('workset_mask') or b.get('operator_mask', [])
-                fadj = b.get('fusable_adj', [])
-                op_count = b.get('operator_count', len(order))
-                id_to_idx = {op_id: idx for idx, op_id in enumerate(order)}
-                allowed = {i for i, bit in enumerate(mask) if bit == 1}  # 仅原始线性位可翻转
-                # 只保留与 operator_order 对齐的可融合边
-                edges_idx = []
-                for a, c in fadj:
-                    if a in id_to_idx and c in id_to_idx:
-                        edges_idx.append((id_to_idx[a], id_to_idx[c]))
-                self.per_bind.append({
-                    'dest': b.get('dest'),
-                    'order': order,
-                    'orig_mask': mask,
-                    'mask_len': op_count,
-                    'allowed': allowed,
-                    'edges': edges_idx,
-                    'sources': b.get('sources', []),
-                })
-
-        def initial_state(self):
-            # 初始状态使用原始掩码（允许位默认=1）
-            state = []
-            for pb in self.per_bind:
-                state.append(list(pb['orig_mask']))
-            return state
-
-        def random_neighbor(self, state):
-            new_state = [list(m) for m in state]
-            # 随机选择一个存在可变位的 bind
-            candidates = [i for i, pb in enumerate(self.per_bind) if pb['allowed']]
-            if not candidates:
-                return new_state
-            bi = random.choice(candidates)
-            pb = self.per_bind[bi]
-            op_len = len(new_state[bi])
-            if op_len == 0:
-                return new_state
-            # 选择操作：flip / grow / shrink
-            op = random.choices(['flip', 'grow', 'shrink'], weights=[0.5, 0.3, 0.2], k=1)[0]
-            if op == 'flip':
-                idx = random.choice(list(pb['allowed']))
-                new_state[bi][idx] = 1 - new_state[bi][idx]
-            elif op == 'grow':
-                # 尝试把某个已为1的位置的相邻允许位设置为1
-                ones = [i for i, v in enumerate(new_state[bi]) if v == 1]
-                if ones:
-                    seed = random.choice(ones)
-                    neighbors = [j for a, c in pb['edges'] for j in ([a] if c == seed else ([c] if a == seed else []))]
-                    neighbors = [j for j in neighbors if j in pb['allowed']]
-                    if neighbors:
-                        k = random.randint(1, min(2, len(neighbors)))
-                        for j in random.sample(neighbors, k):
-                            new_state[bi][j] = 1
-            else:  # shrink
-                ones = [i for i, v in enumerate(new_state[bi]) if v == 1 and i in pb['allowed']]
-                if ones:
-                    k = random.randint(1, 1)
-                    for j in random.sample(ones, k):
-                        new_state[bi][j] = 0
-            return new_state
-
-        def metrics(self, state):
-            # 计算 Area/Delay/Power/Interface 四项的加总
-            total_L = 0
-            total_E = 0
-            total_C = 0
-            total_iface = 0.0
-            for m, pb in zip(state, self.per_bind):
-                L = sum(1 for v in m if v == 1)
-                # 激活边：两端均为1
-                E = 0
-                if pb['edges']:
-                    ones_set = {i for i, v in enumerate(m) if v == 1}
-                    for a, c in pb['edges']:
-                        if a in ones_set and c in ones_set:
-                            E += 1
-                # 组件数 C 近似 = L - E（假定 parent-child 边形成森林）
-                C = max(0, L - E)
-                L_norm = (L / max(1, pb['mask_len']))
-                iface = len(pb['sources']) * L_norm
-                total_L += L
-                total_E += E
-                total_C += C
-                total_iface += iface
-            return {
-                'L': total_L,
-                'E': total_E,
-                'C': total_C,
-                'IFACE': total_iface,
-            }
-
-        def cost(self, state, w: BindCostWeights):
-            m = self.metrics(state)
-            area = w.area_a1 * m['L'] - w.area_a2 * m['E']
-            delay = w.delay_d1 * m['C']
-            power = w.power_p1 * m['L']
-            iface = w.iface_i1 * m['IFACE']
-            total = w.wi * area + w.wz * delay + w.w3 * power + w.wa * iface
-            return total, {
-                'area': area,
-                'delay': delay,
-                'power': power,
-                'interface': iface,
-                'L': m['L'], 'E': m['E'], 'C': m['C'], 'IFACE': m['IFACE']
-            }
-
-    def run_bindmask_anneal(bind_json_path: str,
-                             weights: BindCostWeights,
-                             initial_temperature: float = 50.0,
-                             final_temperature: float = 0.2,
-                             cooling_rate: float = 0.95,
-                             iterations_per_temp: int = 50,
-                             max_iterations: int = 4000,
-                             multi_start_runs: int = 3,
-                             seed: Optional[int] = None,
-                             export_path: Optional[str] = None):
-        problem = BindMaskProblem(bind_json_path)
-        best_overall = None
-        best_overall_cost = float('inf')
-        base_seed = seed if seed is not None else random.randint(0, 10**9)
-        for r in range(max(1, multi_start_runs)):
-            if seed is not None:
-                random.seed(base_seed + r)
-                np.random.seed(base_seed + r)
-            state = problem.initial_state()
-            current = [list(m) for m in state]
-            current_cost, _ = problem.cost(current, weights)
-            best = [list(m) for m in current]
-            best_cost = current_cost
-            temp = initial_temperature
-            iter_cnt = 0
-            cost_hist = [current_cost]
-            while temp > final_temperature and iter_cnt < max_iterations:
-                for _ in range(iterations_per_temp):
-                    neigh = problem.random_neighbor(current)
-                    neigh_cost, _ = problem.cost(neigh, weights)
-                    delta = neigh_cost - current_cost
-                    if delta < 0 or np.exp(-delta / max(1e-9, temp)) > random.random():
-                        current = neigh
-                        current_cost = neigh_cost
-                        if current_cost < best_cost:
-                            best = [list(m) for m in current]
-                            best_cost = current_cost
-                    iter_cnt += 1
-                    cost_hist.append(current_cost)
-                temp *= cooling_rate
-            if best_cost < best_overall_cost:
-                best_overall = {
-                    'state': best,
-                    'cost': best_cost,
-                    'runs': r + 1,
-                    'history': cost_hist,
-                }
-                best_overall_cost = best_cost
-
-        # 导出
-        if export_path and best_overall is not None:
-            totals = problem.cost(best_overall['state'], weights)[1]
-            # 绑定回写
-            out_binds = []
-            for pb, m in zip(problem.per_bind, best_overall['state']):
-                # 统计单 bind 指标
-                L = sum(1 for v in m if v == 1)
-                ones_set = {i for i, v in enumerate(m) if v == 1}
-                E = sum(1 for a, c in pb['edges'] if a in ones_set and c in ones_set)
-                C = max(0, L - E)
-                out_binds.append({
-                    'dest': pb['dest'],
-                    'operator_order': list(pb['order']),
-                    'initial_mask': list(pb['orig_mask']),
-                    'best_mask': list(m),
-                    'stats': {'L': L, 'E': E, 'C': C, 'sources': list(pb['sources'])}
-                })
-            payload = {
-                'bind_json': bind_json_path,
-                'weights': vars(weights),
-                'best_total_cost': best_overall['cost'],
-                'totals': totals,
-                'binds': out_binds,
-            }
-            Path(export_path).parent.mkdir(parents=True, exist_ok=True)
-            Path(export_path).write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding='utf-8')
-            print('[BIND SA] export =>', export_path)
-            return export_path
-        return None
-
     bind_json = Path('results/4004_dfg_bind_masks.json')
     if bind_json.exists():
+        # ONN 偏好（优先减少模块数量 C 与接口成本）：
+        # - 提高延迟与接口权重 (wz, wa)，并提高 delay_d1/iface_i1
+        # - 提高融合奖励 area_a2，降低线性单元与功耗惩罚 (area_a1, power_p1)
         w = BindCostWeights(
-            wi=1.0, wz=1.0, w3=0.5, wa=0.5,
-            area_a1=1.0, area_a2=0.6,
-            delay_d1=1.0,
-            power_p1=0.4,
-            iface_i1=0.2,
+            wi=0.7,
+            wz=1.3,
+            w3=0.3,
+            wa=1.4,
+            area_a1=0.6,
+            area_a2=1.2,
+            delay_d1=1.2,
+            power_p1=0.3,
+            iface_i1=0.8,
         )
         out = run_bindmask_anneal(
             str(bind_json), w,

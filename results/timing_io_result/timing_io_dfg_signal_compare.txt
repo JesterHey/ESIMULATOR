@@ -1,0 +1,21 @@
+信号对比报告 (DFG vs Verilog)
+========================================
+
+Verilog 文件: 4004_full_verilog/timing_io.v
+DFG 文件: dfg_files/timing_io_dfg.txt
+模块前缀: timing_io.
+
+概要:
+  总信号名(并集): 60
+  Verilog 提取信号: 37
+  导出绑定条目: 39
+  仅存在于 Verilog 的信号: 4
+  作为 bind 目标但无 Verilog 行号的: 0
+  绑定中存在源行号不完整的: 0
+
+仅存在于 Verilog 的信号(未参与 DFG):
+  - timing_io.inout
+  - timing_io.input
+  - timing_io.output
+  - timing_io.sysclk
+

@@ -1,0 +1,59 @@
+instruction_pointer._rn0_dout, 0
+instruction_pointer._rn1_dout, 0
+instruction_pointer._rn2_dout, 0
+instruction_pointer._rn3_dout, 0
+instruction_pointer.addr_ptr, 0
+instruction_pointer.addr_ptr, 0
+instruction_pointer.addr_ptr_0.q, Unot, 0
+instruction_pointer.addr_ptr_0.q_n, 0
+instruction_pointer.addr_ptr_0.step_a, 0
+instruction_pointer.addr_ptr_0.step_b, 0
+instruction_pointer.addr_ptr_0.sysclk, 0
+instruction_pointer.addr_ptr_1.q, Unot, 0
+instruction_pointer.addr_ptr_1.q_n, 0
+instruction_pointer.addr_ptr_1.step_a, 0
+instruction_pointer.addr_ptr_1.step_b, Unot, 0
+instruction_pointer.addr_ptr_1.sysclk, 0
+instruction_pointer.addr_ptr_step, Unot, Or, Unot, Unot, Or, And, Or, Or, And, And, 0 1 0 0 1 1 1 1 1 1
+instruction_pointer.addr_rfsh, 0
+instruction_pointer.addr_rfsh, 0
+instruction_pointer.addr_rfsh_0.q, Unot, 0
+instruction_pointer.addr_rfsh_0.q_n, 0
+instruction_pointer.addr_rfsh_0.step_a, 0
+instruction_pointer.addr_rfsh_0.step_b, 0
+instruction_pointer.addr_rfsh_0.sysclk, 0
+instruction_pointer.addr_rfsh_1.q, Unot, 0
+instruction_pointer.addr_rfsh_1.q_n, 0
+instruction_pointer.addr_rfsh_1.step_a, 0
+instruction_pointer.addr_rfsh_1.step_b, Unot, 0
+instruction_pointer.addr_rfsh_1.sysclk, 0
+instruction_pointer.addr_rfsh_step, And, And, Unot, 1 1 0
+instruction_pointer.carry_in, 0
+instruction_pointer.carry_out, 0
+instruction_pointer.data, 0
+instruction_pointer.din_n, Unot, 0
+instruction_pointer.dout, Eq, Eq, Eq, 1 1 1
+instruction_pointer.dram_array, 0
+instruction_pointer.dram_temp, Unot, 0
+instruction_pointer.dram_temp, Unot, 0
+instruction_pointer.dram_temp, Unot, 0
+instruction_pointer.incr_in, 0
+instruction_pointer.incr_out, Or, And, Or, Plus, Concat, 1 1 1 1 0
+instruction_pointer.inh, Or, And, And, Or, And, Unot, 1 1 1 1 1 0
+instruction_pointer.n0322, Unot, Or, 0 1
+instruction_pointer.n0374, Unot, 0
+instruction_pointer.n0384, Unot, 0
+instruction_pointer.n0416, Unot, 0
+instruction_pointer.n0438, Unot, Or, And, Unot, 0 1 1 0
+instruction_pointer.n0517, Unot, Or, 0 1
+instruction_pointer.precharge, Unot, Or, Or, Unot, 0 1 1 0
+instruction_pointer.radb0, Unot, Or, 0 1
+instruction_pointer.radb1, Unot, Or, 0 1
+instruction_pointer.radb2, Unot, Or, 0 1
+instruction_pointer.row, 0
+instruction_pointer.row_read, And, And, And, Unot, Or, Unot, 1 1 1 0 1 0
+instruction_pointer.row_write, Unot, Or, Or, And, Unot, Unot, 0 1 1 1 0 0
+instruction_pointer.wadb0, Unot, Or, Unot, Unot, Or, Or, And, And, And, Or, And, And, Unot, 0 1 0 0 1 1 1 1 1 1 1 1 0
+instruction_pointer.wadb1, Unot, Or, Unot, Unot, Or, Or, And, And, And, Or, And, And, Unot, 0 1 0 0 1 1 1 1 1 1 1 1 0
+instruction_pointer.wadb2, Unot, Or, Unot, Unot, Or, And, And, Unot, 0 1 0 0 1 1 1 0
+instruction_pointer.sysclk, 0
